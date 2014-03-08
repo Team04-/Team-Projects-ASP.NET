@@ -1,0 +1,17 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="TestDBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="timetable_room">
+    <Key>
+      <PropertyRef Name="Building_ID" />
+      <PropertyRef Name="Room_ID" />
+    </Key>
+    <Property Name="Park_ID" Type="Int32" />
+    <Property Name="Building_ID" Type="String" MaxLength="5" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Room_ID" Type="String" MaxLength="5" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Capacity" Type="Int32" />
+    <Property Name="Type_ID" Type="Byte" Nullable="false" />
+  </EntityType>
+  <EntityContainer Name="TestDBEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="timetable_room" EntityType="TestDBModel.timetable_room" />
+  </EntityContainer>
+</Schema>

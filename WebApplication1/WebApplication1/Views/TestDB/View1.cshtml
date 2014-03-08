@@ -1,0 +1,42 @@
+﻿@model WebApplication1.Models.timetable_room
+
+@{
+    ViewBag.Title = "View1";
+}
+
+<h2>View1</h2>
+
+<div>
+    <h4>timetable_room</h4>
+	<hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Park_ID)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Park_ID)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Capacity)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Capacity)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Type_ID)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Type_ID)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { /* id = Model.PrimaryKey */ }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

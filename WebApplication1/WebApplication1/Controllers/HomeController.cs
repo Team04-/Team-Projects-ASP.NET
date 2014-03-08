@@ -26,5 +26,13 @@ namespace WebApplication1.Controllers
 
             return View();
         }
+
+        public ActionResult DBTest1()
+        {
+            ViewBag.Message = "Your dbtest1 page.";
+
+            return View();
+        }
+
     }
 }
