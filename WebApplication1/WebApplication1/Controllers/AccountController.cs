@@ -66,8 +66,7 @@ namespace WebApplication1.Controllers
         [AllowAnonymous]
         public ActionResult Register()
         {
-            return View();
-            //return RedirectToAction("Login");
+            return RedirectToAction("Login");
         }
 
         //
