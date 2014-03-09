@@ -270,6 +270,7 @@
     <Content Include="Views\Shared\_LoginPartial - Copy.cshtml" />
     <Content Include="Views\Home\DBTest1.cshtml" />
     <Content Include="Views\TestDB\View1.cshtml" />
+    <Content Include="Views\Account\_ModuleManagement.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
