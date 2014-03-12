@@ -17,7 +17,7 @@ namespace WebApplication1.Controllers
         // GET: /Module/
         public ActionResult Index()
         {
-            return View(db.timetable_module.ToList());
+            return View(db.timetable_module.Where(dc => dc.Department_Code == User.Identity.Name));
         }
 
         // GET: /Module/Details/5
