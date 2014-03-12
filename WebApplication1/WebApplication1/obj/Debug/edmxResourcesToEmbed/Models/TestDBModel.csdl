@@ -13,5 +13,18 @@
   </EntityType>
   <EntityContainer Name="TestDBEntities" annotation:LazyLoadingEnabled="true">
     <EntitySet Name="timetable_room" EntityType="TestDBModel.timetable_room" />
+    <EntitySet Name="timetable_module" EntityType="TestDBModel.timetable_module" />
   </EntityContainer>
+  <EntityType Name="timetable_module">
+    <Key>
+      <PropertyRef Name="Department_Code" />
+      <PropertyRef Name="Part_Code" />
+      <PropertyRef Name="Module_Code" />
+    </Key>
+    <Property Name="Department_Code" Type="String" Nullable="false" MaxLength="2" FixedLength="false" Unicode="false" />
+    <Property Name="Part_Code" Type="String" Nullable="false" MaxLength="1" FixedLength="false" Unicode="false" />
+    <Property Name="Module_Code" Type="String" Nullable="false" MaxLength="3" FixedLength="false" Unicode="false" />
+    <Property Name="Module_Title" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Active" Type="Boolean" Nullable="false" />
+  </EntityType>
 </Schema>

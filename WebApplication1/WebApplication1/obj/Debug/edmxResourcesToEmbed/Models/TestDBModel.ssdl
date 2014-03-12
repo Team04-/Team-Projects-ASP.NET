@@ -1,5 +1,17 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Schema Namespace="TestDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="timetable_module">
+    <Key>
+      <PropertyRef Name="Department_Code" />
+      <PropertyRef Name="Part_Code" />
+      <PropertyRef Name="Module_Code" />
+    </Key>
+    <Property Name="Department_Code" Type="varchar" MaxLength="2" Nullable="false" />
+    <Property Name="Part_Code" Type="varchar" MaxLength="1" Nullable="false" />
+    <Property Name="Module_Code" Type="varchar" MaxLength="3" Nullable="false" />
+    <Property Name="Module_Title" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="Active" Type="bit" Nullable="false" />
+  </EntityType>
   <EntityType Name="timetable_room">
     <Key>
       <PropertyRef Name="Building_ID" />
@@ -12,6 +24,7 @@
     <Property Name="Type_ID" Type="tinyint" Nullable="false" />
   </EntityType>
   <EntityContainer Name="TestDBModelStoreContainer">
+    <EntitySet Name="timetable_module" EntityType="Self.timetable_module" Schema="team04" store:Type="Tables" />
     <EntitySet Name="timetable_room" EntityType="Self.timetable_room" Schema="team04" store:Type="Tables" />
   </EntityContainer>
 </Schema>

@@ -4,7 +4,19 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="TestDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="TestDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="timetable_module">
+          <Key>
+            <PropertyRef Name="Department_Code" />
+            <PropertyRef Name="Part_Code" />
+            <PropertyRef Name="Module_Code" />
+          </Key>
+          <Property Name="Department_Code" Type="varchar" MaxLength="2" Nullable="false" />
+          <Property Name="Part_Code" Type="varchar" MaxLength="1" Nullable="false" />
+          <Property Name="Module_Code" Type="varchar" MaxLength="3" Nullable="false" />
+          <Property Name="Module_Title" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Active" Type="bit" Nullable="false" />
+        </EntityType>
         <EntityType Name="timetable_room">
           <Key>
             <PropertyRef Name="Building_ID" />
@@ -17,10 +29,10 @@
           <Property Name="Type_ID" Type="tinyint" Nullable="false" />
         </EntityType>
         <EntityContainer Name="TestDBModelStoreContainer">
+          <EntitySet Name="timetable_module" EntityType="Self.timetable_module" Schema="team04" store:Type="Tables" />
           <EntitySet Name="timetable_room" EntityType="Self.timetable_room" Schema="team04" store:Type="Tables" />
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="TestDBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -37,7 +49,20 @@
         </EntityType>
         <EntityContainer Name="TestDBEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="timetable_room" EntityType="TestDBModel.timetable_room" />
+          <EntitySet Name="timetable_module" EntityType="TestDBModel.timetable_module" />
         </EntityContainer>
+        <EntityType Name="timetable_module">
+          <Key>
+            <PropertyRef Name="Department_Code" />
+            <PropertyRef Name="Part_Code" />
+            <PropertyRef Name="Module_Code" />
+          </Key>
+          <Property Name="Department_Code" Type="String" Nullable="false" MaxLength="2" FixedLength="false" Unicode="false" />
+          <Property Name="Part_Code" Type="String" Nullable="false" MaxLength="1" FixedLength="false" Unicode="false" />
+          <Property Name="Module_Code" Type="String" Nullable="false" MaxLength="3" FixedLength="false" Unicode="false" />
+          <Property Name="Module_Title" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Active" Type="Boolean" Nullable="false" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -52,6 +77,17 @@
                 <ScalarProperty Name="Room_ID" ColumnName="Room_ID" />
                 <ScalarProperty Name="Capacity" ColumnName="Capacity" />
                 <ScalarProperty Name="Type_ID" ColumnName="Type_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="timetable_module">
+            <EntityTypeMapping TypeName="TestDBModel.timetable_module">
+              <MappingFragment StoreEntitySet="timetable_module">
+                <ScalarProperty Name="Active" ColumnName="Active" />
+                <ScalarProperty Name="Module_Title" ColumnName="Module_Title" />
+                <ScalarProperty Name="Module_Code" ColumnName="Module_Code" />
+                <ScalarProperty Name="Part_Code" ColumnName="Part_Code" />
+                <ScalarProperty Name="Department_Code" ColumnName="Department_Code" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

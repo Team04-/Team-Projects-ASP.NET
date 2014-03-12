@@ -12,5 +12,16 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <EntitySetMapping Name="timetable_module">
+      <EntityTypeMapping TypeName="TestDBModel.timetable_module">
+        <MappingFragment StoreEntitySet="timetable_module">
+          <ScalarProperty Name="Active" ColumnName="Active" />
+          <ScalarProperty Name="Module_Title" ColumnName="Module_Title" />
+          <ScalarProperty Name="Module_Code" ColumnName="Module_Code" />
+          <ScalarProperty Name="Part_Code" ColumnName="Part_Code" />
+          <ScalarProperty Name="Department_Code" ColumnName="Department_Code" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
   </EntityContainerMapping>
 </Mapping>

@@ -1,0 +1,53 @@
+﻿@using Microsoft.AspNet.Identity
+@model IEnumerable<WebApplication1.Models.timetable_module>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Modules for @(User.Identity.GetUserName())</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            Module Code
+        </th>
+        <th>
+            Module Title
+        </th>
+        <th>
+            Active
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @(item.Department_Code)@(item.Module_Code)            
+        </td>
+        <td>
+            @item.Module_Title
+        </td>
+        <td>
+            @if (item.Active)
+            {
+                @Html.Raw("Active")
+            }
+            else
+            {
+                @Html.Raw("Not Active");
+            }
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
+            @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
+            @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+        </td>
+    </tr>
+}
+
+</table>
