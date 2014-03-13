@@ -1,10 +1,13 @@
-﻿@model WebApplication1.Models.timetable_module
+﻿@using Microsoft.AspNet.Identity
+@model WebApplication1.Models.timetable_module
 
 @{
-    ViewBag.Title = "Edit";
+    ViewBag.Title = "Edit ";
+    ViewBag.Title += Model.Department_Code;
+    ViewBag.Title += Model.Module_Code;
 }
 
-<h2>Edit</h2>
+<h2>@(User.Identity.GetUserName()) Modules | Edit</h2>
 
 
 @using (Html.BeginForm())
@@ -12,7 +15,6 @@
     @Html.AntiForgeryToken()
     
     <div class="form-horizontal">
-        <h4>timetable_module</h4>
         <hr />
         @Html.ValidationSummary(true)
         @Html.HiddenFor(model => model.Department_Code)

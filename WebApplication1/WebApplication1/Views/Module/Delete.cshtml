@@ -1,14 +1,16 @@
-﻿@model WebApplication1.Models.timetable_module
+﻿@using Microsoft.AspNet.Identity
+@model WebApplication1.Models.timetable_module
 
 @{
-    ViewBag.Title = "Delete";
+    ViewBag.Title = "Delete ";
+    ViewBag.Title += Model.Department_Code;
+    ViewBag.Title += Model.Module_Code;
 }
 
-<h2>Delete</h2>
+<h2>@(User.Identity.GetUserName()) Modules | Delete</h2>
 
 <h3>Are you sure you want to delete this?</h3>
 <div>
-    <h4>timetable_module</h4>
     <hr />
     <dl class="dl-horizontal">
         <dt>

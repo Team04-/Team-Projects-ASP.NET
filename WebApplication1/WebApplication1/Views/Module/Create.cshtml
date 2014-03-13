@@ -1,11 +1,11 @@
-﻿@model WebApplication1.Models.timetable_module
+﻿@using Microsoft.AspNet.Identity
+@model WebApplication1.Models.timetable_module
 
 @{
-    ViewBag.Title = "Create";
+    ViewBag.Title = "New Module";
 }
 
-<h2>Create</h2>
-
+<h2>@(User.Identity.GetUserName()) Modules | New</h2>
 
 @using (Html.BeginForm()) 
 {

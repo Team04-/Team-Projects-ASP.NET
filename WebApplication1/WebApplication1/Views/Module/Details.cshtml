@@ -1,10 +1,12 @@
-﻿@model WebApplication1.Models.timetable_module
+﻿@using Microsoft.AspNet.Identity
+@model WebApplication1.Models.timetable_module
 
 @{
-    ViewBag.Title = "Details";
+    ViewBag.Title = Model.Department_Code;
+    ViewBag.Title += Model.Module_Code;
 }
 
-<h2>Details</h2>
+<h2>@(User.Identity.GetUserName()) Modules | Details</h2>
 
 <div>
     <h4>timetable_module</h4>
