@@ -15,19 +15,21 @@ namespace WebApplication1.Controllers
         private TestDBEntities db = new TestDBEntities();
 
         // GET: /Module/
+        [Authorize]
         public ActionResult Index()
         {
             return View(db.timetable_module.Where(dc => dc.Department_Code == User.Identity.Name));
         }
 
         // GET: /Module/Details/5
-        public ActionResult Details(string id)
+        [Authorize]
+        public ActionResult Details(string moduleCode)
         {
-            if (id == null)
+            if (moduleCode == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            timetable_module timetable_module = db.timetable_module.Find(id);
+            timetable_module timetable_module = db.timetable_module.Where(dc => dc.Department_Code == User.Identity.Name).Where(mc => mc.Module_Code == moduleCode).First();
             if (timetable_module == null)
             {
                 return HttpNotFound();
@@ -36,6 +38,7 @@ namespace WebApplication1.Controllers
         }
 
         // GET: /Module/Create
+        [Authorize]
         public ActionResult Create()
         {
             return View();
@@ -44,6 +47,7 @@ namespace WebApplication1.Controllers
         // POST: /Module/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [Authorize]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include="Department_Code,Part_Code,Module_Code,Module_Title,Active")] timetable_module timetable_module)
@@ -59,6 +63,7 @@ namespace WebApplication1.Controllers
         }
 
         // GET: /Module/Edit/5
+        [Authorize]
         public ActionResult Edit(string id)
         {
             if (id == null)
@@ -76,6 +81,7 @@ namespace WebApplication1.Controllers
         // POST: /Module/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [Authorize]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include="Department_Code,Part_Code,Module_Code,Module_Title,Active")] timetable_module timetable_module)
@@ -90,6 +96,7 @@ namespace WebApplication1.Controllers
         }
 
         // GET: /Module/Delete/5
+        [Authorize]
         public ActionResult Delete(string id)
         {
             if (id == null)
@@ -105,6 +112,7 @@ namespace WebApplication1.Controllers
         }
 
         // POST: /Module/Delete/5
+        [Authorize]
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(string id)
