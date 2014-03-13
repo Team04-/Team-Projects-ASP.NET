@@ -25,7 +25,7 @@ namespace WebApplication1.Controllers.manage
         {
             if (id == null)
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                return RedirectToAction("Index");
             }
             timetable_room timetable_room = db.timetable_room.Find(id);
             if (timetable_room == null)
@@ -63,7 +63,7 @@ namespace WebApplication1.Controllers.manage
         {
             if (id == null)
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                return RedirectToAction("Index");
             }
             timetable_room timetable_room = db.timetable_room.Find(id);
             if (timetable_room == null)
@@ -94,7 +94,7 @@ namespace WebApplication1.Controllers.manage
         {
             if (id == null)
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                return RedirectToAction("Index");
             }
             timetable_room timetable_room = db.timetable_room.Find(id);
             if (timetable_room == null)

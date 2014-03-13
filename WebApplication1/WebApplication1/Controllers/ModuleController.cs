@@ -27,7 +27,7 @@ namespace WebApplication1.Controllers
         {
             if (moduleCode == null)
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                return RedirectToAction("Index");
             }
             timetable_module timetable_module = db.timetable_module.Where(dc => dc.Department_Code == User.Identity.Name).Where(mc => mc.Module_Code == moduleCode).First();
             if (timetable_module == null)
@@ -68,7 +68,7 @@ namespace WebApplication1.Controllers
         {
             if (moduleCode == null)
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                return RedirectToAction("Index");
             }
             timetable_module timetable_module = db.timetable_module.Where(dc => dc.Department_Code == User.Identity.Name).Where(mc => mc.Module_Code == moduleCode).First();
             if (timetable_module == null)
@@ -101,7 +101,7 @@ namespace WebApplication1.Controllers
         {
             if (moduleCode == null)
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                return RedirectToAction("Index");
             }
             timetable_module timetable_module = db.timetable_module.Where(dc => dc.Department_Code == User.Identity.Name).Where(mc => mc.Module_Code == moduleCode).First();
             if (timetable_module == null)

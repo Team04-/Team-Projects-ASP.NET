@@ -25,7 +25,7 @@ namespace WebApplication1.Controllers.manage
         {
             if (id == null)
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                return RedirectToAction("Index");
             }
             timetable_building timetable_building = db.timetable_building.Find(id);
             if (timetable_building == null)
@@ -63,7 +63,7 @@ namespace WebApplication1.Controllers.manage
         {
             if (id == null)
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                return RedirectToAction("Index");
             }
             timetable_building timetable_building = db.timetable_building.Find(id);
             if (timetable_building == null)
@@ -94,7 +94,7 @@ namespace WebApplication1.Controllers.manage
         {
             if (id == null)
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                return RedirectToAction("Index");
             }
             timetable_building timetable_building = db.timetable_building.Find(id);
             if (timetable_building == null)
