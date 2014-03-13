@@ -43,9 +43,9 @@
             }
         </td>
         <td>
-            @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
+            @Html.ActionLink("Edit", "Edit", new { moduleCode = item.Module_Code }) |
             @Html.ActionLink("Details", "Details", new { moduleCode = item.Module_Code }) |
-            @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+            @Html.ActionLink("Delete", "Delete", new { moduleCode = item.Module_Code })
         </td>
     </tr>
 }

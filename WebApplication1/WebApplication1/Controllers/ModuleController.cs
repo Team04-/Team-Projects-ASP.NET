@@ -64,13 +64,13 @@ namespace WebApplication1.Controllers
 
         // GET: /Module/Edit/5
         [Authorize]
-        public ActionResult Edit(string id)
+        public ActionResult Edit(string moduleCode)
         {
-            if (id == null)
+            if (moduleCode == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            timetable_module timetable_module = db.timetable_module.Find(id);
+            timetable_module timetable_module = db.timetable_module.Where(dc => dc.Department_Code == User.Identity.Name).Where(mc => mc.Module_Code == moduleCode).First();
             if (timetable_module == null)
             {
                 return HttpNotFound();
@@ -97,13 +97,13 @@ namespace WebApplication1.Controllers
 
         // GET: /Module/Delete/5
         [Authorize]
-        public ActionResult Delete(string id)
+        public ActionResult Delete(string moduleCode)
         {
-            if (id == null)
+            if (moduleCode == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            timetable_module timetable_module = db.timetable_module.Find(id);
+            timetable_module timetable_module = db.timetable_module.Where(dc => dc.Department_Code == User.Identity.Name).Where(mc => mc.Module_Code == moduleCode).First();
             if (timetable_module == null)
             {
                 return HttpNotFound();
@@ -115,9 +115,9 @@ namespace WebApplication1.Controllers
         [Authorize]
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(string id)
+        public ActionResult DeleteConfirmed(string moduleCode)
         {
-            timetable_module timetable_module = db.timetable_module.Find(id);
+            timetable_module timetable_module = db.timetable_module.Where(dc => dc.Department_Code == User.Identity.Name).Where(mc => mc.Module_Code == moduleCode).First();
             db.timetable_module.Remove(timetable_module);
             db.SaveChanges();
             return RedirectToAction("Index");
