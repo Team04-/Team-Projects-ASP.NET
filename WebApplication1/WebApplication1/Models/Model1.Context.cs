@@ -27,5 +27,7 @@ namespace WebApplication1.Models
     
         public virtual DbSet<timetable_room> timetable_room { get; set; }
         public virtual DbSet<timetable_module> timetable_module { get; set; }
+        public virtual DbSet<timetable_building> timetable_building { get; set; }
+        public virtual DbSet<timetable_facility> timetable_facility { get; set; }
     }
 }

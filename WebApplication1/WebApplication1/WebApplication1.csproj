@@ -175,6 +175,9 @@
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\manage\BuildingController.cs" />
+    <Compile Include="Controllers\manage\FacilitiesController.cs" />
+    <Compile Include="Controllers\manage\RoomController.cs" />
     <Compile Include="Controllers\ModuleController.cs" />
     <Compile Include="Controllers\TestDBController.cs" />
     <Compile Include="Global.asax.cs">
@@ -196,6 +199,12 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>TestDBModel.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Models\timetable_building.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\timetable_facility.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\timetable_module.cs">
       <DependentUpon>Model1.tt</DependentUpon>
@@ -280,6 +289,21 @@
     <Content Include="Views\Module\Details.cshtml" />
     <Content Include="Views\Module\Edit.cshtml" />
     <Content Include="Views\Module\Index.cshtml" />
+    <Content Include="Views\Room\Create.cshtml" />
+    <Content Include="Views\Room\Delete.cshtml" />
+    <Content Include="Views\Room\Details.cshtml" />
+    <Content Include="Views\Room\Edit.cshtml" />
+    <Content Include="Views\Room\Index.cshtml" />
+    <Content Include="Views\Building\Create.cshtml" />
+    <Content Include="Views\Building\Delete.cshtml" />
+    <Content Include="Views\Building\Details.cshtml" />
+    <Content Include="Views\Building\Edit.cshtml" />
+    <Content Include="Views\Building\Index.cshtml" />
+    <Content Include="Views\Facilities\Create.cshtml" />
+    <Content Include="Views\Facilities\Delete.cshtml" />
+    <Content Include="Views\Facilities\Details.cshtml" />
+    <Content Include="Views\Facilities\Edit.cshtml" />
+    <Content Include="Views\Facilities\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

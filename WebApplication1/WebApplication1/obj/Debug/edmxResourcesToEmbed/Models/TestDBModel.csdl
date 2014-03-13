@@ -14,6 +14,8 @@
   <EntityContainer Name="TestDBEntities" annotation:LazyLoadingEnabled="true">
     <EntitySet Name="timetable_room" EntityType="TestDBModel.timetable_room" />
     <EntitySet Name="timetable_module" EntityType="TestDBModel.timetable_module" />
+    <EntitySet Name="timetable_building" EntityType="TestDBModel.timetable_building" />
+    <EntitySet Name="timetable_facility" EntityType="TestDBModel.timetable_facility" />
   </EntityContainer>
   <EntityType Name="timetable_module">
     <Key>
@@ -26,5 +28,19 @@
     <Property Name="Module_Code" Type="String" Nullable="false" MaxLength="3" FixedLength="false" Unicode="false" />
     <Property Name="Module_Title" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
     <Property Name="Active" Type="Boolean" Nullable="false" />
+  </EntityType>
+  <EntityType Name="timetable_building">
+    <Key>
+      <PropertyRef Name="Building_ID" />
+    </Key>
+    <Property Name="Building_ID" Type="String" Nullable="false" MaxLength="5" FixedLength="false" Unicode="false" />
+    <Property Name="Building_Name" Type="String" Nullable="false" MaxLength="60" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <EntityType Name="timetable_facility">
+    <Key>
+      <PropertyRef Name="Facility_ID" />
+    </Key>
+    <Property Name="Facility_ID" Type="Byte" Nullable="false" />
+    <Property Name="Facility_Name" Type="String" MaxLength="60" FixedLength="false" Unicode="false" />
   </EntityType>
 </Schema>
