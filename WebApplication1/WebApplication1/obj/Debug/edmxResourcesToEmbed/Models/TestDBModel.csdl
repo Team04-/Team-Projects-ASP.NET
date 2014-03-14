@@ -16,6 +16,7 @@
     <EntitySet Name="timetable_module" EntityType="TestDBModel.timetable_module" />
     <EntitySet Name="timetable_building" EntityType="TestDBModel.timetable_building" />
     <EntitySet Name="timetable_facility" EntityType="TestDBModel.timetable_facility" />
+    <EntitySet Name="timetable_department" EntityType="TestDBModel.timetable_department" />
   </EntityContainer>
   <EntityType Name="timetable_module">
     <Key>
@@ -42,5 +43,13 @@
     </Key>
     <Property Name="Facility_ID" Type="Byte" Nullable="false" />
     <Property Name="Facility_Name" Type="String" MaxLength="60" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <EntityType Name="timetable_department">
+    <Key>
+      <PropertyRef Name="Department_Code" />
+    </Key>
+    <Property Name="Department_Code" Type="String" Nullable="false" MaxLength="2" FixedLength="false" Unicode="false" />
+    <Property Name="Department_Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Department_Password" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
   </EntityType>
 </Schema>

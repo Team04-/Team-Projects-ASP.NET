@@ -203,6 +203,9 @@
     <Compile Include="Models\timetable_building.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\timetable_department.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\timetable_facility.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>

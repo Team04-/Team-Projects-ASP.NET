@@ -39,5 +39,14 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <EntitySetMapping Name="timetable_department">
+      <EntityTypeMapping TypeName="TestDBModel.timetable_department">
+        <MappingFragment StoreEntitySet="timetable_department">
+          <ScalarProperty Name="Department_Password" ColumnName="Department_Password" />
+          <ScalarProperty Name="Department_Name" ColumnName="Department_Name" />
+          <ScalarProperty Name="Department_Code" ColumnName="Department_Code" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
   </EntityContainerMapping>
 </Mapping>

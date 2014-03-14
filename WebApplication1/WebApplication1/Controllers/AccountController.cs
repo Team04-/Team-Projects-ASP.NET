@@ -31,7 +31,9 @@ namespace WebApplication1.Controllers
         // GET: /Account/Login
         [AllowAnonymous]
         public ActionResult Login(string returnUrl)
-        {
+        {   
+            TestDBEntities db = new TestDBEntities();
+            ViewBag.Departments = db.timetable_department.Select(name => name.Department_Code).ToList();
             ViewBag.ReturnUrl = returnUrl;
             return View();
         }
