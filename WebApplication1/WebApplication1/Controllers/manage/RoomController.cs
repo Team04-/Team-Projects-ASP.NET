@@ -17,6 +17,11 @@ namespace WebApplication1.Controllers.manage
         // GET: /Room/
         public ActionResult Index()
         {
+            var q = from r in db.timetable_room
+                    join b in db.timetable_building on r.Building_ID equals b.Building_ID into j
+                    from b in j.DefaultIfEmpty()
+                    select new { b.Building_Name, r.Room_ID, r.Capacity, r.Park_ID, r.Type_ID };
+            ViewBag.RoomInfoWithBuilding = q.ToList();
             return View(db.timetable_room.ToList());
         }
 
