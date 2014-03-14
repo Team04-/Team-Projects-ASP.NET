@@ -17,14 +17,14 @@
                 <h4>Use a local account to log in.</h4>
                 <hr />  
                 @Html.ValidationSummary(true)
-                if (ViewBag.Departments != null)
+                if (ViewBag.DepartmentsInfo != null)
                 {
                 <div class="form-group">
                     <select data-placeholder="Choose a department" data-val="true" data-val-required="A department must be chosen." class="chosen-select" id="UserName" name="UserName">
                         <option value=""></option>
-                        @foreach (String department in ViewBag.Departments)
+                        @for (int x = 0; x < ViewBag.DepartmentsInfo.GetLength(0); x += 1)
                         {
-                            <option value="@Html.Raw(department)">@Html.Raw(department)</option>
+                            <option value="@Html.Raw(ViewBag.DepartmentsInfo[x,0])">@Html.Raw(ViewBag.DepartmentsInfo[x,0]) - @Html.Raw(ViewBag.DepartmentsInfo[x,1])</option>
                         }
                     </select>
                 </div>

@@ -32,8 +32,23 @@ namespace WebApplication1.Controllers
         [AllowAnonymous]
         public ActionResult Login(string returnUrl)
         {   
+            
             TestDBEntities db = new TestDBEntities();
-            ViewBag.Departments = db.timetable_department.Select(name => name.Department_Code).ToList();
+            List<string> Department_Names = db.timetable_department.Select(name => name.Department_Name).ToList();
+            List<string> Department_Codes = db.timetable_department.Select(name => name.Department_Code).ToList();
+            string[,] DepartmentsInfo = new string[Department_Names.Count, Department_Names.Count];
+            using (var dcs = Department_Names.GetEnumerator())
+            using (var dns = Department_Codes.GetEnumerator())
+            {
+                int counter = 0;
+                while (dcs.MoveNext() && dns.MoveNext())
+                {
+                    DepartmentsInfo[counter, 0] = dcs.Current;
+                    DepartmentsInfo[counter, 1] = dns.Current;
+                    counter++;
+                }
+            }
+            ViewBag.DepartmentsInfo = DepartmentsInfo;
             ViewBag.ReturnUrl = returnUrl;
             return View();
         }

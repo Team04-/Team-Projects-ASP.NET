@@ -15,7 +15,8 @@ namespace WebApplication1
             routes.MapRoute(
                 name: "Manage",
                 url: "manage/{controller}/{action}/{id}",
-                defaults: new { controller = "Room", action = "Index", id = UrlParameter.Optional }
+                defaults: new { controller = "Room", action = "Index", id = UrlParameter.Optional },
+                constraints: new { controller = @"Room|Building|Facilities" }
             );
             routes.MapRoute(
                 name: "Default",
