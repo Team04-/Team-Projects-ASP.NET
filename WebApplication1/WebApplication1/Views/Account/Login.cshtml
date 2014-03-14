@@ -24,7 +24,7 @@
                         <option value=""></option>
                         @for (int x = 0; x < ViewBag.DepartmentsInfo.GetLength(0); x += 1)
                         {
-                            <option value="@Html.Raw(ViewBag.DepartmentsInfo[x,0])">@Html.Raw(ViewBag.DepartmentsInfo[x,0]) - @Html.Raw(ViewBag.DepartmentsInfo[x,1])</option>
+                            <option value="@Html.Raw(ViewBag.DepartmentsInfo[x,1])">@Html.Raw(ViewBag.DepartmentsInfo[x,1]) - @Html.Raw(ViewBag.DepartmentsInfo[x,0])</option>
                         }
                     </select>
                 </div>

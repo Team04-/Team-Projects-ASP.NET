@@ -27,12 +27,8 @@ namespace WebApplication1.Controllers
 
         public UserManager<ApplicationUser> UserManager { get; private set; }
 
-        //
-        // GET: /Account/Login
-        [AllowAnonymous]
-        public ActionResult Login(string returnUrl)
-        {   
-            
+        private string[,] getDepartmentInfo()
+        {
             TestDBEntities db = new TestDBEntities();
             List<string> Department_Names = db.timetable_department.Select(name => name.Department_Name).ToList();
             List<string> Department_Codes = db.timetable_department.Select(name => name.Department_Code).ToList();
@@ -48,7 +44,14 @@ namespace WebApplication1.Controllers
                     counter++;
                 }
             }
-            ViewBag.DepartmentsInfo = DepartmentsInfo;
+            return DepartmentsInfo;
+        }
+        //
+        // GET: /Account/Login
+        [AllowAnonymous]
+        public ActionResult Login(string returnUrl)
+        {   
+            ViewBag.DepartmentsInfo = getDepartmentInfo();
             ViewBag.ReturnUrl = returnUrl;
             return View();
         }
@@ -70,6 +73,7 @@ namespace WebApplication1.Controllers
                 }
                 else
                 {
+                    ViewBag.DepartmentsInfo = getDepartmentInfo();
                     ModelState.AddModelError("", "Invalid username or password.");
                 }
             }
@@ -104,6 +108,7 @@ namespace WebApplication1.Controllers
                 }
                 else
                 {
+                    ViewBag.DepartmentsInfo = getDepartmentInfo();
                     AddErrors(result);
                 }
             }
