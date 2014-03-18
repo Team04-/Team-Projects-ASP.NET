@@ -14,10 +14,17 @@ namespace WebApplication1.Models
     
     public partial class timetable_module
     {
+        public timetable_module()
+        {
+            this.timetable_request = new HashSet<timetable_request>();
+        }
+    
         public string Department_Code { get; set; }
         public string Part_Code { get; set; }
         public string Module_Code { get; set; }
         public string Module_Title { get; set; }
         public bool Active { get; set; }
+    
+        public virtual ICollection<timetable_request> timetable_request { get; set; }
     }
 }

@@ -12,21 +12,15 @@ namespace WebApplication1.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class timetable_room
+    public partial class timetable_request_room_allocation
     {
-        public timetable_room()
-        {
-            this.timetable_request_room_allocation = new HashSet<timetable_request_room_allocation>();
-        }
-    
-        public Nullable<int> Park_ID { get; set; }
+        public short Request_ID { get; set; }
         public string Building_ID { get; set; }
         public string Room_ID { get; set; }
-        public Nullable<int> Capacity { get; set; }
-        public byte Type_ID { get; set; }
     
-        public virtual ICollection<timetable_request_room_allocation> timetable_request_room_allocation { get; set; }
-        public virtual timetable_room timetable_room1 { get; set; }
-        public virtual timetable_room timetable_room2 { get; set; }
+        public virtual timetable_request timetable_request { get; set; }
+        public virtual timetable_request_room_allocation timetable_request_room_allocation1 { get; set; }
+        public virtual timetable_request_room_allocation timetable_request_room_allocation2 { get; set; }
+        public virtual timetable_room timetable_room { get; set; }
     }
 }

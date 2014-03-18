@@ -12,6 +12,13 @@
           <Property Name="Building_ID" Type="varchar" MaxLength="5" Nullable="false" />
           <Property Name="Building_Name" Type="varchar" MaxLength="60" Nullable="false" />
         </EntityType>
+        <EntityType Name="timetable_day">
+          <Key>
+            <PropertyRef Name="Day_ID" />
+          </Key>
+          <Property Name="Day_ID" Type="tinyint" Nullable="false" />
+          <Property Name="Day_Name" Type="varchar" MaxLength="9" Nullable="false" />
+        </EntityType>
         <EntityType Name="timetable_department">
           <Key>
             <PropertyRef Name="Department_Code" />
@@ -39,6 +46,59 @@
           <Property Name="Module_Title" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="Active" Type="bit" Nullable="false" />
         </EntityType>
+        <EntityType Name="timetable_park">
+          <Key>
+            <PropertyRef Name="Park_ID" />
+          </Key>
+          <Property Name="Park_ID" Type="int" Nullable="false" />
+          <Property Name="Park_Name" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="timetable_request">
+          <Key>
+            <PropertyRef Name="Request_ID" />
+          </Key>
+          <Property Name="Request_ID" Type="smallint" Nullable="false" />
+          <Property Name="Department_Code" Type="varchar" MaxLength="2" Nullable="false" />
+          <Property Name="Part_Code" Type="varchar" MaxLength="1" Nullable="false" />
+          <Property Name="Module_Code" Type="varchar" MaxLength="3" Nullable="false" />
+          <Property Name="Day_ID" Type="tinyint" Nullable="false" />
+          <Property Name="Start_Time" Type="tinyint" Nullable="false" />
+          <Property Name="Duration" Type="tinyint" Nullable="false" />
+          <Property Name="Number_Students" Type="int" Nullable="false" />
+          <Property Name="Number_Rooms" Type="tinyint" Nullable="false" />
+          <Property Name="Priority" Type="tinyint" Nullable="false" />
+          <Property Name="Room_Type" Type="int" Nullable="false" />
+          <Property Name="Park_ID" Type="int" Nullable="false" />
+          <Property Name="Custom_Comments" Type="text" Nullable="false" />
+          <Property Name="Current_Year" Type="int" Nullable="false" />
+          <Property Name="Current_Semester" Type="tinyint" Nullable="false" />
+          <Property Name="Current_Round" Type="tinyint" Nullable="false" />
+          <Property Name="Request_Status" Type="tinyint" Nullable="false" />
+        </EntityType>
+        <EntityType Name="timetable_request_facility">
+          <Key>
+            <PropertyRef Name="Request_ID" />
+            <PropertyRef Name="Facility_ID" />
+          </Key>
+          <Property Name="Request_ID" Type="smallint" Nullable="false" />
+          <Property Name="Facility_ID" Type="tinyint" Nullable="false" />
+          <Property Name="Quantity" Type="tinyint" Nullable="false" />
+        </EntityType>
+        <EntityType Name="timetable_request_room_allocation">
+          <Key>
+            <PropertyRef Name="Request_ID" />
+          </Key>
+          <Property Name="Request_ID" Type="smallint" Nullable="false" />
+          <Property Name="Building_ID" Type="varchar" MaxLength="5" Nullable="false" />
+          <Property Name="Room_ID" Type="varchar" MaxLength="5" Nullable="false" />
+        </EntityType>
+        <EntityType Name="timetable_request_week">
+          <Key>
+            <PropertyRef Name="Request_ID" />
+          </Key>
+          <Property Name="Request_ID" Type="smallint" Nullable="false" />
+          <Property Name="Week" Type="tinyint" Nullable="false" />
+        </EntityType>
         <EntityType Name="timetable_room">
           <Key>
             <PropertyRef Name="Building_ID" />
@@ -50,12 +110,215 @@
           <Property Name="Capacity" Type="int" />
           <Property Name="Type_ID" Type="tinyint" Nullable="false" />
         </EntityType>
+        <EntityType Name="timetable_room_facility">
+          <Key>
+            <PropertyRef Name="Building_ID" />
+            <PropertyRef Name="Room_ID" />
+            <PropertyRef Name="Facility_ID" />
+          </Key>
+          <Property Name="Building_ID" Type="varchar" MaxLength="5" Nullable="false" />
+          <Property Name="Room_ID" Type="varchar" MaxLength="5" Nullable="false" />
+          <Property Name="Facility_ID" Type="int" Nullable="false" />
+          <Property Name="Quantity" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="timetable_room_type">
+          <Key>
+            <PropertyRef Name="Type_ID" />
+          </Key>
+          <Property Name="Type_ID" Type="tinyint" Nullable="false" />
+          <Property Name="Type_Name" Type="varchar" MaxLength="10" Nullable="false" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'team04.team04.timetable_round' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="timetable_round">
+          <Key>
+            <PropertyRef Name="Current_Year" />
+            <PropertyRef Name="Current_Semester" />
+            <PropertyRef Name="Current_Round" />
+            <PropertyRef Name="Current_Round_Status" />
+            <PropertyRef Name="Adhoc_Status" />
+          </Key>
+          <Property Name="Current_Year" Type="int" Nullable="false" />
+          <Property Name="Current_Semester" Type="tinyint" Nullable="false" />
+          <Property Name="Current_Round" Type="tinyint" Nullable="false" />
+          <Property Name="Current_Round_Status" Type="tinyint" Nullable="false" />
+          <Property Name="Adhoc_Status" Type="tinyint" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_timetable_request_facility_timetable_facility">
+          <End Role="timetable_facility" Type="Self.timetable_facility" Multiplicity="1" />
+          <End Role="timetable_request_facility" Type="Self.timetable_request_facility" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="timetable_facility">
+              <PropertyRef Name="Facility_ID" />
+            </Principal>
+            <Dependent Role="timetable_request_facility">
+              <PropertyRef Name="Facility_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_timetable_request_room_allocation_timetable_request_room_allocation">
+          <End Role="timetable_request_room_allocation" Type="Self.timetable_request_room_allocation" Multiplicity="1" />
+          <End Role="timetable_request_room_allocation1" Type="Self.timetable_request_room_allocation" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="timetable_request_room_allocation">
+              <PropertyRef Name="Request_ID" />
+            </Principal>
+            <Dependent Role="timetable_request_room_allocation1">
+              <PropertyRef Name="Request_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_timetable_request_room_allocation_timetable_room">
+          <End Role="timetable_room" Type="Self.timetable_room" Multiplicity="1" />
+          <End Role="timetable_request_room_allocation" Type="Self.timetable_request_room_allocation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="timetable_room">
+              <PropertyRef Name="Building_ID" />
+              <PropertyRef Name="Room_ID" />
+            </Principal>
+            <Dependent Role="timetable_request_room_allocation">
+              <PropertyRef Name="Building_ID" />
+              <PropertyRef Name="Room_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_timetable_request_timetable_day">
+          <End Role="timetable_day" Type="Self.timetable_day" Multiplicity="1" />
+          <End Role="timetable_request" Type="Self.timetable_request" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="timetable_day">
+              <PropertyRef Name="Day_ID" />
+            </Principal>
+            <Dependent Role="timetable_request">
+              <PropertyRef Name="Day_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_timetable_request_timetable_module">
+          <End Role="timetable_module" Type="Self.timetable_module" Multiplicity="1" />
+          <End Role="timetable_request" Type="Self.timetable_request" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="timetable_module">
+              <PropertyRef Name="Department_Code" />
+              <PropertyRef Name="Part_Code" />
+              <PropertyRef Name="Module_Code" />
+            </Principal>
+            <Dependent Role="timetable_request">
+              <PropertyRef Name="Department_Code" />
+              <PropertyRef Name="Part_Code" />
+              <PropertyRef Name="Module_Code" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_timetable_request_timetable_request">
+          <End Role="timetable_request" Type="Self.timetable_request" Multiplicity="1" />
+          <End Role="timetable_request1" Type="Self.timetable_request" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="timetable_request">
+              <PropertyRef Name="Request_ID" />
+            </Principal>
+            <Dependent Role="timetable_request1">
+              <PropertyRef Name="Request_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_timetable_request_timetable_request_room_allocation">
+          <End Role="timetable_request_room_allocation" Type="Self.timetable_request_room_allocation" Multiplicity="1" />
+          <End Role="timetable_request" Type="Self.timetable_request" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="timetable_request_room_allocation">
+              <PropertyRef Name="Request_ID" />
+            </Principal>
+            <Dependent Role="timetable_request">
+              <PropertyRef Name="Request_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_timetable_request_timetable_request_week">
+          <End Role="timetable_request_week" Type="Self.timetable_request_week" Multiplicity="1" />
+          <End Role="timetable_request" Type="Self.timetable_request" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="timetable_request_week">
+              <PropertyRef Name="Request_ID" />
+            </Principal>
+            <Dependent Role="timetable_request">
+              <PropertyRef Name="Request_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_timetable_room_timetable_room">
+          <End Role="timetable_room" Type="Self.timetable_room" Multiplicity="1" />
+          <End Role="timetable_room1" Type="Self.timetable_room" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="timetable_room">
+              <PropertyRef Name="Building_ID" />
+              <PropertyRef Name="Room_ID" />
+            </Principal>
+            <Dependent Role="timetable_room1">
+              <PropertyRef Name="Building_ID" />
+              <PropertyRef Name="Room_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <EntityContainer Name="TestDBModelStoreContainer">
           <EntitySet Name="timetable_building" EntityType="Self.timetable_building" Schema="team04" store:Type="Tables" />
+          <EntitySet Name="timetable_day" EntityType="Self.timetable_day" Schema="team04" store:Type="Tables" />
           <EntitySet Name="timetable_department" EntityType="Self.timetable_department" Schema="team04" store:Type="Tables" />
           <EntitySet Name="timetable_facility" EntityType="Self.timetable_facility" Schema="team04" store:Type="Tables" />
           <EntitySet Name="timetable_module" EntityType="Self.timetable_module" Schema="team04" store:Type="Tables" />
+          <EntitySet Name="timetable_park" EntityType="Self.timetable_park" Schema="team04" store:Type="Tables" />
+          <EntitySet Name="timetable_request" EntityType="Self.timetable_request" Schema="team04" store:Type="Tables" />
+          <EntitySet Name="timetable_request_facility" EntityType="Self.timetable_request_facility" Schema="team04" store:Type="Tables" />
+          <EntitySet Name="timetable_request_room_allocation" EntityType="Self.timetable_request_room_allocation" Schema="team04" store:Type="Tables" />
+          <EntitySet Name="timetable_request_week" EntityType="Self.timetable_request_week" Schema="team04" store:Type="Tables" />
           <EntitySet Name="timetable_room" EntityType="Self.timetable_room" Schema="team04" store:Type="Tables" />
+          <EntitySet Name="timetable_room_facility" EntityType="Self.timetable_room_facility" Schema="team04" store:Type="Tables" />
+          <EntitySet Name="timetable_room_type" EntityType="Self.timetable_room_type" Schema="team04" store:Type="Tables" />
+          <EntitySet Name="timetable_round" EntityType="Self.timetable_round" store:Type="Tables" store:Schema="team04">
+            <DefiningQuery>SELECT 
+    [timetable_round].[Current_Year] AS [Current_Year], 
+    [timetable_round].[Current_Semester] AS [Current_Semester], 
+    [timetable_round].[Current_Round] AS [Current_Round], 
+    [timetable_round].[Current_Round_Status] AS [Current_Round_Status], 
+    [timetable_round].[Adhoc_Status] AS [Adhoc_Status]
+    FROM [team04].[timetable_round] AS [timetable_round]</DefiningQuery>
+          </EntitySet>
+          <AssociationSet Name="FK_timetable_request_facility_timetable_facility" Association="Self.FK_timetable_request_facility_timetable_facility">
+            <End Role="timetable_facility" EntitySet="timetable_facility" />
+            <End Role="timetable_request_facility" EntitySet="timetable_request_facility" />
+          </AssociationSet>
+          <AssociationSet Name="FK_timetable_request_room_allocation_timetable_request_room_allocation" Association="Self.FK_timetable_request_room_allocation_timetable_request_room_allocation">
+            <End Role="timetable_request_room_allocation" EntitySet="timetable_request_room_allocation" />
+            <End Role="timetable_request_room_allocation1" EntitySet="timetable_request_room_allocation" />
+          </AssociationSet>
+          <AssociationSet Name="FK_timetable_request_room_allocation_timetable_room" Association="Self.FK_timetable_request_room_allocation_timetable_room">
+            <End Role="timetable_room" EntitySet="timetable_room" />
+            <End Role="timetable_request_room_allocation" EntitySet="timetable_request_room_allocation" />
+          </AssociationSet>
+          <AssociationSet Name="FK_timetable_request_timetable_day" Association="Self.FK_timetable_request_timetable_day">
+            <End Role="timetable_day" EntitySet="timetable_day" />
+            <End Role="timetable_request" EntitySet="timetable_request" />
+          </AssociationSet>
+          <AssociationSet Name="FK_timetable_request_timetable_module" Association="Self.FK_timetable_request_timetable_module">
+            <End Role="timetable_module" EntitySet="timetable_module" />
+            <End Role="timetable_request" EntitySet="timetable_request" />
+          </AssociationSet>
+          <AssociationSet Name="FK_timetable_request_timetable_request" Association="Self.FK_timetable_request_timetable_request">
+            <End Role="timetable_request" EntitySet="timetable_request" />
+            <End Role="timetable_request1" EntitySet="timetable_request" />
+          </AssociationSet>
+          <AssociationSet Name="FK_timetable_request_timetable_request_room_allocation" Association="Self.FK_timetable_request_timetable_request_room_allocation">
+            <End Role="timetable_request_room_allocation" EntitySet="timetable_request_room_allocation" />
+            <End Role="timetable_request" EntitySet="timetable_request" />
+          </AssociationSet>
+          <AssociationSet Name="FK_timetable_request_timetable_request_week" Association="Self.FK_timetable_request_timetable_request_week">
+            <End Role="timetable_request_week" EntitySet="timetable_request_week" />
+            <End Role="timetable_request" EntitySet="timetable_request" />
+          </AssociationSet>
+          <AssociationSet Name="FK_timetable_room_timetable_room" Association="Self.FK_timetable_room_timetable_room">
+            <End Role="timetable_room" EntitySet="timetable_room" />
+            <End Role="timetable_room1" EntitySet="timetable_room" />
+          </AssociationSet>
         </EntityContainer>
       </Schema></edmx:StorageModels>
     <!-- CSDL content -->
@@ -71,6 +334,9 @@
           <Property Name="Room_ID" Type="String" MaxLength="5" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="Capacity" Type="Int32" />
           <Property Name="Type_ID" Type="Byte" Nullable="false" />
+          <NavigationProperty Name="timetable_request_room_allocation" Relationship="TestDBModel.FK_timetable_request_room_allocation_timetable_room" FromRole="timetable_room" ToRole="timetable_request_room_allocation" />
+          <NavigationProperty Name="timetable_room1" Relationship="TestDBModel.FK_timetable_room_timetable_room" FromRole="timetable_room" ToRole="timetable_room1" />
+          <NavigationProperty Name="timetable_room2" Relationship="TestDBModel.FK_timetable_room_timetable_room" FromRole="timetable_room1" ToRole="timetable_room" />
         </EntityType>
         <EntityContainer Name="TestDBEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="timetable_room" EntityType="TestDBModel.timetable_room" />
@@ -78,6 +344,51 @@
           <EntitySet Name="timetable_building" EntityType="TestDBModel.timetable_building" />
           <EntitySet Name="timetable_facility" EntityType="TestDBModel.timetable_facility" />
           <EntitySet Name="timetable_department" EntityType="TestDBModel.timetable_department" />
+          <EntitySet Name="timetable_day" EntityType="TestDBModel.timetable_day" />
+          <EntitySet Name="timetable_park" EntityType="TestDBModel.timetable_park" />
+          <EntitySet Name="timetable_request" EntityType="TestDBModel.timetable_request" />
+          <EntitySet Name="timetable_request_facility" EntityType="TestDBModel.timetable_request_facility" />
+          <EntitySet Name="timetable_request_room_allocation" EntityType="TestDBModel.timetable_request_room_allocation" />
+          <EntitySet Name="timetable_request_week" EntityType="TestDBModel.timetable_request_week" />
+          <EntitySet Name="timetable_room_facility" EntityType="TestDBModel.timetable_room_facility" />
+          <EntitySet Name="timetable_room_type" EntityType="TestDBModel.timetable_room_type" />
+          <EntitySet Name="timetable_round" EntityType="TestDBModel.timetable_round" />
+          <AssociationSet Name="FK_timetable_request_timetable_day" Association="TestDBModel.FK_timetable_request_timetable_day">
+            <End Role="timetable_day" EntitySet="timetable_day" />
+            <End Role="timetable_request" EntitySet="timetable_request" />
+          </AssociationSet>
+          <AssociationSet Name="FK_timetable_request_facility_timetable_facility" Association="TestDBModel.FK_timetable_request_facility_timetable_facility">
+            <End Role="timetable_facility" EntitySet="timetable_facility" />
+            <End Role="timetable_request_facility" EntitySet="timetable_request_facility" />
+          </AssociationSet>
+          <AssociationSet Name="FK_timetable_request_timetable_module" Association="TestDBModel.FK_timetable_request_timetable_module">
+            <End Role="timetable_module" EntitySet="timetable_module" />
+            <End Role="timetable_request" EntitySet="timetable_request" />
+          </AssociationSet>
+          <AssociationSet Name="FK_timetable_request_timetable_request" Association="TestDBModel.FK_timetable_request_timetable_request">
+            <End Role="timetable_request" EntitySet="timetable_request" />
+            <End Role="timetable_request1" EntitySet="timetable_request" />
+          </AssociationSet>
+          <AssociationSet Name="FK_timetable_request_timetable_request_room_allocation" Association="TestDBModel.FK_timetable_request_timetable_request_room_allocation">
+            <End Role="timetable_request_room_allocation" EntitySet="timetable_request_room_allocation" />
+            <End Role="timetable_request" EntitySet="timetable_request" />
+          </AssociationSet>
+          <AssociationSet Name="FK_timetable_request_timetable_request_week" Association="TestDBModel.FK_timetable_request_timetable_request_week">
+            <End Role="timetable_request_week" EntitySet="timetable_request_week" />
+            <End Role="timetable_request" EntitySet="timetable_request" />
+          </AssociationSet>
+          <AssociationSet Name="FK_timetable_request_room_allocation_timetable_request_room_allocation" Association="TestDBModel.FK_timetable_request_room_allocation_timetable_request_room_allocation">
+            <End Role="timetable_request_room_allocation" EntitySet="timetable_request_room_allocation" />
+            <End Role="timetable_request_room_allocation1" EntitySet="timetable_request_room_allocation" />
+          </AssociationSet>
+          <AssociationSet Name="FK_timetable_request_room_allocation_timetable_room" Association="TestDBModel.FK_timetable_request_room_allocation_timetable_room">
+            <End Role="timetable_room" EntitySet="timetable_room" />
+            <End Role="timetable_request_room_allocation" EntitySet="timetable_request_room_allocation" />
+          </AssociationSet>
+          <AssociationSet Name="FK_timetable_room_timetable_room" Association="TestDBModel.FK_timetable_room_timetable_room">
+            <End Role="timetable_room" EntitySet="timetable_room" />
+            <End Role="timetable_room1" EntitySet="timetable_room" />
+          </AssociationSet>
         </EntityContainer>
         <EntityType Name="timetable_module">
           <Key>
@@ -90,6 +401,7 @@
           <Property Name="Module_Code" Type="String" Nullable="false" MaxLength="3" FixedLength="false" Unicode="false" />
           <Property Name="Module_Title" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="Active" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="timetable_request" Relationship="TestDBModel.FK_timetable_request_timetable_module" FromRole="timetable_module" ToRole="timetable_request" />
         </EntityType>
         <EntityType Name="timetable_building">
           <Key>
@@ -104,6 +416,7 @@
           </Key>
           <Property Name="Facility_ID" Type="Byte" Nullable="false" />
           <Property Name="Facility_Name" Type="String" MaxLength="60" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="timetable_request_facility" Relationship="TestDBModel.FK_timetable_request_facility_timetable_facility" FromRole="timetable_facility" ToRole="timetable_request_facility" />
         </EntityType>
         <EntityType Name="timetable_department">
           <Key>
@@ -113,6 +426,227 @@
           <Property Name="Department_Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="Department_Password" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
         </EntityType>
+        <EntityType Name="timetable_day">
+          <Key>
+            <PropertyRef Name="Day_ID" />
+          </Key>
+          <Property Name="Day_ID" Type="Byte" Nullable="false" />
+          <Property Name="Day_Name" Type="String" Nullable="false" MaxLength="9" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="timetable_request" Relationship="TestDBModel.FK_timetable_request_timetable_day" FromRole="timetable_day" ToRole="timetable_request" />
+        </EntityType>
+        <EntityType Name="timetable_park">
+          <Key>
+            <PropertyRef Name="Park_ID" />
+          </Key>
+          <Property Name="Park_ID" Type="Int32" Nullable="false" />
+          <Property Name="Park_Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="timetable_request">
+          <Key>
+            <PropertyRef Name="Request_ID" />
+          </Key>
+          <Property Name="Request_ID" Type="Int16" Nullable="false" />
+          <Property Name="Department_Code" Type="String" Nullable="false" MaxLength="2" FixedLength="false" Unicode="false" />
+          <Property Name="Part_Code" Type="String" Nullable="false" MaxLength="1" FixedLength="false" Unicode="false" />
+          <Property Name="Module_Code" Type="String" Nullable="false" MaxLength="3" FixedLength="false" Unicode="false" />
+          <Property Name="Day_ID" Type="Byte" Nullable="false" />
+          <Property Name="Start_Time" Type="Byte" Nullable="false" />
+          <Property Name="Duration" Type="Byte" Nullable="false" />
+          <Property Name="Number_Students" Type="Int32" Nullable="false" />
+          <Property Name="Number_Rooms" Type="Byte" Nullable="false" />
+          <Property Name="Priority" Type="Byte" Nullable="false" />
+          <Property Name="Room_Type" Type="Int32" Nullable="false" />
+          <Property Name="Park_ID" Type="Int32" Nullable="false" />
+          <Property Name="Custom_Comments" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Current_Year" Type="Int32" Nullable="false" />
+          <Property Name="Current_Semester" Type="Byte" Nullable="false" />
+          <Property Name="Current_Round" Type="Byte" Nullable="false" />
+          <Property Name="Request_Status" Type="Byte" Nullable="false" />
+          <NavigationProperty Name="timetable_day" Relationship="TestDBModel.FK_timetable_request_timetable_day" FromRole="timetable_request" ToRole="timetable_day" />
+          <NavigationProperty Name="timetable_module" Relationship="TestDBModel.FK_timetable_request_timetable_module" FromRole="timetable_request" ToRole="timetable_module" />
+          <NavigationProperty Name="timetable_request1" Relationship="TestDBModel.FK_timetable_request_timetable_request" FromRole="timetable_request" ToRole="timetable_request1" />
+          <NavigationProperty Name="timetable_request2" Relationship="TestDBModel.FK_timetable_request_timetable_request" FromRole="timetable_request1" ToRole="timetable_request" />
+          <NavigationProperty Name="timetable_request_room_allocation" Relationship="TestDBModel.FK_timetable_request_timetable_request_room_allocation" FromRole="timetable_request" ToRole="timetable_request_room_allocation" />
+          <NavigationProperty Name="timetable_request_week" Relationship="TestDBModel.FK_timetable_request_timetable_request_week" FromRole="timetable_request" ToRole="timetable_request_week" />
+        </EntityType>
+        <EntityType Name="timetable_request_facility">
+          <Key>
+            <PropertyRef Name="Request_ID" />
+            <PropertyRef Name="Facility_ID" />
+          </Key>
+          <Property Name="Request_ID" Type="Int16" Nullable="false" />
+          <Property Name="Facility_ID" Type="Byte" Nullable="false" />
+          <Property Name="Quantity" Type="Byte" Nullable="false" />
+          <NavigationProperty Name="timetable_facility" Relationship="TestDBModel.FK_timetable_request_facility_timetable_facility" FromRole="timetable_request_facility" ToRole="timetable_facility" />
+        </EntityType>
+        <EntityType Name="timetable_request_room_allocation">
+          <Key>
+            <PropertyRef Name="Request_ID" />
+          </Key>
+          <Property Name="Request_ID" Type="Int16" Nullable="false" />
+          <Property Name="Building_ID" Type="String" Nullable="false" MaxLength="5" FixedLength="false" Unicode="false" />
+          <Property Name="Room_ID" Type="String" Nullable="false" MaxLength="5" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="timetable_request" Relationship="TestDBModel.FK_timetable_request_timetable_request_room_allocation" FromRole="timetable_request_room_allocation" ToRole="timetable_request" />
+          <NavigationProperty Name="timetable_request_room_allocation1" Relationship="TestDBModel.FK_timetable_request_room_allocation_timetable_request_room_allocation" FromRole="timetable_request_room_allocation" ToRole="timetable_request_room_allocation1" />
+          <NavigationProperty Name="timetable_request_room_allocation2" Relationship="TestDBModel.FK_timetable_request_room_allocation_timetable_request_room_allocation" FromRole="timetable_request_room_allocation1" ToRole="timetable_request_room_allocation" />
+          <NavigationProperty Name="timetable_room" Relationship="TestDBModel.FK_timetable_request_room_allocation_timetable_room" FromRole="timetable_request_room_allocation" ToRole="timetable_room" />
+        </EntityType>
+        <EntityType Name="timetable_request_week">
+          <Key>
+            <PropertyRef Name="Request_ID" />
+          </Key>
+          <Property Name="Request_ID" Type="Int16" Nullable="false" />
+          <Property Name="Week" Type="Byte" Nullable="false" />
+          <NavigationProperty Name="timetable_request" Relationship="TestDBModel.FK_timetable_request_timetable_request_week" FromRole="timetable_request_week" ToRole="timetable_request" />
+        </EntityType>
+        <EntityType Name="timetable_room_facility">
+          <Key>
+            <PropertyRef Name="Building_ID" />
+            <PropertyRef Name="Room_ID" />
+            <PropertyRef Name="Facility_ID" />
+          </Key>
+          <Property Name="Building_ID" Type="String" Nullable="false" MaxLength="5" FixedLength="false" Unicode="false" />
+          <Property Name="Room_ID" Type="String" Nullable="false" MaxLength="5" FixedLength="false" Unicode="false" />
+          <Property Name="Facility_ID" Type="Int32" Nullable="false" />
+          <Property Name="Quantity" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="timetable_room_type">
+          <Key>
+            <PropertyRef Name="Type_ID" />
+          </Key>
+          <Property Name="Type_ID" Type="Byte" Nullable="false" />
+          <Property Name="Type_Name" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="timetable_round">
+          <Key>
+            <PropertyRef Name="Current_Year" />
+            <PropertyRef Name="Current_Semester" />
+            <PropertyRef Name="Current_Round" />
+            <PropertyRef Name="Current_Round_Status" />
+            <PropertyRef Name="Adhoc_Status" />
+          </Key>
+          <Property Name="Current_Year" Type="Int32" Nullable="false" />
+          <Property Name="Current_Semester" Type="Byte" Nullable="false" />
+          <Property Name="Current_Round" Type="Byte" Nullable="false" />
+          <Property Name="Current_Round_Status" Type="Byte" Nullable="false" />
+          <Property Name="Adhoc_Status" Type="Byte" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_timetable_request_timetable_day">
+          <End Type="TestDBModel.timetable_day" Role="timetable_day" Multiplicity="1" />
+          <End Type="TestDBModel.timetable_request" Role="timetable_request" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="timetable_day">
+              <PropertyRef Name="Day_ID" />
+            </Principal>
+            <Dependent Role="timetable_request">
+              <PropertyRef Name="Day_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_timetable_request_facility_timetable_facility">
+          <End Type="TestDBModel.timetable_facility" Role="timetable_facility" Multiplicity="1" />
+          <End Type="TestDBModel.timetable_request_facility" Role="timetable_request_facility" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="timetable_facility">
+              <PropertyRef Name="Facility_ID" />
+            </Principal>
+            <Dependent Role="timetable_request_facility">
+              <PropertyRef Name="Facility_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_timetable_request_timetable_module">
+          <End Type="TestDBModel.timetable_module" Role="timetable_module" Multiplicity="1" />
+          <End Type="TestDBModel.timetable_request" Role="timetable_request" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="timetable_module">
+              <PropertyRef Name="Department_Code" />
+              <PropertyRef Name="Part_Code" />
+              <PropertyRef Name="Module_Code" />
+            </Principal>
+            <Dependent Role="timetable_request">
+              <PropertyRef Name="Department_Code" />
+              <PropertyRef Name="Part_Code" />
+              <PropertyRef Name="Module_Code" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_timetable_request_timetable_request">
+          <End Type="TestDBModel.timetable_request" Role="timetable_request" Multiplicity="1" />
+          <End Type="TestDBModel.timetable_request" Role="timetable_request1" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="timetable_request">
+              <PropertyRef Name="Request_ID" />
+            </Principal>
+            <Dependent Role="timetable_request1">
+              <PropertyRef Name="Request_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_timetable_request_timetable_request_room_allocation">
+          <End Type="TestDBModel.timetable_request_room_allocation" Role="timetable_request_room_allocation" Multiplicity="1" />
+          <End Type="TestDBModel.timetable_request" Role="timetable_request" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="timetable_request_room_allocation">
+              <PropertyRef Name="Request_ID" />
+            </Principal>
+            <Dependent Role="timetable_request">
+              <PropertyRef Name="Request_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_timetable_request_timetable_request_week">
+          <End Type="TestDBModel.timetable_request_week" Role="timetable_request_week" Multiplicity="1" />
+          <End Type="TestDBModel.timetable_request" Role="timetable_request" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="timetable_request_week">
+              <PropertyRef Name="Request_ID" />
+            </Principal>
+            <Dependent Role="timetable_request">
+              <PropertyRef Name="Request_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_timetable_request_room_allocation_timetable_request_room_allocation">
+          <End Type="TestDBModel.timetable_request_room_allocation" Role="timetable_request_room_allocation" Multiplicity="1" />
+          <End Type="TestDBModel.timetable_request_room_allocation" Role="timetable_request_room_allocation1" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="timetable_request_room_allocation">
+              <PropertyRef Name="Request_ID" />
+            </Principal>
+            <Dependent Role="timetable_request_room_allocation1">
+              <PropertyRef Name="Request_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_timetable_request_room_allocation_timetable_room">
+          <End Type="TestDBModel.timetable_room" Role="timetable_room" Multiplicity="1" />
+          <End Type="TestDBModel.timetable_request_room_allocation" Role="timetable_request_room_allocation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="timetable_room">
+              <PropertyRef Name="Building_ID" />
+              <PropertyRef Name="Room_ID" />
+            </Principal>
+            <Dependent Role="timetable_request_room_allocation">
+              <PropertyRef Name="Building_ID" />
+              <PropertyRef Name="Room_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_timetable_room_timetable_room">
+          <End Type="TestDBModel.timetable_room" Role="timetable_room" Multiplicity="1" />
+          <End Type="TestDBModel.timetable_room" Role="timetable_room1" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="timetable_room">
+              <PropertyRef Name="Building_ID" />
+              <PropertyRef Name="Room_ID" />
+            </Principal>
+            <Dependent Role="timetable_room1">
+              <PropertyRef Name="Building_ID" />
+              <PropertyRef Name="Room_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -163,6 +697,100 @@
                 <ScalarProperty Name="Department_Password" ColumnName="Department_Password" />
                 <ScalarProperty Name="Department_Name" ColumnName="Department_Name" />
                 <ScalarProperty Name="Department_Code" ColumnName="Department_Code" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="timetable_day">
+            <EntityTypeMapping TypeName="TestDBModel.timetable_day">
+              <MappingFragment StoreEntitySet="timetable_day">
+                <ScalarProperty Name="Day_Name" ColumnName="Day_Name" />
+                <ScalarProperty Name="Day_ID" ColumnName="Day_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="timetable_park">
+            <EntityTypeMapping TypeName="TestDBModel.timetable_park">
+              <MappingFragment StoreEntitySet="timetable_park">
+                <ScalarProperty Name="Park_Name" ColumnName="Park_Name" />
+                <ScalarProperty Name="Park_ID" ColumnName="Park_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="timetable_request">
+            <EntityTypeMapping TypeName="TestDBModel.timetable_request">
+              <MappingFragment StoreEntitySet="timetable_request">
+                <ScalarProperty Name="Request_Status" ColumnName="Request_Status" />
+                <ScalarProperty Name="Current_Round" ColumnName="Current_Round" />
+                <ScalarProperty Name="Current_Semester" ColumnName="Current_Semester" />
+                <ScalarProperty Name="Current_Year" ColumnName="Current_Year" />
+                <ScalarProperty Name="Custom_Comments" ColumnName="Custom_Comments" />
+                <ScalarProperty Name="Park_ID" ColumnName="Park_ID" />
+                <ScalarProperty Name="Room_Type" ColumnName="Room_Type" />
+                <ScalarProperty Name="Priority" ColumnName="Priority" />
+                <ScalarProperty Name="Number_Rooms" ColumnName="Number_Rooms" />
+                <ScalarProperty Name="Number_Students" ColumnName="Number_Students" />
+                <ScalarProperty Name="Duration" ColumnName="Duration" />
+                <ScalarProperty Name="Start_Time" ColumnName="Start_Time" />
+                <ScalarProperty Name="Day_ID" ColumnName="Day_ID" />
+                <ScalarProperty Name="Module_Code" ColumnName="Module_Code" />
+                <ScalarProperty Name="Part_Code" ColumnName="Part_Code" />
+                <ScalarProperty Name="Department_Code" ColumnName="Department_Code" />
+                <ScalarProperty Name="Request_ID" ColumnName="Request_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="timetable_request_facility">
+            <EntityTypeMapping TypeName="TestDBModel.timetable_request_facility">
+              <MappingFragment StoreEntitySet="timetable_request_facility">
+                <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+                <ScalarProperty Name="Facility_ID" ColumnName="Facility_ID" />
+                <ScalarProperty Name="Request_ID" ColumnName="Request_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="timetable_request_room_allocation">
+            <EntityTypeMapping TypeName="TestDBModel.timetable_request_room_allocation">
+              <MappingFragment StoreEntitySet="timetable_request_room_allocation">
+                <ScalarProperty Name="Room_ID" ColumnName="Room_ID" />
+                <ScalarProperty Name="Building_ID" ColumnName="Building_ID" />
+                <ScalarProperty Name="Request_ID" ColumnName="Request_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="timetable_request_week">
+            <EntityTypeMapping TypeName="TestDBModel.timetable_request_week">
+              <MappingFragment StoreEntitySet="timetable_request_week">
+                <ScalarProperty Name="Week" ColumnName="Week" />
+                <ScalarProperty Name="Request_ID" ColumnName="Request_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="timetable_room_facility">
+            <EntityTypeMapping TypeName="TestDBModel.timetable_room_facility">
+              <MappingFragment StoreEntitySet="timetable_room_facility">
+                <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+                <ScalarProperty Name="Facility_ID" ColumnName="Facility_ID" />
+                <ScalarProperty Name="Room_ID" ColumnName="Room_ID" />
+                <ScalarProperty Name="Building_ID" ColumnName="Building_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="timetable_room_type">
+            <EntityTypeMapping TypeName="TestDBModel.timetable_room_type">
+              <MappingFragment StoreEntitySet="timetable_room_type">
+                <ScalarProperty Name="Type_Name" ColumnName="Type_Name" />
+                <ScalarProperty Name="Type_ID" ColumnName="Type_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="timetable_round">
+            <EntityTypeMapping TypeName="TestDBModel.timetable_round">
+              <MappingFragment StoreEntitySet="timetable_round">
+                <ScalarProperty Name="Adhoc_Status" ColumnName="Adhoc_Status" />
+                <ScalarProperty Name="Current_Round_Status" ColumnName="Current_Round_Status" />
+                <ScalarProperty Name="Current_Round" ColumnName="Current_Round" />
+                <ScalarProperty Name="Current_Semester" ColumnName="Current_Semester" />
+                <ScalarProperty Name="Current_Year" ColumnName="Current_Year" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

@@ -10,6 +10,24 @@
         <EntityTypeShape EntityType="TestDBModel.timetable_building" Width="1.5" PointX="0.75" PointY="3.75" />
         <EntityTypeShape EntityType="TestDBModel.timetable_facility" Width="1.5" PointX="3.375" PointY="3.75" />
         <EntityTypeShape EntityType="TestDBModel.timetable_department" Width="1.5" PointX="5.375" PointY="0.75" />
+        <EntityTypeShape EntityType="TestDBModel.timetable_day" Width="1.5" PointX="5.75" PointY="14" />
+        <EntityTypeShape EntityType="TestDBModel.timetable_park" Width="1.5" PointX="0.75" PointY="8.375" />
+        <EntityTypeShape EntityType="TestDBModel.timetable_request" Width="1.5" PointX="8" PointY="0.75" />
+        <EntityTypeShape EntityType="TestDBModel.timetable_request_facility" Width="1.5" PointX="6" PointY="17.25" />
+        <EntityTypeShape EntityType="TestDBModel.timetable_request_room_allocation" Width="1.5" PointX="5.75" PointY="8.625" />
+        <EntityTypeShape EntityType="TestDBModel.timetable_request_week" Width="1.5" PointX="5.75" PointY="11.75" />
+        <EntityTypeShape EntityType="TestDBModel.timetable_room_facility" Width="1.5" PointX="2.75" PointY="8.375" />
+        <EntityTypeShape EntityType="TestDBModel.timetable_room_type" Width="1.5" PointX="7.75" PointY="7.375" />
+        <EntityTypeShape EntityType="TestDBModel.timetable_round" Width="1.5" PointX="7.75" PointY="10.375" />
+        <AssociationConnector Association="TestDBModel.FK_timetable_request_timetable_day" />
+        <AssociationConnector Association="TestDBModel.FK_timetable_request_facility_timetable_facility" />
+        <AssociationConnector Association="TestDBModel.FK_timetable_request_timetable_module" />
+        <AssociationConnector Association="TestDBModel.FK_timetable_request_timetable_request" />
+        <AssociationConnector Association="TestDBModel.FK_timetable_request_timetable_request_room_allocation" />
+        <AssociationConnector Association="TestDBModel.FK_timetable_request_timetable_request_week" />
+        <AssociationConnector Association="TestDBModel.FK_timetable_request_room_allocation_timetable_request_room_allocation" />
+        <AssociationConnector Association="TestDBModel.FK_timetable_request_room_allocation_timetable_room" />
+        <AssociationConnector Association="TestDBModel.FK_timetable_room_timetable_room" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

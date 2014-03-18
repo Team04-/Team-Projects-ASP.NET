@@ -12,16 +12,12 @@ namespace WebApplication1.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class timetable_facility
+    public partial class timetable_request_facility
     {
-        public timetable_facility()
-        {
-            this.timetable_request_facility = new HashSet<timetable_request_facility>();
-        }
-    
+        public short Request_ID { get; set; }
         public byte Facility_ID { get; set; }
-        public string Facility_Name { get; set; }
+        public byte Quantity { get; set; }
     
-        public virtual ICollection<timetable_request_facility> timetable_request_facility { get; set; }
+        public virtual timetable_facility timetable_facility { get; set; }
     }
 }
