@@ -177,10 +177,9 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\manage\BuildingController.cs" />
     <Compile Include="Controllers\manage\FacilitiesController.cs" />
+    <Compile Include="Controllers\manage\RequestController.cs" />
     <Compile Include="Controllers\manage\RoomController.cs" />
     <Compile Include="Controllers\ModuleController.cs" />
-    <Compile Include="Controllers\RequestController.cs" />
-    <Compile Include="Controllers\TestDBController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -312,8 +311,6 @@
     <Content Include="Views\Home\Index_def.cshtml" />
     <Content Include="Views\Shared\_Layout - Copy.cshtml" />
     <Content Include="Views\Shared\_LoginPartial - Copy.cshtml" />
-    <Content Include="Views\Home\DBTest1.cshtml" />
-    <Content Include="Views\TestDB\View1.cshtml" />
     <Content Include="Views\Account\_ModuleManagement.cshtml" />
     <Content Include="Views\Module\Create.cshtml" />
     <Content Include="Views\Module\Delete.cshtml" />
