@@ -1,37 +1,51 @@
-﻿@model WebApplication1.Models.timetable_room
-
+﻿@model WebApplication1.Models.RoomBuildingViewModel
 @{
     ViewBag.Title = "Details";
 }
 
-<h2>Details</h2>
+<h2>@Model.Building_ID@Model.Room_ID Details</h2>
 
 <div>
-    <h4>timetable_room</h4>
 	<hr />
     <dl class="dl-horizontal">
         <dt>
-            @Html.DisplayNameFor(model => model.Park_ID)
+            Building
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.Park_ID)
+            @Model.Building_Name
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.Capacity)
+            Room
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.Capacity)
+            @Model.Building_ID@Model.Room_ID
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.Type_ID)
+            Park
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.Type_ID)
+            @Model.Park_ID
+        </dd>
+
+        <dt>
+            Capacity
+        </dt>
+
+        <dd>
+            @Model.Capacity
+        </dd>
+
+        <dt>
+            Room Type
+        </dt>
+
+        <dd>
+            @Model.Type_ID
         </dd>
 
     </dl>

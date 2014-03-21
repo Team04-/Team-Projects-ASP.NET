@@ -4,7 +4,7 @@
     ViewBag.Title = "Edit";
 }
 
-<h2>Edit</h2>
+<h2>Editing @Model.Building_ID@Model.Room_ID</h2>
 
 
 @using (Html.BeginForm())
@@ -12,9 +12,25 @@
     @Html.AntiForgeryToken()
     
     <div class="form-horizontal">
-        <h4>timetable_room</h4>
         <hr />
         @Html.ValidationSummary(true)
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Building_ID, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Building_ID)
+                @Html.ValidationMessageFor(model => model.Building_ID)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Room_ID, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Room_ID)
+                @Html.ValidationMessageFor(model => model.Room_ID)
+            </div>
+        </div>
+
         <div class="form-group">
             @Html.LabelFor(model => model.Park_ID, new { @class = "control-label col-md-2" })
             <div class="col-md-10">
@@ -22,10 +38,6 @@
                 @Html.ValidationMessageFor(model => model.Park_ID)
             </div>
         </div>
-
-        @Html.HiddenFor(model => model.Building_ID)
-
-        @Html.HiddenFor(model => model.Room_ID)
 
         <div class="form-group">
             @Html.LabelFor(model => model.Capacity, new { @class = "control-label col-md-2" })

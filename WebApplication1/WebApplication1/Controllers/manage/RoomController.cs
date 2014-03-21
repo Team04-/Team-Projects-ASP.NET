@@ -17,27 +17,25 @@ namespace WebApplication1.Controllers.manage
         // GET: /Room/
         public ActionResult Index()
         {
-            var q = from r in db.timetable_room
-                    join b in db.timetable_building on r.Building_ID equals b.Building_ID into j
-                    from b in j.DefaultIfEmpty()
-                    select new { b.Building_Name, r.Room_ID, r.Capacity, r.Park_ID, r.Type_ID };
-            ViewBag.RoomInfoWithBuilding = q.ToList();
-            return View(db.timetable_room.ToList());
+            string query = "SELECT b.Building_Name as Building_Name, r.Building_ID as Building_ID, r.Park_ID as Park_ID, r.Room_ID as Room_ID, r.Capacity as Capacity, r.Type_ID as Type_ID from timetable_building b, timetable_room r WHERE b.Building_ID = r.Building_ID";
+            var viewModel = db.Database.SqlQuery<WebApplication1.Models.RoomBuildingViewModel>(query);
+            return View(viewModel.ToList());
         }
 
         // GET: /Room/Details/5
-        public ActionResult Details(string id)
+        public ActionResult Details(string buildingID, string roomID)
         {
-            if (id == null)
+            if (roomID == null || buildingID == null)
             {
                 return RedirectToAction("Index");
             }
-            timetable_room timetable_room = db.timetable_room.Find(id);
-            if (timetable_room == null)
+            string query = "SELECT b.Building_Name as Building_Name, r.Building_ID as Building_ID, r.Park_ID as Park_ID, r.Room_ID as Room_ID, r.Capacity as Capacity, r.Type_ID as Type_ID from timetable_building b, timetable_room r WHERE b.Building_ID = r.Building_ID AND r.Building_ID = '" + buildingID + "' AND r.Room_ID = '" + roomID + "'";
+            var viewModel = db.Database.SqlQuery<WebApplication1.Models.RoomBuildingViewModel>(query).First();
+            if (viewModel == null)
             {
                 return HttpNotFound();
             }
-            return View(timetable_room);
+            return View(viewModel);
         }
 
         // GET: /Room/Create
@@ -64,13 +62,13 @@ namespace WebApplication1.Controllers.manage
         }
 
         // GET: /Room/Edit/5
-        public ActionResult Edit(string id)
+        public ActionResult Edit(string buildingID, string roomID)
         {
-            if (id == null)
+            if (roomID == null || buildingID == null)
             {
                 return RedirectToAction("Index");
             }
-            timetable_room timetable_room = db.timetable_room.Find(id);
+            timetable_room timetable_room = db.timetable_room.Where(bi => bi.Building_ID == buildingID).Where(ri => ri.Room_ID == roomID).First();
             if (timetable_room == null)
             {
                 return HttpNotFound();
@@ -95,13 +93,13 @@ namespace WebApplication1.Controllers.manage
         }
 
         // GET: /Room/Delete/5
-        public ActionResult Delete(string id)
+        public ActionResult Delete(string buildingID, string roomID)
         {
-            if (id == null)
+            if (roomID == null || buildingID == null)
             {
                 return RedirectToAction("Index");
             }
-            timetable_room timetable_room = db.timetable_room.Find(id);
+            timetable_room timetable_room = db.timetable_room.Where(bi => bi.Building_ID == buildingID).Where(ri => ri.Room_ID == roomID).First();
             if (timetable_room == null)
             {
                 return HttpNotFound();
@@ -112,9 +110,9 @@ namespace WebApplication1.Controllers.manage
         // POST: /Room/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(string id)
+        public ActionResult DeleteConfirmed(string buildingID, string roomID)
         {
-            timetable_room timetable_room = db.timetable_room.Find(id);
+            timetable_room timetable_room = db.timetable_room.Where(bi => bi.Building_ID == buildingID).Where(ri => ri.Room_ID == roomID).First();
             db.timetable_room.Remove(timetable_room);
             db.SaveChanges();
             return RedirectToAction("Index");

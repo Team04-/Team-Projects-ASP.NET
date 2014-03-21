@@ -1,16 +1,22 @@
-﻿@model IEnumerable<WebApplication1.Models.timetable_room>
-
+﻿@model IEnumerable<WebApplication1.Models.RoomBuildingViewModel>
 @{
     ViewBag.Title = "Index";
 }
 
-<h2>Index</h2>
+<h2>Rooms List</h2>
 
 <p>
     @Html.ActionLink("Create New", "Create")
 </p>
+@ViewBag.RoomInfoWithBuilding
 <table class="table">
     <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Building_Name)
+        </th>
+        <th>
+            Room
+        </th>
         <th>
             @Html.DisplayNameFor(model => model.Park_ID)
         </th>
@@ -26,6 +32,12 @@
 @foreach (var item in Model) {
     <tr>
         <td>
+            @Html.DisplayFor(modelItem => item.Building_Name)
+        </td>
+        <td>
+            @item.Building_ID@item.Room_ID
+        </td>
+        <td>
             @Html.DisplayFor(modelItem => item.Park_ID)
         </td>
         <td>
@@ -35,9 +47,9 @@
             @Html.DisplayFor(modelItem => item.Type_ID)
         </td>
         <td>
-            @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
-            @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
-            @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+            @Html.ActionLink("Edit", "Edit", new { buildingID = item.Building_ID, roomID = item.Room_ID }) |
+            @Html.ActionLink("Details", "Details", new { buildingID = item.Building_ID, roomID = item.Room_ID }) |
+            @Html.ActionLink("Delete", "Delete", new { buildingID = item.Building_ID, roomID = item.Room_ID })
         </td>
     </tr>
 }

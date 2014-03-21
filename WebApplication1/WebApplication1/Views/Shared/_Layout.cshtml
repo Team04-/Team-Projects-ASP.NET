@@ -28,8 +28,24 @@
                     <li>@Html.ActionLink("Home", "Index", "Home")</li>
                     @if (Request.IsAuthenticated)
                     {
-                        <li>@Html.ActionLink("About", "About", "Home")</li>
-                        <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">Requests <b class="caret"></b></a>
+                            <ul class="dropdown-menu">
+                                <li>@Html.ActionLink("New Request", "Create", "Request")</li>
+                                <li>@Html.ActionLink("View Current Requests", "Index", "Request")</li>
+                                <li>@Html.ActionLink("View Previous Requests", "Index", "Request")</li>
+                            </ul>
+                        </li>
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">Management <b class="caret"></b></a>
+                            <ul class="dropdown-menu">
+                                <li>@Html.ActionLink("Modules", "Index", "Module")</li>
+                                <li class="divider"></li>
+                                <li>@Html.ActionLink("Buildings", "Index", "Building")</li>
+                                <li>@Html.ActionLink("Rooms", "Index", "Room")</li>
+                                <li>@Html.ActionLink("Facilities", "Index", "Facilities")</li>
+                            </ul>
+                        </li>
                     }
                 </ul>
                 @Html.Partial("_LoginPartial")
