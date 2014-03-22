@@ -195,6 +195,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\RequestViewModel.cs" />
     <Compile Include="Models\RoomBuildingViewModel.cs" />
     <Compile Include="Models\TestDBModel.Designer.cs">
       <AutoGen>True</AutoGen>

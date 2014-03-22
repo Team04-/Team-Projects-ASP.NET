@@ -117,7 +117,6 @@ C:\Users\Niall\Documents\GitHub\Team-Projects-ASP.NET\WebApplication1\WebApplica
 C:\Users\Niall\Documents\GitHub\Team-Projects-ASP.NET\WebApplication1\WebApplication1\bin\Microsoft.Owin.Security.Google.xml
 C:\Users\Niall\Documents\GitHub\Team-Projects-ASP.NET\WebApplication1\WebApplication1\bin\Microsoft.Owin.Security.Twitter.xml
 C:\Users\Niall\Documents\GitHub\Team-Projects-ASP.NET\WebApplication1\WebApplication1\bin\Microsoft.Owin.Security.MicrosoftAccount.xml
-C:\Users\Niall\Documents\GitHub\Team-Projects-ASP.NET\WebApplication1\WebApplication1\obj\Debug\WebApplication1.csprojResolveAssemblyReference.cache
 C:\Users\Niall\Documents\GitHub\Team-Projects-ASP.NET\WebApplication1\WebApplication1\obj\Debug\WebApplication1.dll
 C:\Users\Niall\Documents\GitHub\Team-Projects-ASP.NET\WebApplication1\WebApplication1\obj\Debug\WebApplication1.pdb
 C:\Users\M\Dropbox\GitHub\Team-Projects-ASP.NET\WebApplication1\WebApplication1\bin\WebApplication1.dll.config
