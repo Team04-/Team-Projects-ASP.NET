@@ -17,8 +17,9 @@ namespace WebApplication1.Controllers.manage
         // GET: /Request/
         public ActionResult Index()
         {
-            var timetable_request = db.timetable_request.Include(t => t.timetable_day).Include(t => t.timetable_module).Include(t => t.timetable_request1).Include(t => t.timetable_request2).Include(t => t.timetable_request_room_allocation).Include(t => t.timetable_request_week);
-            return View(timetable_request.ToList());
+            string query = "SELECT dept.Department_Code as Department_Code, mod.Part_Code as Part_Code, mod.Module_Code as Module_Code, roomt.Type_Name as Room_Type, park.Park_ID as Park_ID from timetable_department dept, timetable_module mod, timetable_room_type roomt, timetable_park park";
+            var viewModel = db.Database.SqlQuery<WebApplication1.Models.RequestViewModel>(query);
+            return View(viewModel.ToList());
         }
 
         // GET: /Request/Details/5
@@ -39,12 +40,17 @@ namespace WebApplication1.Controllers.manage
         // GET: /Request/Create
         public ActionResult Create()
         {
+            ViewBag.Department_Code = new SelectList(db.timetable_department, "Department_Code", "Department_Name");
+           // ViewBag.Request_ID = new SelectList(db.timetable_request, "Request_ID", "Department_Code");
+           // ViewBag.Request_ID = new SelectList(db.timetable_request, "Request_ID", "Department_Code");
+           // ViewBag.Request_ID = new SelectList(db.timetable_request_room_allocation, "Request_ID", "Building_ID");
+           // ViewBag.Request_ID = new SelectList(db.timetable_request_week, "Request_ID", "Request_ID");
+            ViewBag.Part_Code = new SelectList(db.timetable_module, "Part_Code", "Part_Code");
+            ViewBag.Module_Code = new SelectList(db.timetable_module, "Module_Code", "Module_Code");
+            ViewBag.Module_Code = new SelectList(db.timetable_module, "Module_Code", "Module_Code");
             ViewBag.Day_ID = new SelectList(db.timetable_day, "Day_ID", "Day_Name");
-            ViewBag.Department_Code = new SelectList(db.timetable_module, "Department_Code", "Module_Title");
-            ViewBag.Request_ID = new SelectList(db.timetable_request, "Request_ID", "Department_Code");
-            ViewBag.Request_ID = new SelectList(db.timetable_request, "Request_ID", "Department_Code");
-            ViewBag.Request_ID = new SelectList(db.timetable_request_room_allocation, "Request_ID", "Building_ID");
-            ViewBag.Request_ID = new SelectList(db.timetable_request_week, "Request_ID", "Request_ID");
+            ViewBag.Park_ID = new SelectList(db.timetable_park, "Park_ID", "Park_Name");
+
             return View();
         }
 

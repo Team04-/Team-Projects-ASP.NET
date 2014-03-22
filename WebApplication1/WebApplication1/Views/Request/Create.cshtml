@@ -1,4 +1,4 @@
-﻿@model WebApplication1.Models.timetable_request
+﻿@model WebApplication1.Models.RequestViewModel
 
 @{
     ViewBag.Title = "Create";
@@ -17,9 +17,9 @@
         @Html.ValidationSummary(true)
 
         <div class="form-group">
-            @Html.LabelFor(model => model.Request_ID, "Request_ID", new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.Request_ID, new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.DropDownList("Request_ID", String.Empty)
+                @Html.EditorFor(model => model.Request_ID)
                 @Html.ValidationMessageFor(model => model.Request_ID)
             </div>
         </div>
@@ -107,7 +107,7 @@
         <div class="form-group">
             @Html.LabelFor(model => model.Park_ID, new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.Park_ID)
+                @Html.DropDownList("Park_ID", String.Empty)
                 @Html.ValidationMessageFor(model => model.Park_ID)
             </div>
         </div>
