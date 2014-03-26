@@ -40,14 +40,9 @@ namespace WebApplication1.Controllers.manage
         // GET: /Request/Create
         public ActionResult Create()
         {
-            ViewBag.Department_Code = new SelectList(db.timetable_department, "Department_Code", "Department_Name");
-           // ViewBag.Request_ID = new SelectList(db.timetable_request, "Request_ID", "Department_Code");
-           // ViewBag.Request_ID = new SelectList(db.timetable_request, "Request_ID", "Department_Code");
-           // ViewBag.Request_ID = new SelectList(db.timetable_request_room_allocation, "Request_ID", "Building_ID");
-           // ViewBag.Request_ID = new SelectList(db.timetable_request_week, "Request_ID", "Request_ID");
-            ViewBag.Part_Code = new SelectList(db.timetable_module, "Part_Code", "Part_Code");
+            //ViewBag.Department_Code = new SelectList(db.timetable_department, "Department_Code", "Department_Name");
+            //ViewBag.Part_Code = new SelectList(db.timetable_module, "Part_Code", "Part_Code");
             ViewBag.Module_Code = new SelectList(db.timetable_module, "Module_Code", "Module_Title");
-           // ViewBag.Module_Code = new SelectList(db.timetable_module, "Module_Code", "Module_Code");
             ViewBag.Day_ID = new SelectList(db.timetable_day, "Day_ID", "Day_Name");
             ViewBag.Park_ID = new SelectList(db.timetable_park, "Park_ID", "Park_Name");
 
