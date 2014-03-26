@@ -42,6 +42,7 @@
     <EntitySetMapping Name="timetable_department">
       <EntityTypeMapping TypeName="TestDBModel.timetable_department">
         <MappingFragment StoreEntitySet="timetable_department">
+          <ScalarProperty Name="Current_Round" ColumnName="Current_Round" />
           <ScalarProperty Name="Department_Password" ColumnName="Department_Password" />
           <ScalarProperty Name="Department_Name" ColumnName="Department_Name" />
           <ScalarProperty Name="Department_Code" ColumnName="Department_Code" />
@@ -134,11 +135,11 @@
     <EntitySetMapping Name="timetable_round">
       <EntityTypeMapping TypeName="TestDBModel.timetable_round">
         <MappingFragment StoreEntitySet="timetable_round">
-          <ScalarProperty Name="Adhoc_Status" ColumnName="Adhoc_Status" />
-          <ScalarProperty Name="Current_Round_Status" ColumnName="Current_Round_Status" />
-          <ScalarProperty Name="Current_Round" ColumnName="Current_Round" />
-          <ScalarProperty Name="Current_Semester" ColumnName="Current_Semester" />
-          <ScalarProperty Name="Current_Year" ColumnName="Current_Year" />
+          <ScalarProperty Name="End_Date" ColumnName="End_Date" />
+          <ScalarProperty Name="Start_Date" ColumnName="Start_Date" />
+          <ScalarProperty Name="Round_Status" ColumnName="Round_Status" />
+          <ScalarProperty Name="Round_Name" ColumnName="Round_Name" />
+          <ScalarProperty Name="Round_Code" ColumnName="Round_Code" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

@@ -17,5 +17,6 @@ namespace WebApplication1.Models
         public string Department_Code { get; set; }
         public string Department_Name { get; set; }
         public string Department_Password { get; set; }
+        public short Current_Round { get; set; }
     }
 }

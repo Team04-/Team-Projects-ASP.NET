@@ -14,10 +14,10 @@ namespace WebApplication1.Models
     
     public partial class timetable_round
     {
-        public int Current_Year { get; set; }
-        public byte Current_Semester { get; set; }
-        public byte Current_Round { get; set; }
-        public byte Current_Round_Status { get; set; }
-        public byte Adhoc_Status { get; set; }
+        public short Round_Code { get; set; }
+        public string Round_Name { get; set; }
+        public short Round_Status { get; set; }
+        public System.DateTime Start_Date { get; set; }
+        public System.DateTime End_Date { get; set; }
     }
 }

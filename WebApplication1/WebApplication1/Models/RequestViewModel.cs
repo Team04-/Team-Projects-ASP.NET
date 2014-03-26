@@ -7,6 +7,7 @@ namespace WebApplication1.Models
 {
     public class RequestViewModel
     {
+            // Tinyint in DB --> byte in ASP.NET
             public int Request_ID { get; set; }
             public string Department_Code { get; set; }
             public char Part_Code { get; set; }
@@ -21,8 +22,8 @@ namespace WebApplication1.Models
             public int Park_ID { get; set; }
             public string Custom_Comments { get; set; }
             public int Current_Year { get; set; }
-            public int Current_Semester { get; set; }
-            public int Current_Round { get; set; }
+            public byte Current_Semester { get; set; }
+            public byte Current_Round { get; set; }
             public int Request_Status { get; set; }
     }
 }

@@ -59,15 +59,21 @@ namespace WebApplication1.Controllers.manage
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include="Request_ID,Department_Code,Part_Code,Module_Code,Day_ID,Start_Time,Duration,Number_Students,Number_Rooms,Priority,Room_Type,Park_ID,Custom_Comments,Current_Year,Current_Semester,Current_Round,Request_Status")] timetable_request timetable_request)
+        public ActionResult Create([Bind(Include="Request_ID,Department_Code,Part_Code,Module_Code,Day_ID,Start_Time,Duration,Number_Students,Number_Rooms,Priority,Room_Type,Park_ID,Custom_Comments,Current_Year,Current_Semester,Current_Round,Request_Status")] RequestViewModel requestView)
         {
+            // Make new timetable_request object, add requestView ("master data") Current_Round value.
+            // Do this for all tables which need subsets of data from requestView.
+            timetable_request timetable_request = new timetable_request();
+            timetable_request.Current_Round = requestView.Current_Round;
             if (ModelState.IsValid)
             {
                 db.timetable_request.Add(timetable_request);
                 db.SaveChanges();
+                // short THIS = timetable_request.Request_ID;
                 return RedirectToAction("Index");
             }
 
+            // Need to update this
             ViewBag.Day_ID = new SelectList(db.timetable_day, "Day_ID", "Day_Name", timetable_request.Day_ID);
             ViewBag.Department_Code = new SelectList(db.timetable_module, "Department_Code", "Module_Title", timetable_request.Department_Code);
             ViewBag.Request_ID = new SelectList(db.timetable_request, "Request_ID", "Department_Code", timetable_request.Request_ID);

@@ -26,6 +26,7 @@
           <Property Name="Department_Code" Type="varchar" MaxLength="2" Nullable="false" />
           <Property Name="Department_Name" Type="varchar" MaxLength="50" />
           <Property Name="Department_Password" Type="varchar" MaxLength="255" />
+          <Property Name="Current_Round" Type="smallint" Nullable="false" />
         </EntityType>
         <EntityType Name="timetable_facility">
           <Key>
@@ -57,7 +58,7 @@
           <Key>
             <PropertyRef Name="Request_ID" />
           </Key>
-          <Property Name="Request_ID" Type="smallint" Nullable="false" />
+          <Property Name="Request_ID" Type="smallint" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Department_Code" Type="varchar" MaxLength="2" Nullable="false" />
           <Property Name="Part_Code" Type="varchar" MaxLength="1" Nullable="false" />
           <Property Name="Module_Code" Type="varchar" MaxLength="3" Nullable="false" />
@@ -80,7 +81,7 @@
             <PropertyRef Name="Request_ID" />
             <PropertyRef Name="Facility_ID" />
           </Key>
-          <Property Name="Request_ID" Type="smallint" Nullable="false" />
+          <Property Name="Request_ID" Type="smallint" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Facility_ID" Type="tinyint" Nullable="false" />
           <Property Name="Quantity" Type="tinyint" Nullable="false" />
         </EntityType>
@@ -88,7 +89,7 @@
           <Key>
             <PropertyRef Name="Request_ID" />
           </Key>
-          <Property Name="Request_ID" Type="smallint" Nullable="false" />
+          <Property Name="Request_ID" Type="smallint" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Building_ID" Type="varchar" MaxLength="5" Nullable="false" />
           <Property Name="Room_ID" Type="varchar" MaxLength="5" Nullable="false" />
         </EntityType>
@@ -96,7 +97,7 @@
           <Key>
             <PropertyRef Name="Request_ID" />
           </Key>
-          <Property Name="Request_ID" Type="smallint" Nullable="false" />
+          <Property Name="Request_ID" Type="smallint" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Week" Type="tinyint" Nullable="false" />
         </EntityType>
         <EntityType Name="timetable_room">
@@ -128,21 +129,15 @@
           <Property Name="Type_ID" Type="tinyint" Nullable="false" />
           <Property Name="Type_Name" Type="varchar" MaxLength="10" Nullable="false" />
         </EntityType>
-        <!--Errors Found During Generation:
-warning 6002: The table/view 'team04.team04.timetable_round' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="timetable_round">
           <Key>
-            <PropertyRef Name="Current_Year" />
-            <PropertyRef Name="Current_Semester" />
-            <PropertyRef Name="Current_Round" />
-            <PropertyRef Name="Current_Round_Status" />
-            <PropertyRef Name="Adhoc_Status" />
+            <PropertyRef Name="Round_Code" />
           </Key>
-          <Property Name="Current_Year" Type="int" Nullable="false" />
-          <Property Name="Current_Semester" Type="tinyint" Nullable="false" />
-          <Property Name="Current_Round" Type="tinyint" Nullable="false" />
-          <Property Name="Current_Round_Status" Type="tinyint" Nullable="false" />
-          <Property Name="Adhoc_Status" Type="tinyint" Nullable="false" />
+          <Property Name="Round_Code" Type="smallint" Nullable="false" />
+          <Property Name="Round_Name" Type="varchar" MaxLength="1" Nullable="false" />
+          <Property Name="Round_Status" Type="smallint" Nullable="false" />
+          <Property Name="Start_Date" Type="date" Nullable="false" />
+          <Property Name="End_Date" Type="date" Nullable="false" />
         </EntityType>
         <Association Name="FK_timetable_request_facility_timetable_facility">
           <End Role="timetable_facility" Type="Self.timetable_facility" Multiplicity="1" />
@@ -222,7 +217,7 @@ warning 6002: The table/view 'team04.team04.timetable_round' does not have a pri
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_timetable_request_timetable_request_room_allocation">
+        <Association Name="FK_timetable_request_timetable_request_room_allocation1">
           <End Role="timetable_request_room_allocation" Type="Self.timetable_request_room_allocation" Multiplicity="1" />
           <End Role="timetable_request" Type="Self.timetable_request" Multiplicity="0..1" />
           <ReferentialConstraint>
@@ -274,15 +269,7 @@ warning 6002: The table/view 'team04.team04.timetable_round' does not have a pri
           <EntitySet Name="timetable_room" EntityType="Self.timetable_room" Schema="team04" store:Type="Tables" />
           <EntitySet Name="timetable_room_facility" EntityType="Self.timetable_room_facility" Schema="team04" store:Type="Tables" />
           <EntitySet Name="timetable_room_type" EntityType="Self.timetable_room_type" Schema="team04" store:Type="Tables" />
-          <EntitySet Name="timetable_round" EntityType="Self.timetable_round" store:Type="Tables" store:Schema="team04">
-            <DefiningQuery>SELECT 
-    [timetable_round].[Current_Year] AS [Current_Year], 
-    [timetable_round].[Current_Semester] AS [Current_Semester], 
-    [timetable_round].[Current_Round] AS [Current_Round], 
-    [timetable_round].[Current_Round_Status] AS [Current_Round_Status], 
-    [timetable_round].[Adhoc_Status] AS [Adhoc_Status]
-    FROM [team04].[timetable_round] AS [timetable_round]</DefiningQuery>
-          </EntitySet>
+          <EntitySet Name="timetable_round" EntityType="Self.timetable_round" Schema="team04" store:Type="Tables" />
           <AssociationSet Name="FK_timetable_request_facility_timetable_facility" Association="Self.FK_timetable_request_facility_timetable_facility">
             <End Role="timetable_facility" EntitySet="timetable_facility" />
             <End Role="timetable_request_facility" EntitySet="timetable_request_facility" />
@@ -307,7 +294,7 @@ warning 6002: The table/view 'team04.team04.timetable_round' does not have a pri
             <End Role="timetable_request" EntitySet="timetable_request" />
             <End Role="timetable_request1" EntitySet="timetable_request" />
           </AssociationSet>
-          <AssociationSet Name="FK_timetable_request_timetable_request_room_allocation" Association="Self.FK_timetable_request_timetable_request_room_allocation">
+          <AssociationSet Name="FK_timetable_request_timetable_request_room_allocation1" Association="Self.FK_timetable_request_timetable_request_room_allocation1">
             <End Role="timetable_request_room_allocation" EntitySet="timetable_request_room_allocation" />
             <End Role="timetable_request" EntitySet="timetable_request" />
           </AssociationSet>
@@ -352,7 +339,6 @@ warning 6002: The table/view 'team04.team04.timetable_round' does not have a pri
           <EntitySet Name="timetable_request_week" EntityType="TestDBModel.timetable_request_week" />
           <EntitySet Name="timetable_room_facility" EntityType="TestDBModel.timetable_room_facility" />
           <EntitySet Name="timetable_room_type" EntityType="TestDBModel.timetable_room_type" />
-          <EntitySet Name="timetable_round" EntityType="TestDBModel.timetable_round" />
           <AssociationSet Name="FK_timetable_request_timetable_day" Association="TestDBModel.FK_timetable_request_timetable_day">
             <End Role="timetable_day" EntitySet="timetable_day" />
             <End Role="timetable_request" EntitySet="timetable_request" />
@@ -389,6 +375,7 @@ warning 6002: The table/view 'team04.team04.timetable_round' does not have a pri
             <End Role="timetable_room" EntitySet="timetable_room" />
             <End Role="timetable_room1" EntitySet="timetable_room" />
           </AssociationSet>
+          <EntitySet Name="timetable_round" EntityType="TestDBModel.timetable_round" />
         </EntityContainer>
         <EntityType Name="timetable_module">
           <Key>
@@ -425,6 +412,7 @@ warning 6002: The table/view 'team04.team04.timetable_round' does not have a pri
           <Property Name="Department_Code" Type="String" Nullable="false" MaxLength="2" FixedLength="false" Unicode="false" />
           <Property Name="Department_Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="Department_Password" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="Current_Round" Type="Int16" Nullable="false" />
         </EntityType>
         <EntityType Name="timetable_day">
           <Key>
@@ -516,20 +504,6 @@ warning 6002: The table/view 'team04.team04.timetable_round' does not have a pri
           </Key>
           <Property Name="Type_ID" Type="Byte" Nullable="false" />
           <Property Name="Type_Name" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
-        </EntityType>
-        <EntityType Name="timetable_round">
-          <Key>
-            <PropertyRef Name="Current_Year" />
-            <PropertyRef Name="Current_Semester" />
-            <PropertyRef Name="Current_Round" />
-            <PropertyRef Name="Current_Round_Status" />
-            <PropertyRef Name="Adhoc_Status" />
-          </Key>
-          <Property Name="Current_Year" Type="Int32" Nullable="false" />
-          <Property Name="Current_Semester" Type="Byte" Nullable="false" />
-          <Property Name="Current_Round" Type="Byte" Nullable="false" />
-          <Property Name="Current_Round_Status" Type="Byte" Nullable="false" />
-          <Property Name="Adhoc_Status" Type="Byte" Nullable="false" />
         </EntityType>
         <Association Name="FK_timetable_request_timetable_day">
           <End Type="TestDBModel.timetable_day" Role="timetable_day" Multiplicity="1" />
@@ -647,6 +621,16 @@ warning 6002: The table/view 'team04.team04.timetable_round' does not have a pri
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="timetable_round">
+          <Key>
+            <PropertyRef Name="Round_Code" />
+          </Key>
+          <Property Name="Round_Code" Type="Int16" Nullable="false" />
+          <Property Name="Round_Name" Type="String" Nullable="false" MaxLength="1" FixedLength="false" Unicode="false" />
+          <Property Name="Round_Status" Type="Int16" Nullable="false" />
+          <Property Name="Start_Date" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="End_Date" Type="DateTime" Nullable="false" Precision="0" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -694,6 +678,7 @@ warning 6002: The table/view 'team04.team04.timetable_round' does not have a pri
           <EntitySetMapping Name="timetable_department">
             <EntityTypeMapping TypeName="TestDBModel.timetable_department">
               <MappingFragment StoreEntitySet="timetable_department">
+                <ScalarProperty Name="Current_Round" ColumnName="Current_Round" />
                 <ScalarProperty Name="Department_Password" ColumnName="Department_Password" />
                 <ScalarProperty Name="Department_Name" ColumnName="Department_Name" />
                 <ScalarProperty Name="Department_Code" ColumnName="Department_Code" />
@@ -786,11 +771,11 @@ warning 6002: The table/view 'team04.team04.timetable_round' does not have a pri
           <EntitySetMapping Name="timetable_round">
             <EntityTypeMapping TypeName="TestDBModel.timetable_round">
               <MappingFragment StoreEntitySet="timetable_round">
-                <ScalarProperty Name="Adhoc_Status" ColumnName="Adhoc_Status" />
-                <ScalarProperty Name="Current_Round_Status" ColumnName="Current_Round_Status" />
-                <ScalarProperty Name="Current_Round" ColumnName="Current_Round" />
-                <ScalarProperty Name="Current_Semester" ColumnName="Current_Semester" />
-                <ScalarProperty Name="Current_Year" ColumnName="Current_Year" />
+                <ScalarProperty Name="End_Date" ColumnName="End_Date" />
+                <ScalarProperty Name="Start_Date" ColumnName="Start_Date" />
+                <ScalarProperty Name="Round_Status" ColumnName="Round_Status" />
+                <ScalarProperty Name="Round_Name" ColumnName="Round_Name" />
+                <ScalarProperty Name="Round_Code" ColumnName="Round_Code" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

@@ -28,7 +28,6 @@
     <EntitySet Name="timetable_request_week" EntityType="TestDBModel.timetable_request_week" />
     <EntitySet Name="timetable_room_facility" EntityType="TestDBModel.timetable_room_facility" />
     <EntitySet Name="timetable_room_type" EntityType="TestDBModel.timetable_room_type" />
-    <EntitySet Name="timetable_round" EntityType="TestDBModel.timetable_round" />
     <AssociationSet Name="FK_timetable_request_timetable_day" Association="TestDBModel.FK_timetable_request_timetable_day">
       <End Role="timetable_day" EntitySet="timetable_day" />
       <End Role="timetable_request" EntitySet="timetable_request" />
@@ -65,6 +64,7 @@
       <End Role="timetable_room" EntitySet="timetable_room" />
       <End Role="timetable_room1" EntitySet="timetable_room" />
     </AssociationSet>
+    <EntitySet Name="timetable_round" EntityType="TestDBModel.timetable_round" />
   </EntityContainer>
   <EntityType Name="timetable_module">
     <Key>
@@ -101,6 +101,7 @@
     <Property Name="Department_Code" Type="String" Nullable="false" MaxLength="2" FixedLength="false" Unicode="false" />
     <Property Name="Department_Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
     <Property Name="Department_Password" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+    <Property Name="Current_Round" Type="Int16" Nullable="false" />
   </EntityType>
   <EntityType Name="timetable_day">
     <Key>
@@ -192,20 +193,6 @@
     </Key>
     <Property Name="Type_ID" Type="Byte" Nullable="false" />
     <Property Name="Type_Name" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
-  </EntityType>
-  <EntityType Name="timetable_round">
-    <Key>
-      <PropertyRef Name="Current_Year" />
-      <PropertyRef Name="Current_Semester" />
-      <PropertyRef Name="Current_Round" />
-      <PropertyRef Name="Current_Round_Status" />
-      <PropertyRef Name="Adhoc_Status" />
-    </Key>
-    <Property Name="Current_Year" Type="Int32" Nullable="false" />
-    <Property Name="Current_Semester" Type="Byte" Nullable="false" />
-    <Property Name="Current_Round" Type="Byte" Nullable="false" />
-    <Property Name="Current_Round_Status" Type="Byte" Nullable="false" />
-    <Property Name="Adhoc_Status" Type="Byte" Nullable="false" />
   </EntityType>
   <Association Name="FK_timetable_request_timetable_day">
     <End Type="TestDBModel.timetable_day" Role="timetable_day" Multiplicity="1" />
@@ -323,4 +310,14 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <EntityType Name="timetable_round">
+    <Key>
+      <PropertyRef Name="Round_Code" />
+    </Key>
+    <Property Name="Round_Code" Type="Int16" Nullable="false" />
+    <Property Name="Round_Name" Type="String" Nullable="false" MaxLength="1" FixedLength="false" Unicode="false" />
+    <Property Name="Round_Status" Type="Int16" Nullable="false" />
+    <Property Name="Start_Date" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="End_Date" Type="DateTime" Nullable="false" Precision="0" />
+  </EntityType>
 </Schema>
