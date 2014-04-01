@@ -45,6 +45,9 @@ namespace WebApplication1.Controllers.manage
             ViewBag.Module_Code = new SelectList(db.timetable_module, "Module_Code", "Module_Title");
             ViewBag.Day_ID = new SelectList(db.timetable_day, "Day_ID", "Day_Name");
             ViewBag.Park_ID = new SelectList(db.timetable_park, "Park_ID", "Park_Name");
+			ViewBag.Building_ID = new SelectList(db.timetable_building, "Building_ID", "Building_Name");
+			ViewBag.Room_ID = new SelectList(db.timetable_room, "Room_ID", "Room_ID");
+			ViewBag.Facility_ID = new SelectList(db.timetable_facility, "Facility_ID", "Facility_Name");
 
             return View();
         }
@@ -69,12 +72,12 @@ namespace WebApplication1.Controllers.manage
             }
 
             // Need to update this
-            ViewBag.Day_ID = new SelectList(db.timetable_day, "Day_ID", "Day_Name", timetable_request.Day_ID);
-            ViewBag.Department_Code = new SelectList(db.timetable_module, "Department_Code", "Module_Title", timetable_request.Department_Code);
-            ViewBag.Request_ID = new SelectList(db.timetable_request, "Request_ID", "Department_Code", timetable_request.Request_ID);
-            ViewBag.Request_ID = new SelectList(db.timetable_request, "Request_ID", "Department_Code", timetable_request.Request_ID);
-            ViewBag.Request_ID = new SelectList(db.timetable_request_room_allocation, "Request_ID", "Building_ID", timetable_request.Request_ID);
-            ViewBag.Request_ID = new SelectList(db.timetable_request_week, "Request_ID", "Request_ID", timetable_request.Request_ID);
+			ViewBag.Module_Code = new SelectList(db.timetable_module, "Module_Code", "Module_Title");
+			ViewBag.Day_ID = new SelectList(db.timetable_day, "Day_ID", "Day_Name");
+			ViewBag.Park_ID = new SelectList(db.timetable_park, "Park_ID", "Park_Name");
+			ViewBag.Building_ID = new SelectList(db.timetable_building, "Building_ID", "Building_Name");
+			ViewBag.Room_ID = new SelectList(db.timetable_room, "Room_ID", "Room_ID");
+			ViewBag.Facility_ID = new SelectList(db.timetable_facility, "Facility_ID", "Facility_Name");
             return View(timetable_request);
         }
 

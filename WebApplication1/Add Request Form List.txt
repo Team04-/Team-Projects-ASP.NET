@@ -1,0 +1,24 @@
+Request_ID - POST
+Department_Code - POST
+Part_Code - POST?
+Module_Code - DROPDOWN
+Day_ID - DROPDOWN
+Start_Time - DROPDOWN - NOT DONE YET
+Duration - DROPDOWN - NOT DONE YET
+Number_Students - TEXTBOX
+Number_Rooms - WORKED OUT BY BUTTON
+Priority - CHECKBOX
+Room_Type - TEXTBOX - DROPDOWN?
+Park_ID - DROPDOWN
+Custom_Comments - TEXTBOX
+Current_Year - POST
+Current_Semester - POST
+Current_Round - POST
+Request_Status - POST
+
+
+TO DO
+Facility_ID - CHECKBOXES
+Room_ID - DROPDOWN (filter from building - "Any" option)
+Building_ID - DROPDOWN (filter from park_id - "Any" option)
+Week - CHECKBOXES

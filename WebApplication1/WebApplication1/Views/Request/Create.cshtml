@@ -115,6 +115,22 @@
                 </div>
             </div>
 
+		<div class="form-group">
+			@Html.LabelFor(model => model.Building_ID, "Building", new { @class = "control-label col-md-2" })
+			<div class="col-md-10">
+				@Html.DropDownList("Building_ID", String.Empty)
+				@Html.ValidationMessageFor(model => model.Building_ID)
+			</div>
+		</div>
+
+		<div class="form-group">
+			@Html.LabelFor(model => model.Room_ID, "Room", new { @class = "control-label col-md-2" })
+			<div class="col-md-10">
+				@Html.DropDownList("Room_ID", String.Empty)
+				@Html.ValidationMessageFor(model => model.Room_ID)
+			</div>
+		</div>
+
         <div class="form-group">---</div>
         <div id="roomChoices" class="form-group"></div>
         <div class="form-group">---</div>
@@ -132,11 +148,15 @@
                 roomPrefArray[roomPrefCount] = new Array();
                 roomPrefArray[roomPrefCount][0] = document.getElementById('Room_Type').value;
                 roomPrefArray[roomPrefCount][1] = document.getElementById('Park_ID').options[document.getElementById('Park_ID').selectedIndex].text;
+                roomPrefArray[roomPrefCount][2] = document.getElementById('Building_ID').options[document.getElementById('Building_ID').selectedIndex].text;
+                roomPrefArray[roomPrefCount][3] = document.getElementById('Room_ID').options[document.getElementById('Room_ID').selectedIndex].text;
                 
-                document.getElementById("roomChoices").innerHTML = document.getElementById("roomChoices").innerHTML + roomPrefArray[roomPrefCount][0] + " | " + roomPrefArray[roomPrefCount][1] +"</br>";
+                document.getElementById("roomChoices").innerHTML = document.getElementById("roomChoices").innerHTML + roomPrefArray[roomPrefCount][0] + " | " + roomPrefArray[roomPrefCount][1] + " | " + roomPrefArray[roomPrefCount][2] + " | " + roomPrefArray[roomPrefCount][3] + "</br>";
                 roomPrefCount++;
                 document.getElementById('Room_Type').value = "";
                 document.getElementById('Park_ID').value = "";
+                document.getElementById('Building_ID').value = "";
+                document.getElementById('Room_ID').value = "";
 
                 if (roomPrefCount > 2) {
                 	document.getElementById("addRoomPrefDiv").innerHTML = "";
