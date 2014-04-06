@@ -18,7 +18,7 @@ Request_Status - POST
 
 
 TO DO
-Facility_ID - CHECKBOXES
-Room_ID - DROPDOWN (filter from building - "Any" option)
+Facility_ID - CHECKBOXLIST - DO AFTER NET FRAMEWORK CHANGE
+Room_ID + Room_Type - DROPDOWN [NO SAMPLE DATA] (filter from building - "Any" option)
 Building_ID - DROPDOWN (filter from park_id - "Any" option)
-Week - CHECKBOXES
+Week - CHECKBOXES, THEN CONGREGATE IN POST
