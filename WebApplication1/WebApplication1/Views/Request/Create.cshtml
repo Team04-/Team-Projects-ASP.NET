@@ -56,53 +56,12 @@
             </div>
         </div>
 
-        <!--<div class="form-group">
-            @Html.LabelFor(model => model.Number_Rooms, "Number Of Rooms", new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Number_Rooms)
-                @Html.ValidationMessageFor(model => model.Number_Rooms)
-            </div>
-        </div>
-
-        <div id="roomMods"></div>
-
-        <script>
-            $('#Number_Rooms').blur(function (event) {
-                var value = $(this).val();
-
-                if (value == parseInt(value, 10)) { // check for int
-                    value = parseInt(value, 10);
-
-                    var htmlString = "";
-
-                    for (var x = 1; x < (value + 1) ; x++) {
-                        //htmlString = htmlString + "<div id='" + x + "'>*Insert Room Module " + x + " Here*</div>";
-                        htmlString = htmlString +
-                        '        <div class="form-group">
-            @Html.LabelFor(model => model.Park_ID, "Park Preference", new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.DropDownList("Park_ID", String.Empty)
-                @Html.ValidationMessageFor(model => model.Park_ID)
-            </div>
-        </div>'
-                    }
-
-                    document.getElementById('roomMods').innerHTML = htmlString;
-                }
-
-                else {
-                    //alert("Not int!");
-                    document.getElementById('roomMods').innerHTML = "";
-                }
-
-            });
-        </script>-->
-            <div class="form-group">---</div>
+        <div class="form-group">---</div>
 
             <div class="form-group">
                 @Html.LabelFor(model => model.Room_Type, "Room Type", new { @class = "control-label col-md-2" })
                 <div class="col-md-10">
-                    @Html.EditorFor(model => model.Room_Type)
+                    @Html.DropDownList("Room_Type", String.Empty)
                     @Html.ValidationMessageFor(model => model.Room_Type)
                 </div>
             </div>
@@ -144,23 +103,32 @@
         <script>
             var roomPrefCount = 0;
             var roomPrefArray = new Array();
-            function addRoomPref() {
-                roomPrefArray[roomPrefCount] = new Array();
-                roomPrefArray[roomPrefCount][0] = document.getElementById('Room_Type').value;
-                roomPrefArray[roomPrefCount][1] = document.getElementById('Park_ID').options[document.getElementById('Park_ID').selectedIndex].text;
-                roomPrefArray[roomPrefCount][2] = document.getElementById('Building_ID').options[document.getElementById('Building_ID').selectedIndex].text;
-                roomPrefArray[roomPrefCount][3] = document.getElementById('Room_ID').options[document.getElementById('Room_ID').selectedIndex].text;
-                
-                document.getElementById("roomChoices").innerHTML = document.getElementById("roomChoices").innerHTML + roomPrefArray[roomPrefCount][0] + " | " + roomPrefArray[roomPrefCount][1] + " | " + roomPrefArray[roomPrefCount][2] + " | " + roomPrefArray[roomPrefCount][3] + "</br>";
-                roomPrefCount++;
-                document.getElementById('Room_Type').value = "";
-                document.getElementById('Park_ID').value = "";
-                document.getElementById('Building_ID').value = "";
-                document.getElementById('Room_ID').value = "";
 
-                if (roomPrefCount > 2) {
-                	document.getElementById("addRoomPrefDiv").innerHTML = "";
-                }
+            function addRoomPref() {
+
+            	if (roomPrefCount > 2) {
+            		// Already got 3 room preferences. Tell them that they can remove a roompref from the list of already added roomprefs, then add new one.
+
+            		alert("The maximum number of room preferences has already been filled. If you wish to add another, please remove an existing room preference.")
+            	}
+
+            	else {
+            		roomPrefArray[roomPrefCount] = new Array();
+            		roomPrefArray[roomPrefCount][0] = document.getElementById('Room_Type').value;
+            		roomPrefArray[roomPrefCount][1] = document.getElementById('Park_ID').options[document.getElementById('Park_ID').selectedIndex].text;
+            		roomPrefArray[roomPrefCount][2] = document.getElementById('Building_ID').options[document.getElementById('Building_ID').selectedIndex].text;
+            		roomPrefArray[roomPrefCount][3] = document.getElementById('Room_ID').options[document.getElementById('Room_ID').selectedIndex].text;
+
+            		// Once added, empty the roompref inputs
+            		document.getElementById("roomChoices").innerHTML = document.getElementById("roomChoices").innerHTML + roomPrefArray[roomPrefCount][0] + " | " + roomPrefArray[roomPrefCount][1] + " | " + roomPrefArray[roomPrefCount][2] + " | " + roomPrefArray[roomPrefCount][3] + "</br>";
+            		document.getElementById('Room_Type').value = "";
+            		document.getElementById('Park_ID').value = "";
+            		document.getElementById('Building_ID').value = "";
+            		document.getElementById('Room_ID').value = "";
+
+            		roomPrefCount++;
+            		alert("Room Preference Added!");
+            	}
             }
 
         </script>
