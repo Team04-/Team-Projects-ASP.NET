@@ -38,7 +38,7 @@ namespace Team_Projects.Filters
                         }
                     }
 
-                    WebSecurity.InitializeDatabaseConnection("DefaultConnection", "UserProfile", "UserId", "UserName", autoCreateTables: true);
+                    WebSecurity.InitializeDatabaseConnection("team04Entities", "timetable_department", "Department_Code", "Department_Name", autoCreateTables: false);
                 }
                 catch (Exception ex)
                 {
