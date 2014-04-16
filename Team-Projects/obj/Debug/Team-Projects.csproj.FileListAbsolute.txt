@@ -102,3 +102,5 @@ C:\Users\M\Dropbox\GitHub\Team-Projects-ASP.NET\Team-Projects\bin\DotNetOpenAuth
 C:\Users\M\Dropbox\GitHub\Team-Projects-ASP.NET\Team-Projects\obj\Debug\Team-Projects.csprojResolveAssemblyReference.cache
 C:\Users\M\Dropbox\GitHub\Team-Projects-ASP.NET\Team-Projects\obj\Debug\Team-Projects.dll
 C:\Users\M\Dropbox\GitHub\Team-Projects-ASP.NET\Team-Projects\obj\Debug\Team-Projects.pdb
+C:\Users\M\Dropbox\GitHub\Team-Projects-ASP.NET\Team-Projects\bin\System.Web.Razor.dll
+C:\Users\M\Dropbox\GitHub\Team-Projects-ASP.NET\Team-Projects\bin\System.Web.Razor.xml
