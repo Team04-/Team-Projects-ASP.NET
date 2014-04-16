@@ -1,0 +1,50 @@
+﻿@model TeamProjects.Models.timetable_module
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<fieldset>
+    <legend>timetable_module</legend>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Department_Code)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Department_Code)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Part_Code)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Part_Code)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Module_Code)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Module_Code)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Module_Title)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Module_Title)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Active)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Active)
+    </div>
+</fieldset>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { /* id=Model.PrimaryKey */ }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

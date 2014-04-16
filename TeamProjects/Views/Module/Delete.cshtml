@@ -1,0 +1,53 @@
+﻿@model TeamProjects.Models.timetable_module
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<fieldset>
+    <legend>timetable_module</legend>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Department_Code)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Department_Code)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Part_Code)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Part_Code)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Module_Code)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Module_Code)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Module_Title)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Module_Title)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Active)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Active)
+    </div>
+</fieldset>
+@using (Html.BeginForm()) {
+    <p>
+        <input type="submit" value="Delete" /> |
+        @Html.ActionLink("Back to List", "Index")
+    </p>
+}

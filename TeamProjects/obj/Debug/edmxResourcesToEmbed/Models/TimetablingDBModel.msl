@@ -1,0 +1,147 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2008/09/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="team04ModelStoreContainer" CdmEntityContainer="team04Entities">
+    <EntitySetMapping Name="timetable_building">
+      <EntityTypeMapping TypeName="team04Model.timetable_building">
+        <MappingFragment StoreEntitySet="timetable_building">
+          <ScalarProperty Name="Building_ID" ColumnName="Building_ID" />
+          <ScalarProperty Name="Building_Name" ColumnName="Building_Name" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="timetable_day">
+      <EntityTypeMapping TypeName="team04Model.timetable_day">
+        <MappingFragment StoreEntitySet="timetable_day">
+          <ScalarProperty Name="Day_ID" ColumnName="Day_ID" />
+          <ScalarProperty Name="Day_Name" ColumnName="Day_Name" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="timetable_department">
+      <EntityTypeMapping TypeName="team04Model.timetable_department">
+        <MappingFragment StoreEntitySet="timetable_department">
+          <ScalarProperty Name="Department_ID" ColumnName="Department_ID" />
+          <ScalarProperty Name="Department_Code" ColumnName="Department_Code" />
+          <ScalarProperty Name="Department_Name" ColumnName="Department_Name" />
+          <ScalarProperty Name="Current_Round" ColumnName="Current_Round" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="timetable_facility">
+      <EntityTypeMapping TypeName="team04Model.timetable_facility">
+        <MappingFragment StoreEntitySet="timetable_facility">
+          <ScalarProperty Name="Facility_ID" ColumnName="Facility_ID" />
+          <ScalarProperty Name="Facility_Name" ColumnName="Facility_Name" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="timetable_module">
+      <EntityTypeMapping TypeName="team04Model.timetable_module">
+        <MappingFragment StoreEntitySet="timetable_module">
+          <ScalarProperty Name="Department_Code" ColumnName="Department_Code" />
+          <ScalarProperty Name="Part_Code" ColumnName="Part_Code" />
+          <ScalarProperty Name="Module_Code" ColumnName="Module_Code" />
+          <ScalarProperty Name="Module_Title" ColumnName="Module_Title" />
+          <ScalarProperty Name="Active" ColumnName="Active" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="timetable_park">
+      <EntityTypeMapping TypeName="team04Model.timetable_park">
+        <MappingFragment StoreEntitySet="timetable_park">
+          <ScalarProperty Name="Park_ID" ColumnName="Park_ID" />
+          <ScalarProperty Name="Park_Name" ColumnName="Park_Name" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="timetable_request">
+      <EntityTypeMapping TypeName="team04Model.timetable_request">
+        <MappingFragment StoreEntitySet="timetable_request">
+          <ScalarProperty Name="Request_ID" ColumnName="Request_ID" />
+          <ScalarProperty Name="Department_Code" ColumnName="Department_Code" />
+          <ScalarProperty Name="Part_Code" ColumnName="Part_Code" />
+          <ScalarProperty Name="Module_Code" ColumnName="Module_Code" />
+          <ScalarProperty Name="Day_ID" ColumnName="Day_ID" />
+          <ScalarProperty Name="Start_Time" ColumnName="Start_Time" />
+          <ScalarProperty Name="Duration" ColumnName="Duration" />
+          <ScalarProperty Name="Number_Students" ColumnName="Number_Students" />
+          <ScalarProperty Name="Number_Rooms" ColumnName="Number_Rooms" />
+          <ScalarProperty Name="Priority" ColumnName="Priority" />
+          <ScalarProperty Name="Room_Type" ColumnName="Room_Type" />
+          <ScalarProperty Name="Park_ID" ColumnName="Park_ID" />
+          <ScalarProperty Name="Custom_Comments" ColumnName="Custom_Comments" />
+          <ScalarProperty Name="Current_Year" ColumnName="Current_Year" />
+          <ScalarProperty Name="Current_Semester" ColumnName="Current_Semester" />
+          <ScalarProperty Name="Current_Round" ColumnName="Current_Round" />
+          <ScalarProperty Name="Request_Status" ColumnName="Request_Status" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="timetable_request_facility">
+      <EntityTypeMapping TypeName="team04Model.timetable_request_facility">
+        <MappingFragment StoreEntitySet="timetable_request_facility">
+          <ScalarProperty Name="Request_ID" ColumnName="Request_ID" />
+          <ScalarProperty Name="Facility_ID" ColumnName="Facility_ID" />
+          <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="timetable_request_room_allocation">
+      <EntityTypeMapping TypeName="team04Model.timetable_request_room_allocation">
+        <MappingFragment StoreEntitySet="timetable_request_room_allocation">
+          <ScalarProperty Name="Request_ID" ColumnName="Request_ID" />
+          <ScalarProperty Name="Building_ID" ColumnName="Building_ID" />
+          <ScalarProperty Name="Room_ID" ColumnName="Room_ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="timetable_request_week">
+      <EntityTypeMapping TypeName="team04Model.timetable_request_week">
+        <MappingFragment StoreEntitySet="timetable_request_week">
+          <ScalarProperty Name="Request_ID" ColumnName="Request_ID" />
+          <ScalarProperty Name="Week" ColumnName="Week" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="timetable_room">
+      <EntityTypeMapping TypeName="team04Model.timetable_room">
+        <MappingFragment StoreEntitySet="timetable_room">
+          <ScalarProperty Name="Park_ID" ColumnName="Park_ID" />
+          <ScalarProperty Name="Building_ID" ColumnName="Building_ID" />
+          <ScalarProperty Name="Room_ID" ColumnName="Room_ID" />
+          <ScalarProperty Name="Capacity" ColumnName="Capacity" />
+          <ScalarProperty Name="Type_ID" ColumnName="Type_ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="timetable_room_facility">
+      <EntityTypeMapping TypeName="team04Model.timetable_room_facility">
+        <MappingFragment StoreEntitySet="timetable_room_facility">
+          <ScalarProperty Name="Building_ID" ColumnName="Building_ID" />
+          <ScalarProperty Name="Room_ID" ColumnName="Room_ID" />
+          <ScalarProperty Name="Facility_ID" ColumnName="Facility_ID" />
+          <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="timetable_room_type">
+      <EntityTypeMapping TypeName="team04Model.timetable_room_type">
+        <MappingFragment StoreEntitySet="timetable_room_type">
+          <ScalarProperty Name="Type_ID" ColumnName="Type_ID" />
+          <ScalarProperty Name="Type_Name" ColumnName="Type_Name" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="timetable_round">
+      <EntityTypeMapping TypeName="team04Model.timetable_round">
+        <MappingFragment StoreEntitySet="timetable_round">
+          <ScalarProperty Name="Round_Code" ColumnName="Round_Code" />
+          <ScalarProperty Name="Round_Status" ColumnName="Round_Status" />
+          <ScalarProperty Name="Semester" ColumnName="Semester" />
+          <ScalarProperty Name="Start_Date" ColumnName="Start_Date" />
+          <ScalarProperty Name="End_Date" ColumnName="End_Date" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>
