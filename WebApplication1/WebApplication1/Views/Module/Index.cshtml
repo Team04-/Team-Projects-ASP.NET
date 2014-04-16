@@ -1,25 +1,21 @@
-﻿@using Microsoft.AspNet.Identity
-@model IEnumerable<WebApplication1.Models.timetable_module>
+﻿@model IEnumerable<Team_Projects.Models.timetable_module>
 
 @{
     ViewBag.Title = "Index";
 }
 
-<h2>@(User.Identity.GetUserName()) Modules</h2>
+<h2>Index</h2>
 
 <p>
     @Html.ActionLink("Create New", "Create")
 </p>
-<table class="table">
+<table>
     <tr>
         <th>
-            Module Code
+            @Html.DisplayNameFor(model => model.Module_Title)
         </th>
         <th>
-            Module Title
-        </th>
-        <th>
-            Active
+            @Html.DisplayNameFor(model => model.Active)
         </th>
         <th></th>
     </tr>
@@ -27,25 +23,15 @@
 @foreach (var item in Model) {
     <tr>
         <td>
-            @(item.Department_Code)@(item.Module_Code)            
+            @Html.DisplayFor(modelItem => item.Module_Title)
         </td>
         <td>
-            @item.Module_Title
+            @Html.DisplayFor(modelItem => item.Active)
         </td>
         <td>
-            @if (item.Active)
-            {
-                @Html.Raw("Active")
-            }
-            else
-            {
-                @Html.Raw("Not Active");
-            }
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { moduleCode = item.Module_Code }) |
-            @Html.ActionLink("Details", "Details", new { moduleCode = item.Module_Code }) |
-            @Html.ActionLink("Delete", "Delete", new { moduleCode = item.Module_Code })
+            @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
+            @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
+            @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
         </td>
     </tr>
 }
