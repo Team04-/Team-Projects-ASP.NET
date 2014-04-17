@@ -16,18 +16,14 @@ namespace TeamProjects.Controllers.manage
         // GET: /Request/
         public ActionResult Index()
         {
-            string query = "SELECT dept.Department_Code as Department_Code, mod.Part_Code as Part_Code, mod.Module_Code as Module_Code, roomt.Type_Name as Room_Type, park.Park_ID as Park_ID from timetable_department dept, timetable_module mod, timetable_room_type roomt, timetable_park park";
+            string query = "SELECT dept.Department_Code as Department_Code, mod.Part_Code as Part_Code, mod.Module_Code as Module_Code, roomt.Type_Name as Room_Type, park.Park_ID as Park_ID from timetable_department dept, timetable_request mod, timetable_room_type roomt, timetable_park park";
             var viewModel = db.Database.SqlQuery<TeamProjects.Models.RequestViewModel>(query);
             return View(viewModel.ToList());
         }
 
         // GET: /Request/Details/5
-        public ActionResult Details(short? id)
+        public ActionResult Details(string id = null)
         {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
             timetable_request timetable_request = db.timetable_request.Find(id);
             if (timetable_request == null)
             {
@@ -40,8 +36,8 @@ namespace TeamProjects.Controllers.manage
         public ActionResult Create()
         {
             //ViewBag.Department_Code = new SelectList(db.timetable_department, "Department_Code", "Department_Name");
-            //ViewBag.Part_Code = new SelectList(db.timetable_module, "Part_Code", "Part_Code");
-            ViewBag.Module_Code = new SelectList(db.timetable_module, "Module_Code", "Module_Title");
+            //ViewBag.Part_Code = new SelectList(db.timetable_request, "Part_Code", "Part_Code");
+            ViewBag.Module_Code = new SelectList(db.timetable_request, "Module_Code", "Module_Title");
             ViewBag.Day_ID = new SelectList(db.timetable_day, "Day_ID", "Day_Name");
             ViewBag.Park_ID = new SelectList(db.timetable_park, "Park_ID", "Park_Name");
 			ViewBag.Building_ID = new SelectList(db.timetable_building, "Building_ID", "Building_Name");
@@ -72,7 +68,7 @@ namespace TeamProjects.Controllers.manage
             }
 
             // Need to update this
-			ViewBag.Module_Code = new SelectList(db.timetable_module, "Module_Code", "Module_Title");
+			ViewBag.Module_Code = new SelectList(db.timetable_request, "Module_Code", "Module_Title");
 			ViewBag.Day_ID = new SelectList(db.timetable_day, "Day_ID", "Day_Name");
 			ViewBag.Park_ID = new SelectList(db.timetable_park, "Park_ID", "Park_Name");
 			ViewBag.Building_ID = new SelectList(db.timetable_building, "Building_ID", "Building_Name");
@@ -82,23 +78,13 @@ namespace TeamProjects.Controllers.manage
         }
 
         // GET: /Request/Edit/5
-        public ActionResult Edit(short? id)
+        public ActionResult Edit(string id = null)
         {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
             timetable_request timetable_request = db.timetable_request.Find(id);
             if (timetable_request == null)
             {
                 return HttpNotFound();
             }
-            ViewBag.Day_ID = new SelectList(db.timetable_day, "Day_ID", "Day_Name", timetable_request.Day_ID);
-            ViewBag.Department_Code = new SelectList(db.timetable_module, "Department_Code", "Module_Title", timetable_request.Department_Code);
-            ViewBag.Request_ID = new SelectList(db.timetable_request, "Request_ID", "Department_Code", timetable_request.Request_ID);
-            ViewBag.Request_ID = new SelectList(db.timetable_request, "Request_ID", "Department_Code", timetable_request.Request_ID);
-            ViewBag.Request_ID = new SelectList(db.timetable_request_room_allocation, "Request_ID", "Building_ID", timetable_request.Request_ID);
-            ViewBag.Request_ID = new SelectList(db.timetable_request_week, "Request_ID", "Request_ID", timetable_request.Request_ID);
             return View(timetable_request);
         }
 
@@ -116,7 +102,7 @@ namespace TeamProjects.Controllers.manage
                 return RedirectToAction("Index");
             }
             ViewBag.Day_ID = new SelectList(db.timetable_day, "Day_ID", "Day_Name", timetable_request.Day_ID);
-            ViewBag.Department_Code = new SelectList(db.timetable_module, "Department_Code", "Module_Title", timetable_request.Department_Code);
+            ViewBag.Department_Code = new SelectList(db.timetable_request, "Department_Code", "Module_Title", timetable_request.Department_Code);
             ViewBag.Request_ID = new SelectList(db.timetable_request, "Request_ID", "Department_Code", timetable_request.Request_ID);
             ViewBag.Request_ID = new SelectList(db.timetable_request, "Request_ID", "Department_Code", timetable_request.Request_ID);
             ViewBag.Request_ID = new SelectList(db.timetable_request_room_allocation, "Request_ID", "Building_ID", timetable_request.Request_ID);
@@ -125,12 +111,8 @@ namespace TeamProjects.Controllers.manage
         }
 
         // GET: /Request/Delete/5
-        public ActionResult Delete(short? id)
+        public ActionResult Delete(string id = null)
         {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
             timetable_request timetable_request = db.timetable_request.Find(id);
             if (timetable_request == null)
             {
