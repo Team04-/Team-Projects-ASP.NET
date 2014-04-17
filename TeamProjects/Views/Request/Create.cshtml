@@ -1,0 +1,166 @@
+﻿@model TeamProjects.Models.RequestViewModel
+
+@{
+    ViewBag.Title = "Create";
+}
+
+<h2>Create</h2>
+
+
+@using (Html.BeginForm()) 
+{
+    @Html.AntiForgeryToken()
+    
+    <div class="form-horizontal">
+        <h4>timetable_request</h4>
+        <hr />
+        @Html.ValidationSummary(true)
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Module_Code, "Module Code", new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownList("Module_Code", String.Empty)
+                @Html.ValidationMessageFor(model => model.Module_Code)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Day_ID, "Day", new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownList("Day_ID", String.Empty)
+                @Html.ValidationMessageFor(model => model.Day_ID)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Start_Time, "Start Time", new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Start_Time)
+                @Html.ValidationMessageFor(model => model.Start_Time)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Duration, "Duration", new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Duration)
+                @Html.ValidationMessageFor(model => model.Duration)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Number_Students, "Number Of Students", new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Number_Students)
+                @Html.ValidationMessageFor(model => model.Number_Students)
+            </div>
+        </div>
+
+        <div class="form-group">---</div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.Room_Type, "Room Type", new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.DropDownList("Room_Type", String.Empty)
+                    @Html.ValidationMessageFor(model => model.Room_Type)
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.Park_ID, "Park", new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.DropDownList("Park_ID", String.Empty)
+                    @Html.ValidationMessageFor(model => model.Park_ID)
+                </div>
+            </div>
+
+		<div class="form-group">
+			@Html.LabelFor(model => model.Building_ID, "Building", new { @class = "control-label col-md-2" })
+			<div class="col-md-10">
+				@Html.DropDownList("Building_ID", String.Empty)
+				@Html.ValidationMessageFor(model => model.Building_ID)
+			</div>
+		</div>
+
+		<div class="form-group">
+			@Html.LabelFor(model => model.Room_ID, "Room", new { @class = "control-label col-md-2" })
+			<div class="col-md-10">
+				@Html.DropDownList("Room_ID", String.Empty)
+				@Html.ValidationMessageFor(model => model.Room_ID)
+			</div>
+		</div>
+
+        <div class="form-group">---</div>
+        <div id="roomChoices" class="form-group"></div>
+        <div class="form-group">---</div>
+
+        <div id="addRoomPrefDiv" class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input onclick="addRoomPref()" value="Add Room Preference" class="btn btn-default" />
+            </div>
+        </div>
+
+        <script>
+            var roomPrefCount = 0;
+            var roomPrefArray = new Array();
+
+            function addRoomPref() {
+
+            	if (roomPrefCount > 2) {
+            		// Already got 3 room preferences. Tell them that they can remove a roompref from the list of already added roomprefs, then add new one.
+
+            		alert("The maximum number of room preferences has already been filled. If you wish to add another, please remove an existing room preference.")
+            	}
+
+            	else {
+            		roomPrefArray[roomPrefCount] = new Array();
+            		roomPrefArray[roomPrefCount][0] = document.getElementById('Room_Type').value;
+            		roomPrefArray[roomPrefCount][1] = document.getElementById('Park_ID').options[document.getElementById('Park_ID').selectedIndex].text;
+            		roomPrefArray[roomPrefCount][2] = document.getElementById('Building_ID').options[document.getElementById('Building_ID').selectedIndex].text;
+            		roomPrefArray[roomPrefCount][3] = document.getElementById('Room_ID').options[document.getElementById('Room_ID').selectedIndex].text;
+
+            		// Once added, empty the roompref inputs
+            		document.getElementById("roomChoices").innerHTML = document.getElementById("roomChoices").innerHTML + roomPrefArray[roomPrefCount][0] + " | " + roomPrefArray[roomPrefCount][1] + " | " + roomPrefArray[roomPrefCount][2] + " | " + roomPrefArray[roomPrefCount][3] + "</br>";
+            		document.getElementById('Room_Type').value = "";
+            		document.getElementById('Park_ID').value = "";
+            		document.getElementById('Building_ID').value = "";
+            		document.getElementById('Room_ID').value = "";
+
+            		roomPrefCount++;
+            		alert("Room Preference Added!");
+            	}
+            }
+
+        </script>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.Priority, "Priority", new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.Priority)
+                    @Html.ValidationMessageFor(model => model.Priority)
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.Custom_Comments, "Additional Information", new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.Custom_Comments)
+                    @Html.ValidationMessageFor(model => model.Custom_Comments)
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10">
+                    <input type="submit" value="Create" class="btn btn-default" />
+                </div>
+            </div>
+        </div>
+}
+
+    <div>
+        @Html.ActionLink("Back to List", "Index")
+    </div>
+
+            @section Scripts {
+            @Scripts.Render("~/bundles/jqueryval")
+            }

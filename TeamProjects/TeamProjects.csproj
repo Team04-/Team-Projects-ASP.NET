@@ -175,6 +175,7 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\AccountModels.cs" />
+    <Compile Include="Models\RequestViewModel.cs" />
     <Compile Include="Models\timetable_building.cs">
       <DependentUpon>TimetablingDBModel.tt</DependentUpon>
     </Compile>

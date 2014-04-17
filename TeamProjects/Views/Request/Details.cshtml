@@ -1,0 +1,162 @@
+﻿@model WebApplication1.Models.timetable_request
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>timetable_request</h4>
+	<hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Start_Time)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Start_Time)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Duration)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Duration)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Number_Students)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Number_Students)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Number_Rooms)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Number_Rooms)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Priority)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Priority)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Room_Type)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Room_Type)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Park_ID)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Park_ID)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Custom_Comments)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Custom_Comments)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Current_Year)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Current_Year)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Current_Semester)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Current_Semester)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Current_Round)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Current_Round)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Request_Status)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Request_Status)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.timetable_day.Day_Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.timetable_day.Day_Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.timetable_module.Module_Title)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.timetable_module.Module_Title)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.timetable_request1.Department_Code)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.timetable_request1.Department_Code)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.timetable_request2.Department_Code)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.timetable_request2.Department_Code)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.timetable_request_room_allocation.Building_ID)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.timetable_request_room_allocation.Building_ID)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.timetable_request_week.Request_ID)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.timetable_request_week.Request_ID)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Request_ID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

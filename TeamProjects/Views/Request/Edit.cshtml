@@ -1,0 +1,162 @@
+﻿@model WebApplication1.Models.timetable_request
+
+@{
+    ViewBag.Title = "Edit";
+}
+
+<h2>Edit</h2>
+
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    
+    <div class="form-horizontal">
+        <h4>timetable_request</h4>
+        <hr />
+        @Html.ValidationSummary(true)
+        @Html.HiddenFor(model => model.Request_ID)
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Department_Code, "Department_Code", new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownList("Department_Code", String.Empty)
+                @Html.ValidationMessageFor(model => model.Department_Code)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Part_Code, "Part_Code", new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownList("Part_Code", String.Empty)
+                @Html.ValidationMessageFor(model => model.Part_Code)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Module_Code, "Module_Code", new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownList("Module_Code", String.Empty)
+                @Html.ValidationMessageFor(model => model.Module_Code)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Day_ID, "Day_ID", new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownList("Day_ID", String.Empty)
+                @Html.ValidationMessageFor(model => model.Day_ID)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Start_Time, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Start_Time)
+                @Html.ValidationMessageFor(model => model.Start_Time)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Duration, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Duration)
+                @Html.ValidationMessageFor(model => model.Duration)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Number_Students, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Number_Students)
+                @Html.ValidationMessageFor(model => model.Number_Students)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Number_Rooms, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Number_Rooms)
+                @Html.ValidationMessageFor(model => model.Number_Rooms)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Priority, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Priority)
+                @Html.ValidationMessageFor(model => model.Priority)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Room_Type, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Room_Type)
+                @Html.ValidationMessageFor(model => model.Room_Type)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Park_ID, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Park_ID)
+                @Html.ValidationMessageFor(model => model.Park_ID)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Custom_Comments, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Custom_Comments)
+                @Html.ValidationMessageFor(model => model.Custom_Comments)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Current_Year, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Current_Year)
+                @Html.ValidationMessageFor(model => model.Current_Year)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Current_Semester, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Current_Semester)
+                @Html.ValidationMessageFor(model => model.Current_Semester)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Current_Round, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Current_Round)
+                @Html.ValidationMessageFor(model => model.Current_Round)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Request_Status, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Request_Status)
+                @Html.ValidationMessageFor(model => model.Request_Status)
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Save" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

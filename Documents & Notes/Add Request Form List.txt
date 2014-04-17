@@ -1,0 +1,23 @@
+// ___TO DO___
+
+Room_ID + Room_Type - DROPDOWN (filter from building - add "Any" option?)
+Building_ID - DROPDOWN (filter from park_id - add "Any" option?)
+Week - CHECKBOXES, THEN CONGREGATE IN POST
+Start_Time - DROPDOWN?
+Duration - DROPDOWN?
+
+// After .NET Framework change
+Department_Code - POST
+Part_Code - POST
+Facility_ID - CHECKBOXLIST - DO AFTER NET FRAMEWORK CHANGE
+
+// Ask Hemesh to:
+Current_Year - POST? - AUTO IN DB?
+Current_Semester - POST - AUTO IN DB?
+Current_Round - POST - AUTO IN DB?
+Request_ID - POST - AUTOINC IN DB?
+Request_Status - POST? - DEFAULT IN DB TO PENDING
+
+// Final touches
+"Remove roompref" functionality
+Make Room Pref Module look pretty
