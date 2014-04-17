@@ -1,53 +1,54 @@
-C:\Users\M\Documents\Visual Studio 2010\Projects\TeamProjects\TeamProjects\bin\TeamProjects.dll
-C:\Users\M\Documents\Visual Studio 2010\Projects\TeamProjects\TeamProjects\bin\TeamProjects.pdb
-C:\Users\M\Documents\Visual Studio 2010\Projects\TeamProjects\TeamProjects\bin\Antlr3.Runtime.dll
-C:\Users\M\Documents\Visual Studio 2010\Projects\TeamProjects\TeamProjects\bin\DotNetOpenAuth.AspNet.dll
-C:\Users\M\Documents\Visual Studio 2010\Projects\TeamProjects\TeamProjects\bin\DotNetOpenAuth.Core.dll
-C:\Users\M\Documents\Visual Studio 2010\Projects\TeamProjects\TeamProjects\bin\DotNetOpenAuth.OAuth.Consumer.dll
-C:\Users\M\Documents\Visual Studio 2010\Projects\TeamProjects\TeamProjects\bin\DotNetOpenAuth.OAuth.dll
-C:\Users\M\Documents\Visual Studio 2010\Projects\TeamProjects\TeamProjects\bin\DotNetOpenAuth.OpenId.dll
-C:\Users\M\Documents\Visual Studio 2010\Projects\TeamProjects\TeamProjects\bin\DotNetOpenAuth.OpenId.RelyingParty.dll
-C:\Users\M\Documents\Visual Studio 2010\Projects\TeamProjects\TeamProjects\bin\EntityFramework.dll
-C:\Users\M\Documents\Visual Studio 2010\Projects\TeamProjects\TeamProjects\bin\Microsoft.Web.Infrastructure.dll
-C:\Users\M\Documents\Visual Studio 2010\Projects\TeamProjects\TeamProjects\bin\Microsoft.Web.WebPages.OAuth.dll
-C:\Users\M\Documents\Visual Studio 2010\Projects\TeamProjects\TeamProjects\bin\Newtonsoft.Json.dll
-C:\Users\M\Documents\Visual Studio 2010\Projects\TeamProjects\TeamProjects\bin\System.Net.Http.dll
-C:\Users\M\Documents\Visual Studio 2010\Projects\TeamProjects\TeamProjects\bin\System.Net.Http.Formatting.dll
-C:\Users\M\Documents\Visual Studio 2010\Projects\TeamProjects\TeamProjects\bin\System.Net.Http.WebRequest.dll
-C:\Users\M\Documents\Visual Studio 2010\Projects\TeamProjects\TeamProjects\bin\System.Web.Helpers.dll
-C:\Users\M\Documents\Visual Studio 2010\Projects\TeamProjects\TeamProjects\bin\System.Web.Http.dll
-C:\Users\M\Documents\Visual Studio 2010\Projects\TeamProjects\TeamProjects\bin\System.Web.Http.WebHost.dll
-C:\Users\M\Documents\Visual Studio 2010\Projects\TeamProjects\TeamProjects\bin\System.Web.Mvc.dll
-C:\Users\M\Documents\Visual Studio 2010\Projects\TeamProjects\TeamProjects\bin\System.Web.Optimization.dll
-C:\Users\M\Documents\Visual Studio 2010\Projects\TeamProjects\TeamProjects\bin\System.Web.Razor.dll
-C:\Users\M\Documents\Visual Studio 2010\Projects\TeamProjects\TeamProjects\bin\System.Web.WebPages.Deployment.dll
-C:\Users\M\Documents\Visual Studio 2010\Projects\TeamProjects\TeamProjects\bin\System.Web.WebPages.dll
-C:\Users\M\Documents\Visual Studio 2010\Projects\TeamProjects\TeamProjects\bin\System.Web.WebPages.Razor.dll
-C:\Users\M\Documents\Visual Studio 2010\Projects\TeamProjects\TeamProjects\bin\WebGrease.dll
-C:\Users\M\Documents\Visual Studio 2010\Projects\TeamProjects\TeamProjects\bin\WebMatrix.Data.dll
-C:\Users\M\Documents\Visual Studio 2010\Projects\TeamProjects\TeamProjects\bin\WebMatrix.WebData.dll
-C:\Users\M\Documents\Visual Studio 2010\Projects\TeamProjects\TeamProjects\bin\EntityFramework.xml
-C:\Users\M\Documents\Visual Studio 2010\Projects\TeamProjects\TeamProjects\bin\Newtonsoft.Json.xml
-C:\Users\M\Documents\Visual Studio 2010\Projects\TeamProjects\TeamProjects\bin\System.Net.Http.xml
-C:\Users\M\Documents\Visual Studio 2010\Projects\TeamProjects\TeamProjects\bin\System.Net.Http.Formatting.xml
-C:\Users\M\Documents\Visual Studio 2010\Projects\TeamProjects\TeamProjects\bin\System.Net.Http.WebRequest.xml
-C:\Users\M\Documents\Visual Studio 2010\Projects\TeamProjects\TeamProjects\bin\System.Web.Helpers.xml
-C:\Users\M\Documents\Visual Studio 2010\Projects\TeamProjects\TeamProjects\bin\System.Web.Http.xml
-C:\Users\M\Documents\Visual Studio 2010\Projects\TeamProjects\TeamProjects\bin\System.Web.Http.WebHost.xml
-C:\Users\M\Documents\Visual Studio 2010\Projects\TeamProjects\TeamProjects\bin\System.Web.Mvc.xml
-C:\Users\M\Documents\Visual Studio 2010\Projects\TeamProjects\TeamProjects\bin\System.Web.Razor.xml
-C:\Users\M\Documents\Visual Studio 2010\Projects\TeamProjects\TeamProjects\bin\System.Web.WebPages.xml
-C:\Users\M\Documents\Visual Studio 2010\Projects\TeamProjects\TeamProjects\bin\System.Web.WebPages.Deployment.xml
-C:\Users\M\Documents\Visual Studio 2010\Projects\TeamProjects\TeamProjects\bin\System.Web.WebPages.Razor.xml
-C:\Users\M\Documents\Visual Studio 2010\Projects\TeamProjects\TeamProjects\bin\WebMatrix.Data.xml
-C:\Users\M\Documents\Visual Studio 2010\Projects\TeamProjects\TeamProjects\bin\Microsoft.Web.WebPages.OAuth.xml
-C:\Users\M\Documents\Visual Studio 2010\Projects\TeamProjects\TeamProjects\bin\WebMatrix.WebData.xml
-C:\Users\M\Documents\Visual Studio 2010\Projects\TeamProjects\TeamProjects\bin\DotNetOpenAuth.AspNet.xml
-C:\Users\M\Documents\Visual Studio 2010\Projects\TeamProjects\TeamProjects\bin\DotNetOpenAuth.Core.xml
-C:\Users\M\Documents\Visual Studio 2010\Projects\TeamProjects\TeamProjects\bin\DotNetOpenAuth.OAuth.Consumer.xml
-C:\Users\M\Documents\Visual Studio 2010\Projects\TeamProjects\TeamProjects\bin\DotNetOpenAuth.OAuth.xml
-C:\Users\M\Documents\Visual Studio 2010\Projects\TeamProjects\TeamProjects\bin\DotNetOpenAuth.OpenId.xml
-C:\Users\M\Documents\Visual Studio 2010\Projects\TeamProjects\TeamProjects\bin\DotNetOpenAuth.OpenId.RelyingParty.xml
-C:\Users\M\Documents\Visual Studio 2010\Projects\TeamProjects\TeamProjects\obj\Debug\TeamProjects.csprojResolveAssemblyReference.cache
-C:\Users\M\Documents\Visual Studio 2010\Projects\TeamProjects\TeamProjects\obj\Debug\TeamProjects.dll
-C:\Users\M\Documents\Visual Studio 2010\Projects\TeamProjects\TeamProjects\obj\Debug\TeamProjects.pdb
+C:\Users\Niall\Documents\GitHub\Team-Projects-ASP.NET\TeamProjects\bin\TeamProjects.dll.config
+C:\Users\Niall\Documents\GitHub\Team-Projects-ASP.NET\TeamProjects\bin\TeamProjects.dll
+C:\Users\Niall\Documents\GitHub\Team-Projects-ASP.NET\TeamProjects\bin\TeamProjects.pdb
+C:\Users\Niall\Documents\GitHub\Team-Projects-ASP.NET\TeamProjects\bin\Antlr3.Runtime.dll
+C:\Users\Niall\Documents\GitHub\Team-Projects-ASP.NET\TeamProjects\bin\DotNetOpenAuth.AspNet.dll
+C:\Users\Niall\Documents\GitHub\Team-Projects-ASP.NET\TeamProjects\bin\DotNetOpenAuth.OAuth.Consumer.dll
+C:\Users\Niall\Documents\GitHub\Team-Projects-ASP.NET\TeamProjects\bin\DotNetOpenAuth.OAuth.dll
+C:\Users\Niall\Documents\GitHub\Team-Projects-ASP.NET\TeamProjects\bin\DotNetOpenAuth.OpenId.dll
+C:\Users\Niall\Documents\GitHub\Team-Projects-ASP.NET\TeamProjects\bin\DotNetOpenAuth.OpenId.RelyingParty.dll
+C:\Users\Niall\Documents\GitHub\Team-Projects-ASP.NET\TeamProjects\bin\EntityFramework.dll
+C:\Users\Niall\Documents\GitHub\Team-Projects-ASP.NET\TeamProjects\bin\Microsoft.Web.Infrastructure.dll
+C:\Users\Niall\Documents\GitHub\Team-Projects-ASP.NET\TeamProjects\bin\Microsoft.Web.WebPages.OAuth.dll
+C:\Users\Niall\Documents\GitHub\Team-Projects-ASP.NET\TeamProjects\bin\Newtonsoft.Json.dll
+C:\Users\Niall\Documents\GitHub\Team-Projects-ASP.NET\TeamProjects\bin\System.Net.Http.dll
+C:\Users\Niall\Documents\GitHub\Team-Projects-ASP.NET\TeamProjects\bin\System.Net.Http.Formatting.dll
+C:\Users\Niall\Documents\GitHub\Team-Projects-ASP.NET\TeamProjects\bin\System.Net.Http.WebRequest.dll
+C:\Users\Niall\Documents\GitHub\Team-Projects-ASP.NET\TeamProjects\bin\System.Web.Helpers.dll
+C:\Users\Niall\Documents\GitHub\Team-Projects-ASP.NET\TeamProjects\bin\System.Web.Http.dll
+C:\Users\Niall\Documents\GitHub\Team-Projects-ASP.NET\TeamProjects\bin\System.Web.Http.WebHost.dll
+C:\Users\Niall\Documents\GitHub\Team-Projects-ASP.NET\TeamProjects\bin\System.Web.Mvc.dll
+C:\Users\Niall\Documents\GitHub\Team-Projects-ASP.NET\TeamProjects\bin\System.Web.Optimization.dll
+C:\Users\Niall\Documents\GitHub\Team-Projects-ASP.NET\TeamProjects\bin\System.Web.Razor.dll
+C:\Users\Niall\Documents\GitHub\Team-Projects-ASP.NET\TeamProjects\bin\System.Web.WebPages.Deployment.dll
+C:\Users\Niall\Documents\GitHub\Team-Projects-ASP.NET\TeamProjects\bin\System.Web.WebPages.dll
+C:\Users\Niall\Documents\GitHub\Team-Projects-ASP.NET\TeamProjects\bin\System.Web.WebPages.Razor.dll
+C:\Users\Niall\Documents\GitHub\Team-Projects-ASP.NET\TeamProjects\bin\WebGrease.dll
+C:\Users\Niall\Documents\GitHub\Team-Projects-ASP.NET\TeamProjects\bin\WebMatrix.Data.dll
+C:\Users\Niall\Documents\GitHub\Team-Projects-ASP.NET\TeamProjects\bin\WebMatrix.WebData.dll
+C:\Users\Niall\Documents\GitHub\Team-Projects-ASP.NET\TeamProjects\bin\EntityFramework.xml
+C:\Users\Niall\Documents\GitHub\Team-Projects-ASP.NET\TeamProjects\bin\Newtonsoft.Json.xml
+C:\Users\Niall\Documents\GitHub\Team-Projects-ASP.NET\TeamProjects\bin\System.Net.Http.xml
+C:\Users\Niall\Documents\GitHub\Team-Projects-ASP.NET\TeamProjects\bin\System.Net.Http.Formatting.xml
+C:\Users\Niall\Documents\GitHub\Team-Projects-ASP.NET\TeamProjects\bin\System.Net.Http.WebRequest.xml
+C:\Users\Niall\Documents\GitHub\Team-Projects-ASP.NET\TeamProjects\bin\System.Web.Helpers.xml
+C:\Users\Niall\Documents\GitHub\Team-Projects-ASP.NET\TeamProjects\bin\System.Web.Http.xml
+C:\Users\Niall\Documents\GitHub\Team-Projects-ASP.NET\TeamProjects\bin\System.Web.Http.WebHost.xml
+C:\Users\Niall\Documents\GitHub\Team-Projects-ASP.NET\TeamProjects\bin\System.Web.Mvc.xml
+C:\Users\Niall\Documents\GitHub\Team-Projects-ASP.NET\TeamProjects\bin\System.Web.Razor.xml
+C:\Users\Niall\Documents\GitHub\Team-Projects-ASP.NET\TeamProjects\bin\System.Web.WebPages.xml
+C:\Users\Niall\Documents\GitHub\Team-Projects-ASP.NET\TeamProjects\bin\System.Web.WebPages.Deployment.xml
+C:\Users\Niall\Documents\GitHub\Team-Projects-ASP.NET\TeamProjects\bin\System.Web.WebPages.Razor.xml
+C:\Users\Niall\Documents\GitHub\Team-Projects-ASP.NET\TeamProjects\bin\WebMatrix.Data.xml
+C:\Users\Niall\Documents\GitHub\Team-Projects-ASP.NET\TeamProjects\bin\Microsoft.Web.WebPages.OAuth.xml
+C:\Users\Niall\Documents\GitHub\Team-Projects-ASP.NET\TeamProjects\bin\WebMatrix.WebData.xml
+C:\Users\Niall\Documents\GitHub\Team-Projects-ASP.NET\TeamProjects\bin\DotNetOpenAuth.AspNet.xml
+C:\Users\Niall\Documents\GitHub\Team-Projects-ASP.NET\TeamProjects\bin\DotNetOpenAuth.OAuth.Consumer.xml
+C:\Users\Niall\Documents\GitHub\Team-Projects-ASP.NET\TeamProjects\bin\DotNetOpenAuth.OAuth.xml
+C:\Users\Niall\Documents\GitHub\Team-Projects-ASP.NET\TeamProjects\bin\DotNetOpenAuth.OpenId.xml
+C:\Users\Niall\Documents\GitHub\Team-Projects-ASP.NET\TeamProjects\bin\DotNetOpenAuth.OpenId.RelyingParty.xml
+C:\Users\Niall\Documents\GitHub\Team-Projects-ASP.NET\TeamProjects\obj\Debug\TeamProjects.dll
+C:\Users\Niall\Documents\GitHub\Team-Projects-ASP.NET\TeamProjects\obj\Debug\TeamProjects.pdb
+C:\Users\Niall\Documents\GitHub\Team-Projects-ASP.NET\TeamProjects\bin\DotNetOpenAuth.Core.dll
+C:\Users\Niall\Documents\GitHub\Team-Projects-ASP.NET\TeamProjects\bin\DotNetOpenAuth.Core.xml
+C:\Users\Niall\Documents\GitHub\Team-Projects-ASP.NET\TeamProjects\obj\Debug\TeamProjects.csprojResolveAssemblyReference.cache
