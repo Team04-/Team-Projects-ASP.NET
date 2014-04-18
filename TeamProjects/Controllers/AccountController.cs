@@ -17,12 +17,26 @@ namespace TeamProjects.Controllers
     [InitializeSimpleMembership]
     public class AccountController : Controller
     {
+        // return a populated array of department names and codes
+        private string[][] getDepartmentInfo()
+        {
+            team04Entities db = new team04Entities();
+            string[] Department_Names = db.timetable_department.Select(name => name.Department_Name).ToArray();
+            string[] Department_Codes = db.timetable_department.Select(name => name.Department_Code).ToArray();
+            string[][] DepartmentsInfo = new string[2][];
+            DepartmentsInfo[0] = Department_Names;
+            DepartmentsInfo[1] = Department_Codes;
+            return DepartmentsInfo;
+        }
+
         //
         // GET: /Account/Login
 
         [AllowAnonymous]
         public ActionResult Login(string returnUrl)
         {
+            // pass department names and codes to view
+            ViewBag.DepartmentsInfo = getDepartmentInfo();
             ViewBag.ReturnUrl = returnUrl;
             return View();
         }
