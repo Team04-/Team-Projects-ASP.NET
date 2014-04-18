@@ -91,43 +91,99 @@
 		</div>
 
         <div class="form-group">---</div>
+
+        <input type="button" value="Add Room Preference" onclick="addRoomPref()" />
+
+        <input type="button" value="Delete Room Preference(s)" onclick="deleteRowAndPref('dataTable')" />
+
+        <table id="dataTable" width="350px" border="1">
+        </table>
+
         <div id="roomChoices" class="form-group"></div>
         <div class="form-group">---</div>
 
-        <div id="addRoomPrefDiv" class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <input onclick="addRoomPref()" value="Add Room Preference" class="btn btn-default" />
-            </div>
-        </div>
-
         <script>
-            var roomPrefCount = 0;
-            var roomPrefArray = new Array();
+            var roomPrefCollection = new Array();
+
+            function addRow(tableID) {
+
+                var table = document.getElementById(tableID);
+
+                var rowCount = table.rows.length;
+                var row = table.insertRow(rowCount);
+
+                var cell1 = row.insertCell(0);
+                var element1 = document.createElement("input");
+                element1.type = "checkbox";
+                element1.name = "chkbox[]";
+                cell1.appendChild(element1);
+
+                var cell2 = row.insertCell(1);
+                cell2.innerHTML = roomPrefCollection[roomPrefCollection.length - 1][0];
+
+                var cell3 = row.insertCell(2);
+                cell3.innerHTML = roomPrefCollection[roomPrefCollection.length - 1][1];
+
+                var cell4 = row.insertCell(3);
+                cell4.innerHTML = roomPrefCollection[roomPrefCollection.length - 1][2];
+
+                var cell5 = row.insertCell(4);
+                cell5.innerHTML = roomPrefCollection[roomPrefCollection.length - 1][3];
+            }
+
+            function deleteRowAndPref(tableID) {
+                try {
+                    var table = document.getElementById(tableID);
+                    var rowCount = table.rows.length;
+
+                    for (var i = 0; i < rowCount; i++) {
+                        var row = table.rows[i];
+                        var chkbox = row.cells[0].childNodes[0];
+
+                        if (null != chkbox && true == chkbox.checked) {
+                            roomPrefCollection.splice(i, 1);
+
+                            table.deleteRow(i);
+                            rowCount--;
+                            i--;
+                        }
+                    }
+                } catch (e) {
+                    alert(e);
+                }
+            }
 
             function addRoomPref() {
 
-            	if (roomPrefCount > 2) {
+                if (document.getElementById('Room_ID').value == "" || document.getElementById('Building_ID').value == "" || document.getElementById('Park_ID').value == "" || document.getElementById('Room_Type').value == "" || document.getElementById('Room_Type').value == "") {
+                    alert("Please fill in all room preference fields before attempting to add a new preference.")
+                }
+
+            	else if (roomPrefCollection.length > 2) {
             		// Already got 3 room preferences. Tell them that they can remove a roompref from the list of already added roomprefs, then add new one.
 
             		alert("The maximum number of room preferences has already been filled. If you wish to add another, please remove an existing room preference.")
             	}
 
             	else {
-            		roomPrefArray[roomPrefCount] = new Array();
-            		roomPrefArray[roomPrefCount][0] = document.getElementById('Room_Type').value;
-            		roomPrefArray[roomPrefCount][1] = document.getElementById('Park_ID').options[document.getElementById('Park_ID').selectedIndex].text;
-            		roomPrefArray[roomPrefCount][2] = document.getElementById('Building_ID').options[document.getElementById('Building_ID').selectedIndex].text;
-            		roomPrefArray[roomPrefCount][3] = document.getElementById('Room_ID').options[document.getElementById('Room_ID').selectedIndex].text;
+            		roomPref = new Array();
+            		roomPref[0] = document.getElementById('Room_Type').value;
+            		roomPref[1] = document.getElementById('Park_ID').options[document.getElementById('Park_ID').selectedIndex].text;
+            		roomPref[2] = document.getElementById('Building_ID').options[document.getElementById('Building_ID').selectedIndex].text;
+            		roomPref[3] = document.getElementById('Room_ID').options[document.getElementById('Room_ID').selectedIndex].text;
+
+            		roomPrefCollection.push(roomPref);
 
             		// Once added, empty the roompref inputs
-            		document.getElementById("roomChoices").innerHTML = document.getElementById("roomChoices").innerHTML + roomPrefArray[roomPrefCount][0] + " | " + roomPrefArray[roomPrefCount][1] + " | " + roomPrefArray[roomPrefCount][2] + " | " + roomPrefArray[roomPrefCount][3] + "</br>";
+            		// old table: //document.getElementById("roomChoices").innerHTML = document.getElementById("roomChoices").innerHTML + roomPrefArray[roomPrefCount][0] + " | " + roomPrefArray[roomPrefCount][1] + " | " + roomPrefArray[roomPrefCount][2] + " | " + roomPrefArray[roomPrefCount][3] + "</br>";
             		document.getElementById('Room_Type').value = "";
             		document.getElementById('Park_ID').value = "";
             		document.getElementById('Building_ID').value = "";
             		document.getElementById('Room_ID').value = "";
 
-            		roomPrefCount++;
-            		alert("Room Preference Added!");
+            		addRow('dataTable');
+
+            		alert("Room preference successfully added!");
             	}
             }
 

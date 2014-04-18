@@ -35,8 +35,8 @@ namespace TeamProjects.Controllers.manage
         // GET: /Request/Create
         public ActionResult Create()
         {
-            //ViewBag.Department_Code = new SelectList(db.timetable_department, "Department_Code", "Department_Name");
-            //ViewBag.Part_Code = new SelectList(db.timetable_request, "Part_Code", "Part_Code");
+            ViewBag.Department_Code = new SelectList(db.timetable_department, "Department_Code", "Department_Name");
+            ViewBag.Part_Code = new SelectList(db.timetable_request, "Part_Code", "Part_Code");
             ViewBag.Module_Code = new SelectList(db.timetable_request, "Module_Code", "Module_Title");
             ViewBag.Day_ID = new SelectList(db.timetable_day, "Day_ID", "Day_Name");
             ViewBag.Park_ID = new SelectList(db.timetable_park, "Park_ID", "Park_Name");
@@ -68,12 +68,16 @@ namespace TeamProjects.Controllers.manage
             }
 
             // Need to update this
-			ViewBag.Module_Code = new SelectList(db.timetable_request, "Module_Code", "Module_Title");
-			ViewBag.Day_ID = new SelectList(db.timetable_day, "Day_ID", "Day_Name");
-			ViewBag.Park_ID = new SelectList(db.timetable_park, "Park_ID", "Park_Name");
-			ViewBag.Building_ID = new SelectList(db.timetable_building, "Building_ID", "Building_Name");
-			ViewBag.Room_ID = new SelectList(db.timetable_room, "Room_ID", "Room_ID");
-			ViewBag.Facility_ID = new SelectList(db.timetable_facility, "Facility_ID", "Facility_Name");
+            ViewBag.Department_Code = new SelectList(db.timetable_department, "Department_Code", "Department_Name");
+            ViewBag.Part_Code = new SelectList(db.timetable_request, "Part_Code", "Part_Code");
+            ViewBag.Module_Code = new SelectList(db.timetable_request, "Module_Code", "Module_Title");
+            ViewBag.Day_ID = new SelectList(db.timetable_day, "Day_ID", "Day_Name");
+            ViewBag.Park_ID = new SelectList(db.timetable_park, "Park_ID", "Park_Name");
+            ViewBag.Building_ID = new SelectList(db.timetable_building, "Building_ID", "Building_Name");
+            ViewBag.Room_ID = new SelectList(db.timetable_room, "Room_ID", "Room_ID");
+            ViewBag.Facility_ID = new SelectList(db.timetable_facility, "Facility_ID", "Facility_Name");
+            ViewBag.Room_Type = new SelectList(db.timetable_room_type, "Type_ID", "Type_Name");
+
             return View(timetable_request);
         }
 
