@@ -9,7 +9,7 @@ Duration - DROPDOWN?
 // After .NET Framework change
 Department_Code - POST
 Part_Code - POST
-Facility_ID - CHECKBOXLIST - DO AFTER NET FRAMEWORK CHANGE
+Facility_ID - CHECKBOXLIST OR DROPDOWNS WITH QUANTITIES, LIKE IN DB - DO AFTER NET FRAMEWORK CHANGE
 
 // Ask Hemesh to:
 Current_Year - POST? - AUTO IN DB?

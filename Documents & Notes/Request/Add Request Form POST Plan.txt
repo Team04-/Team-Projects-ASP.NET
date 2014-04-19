@@ -1,0 +1,32 @@
+// timetable_request
+Request_ID - AUTO
+Department_Code
+Part_Code
+Module_Code
+Day_ID
+Start_Time
+Duration
+Number_Students
+Number_Rooms
+Priority
+Room_Type - ???
+Park_ID - ???
+Custom_Comments
+Current_Year
+Current_Semester
+Current_Round
+Request_Status - AUTO
+
+// timetable_request_facility
+Request_ID - AUTO
+Facility_ID
+Quantity
+
+// timetable_request_room_allocation
+Request_ID - AUTO
+Building_ID
+Room_ID
+
+// timetable_request_week
+Request_ID - AUTO
+Week

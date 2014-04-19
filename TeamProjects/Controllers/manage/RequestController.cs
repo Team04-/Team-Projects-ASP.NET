@@ -67,7 +67,6 @@ namespace TeamProjects.Controllers.manage
                 return RedirectToAction("Index");
             }
 
-            // Need to update this
             ViewBag.Department_Code = new SelectList(db.timetable_department, "Department_Code", "Department_Name");
             ViewBag.Part_Code = new SelectList(db.timetable_request, "Part_Code", "Part_Code");
             ViewBag.Module_Code = new SelectList(db.timetable_request, "Module_Code", "Module_Title");
