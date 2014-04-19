@@ -22,7 +22,7 @@ namespace TeamProjects.Models
         public int Duration { get; set; }
         public int Number_Students { get; set; }
         public int Number_Rooms { get; set; }
-        public int Priority { get; set; }
+        public bool Priority { get; set; }
         public int Room_Type { get; set; }
         public int Park_ID { get; set; }
         public string Custom_Comments { get; set; }

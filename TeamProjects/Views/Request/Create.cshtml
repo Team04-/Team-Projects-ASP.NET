@@ -167,7 +167,7 @@
 
             	else {
             		roomPref = new Array();
-            		roomPref[0] = document.getElementById('Room_Type').value;
+            		roomPref[0] = document.getElementById('Room_Type').options[document.getElementById('Room_Type').selectedIndex].text;
             		roomPref[1] = document.getElementById('Park_ID').options[document.getElementById('Park_ID').selectedIndex].text;
             		roomPref[2] = document.getElementById('Building_ID').options[document.getElementById('Building_ID').selectedIndex].text;
             		roomPref[3] = document.getElementById('Room_ID').options[document.getElementById('Room_ID').selectedIndex].text;
@@ -192,7 +192,7 @@
             <div class="form-group">
                 @Html.LabelFor(model => model.Priority, "Priority", new { @class = "control-label col-md-2" })
                 <div class="col-md-10">
-                    @Html.EditorFor(model => model.Priority)
+                    @Html.CheckBoxFor(model => model.Priority)
                     @Html.ValidationMessageFor(model => model.Priority)
                 </div>
             </div>
