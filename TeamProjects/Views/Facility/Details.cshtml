@@ -1,0 +1,29 @@
+﻿@model TeamProjects.Models.timetable_facility
+
+@{
+    ViewBag.Title = "Details for @Model.Facility_Name";
+}
+
+<h2>Details for @Model.Facility_Name</h2>
+
+<fieldset>
+    <legend>timetable_facility</legend>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Facility_ID)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Facility_ID)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Facility_Name)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Facility_Name)
+    </div>
+</fieldset>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id=Model.Facility_ID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

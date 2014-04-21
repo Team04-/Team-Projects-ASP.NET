@@ -12,16 +12,13 @@
 <table>
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.Department_Code)
+            Module Code
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Part_Code)
+            Part Code
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Module_Code)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Module_Title)
+            Module Title
         </th>
         <th>
             @Html.DisplayNameFor(model => model.Active)
@@ -29,27 +26,25 @@
         <th></th>
     </tr>
 
-@foreach (var item in Model) {
+@foreach (var item in Model)
+{
     <tr>
         <td>
-            @Html.DisplayFor(modelItem => item.Department_Code)
+            @item.Department_Code@item.Module_Code
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.Part_Code)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.Module_Code)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Module_Title)
+            @item.Module_Title
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.Active)
         </td>
         <td>
-            @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
-            @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
-            @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+            @Html.ActionLink("Edit", "Edit", new { moduleCode = item.Module_Code }) |
+            @Html.ActionLink("Details", "Details", new { moduleCode = item.Module_Code }) |
+            @Html.ActionLink("Delete", "Delete", new { moduleCode = item.Module_Code })
         </td>
     </tr>
 }

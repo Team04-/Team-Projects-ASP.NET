@@ -10,10 +10,10 @@
     <legend>timetable_module</legend>
 
     <div class="display-label">
-         @Html.DisplayNameFor(model => model.Department_Code)
+         Module Code
     </div>
     <div class="display-field">
-        @Html.DisplayFor(model => model.Department_Code)
+        @Model.Department_Code@Model.Module_Code
     </div>
 
     <div class="display-label">
@@ -21,13 +21,6 @@
     </div>
     <div class="display-field">
         @Html.DisplayFor(model => model.Part_Code)
-    </div>
-
-    <div class="display-label">
-         @Html.DisplayNameFor(model => model.Module_Code)
-    </div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.Module_Code)
     </div>
 
     <div class="display-label">
@@ -45,6 +38,6 @@
     </div>
 </fieldset>
 <p>
-    @Html.ActionLink("Edit", "Edit", new { /* id=Model.PrimaryKey */ }) |
+    @Html.ActionLink("Edit", "Edit", new { moduleCode = Model.Module_Code }) |
     @Html.ActionLink("Back to List", "Index")
 </p>

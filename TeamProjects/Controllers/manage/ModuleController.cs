@@ -18,15 +18,21 @@ namespace TeamProjects.Controllers.manage
 
         public ActionResult Index()
         {
-            return View(db.timetable_module.ToList());
+            //TODO Change CO to logged in user
+            return View(db.timetable_module.Where(dc => dc.Department_Code == "CO"));
         }
 
         //
         // GET: /Module/Details/5
 
-        public ActionResult Details(string id = null)
+        public ActionResult Details(string moduleCode = null)
         {
-            timetable_module timetable_module = db.timetable_module.Find(id);
+            if (moduleCode == null)
+            {
+                return RedirectToAction("Index");
+            }
+            //TODO Change CO to logged in user
+            timetable_module timetable_module = db.timetable_module.Where(dc => dc.Department_Code == "CO").Where(mc => mc.Module_Code == moduleCode).First();
             if (timetable_module == null)
             {
                 return HttpNotFound();
@@ -61,9 +67,14 @@ namespace TeamProjects.Controllers.manage
         //
         // GET: /Module/Edit/5
 
-        public ActionResult Edit(string id = null)
+        public ActionResult Edit(string moduleCode = null)
         {
-            timetable_module timetable_module = db.timetable_module.Find(id);
+            if (moduleCode == null)
+            {
+                return RedirectToAction("Index");
+            }
+            //TODO Change CO to logged in user
+            timetable_module timetable_module = db.timetable_module.Where(dc => dc.Department_Code == "CO").Where(mc => mc.Module_Code == moduleCode).First();
             if (timetable_module == null)
             {
                 return HttpNotFound();
@@ -89,9 +100,14 @@ namespace TeamProjects.Controllers.manage
         //
         // GET: /Module/Delete/5
 
-        public ActionResult Delete(string id = null)
+        public ActionResult Delete(string moduleCode = null)
         {
-            timetable_module timetable_module = db.timetable_module.Find(id);
+            if (moduleCode == null)
+            {
+                return RedirectToAction("Index");
+            }
+            //TODO Change CO to logged in user
+            timetable_module timetable_module = db.timetable_module.Where(dc => dc.Department_Code == "CO").Where(mc => mc.Module_Code == moduleCode).First();
             if (timetable_module == null)
             {
                 return HttpNotFound();
@@ -103,9 +119,10 @@ namespace TeamProjects.Controllers.manage
         // POST: /Module/Delete/5
 
         [HttpPost, ActionName("Delete")]
-        public ActionResult DeleteConfirmed(string id)
+        public ActionResult DeleteConfirmed(string moduleCode)
         {
-            timetable_module timetable_module = db.timetable_module.Find(id);
+            //TODO Change CO to logged in user
+            timetable_module timetable_module = db.timetable_module.Where(dc => dc.Department_Code == "CO").Where(mc => mc.Module_Code == moduleCode).First();
             db.timetable_module.Remove(timetable_module);
             db.SaveChanges();
             return RedirectToAction("Index");

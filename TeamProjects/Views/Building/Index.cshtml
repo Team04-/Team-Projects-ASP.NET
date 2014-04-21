@@ -1,0 +1,39 @@
+﻿@model IEnumerable<TeamProjects.Models.timetable_building>
+
+@{
+    ViewBag.Title = "Buildings";
+}
+
+<h2>Buildings</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table>
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Building_ID)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Building_Name)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Building_ID)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Building_Name)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.Building_ID }) |
+            @Html.ActionLink("Details", "Details", new { id=item.Building_ID }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.Building_ID })
+        </td>
+    </tr>
+}
+
+</table>

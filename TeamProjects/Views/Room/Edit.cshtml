@@ -1,0 +1,68 @@
+﻿@model TeamProjects.Models.timetable_room
+
+@{
+    ViewBag.Title = "Edit @Model.Building_ID @Model.Room_ID";
+}
+
+<h2>Edit @Model.Building_ID @Model.Room_ID</h2>
+
+@using (Html.BeginForm())
+{
+    @Html.ValidationSummary(true)
+
+    <fieldset>
+        <legend>timetable_room</legend>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Park_ID)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Park_ID)
+            @Html.ValidationMessageFor(model => model.Park_ID)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Building_ID)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Building_ID)
+            @Html.ValidationMessageFor(model => model.Building_ID)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Room_ID)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Room_ID)
+            @Html.ValidationMessageFor(model => model.Room_ID)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Capacity)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Capacity)
+            @Html.ValidationMessageFor(model => model.Capacity)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Type_ID)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Type_ID)
+            @Html.ValidationMessageFor(model => model.Type_ID)
+        </div>
+
+        <p>
+            <input type="submit" value="Save" />
+        </p>
+    </fieldset>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

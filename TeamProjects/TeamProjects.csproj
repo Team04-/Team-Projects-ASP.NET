@@ -168,15 +168,20 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\HelpController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\manage\BuildingController.cs" />
+    <Compile Include="Controllers\manage\FacilityController.cs" />
     <Compile Include="Controllers\manage\ModuleController.cs" />
     <Compile Include="Controllers\manage\RequestController.cs" />
+    <Compile Include="Controllers\manage\RoomController.cs" />
     <Compile Include="Filters\InitializeSimpleMembershipAttribute.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\AccountModels.cs" />
     <Compile Include="Models\RequestViewModel.cs" />
+    <Compile Include="Models\RoomBuildingViewModel.cs" />
     <Compile Include="Models\timetable_building.cs">
       <DependentUpon>TimetablingDBModel.tt</DependentUpon>
     </Compile>
@@ -237,10 +242,11 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Content\chosen-sprite%402x.png" />
-    <Content Include="Content\chosen-sprite.png" />
-    <Content Include="Content\chosen.css" />
-    <Content Include="Content\chosen.min.css" />
+    <Content Include="Content\chosen\chosen-sprite%402x.png" />
+    <Content Include="Content\chosen\chosen-sprite.png" />
+    <Content Include="Content\chosen\chosen.css" />
+    <Content Include="Content\chosen\chosen.min.css" />
+    <Content Include="Content\shepherd\shepherd-theme-arrows.css" />
     <Content Include="Content\themes\base\images\ui-bg_flat_0_aaaaaa_40x100.png" />
     <Content Include="Content\themes\base\images\ui-bg_flat_75_ffffff_40x100.png" />
     <Content Include="Content\themes\base\images\ui-bg_glass_55_fbf9ee_1x400.png" />
@@ -316,6 +322,7 @@
     <Content Include="Scripts\knockout-2.1.0.debug.js" />
     <Content Include="Scripts\knockout-2.1.0.js" />
     <Content Include="Scripts\modernizr-2.5.3.js" />
+    <Content Include="Scripts\shepherd.js" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -358,6 +365,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Scripts\tours\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
@@ -387,6 +395,22 @@
     <Content Include="Views\Request\Details.cshtml" />
     <Content Include="Views\Request\Edit.cshtml" />
     <Content Include="Views\Request\Index.cshtml" />
+    <Content Include="Views\Building\Index.cshtml" />
+    <Content Include="Views\Building\Details.cshtml" />
+    <Content Include="Views\Building\Create.cshtml" />
+    <Content Include="Views\Building\Edit.cshtml" />
+    <Content Include="Views\Building\Delete.cshtml" />
+    <Content Include="Views\Facility\Index.cshtml" />
+    <Content Include="Views\Facility\Details.cshtml" />
+    <Content Include="Views\Facility\Create.cshtml" />
+    <Content Include="Views\Facility\Edit.cshtml" />
+    <Content Include="Views\Facility\Delete.cshtml" />
+    <Content Include="Views\Room\Index.cshtml" />
+    <Content Include="Views\Room\Details.cshtml" />
+    <Content Include="Views\Room\Create.cshtml" />
+    <Content Include="Views\Room\Edit.cshtml" />
+    <Content Include="Views\Room\Delete.cshtml" />
+    <Content Include="Views\Help\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />

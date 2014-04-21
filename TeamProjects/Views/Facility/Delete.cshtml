@@ -1,0 +1,32 @@
+﻿@model TeamProjects.Models.timetable_facility
+
+@{
+    ViewBag.Title = "Delete @Model.Facility_Name";
+}
+
+<h2>Delete @Model.Facility_Name</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<fieldset>
+    <legend>timetable_facility</legend>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Facility_ID)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Facility_ID)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Facility_Name)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Facility_Name)
+    </div>
+</fieldset>
+@using (Html.BeginForm()) {
+    <p>
+        <input type="submit" value="Delete" /> |
+        @Html.ActionLink("Back to List", "Index")
+    </p>
+}
