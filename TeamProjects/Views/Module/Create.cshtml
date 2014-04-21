@@ -12,13 +12,8 @@
     <fieldset>
         <legend>timetable_module</legend>
 
-        <div class="editor-label">
-            @Html.LabelFor(model => model.Department_Code)
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.Department_Code)
-            @Html.ValidationMessageFor(model => model.Department_Code)
-        </div>
+        <!--TODO Change CO to user code-->
+        <input id="Department_Code" name="Department_Code" type="hidden" value="CO" />
 
         <div class="editor-label">
             @Html.LabelFor(model => model.Part_Code)
