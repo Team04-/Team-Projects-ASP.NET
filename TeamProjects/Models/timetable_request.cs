@@ -19,24 +19,25 @@ namespace TeamProjects.Models
         public string Part_Code { get; set; }
         public string Module_Code { get; set; }
         public byte Day_ID { get; set; }
+        public int Park_ID { get; set; }
         public byte Start_Time { get; set; }
         public byte Duration { get; set; }
         public int Number_Students { get; set; }
         public byte Number_Rooms { get; set; }
-        public byte Priority { get; set; }
-        public int Room_Type { get; set; }
-        public int Park_ID { get; set; }
+        public bool Priority { get; set; }
         public string Custom_Comments { get; set; }
-        public int Current_Year { get; set; }
-        public byte Current_Semester { get; set; }
-        public byte Current_Round { get; set; }
+        public short Current_Semester { get; set; }
+        public short Current_Round { get; set; }
         public byte Request_Status { get; set; }
     
-        public virtual timetable_day timetable_day { get; set; }
         public virtual timetable_module timetable_module { get; set; }
+        public virtual timetable_park timetable_park { get; set; }
         public virtual timetable_request timetable_request1 { get; set; }
         public virtual timetable_request timetable_request2 { get; set; }
-        public virtual timetable_request_room_allocation timetable_request_room_allocation { get; set; }
         public virtual timetable_request_week timetable_request_week { get; set; }
+        public virtual timetable_request_room_allocation timetable_request_room_allocation { get; set; }
+        public virtual timetable_request timetable_request11 { get; set; }
+        public virtual timetable_request timetable_request3 { get; set; }
+        public virtual timetable_round timetable_round { get; set; }
     }
 }

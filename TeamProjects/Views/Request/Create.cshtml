@@ -94,18 +94,12 @@
 	function sendRoomPref() {
 
 		$.ajax({
+			url: '@Url.Action("GetRoomPrefCollection", "Request")',
 			type: 'POST',
-			url: '/RequestController/GetRoomPrefCollection',
-			traditional: true,
-			dataType: "json",
-			data: {
-				roomPrefCollection: roomPrefCollection
-			},
-			success: function (data) {
-				alert("success");
-			},
-			error: function (args) {
-				alert("Error on ajax post");
+			dataType: "application/json",
+			data: JSON.stringify(roomPrefCollection),
+			success: function (response) {
+				response ? alert("It worked!") : alert("It didn't work.");
 			}
 		});
 
@@ -206,7 +200,7 @@
 
         <input type="button" value="Delete Room Preference(s)" onclick="deleteRowAndPref('dataTable')" />
 
-        <table id="dataTable" width="350px" border="1">
+        <table id="dataTable" width="350" border="1">
         </table>
 
         <div id="roomChoices" class="form-group"></div>

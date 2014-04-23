@@ -24,9 +24,9 @@ namespace TeamProjects.Models
         public int Number_Rooms { get; set; }
         public bool Priority { get; set; }
         public int Room_Type { get; set; }
-        //public int Park_ID { get; set; }
+        public int Park_ID { get; set; }
         public string Custom_Comments { get; set; }
-        //public int Current_Year { get; set; }
+        public int Current_Year { get; set; }
         public byte Current_Semester { get; set; }
         public byte Current_Round { get; set; }
         public int Request_Status { get; set; }

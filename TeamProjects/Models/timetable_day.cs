@@ -14,14 +14,7 @@ namespace TeamProjects.Models
     
     public partial class timetable_day
     {
-        public timetable_day()
-        {
-            this.timetable_request = new HashSet<timetable_request>();
-        }
-    
         public byte Day_ID { get; set; }
         public string Day_Name { get; set; }
-    
-        public virtual ICollection<timetable_request> timetable_request { get; set; }
     }
 }

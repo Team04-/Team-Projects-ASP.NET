@@ -17,6 +17,7 @@ namespace TeamProjects.Models
         public timetable_round()
         {
             this.timetable_department = new HashSet<timetable_department>();
+            this.timetable_request = new HashSet<timetable_request>();
         }
     
         public short Round_Code { get; set; }
@@ -26,5 +27,6 @@ namespace TeamProjects.Models
         public System.DateTime End_Date { get; set; }
     
         public virtual ICollection<timetable_department> timetable_department { get; set; }
+        public virtual ICollection<timetable_request> timetable_request { get; set; }
     }
 }
