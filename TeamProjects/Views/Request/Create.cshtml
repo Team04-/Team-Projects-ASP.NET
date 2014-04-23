@@ -9,6 +9,14 @@
 <script>
 	var roomPrefCollection = new Array();
 
+	$(document).ready(function () {
+
+		$("#Building_ID").change(function () {
+			var newRooms = findRooms(document.getElementById('Building_ID').options[document.getElementById('Building_ID').selectedIndex].value);
+		});
+
+	});
+
 	function addRow(tableID) {
 
 		var table = document.getElementById(tableID);
@@ -89,6 +97,16 @@
 
 			alert("Room preference successfully added!");
 		}
+	}
+
+	function findRooms(buildingID) {
+		$.getJSON("~api/RoomAPI" + '/' + buildingID)
+        .done(function (data) {
+        	console.log(data);
+        })
+        .fail(function (jqXHR, textStatus, err) {
+        	console.log('Error: ' + err);
+        });
 	}
 
 	function sendRoomPref() {
@@ -181,7 +199,7 @@
 		<div class="form-group">
 			@Html.LabelFor(model => model.Building_ID, "Building", new { @class = "control-label col-md-2" })
 			<div class="col-md-10">
-				@Html.DropDownList("Building_ID", String.Empty)
+				@Html.DropDownList("Building_ID", String.Empty).
 				@Html.ValidationMessageFor(model => model.Building_ID)
 			</div>
 		</div>
