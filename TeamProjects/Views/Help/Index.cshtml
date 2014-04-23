@@ -1,7 +1,18 @@
 ﻿@{
     ViewBag.Title = "Help";
 }
-
+<script type="text/javascript">
+    function findRooms(buildingID) {
+        $.getJSON("api/RoomAPI" + '/' + id)
+        .done(function (data) {
+            console.log(data);
+        })
+        .fail(function (jqXHR, textStatus, err) {
+            console.log('Error: ' + err);
+        });
+    }
+    findRooms("CC");
+</script>
 <h2>Help</h2>
 <ul>
     <li><a href="~/Module?tour=1">Module Help</a></li>
