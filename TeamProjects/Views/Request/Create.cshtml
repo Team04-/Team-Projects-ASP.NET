@@ -100,7 +100,8 @@
 	}
 
 	function findRooms(buildingID) {
-		$.getJSON("~api/RoomAPI" + '/' + buildingID)
+
+		$.getJSON("@Url.Action("RoomAPI", "api", null, Request.Url.Scheme)" + '/' + buildingID)
         .done(function (data) {
         	console.log(data);
         })
