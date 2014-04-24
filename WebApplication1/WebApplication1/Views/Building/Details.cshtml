@@ -1,25 +1,22 @@
-﻿@model WebApplication1.Models.timetable_building
+﻿@model Team_Projects.Models.timetable_building
 
 @{
     ViewBag.Title = "Details";
 }
 
-<h2>@Model.Facility_Name Details</h2>
+<h2>Details</h2>
 
-<div>
-	<hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.Building_Name)
-        </dt>
+<fieldset>
+    <legend>timetable_building</legend>
 
-        <dd>
-            @Html.DisplayFor(model => model.Building_Name)
-        </dd>
-
-    </dl>
-</div>
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Building_Name)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Building_Name)
+    </div>
+</fieldset>
 <p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.Building_ID }) |
+    @Html.ActionLink("Edit", "Edit", new { id=Model.Building_ID }) |
     @Html.ActionLink("Back to List", "Index")
 </p>

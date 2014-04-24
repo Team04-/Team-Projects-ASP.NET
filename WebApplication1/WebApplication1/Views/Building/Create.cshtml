@@ -1,42 +1,29 @@
-﻿@model WebApplication1.Models.timetable_building
+﻿@model Team_Projects.Models.timetable_building
 
 @{
     ViewBag.Title = "Create";
 }
 
-<h2>New Building</h2>
+<h2>Create</h2>
 
+@using (Html.BeginForm()) {
+    @Html.ValidationSummary(true)
 
-@using (Html.BeginForm()) 
-{
-    @Html.AntiForgeryToken()
-    
-    <div class="form-horizontal">
-        <hr />
-        @Html.ValidationSummary(true)
+    <fieldset>
+        <legend>timetable_building</legend>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.Building_ID, new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Building_ID)
-                @Html.ValidationMessageFor(model => model.Building_ID)
-            </div>
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Building_Name)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Building_Name)
+            @Html.ValidationMessageFor(model => model.Building_Name)
         </div>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.Building_Name, new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Building_Name)
-                @Html.ValidationMessageFor(model => model.Building_Name)
-            </div>
-        </div>
-
-        <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Create" class="btn btn-default" />
-            </div>
-        </div>
-    </div>
+        <p>
+            <input type="submit" value="Create" />
+        </p>
+    </fieldset>
 }
 
 <div>

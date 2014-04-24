@@ -5,19 +5,14 @@ using System.Web;
 using System.Web.Mvc;
 using System.Web.Routing;
 
-namespace WebApplication1
+namespace Team_Projects
 {
     public class RouteConfig
     {
         public static void RegisterRoutes(RouteCollection routes)
         {
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
-            routes.MapRoute(
-                name: "Manage",
-                url: "manage/{controller}/{action}/{id}",
-                defaults: new { controller = "", action = "Index", id = UrlParameter.Optional },
-                constraints: new { controller = @"Room|Building|Facilities" }
-            );
+
             routes.MapRoute(
                 name: "Default",
                 url: "{controller}/{action}/{id}",

@@ -1,43 +1,29 @@
-﻿@using Microsoft.AspNet.Identity
-@model WebApplication1.Models.timetable_module
+﻿@model Team_Projects.Models.timetable_module
 
 @{
-    ViewBag.Title = Model.Department_Code;
-    ViewBag.Title += Model.Module_Code;
+    ViewBag.Title = "Details";
 }
 
-<h2>@(Model.Department_Code)@(Model.Module_Code) Details</h2>
+<h2>Details</h2>
 
-<div>
-	<hr />
-    <dl class="dl-horizontal">
-        <dt>
-            Module Code
-        </dt>
+<fieldset>
+    <legend>timetable_module</legend>
 
-        <dd>
-            @(Model.Department_Code)@(Model.Module_Code)
-        </dd>
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Module_Title)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Module_Title)
+    </div>
 
-        <dt>
-            Module Title
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Module_Title)
-        </dd>
-
-        <dt>
-            Active
-        </dt>
-
-        <dd>
-            @Html.Raw(Model.Active)
-        </dd>
-
-    </dl>
-</div>
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Active)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Active)
+    </div>
+</fieldset>
 <p>
-    @Html.ActionLink("Edit", "Edit", new { /* id = Model.PrimaryKey */ }) |
+    @Html.ActionLink("Edit", "Edit", new { /* id=Model.PrimaryKey */ }) |
     @Html.ActionLink("Back to List", "Index")
 </p>

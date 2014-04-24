@@ -1,64 +1,58 @@
 ﻿<!DOCTYPE html>
-<html>
-<head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@ViewBag.Title - Timetabling System</title>
-    @Styles.Render("~/Content/css")
-    @Scripts.Render("~/bundles/modernizr")
-    @Scripts.Render("~/bundles/jquery")
-    @Scripts.Render("~/bundles/bootstrap")
-    @RenderSection("scripts", required: false)
-    @RenderSection("Includes", required: false)
-</head>
-<body>
-    <div class="navbar navbar-inverse navbar-fixed-top">
-        <div class="container">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                <!--<img id="img_logo" alt="Logo" src="@Url.Content("~/Content/Images/shield_logo_alt.png")" />-->
-                @Html.ActionLink("Timetabling System", "Index", "Home", null, new { @class = "navbar-brand" })
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <title>@ViewBag.Title - My ASP.NET MVC Application</title>
+        <link href="~/favicon.ico" rel="shortcut icon" type="image/x-icon" />
+        <meta name="viewport" content="width=device-width" />
+        @Styles.Render("~/Content/css")
+        @Scripts.Render("~/bundles/modernizr")
+        <script type="text/javascript" src="~/Scripts/accessibility.js"></script>
+    </head>
+    <body>
+        <header>
+            <div class="content-wrapper">
+                <div class="float-left">
+                    <p class="site-title"><img src="~/Images/LU-mark-rgb.png" /></p>
+                </div>
+                <div class="accessibility">
+                    <a href="javascript:increaseFont();"><img src="~/images/zoom_in.png" alt="Zoom In (Increase Font Size)" /></a>
+                    <a href="javascript:decreaseFont();"><img src="~/images/zoom_out.png" alt="Zoom Out (Decrease Font Size)" /></a>
+                    <a href="javascript:resetFont();"><img src="~/images/zoom.png" alt="Reset Zoom to Defaults" /></a>
+                    <a href="javascript:negativar();"><img src="~/images/contrast.png" alt="Invert Colours" /></a>
+                </div>
+                <div class="float-right">
+                    <section id="login">
+                        @Html.Partial("_LoginPartial")
+                    </section>
+                    <nav>
+                        <ul id="menu">
+                            <li>@Html.ActionLink("Home", "Index", "Home")</li>
+                            <li>@Html.ActionLink("About", "About", "Home")</li>
+                            <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
+                            <li><a href="Module">Modules</a></li>
+                            <li><a href="Building">Buildings</a></li>
+                            <li><a href="Facility">Facilities</a></li>
+                        </ul>
+                    </nav>
+                </div>
             </div>
-            <div class="navbar-collapse collapse">
-                <ul class="nav navbar-nav">
-                    @if (Request.IsAuthenticated)
-                    {
-                        <li class="dropdown">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">Requests <b class="caret"></b></a>
-                            <ul class="dropdown-menu">
-                                <li>@Html.ActionLink("New Request", "Create", "Request")</li>
-                                <li>@Html.ActionLink("View Current Requests", "Index", "Request")</li>
-                                <li>@Html.ActionLink("View Previous Requests", "Index", "Request")</li>
-                            </ul>
-                        </li>
-                        <li class="dropdown">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">Management <b class="caret"></b></a>
-                            <ul class="dropdown-menu">
-                                <li>@Html.ActionLink("Account", "Manage", "Account")</li>
-                                <li class="divider"></li>
-                                <li>@Html.ActionLink("Modules", "Index", "Module")</li>
-                                <li class="divider"></li>
-                                <li>@Html.ActionLink("Buildings", "Index", "Building")</li>
-                                <li>@Html.ActionLink("Rooms", "Index", "Room")</li>
-                                <li>@Html.ActionLink("Facilities", "Index", "Facilities")</li>
-                            </ul>
-                        </li>
-                    }
-                </ul>
-                @Html.Partial("_LoginPartial")
-            </div>
+        </header>
+        <div id="body">
+            @RenderSection("featured", required: false)
+            <section class="content-wrapper main-content clear-fix">
+                @RenderBody()
+            </section>
         </div>
-    </div>
-    <div class="container body-content">
-        @RenderBody()
-        <hr />
         <footer>
-            <p>&copy; @DateTime.Now.Year - Timetabling System</p>
+            <div class="content-wrapper">
+                <div class="float-left">
+                    <p>&copy; @DateTime.Now.Year - My ASP.NET MVC Application</p>
+                </div>
+            </div>
         </footer>
-    </div>
-</body>
+
+        @Scripts.Render("~/bundles/jquery")
+        @RenderSection("scripts", required: false)
+    </body>
 </html>
