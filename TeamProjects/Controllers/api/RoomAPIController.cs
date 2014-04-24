@@ -10,7 +10,7 @@ using System.Web;
 using System.Web.Http;
 using TeamProjects.Models;
 
-namespace TeamProjects.Controllers.api
+namespace TeamProjects.Controllers
 {
     public class RoomAPIController : ApiController
     {
@@ -19,6 +19,7 @@ namespace TeamProjects.Controllers.api
         // GET api/RoomAPIController
         public IEnumerable<timetable_room> Gettimetable_room()
         {
+			//return Json(db.timetable_room.AsEnumerable(), JsonRequestBehavior.AllowGet);
             return db.timetable_room.AsEnumerable();
         }
 
