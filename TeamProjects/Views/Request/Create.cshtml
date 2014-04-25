@@ -13,6 +13,28 @@
 
 		$("#Building_ID").change(function () {
 			var newRooms = findRooms(document.getElementById('Building_ID').options[document.getElementById('Building_ID').selectedIndex].value);
+
+			var data = [
+				{
+					"something": "1",
+					"Room_ID": "swag"
+				},
+			{
+				"something": "2",
+				"Room_ID": "swag2"
+			}
+			];
+
+			$("#Room_ID").empty();
+
+			newRooms.forEach(function (entry) {
+				var select = document.getElementById("Room_ID");
+				var option = document.createElement('option');
+				option.text = entry.Room_ID;
+				option.value = entry.Room_ID;
+				select.add(option);
+			});
+
 		});
 
 	});
