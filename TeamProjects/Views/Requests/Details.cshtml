@@ -1,0 +1,120 @@
+﻿@model TeamProjects.Models.timetable_request
+
+@{
+    ViewBag.Title = "Details for Request @Model.Request_ID";
+}
+
+<h2>Details for Request @Model.Request_ID</h2>
+
+<fieldset>
+    <legend>timetable_request</legend>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Request_ID)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Request_ID)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Department_Code)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Department_Code)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Part_Code)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Part_Code)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Module_Code)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Module_Code)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Day_ID)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Day_ID)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Park_ID)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Park_ID)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Start_Time)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Start_Time)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Duration)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Duration)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Number_Students)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Number_Students)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Number_Rooms)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Number_Rooms)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Priority)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Priority)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Custom_Comments)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Custom_Comments)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Current_Semester)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Current_Semester)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Current_Round)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Current_Round)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Request_Status)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Request_Status)
+    </div>
+</fieldset>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { /* id=Model.PrimaryKey */ }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

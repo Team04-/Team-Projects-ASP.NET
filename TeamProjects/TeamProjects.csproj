@@ -177,6 +177,7 @@
     <Compile Include="Controllers\manage\ModuleController.cs" />
     <Compile Include="Controllers\manage\RequestController.cs" />
     <Compile Include="Controllers\manage\RoomController.cs" />
+    <Compile Include="Controllers\RequestsController.cs" />
     <Compile Include="Filters\InitializeSimpleMembershipAttribute.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -413,6 +414,11 @@
     <Content Include="Views\Room\Edit.cshtml" />
     <Content Include="Views\Room\Delete.cshtml" />
     <Content Include="Views\Help\Index.cshtml" />
+    <Content Include="Views\Requests\Index.cshtml" />
+    <Content Include="Views\Requests\Details.cshtml" />
+    <Content Include="Views\Requests\Create.cshtml" />
+    <Content Include="Views\Requests\Edit.cshtml" />
+    <Content Include="Views\Requests\Delete.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />

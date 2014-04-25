@@ -1,0 +1,117 @@
+﻿@model IEnumerable<TeamProjects.Models.timetable_request>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Requests</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table>
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Request_ID)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Department_Code)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Part_Code)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Module_Code)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Day_ID)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Park_ID)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Start_Time)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Duration)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Number_Students)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Number_Rooms)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Priority)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Custom_Comments)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Current_Semester)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Current_Round)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Request_Status)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Request_ID)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Department_Code)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Part_Code)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Module_Code)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Day_ID)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Park_ID)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Start_Time)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Duration)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Number_Students)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Number_Rooms)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Priority)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Custom_Comments)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Current_Semester)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Current_Round)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Request_Status)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
+            @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
+            @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+        </td>
+    </tr>
+}
+
+</table>
