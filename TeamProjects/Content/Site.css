@@ -8,7 +8,7 @@ body {
     background-color: #fff;
     border-top: solid 10px #000;
     color: #333;
-    font-size: .85em;
+    font-size: 100%;
     font-family: "Segoe UI", Verdana, Helvetica, Sans-Serif;
     margin: 0;
     padding: 0;
@@ -528,17 +528,23 @@ input[type="checkbox"].input-validation-error {
 /* tables
 ----------------------------------------------------------*/
 table {
-    border-collapse: collapse;
-    border-spacing: 0;
-    margin-top: 0.75em;
-    border: 0 none;
+	background-color:#F3F3F3;
+	-moz-border-radius: 0px;
+	-webkit-border-radius: 5px 5px 5px 5px;
+	border-radius: 5px 5px 5px 5px;
+	margin-bottom:12px;
 }
 
 th {
-    font-size: 1.2em;
-    text-align: left;
-    border: none 0px;
-    padding-left: 0;
+	background-color: #330066;
+	color: #FFF;
+	border-color: #330066;
+	border-style: solid;
+	border-width: thin;
+	padding: 5px;
+	-moz-border-radius: 3px;
+	-webkit-border-radius: 3px;
+	border-radius: 3px;
 }
 
     th a {
@@ -577,9 +583,14 @@ th {
         content: '▼';
     }
 
+
 td {
-    padding: 0.25em 2em 0.25em 0em;
-    border: 0 none;
+	background-color: #e8e8e8;
+	padding: 10px;
+	-moz-border-radius: 3px;
+	-webkit-border-radius: 3px;
+	border-radius: 3px;
+}
 }
 
 tr.pager td {
@@ -603,7 +614,9 @@ tr.pager td {
     header .site-title {
         margin: 10px;
         text-align: center;
+
     }
+
 
     /* login */
     #login {
@@ -754,3 +767,17 @@ tr.pager td {
             margin: 0;
         }
 }
+
+
+    /* Accessibility
+    ----------------------------------------------------------*/
+
+    .accessibility{
+    float:right;
+	padding:4px;
+	margin:3px;
+	background-color: #e8e8e8;
+	-moz-border-radius: 0px;
+	-webkit-border-radius: 7px 7px 7px 7px;
+	border-radius: 7px 7px 7px 7px;
+    }
