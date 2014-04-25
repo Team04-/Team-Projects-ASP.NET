@@ -9,10 +9,13 @@
 <script>
 	var roomPrefCollection = new Array();
 
+	
+
 	$(document).ready(function () {
 
+		$("#Room_ID").empty();
+
 		$("#Building_ID").change(function () {
-			var newRooms = findRooms(document.getElementById('Building_ID').options[document.getElementById('Building_ID').selectedIndex].value);
 
 			var data = [
 				{
@@ -27,13 +30,8 @@
 
 			$("#Room_ID").empty();
 
-			newRooms.forEach(function (entry) {
-				var select = document.getElementById("Room_ID");
-				var option = document.createElement('option');
-				option.text = entry.Room_ID;
-				option.value = entry.Room_ID;
-				select.add(option);
-			});
+			findRooms(document.getElementById('Building_ID').options[document.getElementById('Building_ID').selectedIndex].value);
+			//var newRooms = findRooms(document.getElementById('Building_ID').options[document.getElementById('Building_ID').selectedIndex].value);
 
 		});
 
@@ -123,9 +121,16 @@
 
 	function findRooms(buildingID) {
 
-		$.getJSON("@Url.Action("RoomAPI", "api", null, Request.Url.Scheme)" + '/' + buildingID)
+		$.getJSON("@Url.Action("RoomAPI", "api", null, Request.Url.Scheme)" + '?BuildingID=' + buildingID)
         .done(function (data) {
         	console.log(data);
+        	data.forEach(function (entry) {
+        		var select = document.getElementById("Room_ID");
+        		var option = document.createElement('option');
+        		option.text = entry.Room_ID;
+        		option.value = entry.Room_ID;
+        		select.add(option);
+        	});
         })
         .fail(function (jqXHR, textStatus, err) {
         	console.log('Error: ' + err);
