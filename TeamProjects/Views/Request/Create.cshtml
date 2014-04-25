@@ -9,30 +9,17 @@
 <script>
 	var roomPrefCollection = new Array();
 
-	
+
 
 	$(document).ready(function () {
-        Park_ID[1].id = "Park_ID2";
-        Park_ID2.name = "Park_ID2";
+
 		$("#Room_ID").empty();
 
 		$("#Building_ID").change(function () {
 
-			var data = [
-				{
-					"something": "1",
-					"Room_ID": "swag"
-				},
-			{
-				"something": "2",
-				"Room_ID": "swag2"
-			}
-			];
-
 			$("#Room_ID").empty();
 
 			findRooms(document.getElementById('Building_ID').options[document.getElementById('Building_ID').selectedIndex].value);
-			//var newRooms = findRooms(document.getElementById('Building_ID').options[document.getElementById('Building_ID').selectedIndex].value);
 
 		});
 
@@ -88,8 +75,8 @@
 
 	function addRoomPref() {
 
-		if (document.getElementById('Room_ID').value == "" || document.getElementById('Building_ID').value == "" || document.getElementById('Park_ID').value == "" || document.getElementById('Room_Type').value == "" || document.getElementById('Room_Type').value == "") {
-			alert("Please fill in all room preference fields before attempting to add a new preference.")
+		if (document.getElementById('Room_ID').value == "" || document.getElementById('Building_ID').value == "") {
+			alert("Please fill in both Building and Room fields before attempting to add a new preference.")
 		}
 
 		else if (roomPrefCollection.length > 2) {
@@ -141,15 +128,23 @@
 	function sendRoomPref() {
 
 		$.ajax({
-			url: '@Url.Action("GetRoomPrefCollection", "Request")',
-			type: 'POST',
-			dataType: "application/json",
-			data: JSON.stringify(roomPrefCollection),
-			success: function (response) {
-				response ? alert("It worked!") : alert("It didn't work.");
+			type: "POST",
+			cache: false,
+			url: "/Request/GetRoomPrefCollection",
+			//dataType: "json",
+			contentType: "application/x-www-form-urlencoded",
+			dataType: "html",
+			//traditional: true,
+			data: {
+				roomPrefCollection: JSON.stringify(roomPrefCollection)
 			}
-		});
-
+		})
+			.done(function (data) {
+				console.log('WOOT: ' + data);
+			})
+			.fail(function (jqXHR, textStatus, err) {
+				console.log('Error: ' + err);
+			});
 	}
 
 </script>
@@ -208,27 +203,19 @@
         </div>
 
 		<div class="form-group">
-			@Html.LabelFor(model => model.Park_ID, "Park", new { @class = "control-label col-md-2" })
+			@Html.LabelFor(model => model.Park_ID, "Park Preference", new { @class = "control-label col-md-2" })
 			<div class="col-md-10">
 				@Html.DropDownList("Park_ID", String.Empty)
 				@Html.ValidationMessageFor(model => model.Park_ID)
 			</div>
 		</div>
 
-        <div class="form-group">---</div>
+        <div class="form-group">--Individual Room Preferences--</div>
 
             <div class="form-group">
-                @Html.LabelFor(model => model.Room_Type, "Room Type", new { @class = "control-label col-md-2" })
+                @Html.LabelFor(model => model.Park_ID, "Filter by Park", new { @class = "control-label col-md-2" })
                 <div class="col-md-10">
-                    @Html.DropDownList("Room_Type", String.Empty)
-                    @Html.ValidationMessageFor(model => model.Room_Type)
-                </div>
-            </div>
-
-            <div class="form-group">
-                @Html.LabelFor(model => model.Park_ID, "Park", new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
-                    @Html.DropDownList("Park_ID", String.Empty)
+                    @Html.DropDownList("Park_ID2", (SelectList) ViewBag.Park_ID, String.Empty)
                     @Html.ValidationMessageFor(model => model.Park_ID)
                 </div>
             </div>
@@ -238,6 +225,14 @@
 			<div class="col-md-10">
 				@Html.DropDownList("Building_ID", String.Empty).
 				@Html.ValidationMessageFor(model => model.Building_ID)
+			</div>
+		</div>
+
+		<div class="form-group">
+			@Html.LabelFor(model => model.Room_Type, "Filter by Room Type", new { @class = "control-label col-md-2" })
+			<div class="col-md-10">
+				@Html.DropDownList("Room_Type", String.Empty)
+				@Html.ValidationMessageFor(model => model.Room_Type)
 			</div>
 		</div>
 
