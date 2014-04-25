@@ -20,13 +20,17 @@ namespace TeamProjects.Controllers
         public IEnumerable<timetable_room> Gettimetable_room()
         {
 			//return Json(db.timetable_room.AsEnumerable(), JsonRequestBehavior.AllowGet);
-            return db.timetable_room.AsEnumerable();
+			return db.timetable_room;
         }
 
         // GET api/RoomAPIController/5
         public IEnumerable<timetable_room> Gettimetable_room(string BuildingID)
         {
-            var timetable_room = db.timetable_room.Where(bc => bc.Building_ID == BuildingID).AsEnumerable();
+
+			var timetable_room = from m in db.timetable_room select m;
+			timetable_room = timetable_room.Where(e => e.Building_ID.Equals(BuildingID));
+
+            //var timetable_room = db.timetable_room.Include(e => e.Room_ID).Where(e => e.Building_ID == BuildingID).AsEnumerable();
             if (timetable_room == null)
             {
                 throw new HttpResponseException(Request.CreateResponse(HttpStatusCode.NotFound));
