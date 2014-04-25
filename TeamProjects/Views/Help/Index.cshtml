@@ -3,7 +3,7 @@
 }
 <script type="text/javascript">
     function findRooms(buildingID) {
-        $.getJSON("api/RoomAPI" + '/' + buildingID)
+        $.getJSON("api/RoomAPI" + '?BuildingID=' + buildingID)
         .done(function (data) {
             console.log(data);
         })
