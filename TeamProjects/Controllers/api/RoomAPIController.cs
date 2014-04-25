@@ -26,7 +26,7 @@ namespace TeamProjects.Controllers
         // GET api/RoomAPIController/5
         public IEnumerable<timetable_room> Gettimetable_room(string BuildingID)
         {
-            IEnumerable<timetable_room> timetable_room = db.timetable_room.Where(bc => bc.Building_ID == BuildingID);
+            var timetable_room = db.timetable_room.Where(bc => bc.Building_ID == BuildingID).AsEnumerable();
             if (timetable_room == null)
             {
                 throw new HttpResponseException(Request.CreateResponse(HttpStatusCode.NotFound));
