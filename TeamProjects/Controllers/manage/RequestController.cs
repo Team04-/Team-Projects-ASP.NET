@@ -13,6 +13,7 @@ namespace TeamProjects.Controllers.manage
     {
         private team04Entities db = new team04Entities();
 
+
         // GET: /Request/
         public ActionResult Index()
         {
@@ -50,9 +51,17 @@ namespace TeamProjects.Controllers.manage
             return View();
         }
 
-		public bool GetRoomPrefCollection(string[][] roomPrefColl)
+		public bool GetRoomPrefCollection(string roomPrefColl)
 		{
-			return roomPrefColl != null;
+			if (roomPrefColl != null)
+			{
+				return true;
+			}
+
+			else {
+				return false;
+			}
+			
 		}
 
         // POST: /Request/Create

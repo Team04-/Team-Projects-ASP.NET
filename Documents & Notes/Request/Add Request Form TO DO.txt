@@ -1,0 +1,11 @@
+// TO DO
+
+- Filter by Park
+- Filter by Room Type
+- JS Room Pref Array to POST
+- POST action
+
+- Add Dept from login
+- Add available module codes
+
+- Redesign
