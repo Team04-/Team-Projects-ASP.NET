@@ -59,7 +59,6 @@
         <MappingFragment StoreEntitySet="timetable_request">
           <ScalarProperty Name="Request_Status" ColumnName="Request_Status" />
           <ScalarProperty Name="Current_Round" ColumnName="Current_Round" />
-          <ScalarProperty Name="Current_Semester" ColumnName="Current_Semester" />
           <ScalarProperty Name="Custom_Comments" ColumnName="Custom_Comments" />
           <ScalarProperty Name="Priority" ColumnName="Priority" />
           <ScalarProperty Name="Number_Rooms" ColumnName="Number_Rooms" />
@@ -87,7 +86,6 @@
     <EntitySetMapping Name="timetable_request_room_allocation">
       <EntityTypeMapping TypeName="team04Model.timetable_request_room_allocation">
         <MappingFragment StoreEntitySet="timetable_request_room_allocation">
-          <ScalarProperty Name="Park_ID" ColumnName="Park_ID" />
           <ScalarProperty Name="Room_ID" ColumnName="Room_ID" />
           <ScalarProperty Name="Building_ID" ColumnName="Building_ID" />
           <ScalarProperty Name="Request_ID" ColumnName="Request_ID" />

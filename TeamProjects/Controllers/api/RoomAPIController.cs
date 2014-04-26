@@ -30,7 +30,6 @@ namespace TeamProjects.Controllers
 			var timetable_room = from m in db.timetable_room select m;
 			timetable_room = timetable_room.Where(e => e.Building_ID.Equals(BuildingID));
 
-            //var timetable_room = db.timetable_room.Include(e => e.Room_ID).Where(e => e.Building_ID == BuildingID).AsEnumerable();
             if (timetable_room == null)
             {
                 throw new HttpResponseException(Request.CreateResponse(HttpStatusCode.NotFound));

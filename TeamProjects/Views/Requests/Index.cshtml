@@ -2,6 +2,7 @@
 
 @{
     ViewBag.Title = "Index";
+    string department = "CO";
 }
 
 <h2>Requests</h2>
@@ -12,49 +13,40 @@
 <table>
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.Request_ID)
+            Part Code
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Department_Code)
+            Module Code
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Part_Code)
+            Day
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Module_Code)
+            Park
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Day_ID)
+            Start Time
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Park_ID)
+            Duration
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Start_Time)
+            Students
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Duration)
+            Rooms
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Number_Students)
+            Priority
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Number_Rooms)
+            Comments
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Priority)
+            Round
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Custom_Comments)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Current_Semester)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Current_Round)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Request_Status)
+            Status
         </th>
         <th></th>
     </tr>
@@ -62,16 +54,10 @@
 @foreach (var item in Model) {
     <tr>
         <td>
-            @Html.DisplayFor(modelItem => item.Request_ID)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Department_Code)
-        </td>
-        <td>
             @Html.DisplayFor(modelItem => item.Part_Code)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.Module_Code)
+            @Html.Raw(department)@Html.DisplayFor(modelItem => item.Module_Code)
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.Day_ID)
@@ -98,18 +84,15 @@
             @Html.DisplayFor(modelItem => item.Custom_Comments)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.Current_Semester)
-        </td>
-        <td>
             @Html.DisplayFor(modelItem => item.Current_Round)
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.Request_Status)
         </td>
         <td>
-            @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
-            @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
-            @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+            @Html.ActionLink("Edit", "Edit", new { id = item.Request_ID }) |
+            @Html.ActionLink("Details", "Details", new { id=item.Request_ID }) |
+            @Html.ActionLink("Delete", "Delete", new { id = item.Request_ID })
         </td>
     </tr>
 }

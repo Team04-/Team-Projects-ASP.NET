@@ -17,7 +17,6 @@ namespace TeamProjects.Models
         public short Request_ID { get; set; }
         public string Building_ID { get; set; }
         public string Room_ID { get; set; }
-        public int Park_ID { get; set; }
     
         public virtual timetable_request timetable_request { get; set; }
         public virtual timetable_request_room_allocation timetable_request_room_allocation1 { get; set; }

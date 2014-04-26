@@ -26,7 +26,6 @@ namespace TeamProjects.Models
         public byte Number_Rooms { get; set; }
         public bool Priority { get; set; }
         public string Custom_Comments { get; set; }
-        public short Current_Semester { get; set; }
         public short Current_Round { get; set; }
         public byte Request_Status { get; set; }
     

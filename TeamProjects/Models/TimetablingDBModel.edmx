@@ -4,27 +4,99 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-    <Schema Namespace="team04Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/02/edm/ssdl">
+    <Schema Namespace="team04Model.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/02/edm/ssdl">
+        <EntityContainer Name="team04ModelStoreContainer">
+          <EntitySet Name="timetable_building" EntityType="team04Model.Store.timetable_building" store:Type="Tables" Schema="team04" />
+          <EntitySet Name="timetable_day" EntityType="team04Model.Store.timetable_day" store:Type="Tables" Schema="team04" />
+          <EntitySet Name="timetable_department" EntityType="team04Model.Store.timetable_department" store:Type="Tables" Schema="team04" />
+          <EntitySet Name="timetable_facility" EntityType="team04Model.Store.timetable_facility" store:Type="Tables" Schema="team04" />
+          <EntitySet Name="timetable_module" EntityType="team04Model.Store.timetable_module" store:Type="Tables" Schema="team04" />
+          <EntitySet Name="timetable_park" EntityType="team04Model.Store.timetable_park" store:Type="Tables" Schema="team04" />
+          <EntitySet Name="timetable_request" EntityType="team04Model.Store.timetable_request" store:Type="Tables" Schema="team04" />
+          <EntitySet Name="timetable_request_facility" EntityType="team04Model.Store.timetable_request_facility" store:Type="Tables" Schema="team04" />
+          <EntitySet Name="timetable_request_room_allocation" EntityType="team04Model.Store.timetable_request_room_allocation" store:Type="Tables" Schema="team04" />
+          <EntitySet Name="timetable_request_week" EntityType="team04Model.Store.timetable_request_week" store:Type="Tables" Schema="team04" />
+          <EntitySet Name="timetable_room" EntityType="team04Model.Store.timetable_room" store:Type="Tables" Schema="team04" />
+          <EntitySet Name="timetable_room_facility" EntityType="team04Model.Store.timetable_room_facility" store:Type="Tables" Schema="team04" />
+          <EntitySet Name="timetable_room_type" EntityType="team04Model.Store.timetable_room_type" store:Type="Tables" Schema="team04" />
+          <EntitySet Name="timetable_round" EntityType="team04Model.Store.timetable_round" store:Type="Tables" Schema="team04" />
+          <AssociationSet Name="FK_timetable_department_timetable_round" Association="team04Model.Store.FK_timetable_department_timetable_round">
+            <End Role="timetable_round" EntitySet="timetable_round" />
+            <End Role="timetable_department" EntitySet="timetable_department" />
+          </AssociationSet>
+          <AssociationSet Name="FK_timetable_request_facility_timetable_facility" Association="team04Model.Store.FK_timetable_request_facility_timetable_facility">
+            <End Role="timetable_facility" EntitySet="timetable_facility" />
+            <End Role="timetable_request_facility" EntitySet="timetable_request_facility" />
+          </AssociationSet>
+          <AssociationSet Name="FK_timetable_request_facility_timetable_request_facility" Association="team04Model.Store.FK_timetable_request_facility_timetable_request_facility">
+            <End Role="timetable_request_facility" EntitySet="timetable_request_facility" />
+            <End Role="timetable_request_facility1" EntitySet="timetable_request_facility" />
+          </AssociationSet>
+          <AssociationSet Name="FK_timetable_request_room_allocation_timetable_request_room_allocation" Association="team04Model.Store.FK_timetable_request_room_allocation_timetable_request_room_allocation">
+            <End Role="timetable_room" EntitySet="timetable_room" />
+            <End Role="timetable_request_room_allocation" EntitySet="timetable_request_room_allocation" />
+          </AssociationSet>
+          <AssociationSet Name="FK_timetable_request_room_allocation_timetable_room" Association="team04Model.Store.FK_timetable_request_room_allocation_timetable_room">
+            <End Role="timetable_room" EntitySet="timetable_room" />
+            <End Role="timetable_request_room_allocation" EntitySet="timetable_request_room_allocation" />
+          </AssociationSet>
+          <AssociationSet Name="FK_timetable_request_timetable_module" Association="team04Model.Store.FK_timetable_request_timetable_module">
+            <End Role="timetable_module" EntitySet="timetable_module" />
+            <End Role="timetable_request" EntitySet="timetable_request" />
+          </AssociationSet>
+          <AssociationSet Name="FK_timetable_request_timetable_park" Association="team04Model.Store.FK_timetable_request_timetable_park">
+            <End Role="timetable_park" EntitySet="timetable_park" />
+            <End Role="timetable_request" EntitySet="timetable_request" />
+          </AssociationSet>
+          <AssociationSet Name="FK_timetable_request_timetable_request" Association="team04Model.Store.FK_timetable_request_timetable_request">
+            <End Role="timetable_request" EntitySet="timetable_request" />
+            <End Role="timetable_request1" EntitySet="timetable_request" />
+          </AssociationSet>
+          <AssociationSet Name="FK_timetable_request_timetable_request_room_allocation" Association="team04Model.Store.FK_timetable_request_timetable_request_room_allocation">
+            <End Role="timetable_request_room_allocation" EntitySet="timetable_request_room_allocation" />
+            <End Role="timetable_request" EntitySet="timetable_request" />
+          </AssociationSet>
+          <AssociationSet Name="FK_timetable_request_timetable_request_week" Association="team04Model.Store.FK_timetable_request_timetable_request_week">
+            <End Role="timetable_request_week" EntitySet="timetable_request_week" />
+            <End Role="timetable_request" EntitySet="timetable_request" />
+          </AssociationSet>
+          <AssociationSet Name="FK_timetable_request_timetable_request2" Association="team04Model.Store.FK_timetable_request_timetable_request2">
+            <End Role="timetable_request" EntitySet="timetable_request" />
+            <End Role="timetable_request1" EntitySet="timetable_request" />
+          </AssociationSet>
+          <AssociationSet Name="FK_timetable_request_timetable_round" Association="team04Model.Store.FK_timetable_request_timetable_round">
+            <End Role="timetable_round" EntitySet="timetable_round" />
+            <End Role="timetable_request" EntitySet="timetable_request" />
+          </AssociationSet>
+          <AssociationSet Name="FK_timetable_room_timetable_room" Association="team04Model.Store.FK_timetable_room_timetable_room">
+            <End Role="timetable_room" EntitySet="timetable_room" />
+            <End Role="timetable_room1" EntitySet="timetable_room" />
+          </AssociationSet>
+          <AssociationSet Name="FK_timetable_room_timetable_room_type" Association="team04Model.Store.FK_timetable_room_timetable_room_type">
+            <End Role="timetable_room_type" EntitySet="timetable_room_type" />
+            <End Role="timetable_room" EntitySet="timetable_room" />
+          </AssociationSet>
+        </EntityContainer>
         <EntityType Name="timetable_building">
           <Key>
             <PropertyRef Name="Building_ID" />
           </Key>
-          <Property Name="Building_ID" Type="varchar" MaxLength="5" Nullable="false" />
-          <Property Name="Building_Name" Type="varchar" MaxLength="60" Nullable="false" />
+          <Property Name="Building_ID" Type="varchar" Nullable="false" MaxLength="5" />
+          <Property Name="Building_Name" Type="varchar" Nullable="false" MaxLength="60" />
         </EntityType>
         <EntityType Name="timetable_day">
           <Key>
             <PropertyRef Name="Day_ID" />
           </Key>
           <Property Name="Day_ID" Type="tinyint" Nullable="false" />
-          <Property Name="Day_Name" Type="varchar" MaxLength="9" Nullable="false" />
+          <Property Name="Day_Name" Type="varchar" Nullable="false" MaxLength="9" />
         </EntityType>
         <EntityType Name="timetable_department">
           <Key>
             <PropertyRef Name="Department_Code" />
           </Key>
           <Property Name="Department_ID" Type="int" Nullable="false" />
-          <Property Name="Department_Code" Type="varchar" MaxLength="2" Nullable="false" />
+          <Property Name="Department_Code" Type="varchar" Nullable="false" MaxLength="2" />
           <Property Name="Department_Name" Type="varchar" MaxLength="50" />
           <Property Name="Current_Round" Type="smallint" Nullable="false" />
         </EntityType>
@@ -41,10 +113,10 @@
             <PropertyRef Name="Part_Code" />
             <PropertyRef Name="Module_Code" />
           </Key>
-          <Property Name="Department_Code" Type="varchar" MaxLength="2" Nullable="false" />
-          <Property Name="Part_Code" Type="varchar" MaxLength="1" Nullable="false" />
-          <Property Name="Module_Code" Type="varchar" MaxLength="3" Nullable="false" />
-          <Property Name="Module_Title" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Department_Code" Type="varchar" Nullable="false" MaxLength="2" />
+          <Property Name="Part_Code" Type="varchar" Nullable="false" MaxLength="1" />
+          <Property Name="Module_Code" Type="varchar" Nullable="false" MaxLength="3" />
+          <Property Name="Module_Title" Type="varchar" Nullable="false" MaxLength="50" />
           <Property Name="Active" Type="bit" Nullable="false" />
         </EntityType>
         <EntityType Name="timetable_park">
@@ -52,16 +124,16 @@
             <PropertyRef Name="Park_ID" />
           </Key>
           <Property Name="Park_ID" Type="int" Nullable="false" />
-          <Property Name="Park_Name" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Park_Name" Type="varchar" Nullable="false" MaxLength="50" />
         </EntityType>
         <EntityType Name="timetable_request">
           <Key>
             <PropertyRef Name="Request_ID" />
           </Key>
-          <Property Name="Request_ID" Type="smallint" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="Department_Code" Type="varchar" MaxLength="2" Nullable="false" />
-          <Property Name="Part_Code" Type="varchar" MaxLength="1" Nullable="false" />
-          <Property Name="Module_Code" Type="varchar" MaxLength="3" Nullable="false" />
+          <Property Name="Request_ID" Type="smallint" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Department_Code" Type="varchar" Nullable="false" MaxLength="2" />
+          <Property Name="Part_Code" Type="varchar" Nullable="false" MaxLength="1" />
+          <Property Name="Module_Code" Type="varchar" Nullable="false" MaxLength="3" />
           <Property Name="Day_ID" Type="tinyint" Nullable="false" />
           <Property Name="Park_ID" Type="int" Nullable="false" />
           <Property Name="Start_Time" Type="tinyint" Nullable="false" />
@@ -69,8 +141,7 @@
           <Property Name="Number_Students" Type="int" Nullable="false" />
           <Property Name="Number_Rooms" Type="tinyint" Nullable="false" />
           <Property Name="Priority" Type="bit" Nullable="false" />
-          <Property Name="Custom_Comments" Type="text" Nullable="false" />
-          <Property Name="Current_Semester" Type="smallint" Nullable="false" />
+          <Property Name="Custom_Comments" Type="text" />
           <Property Name="Current_Round" Type="smallint" Nullable="false" />
           <Property Name="Request_Status" Type="tinyint" Nullable="false" />
         </EntityType>
@@ -79,7 +150,7 @@
             <PropertyRef Name="Request_ID" />
             <PropertyRef Name="Facility_ID" />
           </Key>
-          <Property Name="Request_ID" Type="smallint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Request_ID" Type="smallint" Nullable="false" StoreGeneratedPattern="Identity" />
           <Property Name="Facility_ID" Type="tinyint" Nullable="false" />
           <Property Name="Quantity" Type="tinyint" Nullable="false" />
         </EntityType>
@@ -87,16 +158,15 @@
           <Key>
             <PropertyRef Name="Request_ID" />
           </Key>
-          <Property Name="Request_ID" Type="smallint" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="Building_ID" Type="varchar" MaxLength="5" Nullable="false" />
-          <Property Name="Room_ID" Type="varchar" MaxLength="5" Nullable="false" />
-          <Property Name="Park_ID" Type="int" Nullable="false" />
+          <Property Name="Request_ID" Type="smallint" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Building_ID" Type="varchar" Nullable="false" MaxLength="5" />
+          <Property Name="Room_ID" Type="varchar" Nullable="false" MaxLength="5" />
         </EntityType>
         <EntityType Name="timetable_request_week">
           <Key>
             <PropertyRef Name="Request_ID" />
           </Key>
-          <Property Name="Request_ID" Type="smallint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Request_ID" Type="smallint" Nullable="false" StoreGeneratedPattern="Identity" />
           <Property Name="Week" Type="tinyint" Nullable="false" />
         </EntityType>
         <EntityType Name="timetable_room">
@@ -105,8 +175,8 @@
             <PropertyRef Name="Room_ID" />
           </Key>
           <Property Name="Park_ID" Type="int" />
-          <Property Name="Building_ID" Type="varchar" MaxLength="5" Nullable="false" />
-          <Property Name="Room_ID" Type="varchar" MaxLength="5" Nullable="false" />
+          <Property Name="Building_ID" Type="varchar" Nullable="false" MaxLength="5" />
+          <Property Name="Room_ID" Type="varchar" Nullable="false" MaxLength="5" />
           <Property Name="Capacity" Type="int" />
           <Property Name="Type_ID" Type="tinyint" Nullable="false" />
         </EntityType>
@@ -116,8 +186,8 @@
             <PropertyRef Name="Room_ID" />
             <PropertyRef Name="Facility_ID" />
           </Key>
-          <Property Name="Building_ID" Type="varchar" MaxLength="5" Nullable="false" />
-          <Property Name="Room_ID" Type="varchar" MaxLength="5" Nullable="false" />
+          <Property Name="Building_ID" Type="varchar" Nullable="false" MaxLength="5" />
+          <Property Name="Room_ID" Type="varchar" Nullable="false" MaxLength="5" />
           <Property Name="Facility_ID" Type="int" Nullable="false" />
           <Property Name="Quantity" Type="int" Nullable="false" />
         </EntityType>
@@ -126,21 +196,21 @@
             <PropertyRef Name="Type_ID" />
           </Key>
           <Property Name="Type_ID" Type="tinyint" Nullable="false" />
-          <Property Name="Type_Name" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="Type_Name" Type="varchar" Nullable="false" MaxLength="10" />
         </EntityType>
         <EntityType Name="timetable_round">
           <Key>
             <PropertyRef Name="Round_Code" />
           </Key>
           <Property Name="Round_Code" Type="smallint" Nullable="false" />
-          <Property Name="Round_Status" Type="varchar" MaxLength="15" Nullable="false" />
+          <Property Name="Round_Status" Type="varchar" Nullable="false" MaxLength="15" />
           <Property Name="Semester" Type="smallint" Nullable="false" />
           <Property Name="Start_Date" Type="date" Nullable="false" />
           <Property Name="End_Date" Type="date" Nullable="false" />
         </EntityType>
         <Association Name="FK_timetable_department_timetable_round">
-          <End Role="timetable_round" Type="Self.timetable_round" Multiplicity="1" />
-          <End Role="timetable_department" Type="Self.timetable_department" Multiplicity="*" />
+          <End Role="timetable_round" Type="team04Model.Store.timetable_round" Multiplicity="1" />
+          <End Role="timetable_department" Type="team04Model.Store.timetable_department" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="timetable_round">
               <PropertyRef Name="Round_Code" />
@@ -151,8 +221,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_timetable_request_facility_timetable_facility">
-          <End Role="timetable_facility" Type="Self.timetable_facility" Multiplicity="1" />
-          <End Role="timetable_request_facility" Type="Self.timetable_request_facility" Multiplicity="*" />
+          <End Role="timetable_facility" Type="team04Model.Store.timetable_facility" Multiplicity="1" />
+          <End Role="timetable_request_facility" Type="team04Model.Store.timetable_request_facility" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="timetable_facility">
               <PropertyRef Name="Facility_ID" />
@@ -162,21 +232,37 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_timetable_request_room_allocation_timetable_request_room_allocation">
-          <End Role="timetable_request_room_allocation" Type="Self.timetable_request_room_allocation" Multiplicity="1" />
-          <End Role="timetable_request_room_allocation1" Type="Self.timetable_request_room_allocation" Multiplicity="0..1" />
+        <Association Name="FK_timetable_request_facility_timetable_request_facility">
+          <End Role="timetable_request_facility" Type="team04Model.Store.timetable_request_facility" Multiplicity="1" />
+          <End Role="timetable_request_facility1" Type="team04Model.Store.timetable_request_facility" Multiplicity="0..1" />
           <ReferentialConstraint>
-            <Principal Role="timetable_request_room_allocation">
+            <Principal Role="timetable_request_facility">
               <PropertyRef Name="Request_ID" />
+              <PropertyRef Name="Facility_ID" />
             </Principal>
-            <Dependent Role="timetable_request_room_allocation1">
+            <Dependent Role="timetable_request_facility1">
               <PropertyRef Name="Request_ID" />
+              <PropertyRef Name="Facility_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_timetable_request_room_allocation_timetable_request_room_allocation">
+          <End Role="timetable_room" Type="team04Model.Store.timetable_room" Multiplicity="1" />
+          <End Role="timetable_request_room_allocation" Type="team04Model.Store.timetable_request_room_allocation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="timetable_room">
+              <PropertyRef Name="Building_ID" />
+              <PropertyRef Name="Room_ID" />
+            </Principal>
+            <Dependent Role="timetable_request_room_allocation">
+              <PropertyRef Name="Building_ID" />
+              <PropertyRef Name="Room_ID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_timetable_request_room_allocation_timetable_room">
-          <End Role="timetable_room" Type="Self.timetable_room" Multiplicity="1" />
-          <End Role="timetable_request_room_allocation" Type="Self.timetable_request_room_allocation" Multiplicity="*" />
+          <End Role="timetable_room" Type="team04Model.Store.timetable_room" Multiplicity="1" />
+          <End Role="timetable_request_room_allocation" Type="team04Model.Store.timetable_request_room_allocation" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="timetable_room">
               <PropertyRef Name="Building_ID" />
@@ -189,8 +275,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_timetable_request_timetable_module">
-          <End Role="timetable_module" Type="Self.timetable_module" Multiplicity="1" />
-          <End Role="timetable_request" Type="Self.timetable_request" Multiplicity="*" />
+          <End Role="timetable_module" Type="team04Model.Store.timetable_module" Multiplicity="1" />
+          <End Role="timetable_request" Type="team04Model.Store.timetable_request" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="timetable_module">
               <PropertyRef Name="Department_Code" />
@@ -205,8 +291,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_timetable_request_timetable_park">
-          <End Role="timetable_park" Type="Self.timetable_park" Multiplicity="1" />
-          <End Role="timetable_request" Type="Self.timetable_request" Multiplicity="*" />
+          <End Role="timetable_park" Type="team04Model.Store.timetable_park" Multiplicity="1" />
+          <End Role="timetable_request" Type="team04Model.Store.timetable_request" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="timetable_park">
               <PropertyRef Name="Park_ID" />
@@ -217,8 +303,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_timetable_request_timetable_request">
-          <End Role="timetable_request" Type="Self.timetable_request" Multiplicity="1" />
-          <End Role="timetable_request1" Type="Self.timetable_request" Multiplicity="0..1" />
+          <End Role="timetable_request" Type="team04Model.Store.timetable_request" Multiplicity="1" />
+          <End Role="timetable_request1" Type="team04Model.Store.timetable_request" Multiplicity="0..1" />
           <ReferentialConstraint>
             <Principal Role="timetable_request">
               <PropertyRef Name="Request_ID" />
@@ -228,21 +314,9 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_timetable_request_timetable_request_week">
-          <End Role="timetable_request_week" Type="Self.timetable_request_week" Multiplicity="1" />
-          <End Role="timetable_request" Type="Self.timetable_request" Multiplicity="0..1" />
-          <ReferentialConstraint>
-            <Principal Role="timetable_request_week">
-              <PropertyRef Name="Request_ID" />
-            </Principal>
-            <Dependent Role="timetable_request">
-              <PropertyRef Name="Request_ID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_timetable_request_timetable_request1">
-          <End Role="timetable_request_room_allocation" Type="Self.timetable_request_room_allocation" Multiplicity="1" />
-          <End Role="timetable_request" Type="Self.timetable_request" Multiplicity="0..1" />
+        <Association Name="FK_timetable_request_timetable_request_room_allocation">
+          <End Role="timetable_request_room_allocation" Type="team04Model.Store.timetable_request_room_allocation" Multiplicity="1" />
+          <End Role="timetable_request" Type="team04Model.Store.timetable_request" Multiplicity="0..1" />
           <ReferentialConstraint>
             <Principal Role="timetable_request_room_allocation">
               <PropertyRef Name="Request_ID" />
@@ -252,9 +326,21 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_timetable_request_timetable_request_week">
+          <End Role="timetable_request_week" Type="team04Model.Store.timetable_request_week" Multiplicity="1" />
+          <End Role="timetable_request" Type="team04Model.Store.timetable_request" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="timetable_request_week">
+              <PropertyRef Name="Request_ID" />
+            </Principal>
+            <Dependent Role="timetable_request">
+              <PropertyRef Name="Request_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_timetable_request_timetable_request2">
-          <End Role="timetable_request" Type="Self.timetable_request" Multiplicity="1" />
-          <End Role="timetable_request1" Type="Self.timetable_request" Multiplicity="0..1" />
+          <End Role="timetable_request" Type="team04Model.Store.timetable_request" Multiplicity="1" />
+          <End Role="timetable_request1" Type="team04Model.Store.timetable_request" Multiplicity="0..1" />
           <ReferentialConstraint>
             <Principal Role="timetable_request">
               <PropertyRef Name="Request_ID" />
@@ -265,8 +351,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_timetable_request_timetable_round">
-          <End Role="timetable_round" Type="Self.timetable_round" Multiplicity="1" />
-          <End Role="timetable_request" Type="Self.timetable_request" Multiplicity="*" />
+          <End Role="timetable_round" Type="team04Model.Store.timetable_round" Multiplicity="1" />
+          <End Role="timetable_request" Type="team04Model.Store.timetable_request" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="timetable_round">
               <PropertyRef Name="Round_Code" />
@@ -277,8 +363,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_timetable_room_timetable_room">
-          <End Role="timetable_room" Type="Self.timetable_room" Multiplicity="1" />
-          <End Role="timetable_room1" Type="Self.timetable_room" Multiplicity="0..1" />
+          <End Role="timetable_room" Type="team04Model.Store.timetable_room" Multiplicity="1" />
+          <End Role="timetable_room1" Type="team04Model.Store.timetable_room" Multiplicity="0..1" />
           <ReferentialConstraint>
             <Principal Role="timetable_room">
               <PropertyRef Name="Building_ID" />
@@ -291,8 +377,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_timetable_room_timetable_room_type">
-          <End Role="timetable_room_type" Type="Self.timetable_room_type" Multiplicity="1" />
-          <End Role="timetable_room" Type="Self.timetable_room" Multiplicity="*" />
+          <End Role="timetable_room_type" Type="team04Model.Store.timetable_room_type" Multiplicity="1" />
+          <End Role="timetable_room" Type="team04Model.Store.timetable_room" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="timetable_room_type">
               <PropertyRef Name="Type_ID" />
@@ -302,74 +388,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="team04ModelStoreContainer">
-          <EntitySet Name="timetable_building" EntityType="Self.timetable_building" Schema="team04" store:Type="Tables" />
-          <EntitySet Name="timetable_day" EntityType="Self.timetable_day" Schema="team04" store:Type="Tables" />
-          <EntitySet Name="timetable_department" EntityType="Self.timetable_department" Schema="team04" store:Type="Tables" />
-          <EntitySet Name="timetable_facility" EntityType="Self.timetable_facility" Schema="team04" store:Type="Tables" />
-          <EntitySet Name="timetable_module" EntityType="Self.timetable_module" Schema="team04" store:Type="Tables" />
-          <EntitySet Name="timetable_park" EntityType="Self.timetable_park" Schema="team04" store:Type="Tables" />
-          <EntitySet Name="timetable_request" EntityType="Self.timetable_request" Schema="team04" store:Type="Tables" />
-          <EntitySet Name="timetable_request_facility" EntityType="Self.timetable_request_facility" Schema="team04" store:Type="Tables" />
-          <EntitySet Name="timetable_request_room_allocation" EntityType="Self.timetable_request_room_allocation" Schema="team04" store:Type="Tables" />
-          <EntitySet Name="timetable_request_week" EntityType="Self.timetable_request_week" Schema="team04" store:Type="Tables" />
-          <EntitySet Name="timetable_room" EntityType="Self.timetable_room" Schema="team04" store:Type="Tables" />
-          <EntitySet Name="timetable_room_facility" EntityType="Self.timetable_room_facility" Schema="team04" store:Type="Tables" />
-          <EntitySet Name="timetable_room_type" EntityType="Self.timetable_room_type" Schema="team04" store:Type="Tables" />
-          <EntitySet Name="timetable_round" EntityType="Self.timetable_round" Schema="team04" store:Type="Tables" />
-          <AssociationSet Name="FK_timetable_department_timetable_round" Association="Self.FK_timetable_department_timetable_round">
-            <End Role="timetable_round" EntitySet="timetable_round" />
-            <End Role="timetable_department" EntitySet="timetable_department" />
-          </AssociationSet>
-          <AssociationSet Name="FK_timetable_request_facility_timetable_facility" Association="Self.FK_timetable_request_facility_timetable_facility">
-            <End Role="timetable_facility" EntitySet="timetable_facility" />
-            <End Role="timetable_request_facility" EntitySet="timetable_request_facility" />
-          </AssociationSet>
-          <AssociationSet Name="FK_timetable_request_room_allocation_timetable_request_room_allocation" Association="Self.FK_timetable_request_room_allocation_timetable_request_room_allocation">
-            <End Role="timetable_request_room_allocation" EntitySet="timetable_request_room_allocation" />
-            <End Role="timetable_request_room_allocation1" EntitySet="timetable_request_room_allocation" />
-          </AssociationSet>
-          <AssociationSet Name="FK_timetable_request_room_allocation_timetable_room" Association="Self.FK_timetable_request_room_allocation_timetable_room">
-            <End Role="timetable_room" EntitySet="timetable_room" />
-            <End Role="timetable_request_room_allocation" EntitySet="timetable_request_room_allocation" />
-          </AssociationSet>
-          <AssociationSet Name="FK_timetable_request_timetable_module" Association="Self.FK_timetable_request_timetable_module">
-            <End Role="timetable_module" EntitySet="timetable_module" />
-            <End Role="timetable_request" EntitySet="timetable_request" />
-          </AssociationSet>
-          <AssociationSet Name="FK_timetable_request_timetable_park" Association="Self.FK_timetable_request_timetable_park">
-            <End Role="timetable_park" EntitySet="timetable_park" />
-            <End Role="timetable_request" EntitySet="timetable_request" />
-          </AssociationSet>
-          <AssociationSet Name="FK_timetable_request_timetable_request" Association="Self.FK_timetable_request_timetable_request">
-            <End Role="timetable_request" EntitySet="timetable_request" />
-            <End Role="timetable_request1" EntitySet="timetable_request" />
-          </AssociationSet>
-          <AssociationSet Name="FK_timetable_request_timetable_request_week" Association="Self.FK_timetable_request_timetable_request_week">
-            <End Role="timetable_request_week" EntitySet="timetable_request_week" />
-            <End Role="timetable_request" EntitySet="timetable_request" />
-          </AssociationSet>
-          <AssociationSet Name="FK_timetable_request_timetable_request1" Association="Self.FK_timetable_request_timetable_request1">
-            <End Role="timetable_request_room_allocation" EntitySet="timetable_request_room_allocation" />
-            <End Role="timetable_request" EntitySet="timetable_request" />
-          </AssociationSet>
-          <AssociationSet Name="FK_timetable_request_timetable_request2" Association="Self.FK_timetable_request_timetable_request2">
-            <End Role="timetable_request" EntitySet="timetable_request" />
-            <End Role="timetable_request1" EntitySet="timetable_request" />
-          </AssociationSet>
-          <AssociationSet Name="FK_timetable_request_timetable_round" Association="Self.FK_timetable_request_timetable_round">
-            <End Role="timetable_round" EntitySet="timetable_round" />
-            <End Role="timetable_request" EntitySet="timetable_request" />
-          </AssociationSet>
-          <AssociationSet Name="FK_timetable_room_timetable_room" Association="Self.FK_timetable_room_timetable_room">
-            <End Role="timetable_room" EntitySet="timetable_room" />
-            <End Role="timetable_room1" EntitySet="timetable_room" />
-          </AssociationSet>
-          <AssociationSet Name="FK_timetable_room_timetable_room_type" Association="Self.FK_timetable_room_timetable_room_type">
-            <End Role="timetable_room_type" EntitySet="timetable_room_type" />
-            <End Role="timetable_room" EntitySet="timetable_room" />
-          </AssociationSet>
-        </EntityContainer>
       </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
@@ -441,6 +459,10 @@
             <End Role="timetable_room_type" EntitySet="timetable_room_type" />
             <End Role="timetable_room" EntitySet="timetable_room" />
           </AssociationSet>
+          <AssociationSet Name="FK_timetable_request_facility_timetable_request_facility" Association="team04Model.FK_timetable_request_facility_timetable_request_facility">
+            <End Role="timetable_request_facility" EntitySet="timetable_request_facility" />
+            <End Role="timetable_request_facility1" EntitySet="timetable_request_facility" />
+          </AssociationSet>
         </EntityContainer>
         <EntityType Name="timetable_building">
           <Key>
@@ -511,7 +533,6 @@
           <Property Name="Number_Rooms" Type="Byte" Nullable="false" />
           <Property Name="Priority" Type="Boolean" Nullable="false" />
           <Property Name="Custom_Comments" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
-          <Property Name="Current_Semester" Type="Int16" Nullable="false" />
           <Property Name="Current_Round" Type="Int16" Nullable="false" />
           <Property Name="Request_Status" Type="Byte" Nullable="false" />
           <NavigationProperty Name="timetable_module" Relationship="team04Model.FK_timetable_request_timetable_module" FromRole="timetable_request" ToRole="timetable_module" />
@@ -533,6 +554,8 @@
           <Property Name="Facility_ID" Type="Byte" Nullable="false" />
           <Property Name="Quantity" Type="Byte" Nullable="false" />
           <NavigationProperty Name="timetable_facility" Relationship="team04Model.FK_timetable_request_facility_timetable_facility" FromRole="timetable_request_facility" ToRole="timetable_facility" />
+          <NavigationProperty Name="timetable_request_facility1" Relationship="team04Model.FK_timetable_request_facility_timetable_request_facility" FromRole="timetable_request_facility" ToRole="timetable_request_facility1" />
+          <NavigationProperty Name="timetable_request_facility2" Relationship="team04Model.FK_timetable_request_facility_timetable_request_facility" FromRole="timetable_request_facility1" ToRole="timetable_request_facility" />
         </EntityType>
         <EntityType Name="timetable_request_room_allocation">
           <Key>
@@ -541,7 +564,6 @@
           <Property Name="Request_ID" Type="Int16" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Building_ID" Type="String" Nullable="false" MaxLength="5" FixedLength="false" Unicode="false" />
           <Property Name="Room_ID" Type="String" Nullable="false" MaxLength="5" FixedLength="false" Unicode="false" />
-          <Property Name="Park_ID" Type="Int32" Nullable="false" />
           <NavigationProperty Name="timetable_request" Relationship="team04Model.FK_timetable_request_timetable_request1" FromRole="timetable_request_room_allocation" ToRole="timetable_request" />
           <NavigationProperty Name="timetable_request_room_allocation1" Relationship="team04Model.FK_timetable_request_room_allocation_timetable_request_room_allocation" FromRole="timetable_request_room_allocation" ToRole="timetable_request_room_allocation1" />
           <NavigationProperty Name="timetable_request_room_allocation2" Relationship="team04Model.FK_timetable_request_room_allocation_timetable_request_room_allocation" FromRole="timetable_request_room_allocation1" ToRole="timetable_request_room_allocation" />
@@ -765,6 +787,20 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_timetable_request_facility_timetable_request_facility">
+          <End Type="team04Model.timetable_request_facility" Role="timetable_request_facility" Multiplicity="1" />
+          <End Type="team04Model.timetable_request_facility" Role="timetable_request_facility1" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="timetable_request_facility">
+              <PropertyRef Name="Request_ID" />
+              <PropertyRef Name="Facility_ID" />
+            </Principal>
+            <Dependent Role="timetable_request_facility1">
+              <PropertyRef Name="Request_ID" />
+              <PropertyRef Name="Facility_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -829,7 +865,6 @@
               <MappingFragment StoreEntitySet="timetable_request">
                 <ScalarProperty Name="Request_Status" ColumnName="Request_Status" />
                 <ScalarProperty Name="Current_Round" ColumnName="Current_Round" />
-                <ScalarProperty Name="Current_Semester" ColumnName="Current_Semester" />
                 <ScalarProperty Name="Custom_Comments" ColumnName="Custom_Comments" />
                 <ScalarProperty Name="Priority" ColumnName="Priority" />
                 <ScalarProperty Name="Number_Rooms" ColumnName="Number_Rooms" />
@@ -857,7 +892,6 @@
           <EntitySetMapping Name="timetable_request_room_allocation">
             <EntityTypeMapping TypeName="team04Model.timetable_request_room_allocation">
               <MappingFragment StoreEntitySet="timetable_request_room_allocation">
-                <ScalarProperty Name="Park_ID" ColumnName="Park_ID" />
                 <ScalarProperty Name="Room_ID" ColumnName="Room_ID" />
                 <ScalarProperty Name="Building_ID" ColumnName="Building_ID" />
                 <ScalarProperty Name="Request_ID" ColumnName="Request_ID" />
@@ -934,34 +968,107 @@
     </Options>
     <!-- Diagram content (shape and connector positions) -->
     <Diagrams>
-      <Diagram Name="TimetablingDBModel">
+      <Diagram Name="TimetablingDBModel" ZoomLevel="67">
         <EntityTypeShape EntityType="team04Model.timetable_building" Width="1.5" PointX="5.75" PointY="3.75" />
         <EntityTypeShape EntityType="team04Model.timetable_day" Width="1.5" PointX="5.75" PointY="6.75" />
         <EntityTypeShape EntityType="team04Model.timetable_department" Width="1.5" PointX="3" PointY="10.875" />
         <EntityTypeShape EntityType="team04Model.timetable_facility" Width="1.5" PointX="5.75" PointY="1" />
         <EntityTypeShape EntityType="team04Model.timetable_module" Width="1.5" PointX="0.75" PointY="20.625" />
         <EntityTypeShape EntityType="team04Model.timetable_park" Width="1.5" PointX="0.75" PointY="7.75" />
-        <EntityTypeShape EntityType="team04Model.timetable_request" Width="1.5" PointX="3" PointY="2.625" />
+        <EntityTypeShape EntityType="team04Model.timetable_request" Width="1.5" PointX="3" PointY="2.625" Height="5.4417122395833335" />
         <EntityTypeShape EntityType="team04Model.timetable_request_facility" Width="1.5" PointX="8" PointY="0.875" />
-        <EntityTypeShape EntityType="team04Model.timetable_request_room_allocation" Width="1.5" PointX="0.75" PointY="10.25" />
+        <EntityTypeShape EntityType="team04Model.timetable_request_room_allocation" Width="1.5" PointX="0.75" PointY="10.25" Height="2.3648893229166656" />
         <EntityTypeShape EntityType="team04Model.timetable_request_week" Width="1.5" PointX="0.75" PointY="23.5" />
         <EntityTypeShape EntityType="team04Model.timetable_room" Width="1.5" PointX="1.5" PointY="14.125" />
         <EntityTypeShape EntityType="team04Model.timetable_room_facility" Width="1.5" PointX="7.75" PointY="3.75" />
         <EntityTypeShape EntityType="team04Model.timetable_room_type" Width="1.5" PointX="1.5" PointY="17.75" />
         <EntityTypeShape EntityType="team04Model.timetable_round" Width="1.5" PointX="0.75" PointY="4.25" />
-        <AssociationConnector Association="team04Model.FK_timetable_department_timetable_round" />
-        <AssociationConnector Association="team04Model.FK_timetable_request_facility_timetable_facility" />
-        <AssociationConnector Association="team04Model.FK_timetable_request_timetable_module" />
-        <AssociationConnector Association="team04Model.FK_timetable_request_timetable_park" />
-        <AssociationConnector Association="team04Model.FK_timetable_request_timetable_request" />
-        <AssociationConnector Association="team04Model.FK_timetable_request_timetable_request_week" />
-        <AssociationConnector Association="team04Model.FK_timetable_request_timetable_request1" />
-        <AssociationConnector Association="team04Model.FK_timetable_request_timetable_request2" />
-        <AssociationConnector Association="team04Model.FK_timetable_request_timetable_round" />
-        <AssociationConnector Association="team04Model.FK_timetable_request_room_allocation_timetable_request_room_allocation" />
-        <AssociationConnector Association="team04Model.FK_timetable_request_room_allocation_timetable_room" />
+        <AssociationConnector Association="team04Model.FK_timetable_department_timetable_round" >
+          <ConnectorPoint PointX="2.25" PointY="6.6148893229166656" />
+          <ConnectorPoint PointX="2.625" PointY="6.9898893229166656" />
+          <ConnectorPoint PointX="2.625" PointY="11.865143229166666" />
+          <ConnectorPoint PointX="2.6666666666666665" PointY="11.865143229166666" />
+          <ConnectorPoint PointX="2.8333333333333335" PointY="11.865143229166666" />
+          <ConnectorPoint PointX="3" PointY="11.865143229166666" />
+        </AssociationConnector>
+        <AssociationConnector Association="team04Model.FK_timetable_request_facility_timetable_facility" >
+          <ConnectorPoint PointX="7.25" PointY="1.797841796875" />
+          <ConnectorPoint PointX="8" PointY="1.797841796875" />
+        </AssociationConnector>
+        <AssociationConnector Association="team04Model.FK_timetable_request_timetable_module" >
+          <ConnectorPoint PointX="2.25" PointY="21.7112939453125" />
+          <ConnectorPoint PointX="3.75" PointY="21.7112939453125" />
+          <ConnectorPoint PointX="3.75" PointY="13.105286458333332" />
+          <ConnectorPoint PointX="2.75" PointY="13.105286458333332" />
+          <ConnectorPoint PointX="2.75" PointY="8.4417122395833335" />
+          <ConnectorPoint PointX="3.2604146666666667" PointY="8.4417122395833335" />
+          <ConnectorPoint PointX="3.4270813333333336" PointY="8.4417122395833335" />
+          <ConnectorPoint PointX="3.75" PointY="8.4417122395833335" />
+          <ConnectorPoint PointX="3.75" PointY="8.0667122395833335" />
+        </AssociationConnector>
+        <AssociationConnector Association="team04Model.FK_timetable_request_timetable_park" >
+          <ConnectorPoint PointX="2.25" PointY="7.9083561197916667" />
+          <ConnectorPoint PointX="2.5416666666666665" PointY="7.9083561197916659" />
+          <ConnectorPoint PointX="2.7708333333333335" PointY="7.9083561197916667" />
+          <ConnectorPoint PointX="3" PointY="7.9083561197916667" />
+        </AssociationConnector>
+        <AssociationConnector Association="team04Model.FK_timetable_request_timetable_request" >
+          <ConnectorPoint PointX="3.5319230769230767" PointY="2.625" />
+          <ConnectorPoint PointX="3.5319230769230767" PointY="2.3749999999999996" />
+          <ConnectorPoint PointX="3.9784615384615383" PointY="2.3749999999999996" />
+          <ConnectorPoint PointX="3.9784615384615383" PointY="2.625" />
+        </AssociationConnector>
+        <AssociationConnector Association="team04Model.FK_timetable_request_timetable_request_week" >
+          <ConnectorPoint PointX="2.25" PointY="24.297841796875" />
+          <ConnectorPoint PointX="4" PointY="24.297841796875" />
+          <ConnectorPoint PointX="4" PointY="13.355286458333332" />
+          <ConnectorPoint PointX="3.8333333333333335" PointY="13.355286458333332" />
+          <ConnectorPoint PointX="3.6666666666666665" PointY="13.355286458333332" />
+          <ConnectorPoint PointX="2.5625" PointY="13.355286458333332" />
+          <ConnectorPoint PointX="2.5625" PointY="8.5667122395833335" />
+          <ConnectorPoint PointX="2.6041666666666665" PointY="8.5667122395833335" />
+          <ConnectorPoint PointX="2.8333333333333335" PointY="8.5667122395833335" />
+          <ConnectorPoint PointX="3.343748" PointY="8.5667122395833335" />
+          <ConnectorPoint PointX="3.343748" PointY="8.0667122395833335" />
+        </AssociationConnector>
+        <AssociationConnector Association="team04Model.FK_timetable_request_timetable_request1" >
+          <ConnectorPoint PointX="2.25" PointY="10.313460538461539" />
+          <ConnectorPoint PointX="2.5035744349011204" PointY="10.059886103560418" />
+          <ConnectorPoint PointX="2.6839255650988791" PointY="9.8795349733626612" />
+          <ConnectorPoint PointX="2.6875" PointY="9.87596053846154" />
+          <ConnectorPoint PointX="2.6875" PointY="4.0161641869304434" />
+          <ConnectorPoint PointX="3" PointY="4.0161641869304434" />
+        </AssociationConnector>
+        <AssociationConnector Association="team04Model.FK_timetable_request_timetable_request2" >
+          <ConnectorPoint PointX="4.5" PointY="4.4910410657051276" />
+          <ConnectorPoint PointX="4.75" PointY="4.4910410657051276" />
+          <ConnectorPoint PointX="4.75" PointY="6.2413766526442309" />
+          <ConnectorPoint PointX="4.5" PointY="6.2413766526442309" />
+        </AssociationConnector>
+        <AssociationConnector Association="team04Model.FK_timetable_request_timetable_round" >
+          <ConnectorPoint PointX="2.25" PointY="5.469832373860875" />
+          <ConnectorPoint PointX="2.6041666666666665" PointY="5.4698323738608741" />
+          <ConnectorPoint PointX="2.7708333333333335" PointY="5.469832373860875" />
+          <ConnectorPoint PointX="3" PointY="5.469832373860875" />
+        </AssociationConnector>
+        <AssociationConnector Association="team04Model.FK_timetable_request_room_allocation_timetable_request_room_allocation" >
+          <ConnectorPoint PointX="1.2819230769230767" PointY="10.25" />
+          <ConnectorPoint PointX="1.2819230769230767" PointY="10" />
+          <ConnectorPoint PointX="1.7284615384615383" PointY="10" />
+          <ConnectorPoint PointX="1.7284615384615383" PointY="10.25" />
+        </AssociationConnector>
+        <AssociationConnector Association="team04Model.FK_timetable_request_room_allocation_timetable_room" >
+          <ConnectorPoint PointX="1.875" PointY="14.125" />
+          <ConnectorPoint PointX="1.875" PointY="12.614889322916666" />
+        </AssociationConnector>
         <AssociationConnector Association="team04Model.FK_timetable_room_timetable_room" />
         <AssociationConnector Association="team04Model.FK_timetable_room_timetable_room_type" />
+        <AssociationConnector Association="team04Model.FK_timetable_request_facility_timetable_request_facility" >
+          <ConnectorPoint PointX="9.5" PointY="1.6345682091346154" />
+          <ConnectorPoint PointX="9.75" PointY="1.6345682091346154" />
+          <ConnectorPoint PointX="9.75" PointY="2.3035780498798077" />
+          <ConnectorPoint PointX="9.5" PointY="2.3035780498798077" />
+        </AssociationConnector>
       </Diagram>
     </Diagrams>
   </Designer>
