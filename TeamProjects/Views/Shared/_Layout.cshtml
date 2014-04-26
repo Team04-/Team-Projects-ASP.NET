@@ -20,6 +20,17 @@
         }
         <script type="text/javascript">
             window.onload = function () {
+                $.ajax({
+                    type: "GET",
+                    url: "/api/RoundAPI",
+                    dataType: "json"
+                })
+			    .done(function (data) {
+			        $(".CurrentRoundCode").html(data.Round_Code);
+			    })
+			    .fail(function (jqXHR, textStatus, err) {
+			        $(".CurrentRoundCode").html("Unknown");
+			    });
                 if (tour != null) {
                     tour.start();
                 }
@@ -61,6 +72,7 @@
         <div id="body">
             @RenderSection("featured", required: false)
             <section class="content-wrapper main-content clear-fix">
+                <div>Current Round: <span class="CurrentRoundCode">Loading</span></div>
                 @RenderBody()
             </section>
         </div>
