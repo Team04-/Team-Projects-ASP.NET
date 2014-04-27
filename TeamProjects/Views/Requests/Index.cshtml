@@ -158,9 +158,13 @@
             @Html.DisplayFor(modelItem => item.Request_Status)
         </td>
         <td>
-            @Html.ActionLink("Edit", "Edit", new { id = item.Request_ID }) |
-            @Html.ActionLink("Details", "Details", new { id = item.Request_ID }) |
-            @Html.ActionLink("Delete", "Delete", new { id = item.Request_ID })
+            @{
+                if (item.Current_Round==ViewBag.CurrentRoundCode){
+                    Html.ActionLink("Edit", "Edit", new { id = item.Request_ID });
+                    <span>|</span>
+                    Html.ActionLink("Delete", "Delete", new { id = item.Request_ID });  
+                }             
+            }
         </td>
     </tr>
 }
