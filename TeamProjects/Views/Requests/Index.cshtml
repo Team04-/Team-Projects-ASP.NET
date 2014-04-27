@@ -4,6 +4,9 @@
     ViewBag.Title = "Index";
     string department = "CO";
 }
+@section Includes{
+    <link href="@Url.Content("/Content/Requests.css")" rel="stylesheet" />
+}
 
 <h2>Requests</h2>
 <script type="text/javascript">
@@ -39,6 +42,18 @@
         $(".commentSearchInput").keyup(function () {
             refineResults();
         });
+        var details_tether = null;
+        $(".showrow").click(function () {
+            if (!$(this).hasClass("selectedrow")) {
+                $('.detailsrow').remove();
+                $(".selectedrow").removeClass("selectedrow");
+                var comment = ($.trim($(this).find(".requestComments").text())=="") ? "No comments" : String($(this).find(".requestComments").text());
+                $(this).addClass("selectedrow").after("<tr class='detailsrow'><td colspan=13><div class='detailsheader'>Comments</div><div class='detailscontent'>"+comment+"</div></td></tr>");
+            } else {
+                $('.detailsrow').remove();
+                $(this).removeClass("selectedrow");
+            }
+        });
     }
 </script>
 <p>
@@ -62,7 +77,7 @@
 <div class="commentSearch">
     Search comments: <input class="commentSearchInput" type="text" />
 </div>
-<table>
+<table class="requestsTable">
     <tr>
         <th>
             Part Code
@@ -139,7 +154,7 @@
         <td class="requestRound">
             @Html.DisplayFor(modelItem => item.Current_Round)
         </td>
-        <td>
+        <td class="requestControls">
             @Html.DisplayFor(modelItem => item.Request_Status)
         </td>
         <td>

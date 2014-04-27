@@ -1,0 +1,43 @@
+﻿/* Simple basic reusable classes to hide rows that don't meet the search*/
+.hiderow {
+    display:none;   
+}
+.showrow {
+    display:table-row;
+}
+.requestRow {
+    cursor:pointer;
+    position:relative;
+}
+/*Show selected request and details for it*/
+.selectedrow td, .detailsrow td {
+    background-color: #d7d7d7;
+}
+.selectedrow td {
+    border-top: 10px solid #F3F3F3;
+}
+.detailsrow td {
+    border-bottom: 10px solid #F3F3F3;
+}
+.detailsrow {
+    background-color:#d7d7d7;
+    padding:10px;
+}
+.detailsheader {
+    background-color: #330066;
+    color: #FFF;
+    border-color: #330066;
+    border-style: solid;
+    border-width: thin;
+    padding: 5px;
+    -moz-border-radius: 3px;
+    -webkit-border-radius: 3px;
+    border-radius: 3px;
+}
+.detailscontent {
+    padding: 5px; 
+}
+/*Hide extra columns that will be show in detailed view*/
+.requestsTable *:nth-child(10) {
+    display:none;
+}

@@ -781,12 +781,3 @@ tr.pager td {
 	-webkit-border-radius: 7px 7px 7px 7px;
 	border-radius: 7px 7px 7px 7px;
     }
-    
-    /* Simple basic reusable classes
-    ----------------------------------------------------------*/
-    .hiderow{
-        display:none;   
-    }
-    .showrow{
-        display:table-row;
-    }
