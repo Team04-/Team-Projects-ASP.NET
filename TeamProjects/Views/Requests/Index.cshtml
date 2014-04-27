@@ -9,6 +9,7 @@
 <script type="text/javascript">
     window.onload = function () {
         function refineResults() {
+            $(".noresults").removeClass("showrow").addClass("hiderow");
             var rounds = new Array();
             $(".roundsOptions input:checked").each(function () {
                 rounds.push(parseInt(this.className.split("-")[1]));
@@ -28,6 +29,9 @@
                     }
                 });
             }
+            if ($(".showrow").length == 0) {
+                $(".noresults").removeClass("hiderow").addClass("showrow");
+            }
         }
         $(".roundsOptions input").change(function () {
             refineResults();
@@ -44,7 +48,14 @@
 @{
     for (var i = 1; i <= ViewBag.currentRoundCode; i++)
     {
-        <label style="display:inline-block;margin-bottom:10px;margin-right:10px;"><input class="round-@i" checked type="checkbox" />Round @i</label>
+        <label style="display:inline-block;margin-bottom:10px;margin-right:10px;">
+            <input class="round-@i" checked type="checkbox" />Round @i
+            @{
+                if(i==ViewBag.currentRoundCode){
+                    <span>(Current)</span>
+                }
+            }
+        </label>
     }
 }
 </div>
@@ -138,5 +149,8 @@
         </td>
     </tr>
 }
+    <tr class="noresults hiderow">
+        <td colspan=13>No requests could be found.</td>
+    </tr>
 
 </table>
