@@ -18,6 +18,12 @@ namespace TeamProjects.Controllers
 
         public ActionResult Index()
         {
+            var check = db.timetable_round.Where(r => r.Round_Status == "Current").First();
+            if (!(check is timetable_round))
+            {
+                check = db.timetable_round.Last();
+            }
+            ViewBag.currentRoundCode = check.Round_Code;
             return View(db.timetable_request.ToList());
         }
 
