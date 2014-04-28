@@ -74,9 +74,61 @@ namespace TeamProjects.Controllers.manage
             // Make new timetable_request object, add requestView ("master data") Current_Round value.
             // Do this for all tables which need subsets of data from requestView.
 
-			string query = "SELECT dept.Department_Code as Department_Code, mod.Part_Code as Part_Code, mod.Module_Code as Module_Code, roomt.Type_Name as Room_Type, park.Park_ID as Park_ID from timetable_department dept, timetable_request mod, timetable_room_type roomt, timetable_park park";
-			var viewModel = db.Database.SqlQuery<TeamProjects.Models.RequestViewModel>(query);
-			return View(viewModel.ToList());
+			//string query = "SELECT dept.Department_Code as Department_Code, mod.Part_Code as Part_Code, mod.Module_Code as Module_Code, roomt.Type_Name as Room_Type, park.Park_ID as Park_ID from timetable_department dept, timetable_request mod, timetable_room_type roomt, timetable_park park";
+			//var viewModel = db.Database.SqlQuery<TeamProjects.Models.RequestViewModel>(query);
+			//return View(viewModel.ToList());
+
+
+
+			timetable_request timetable_request = new timetable_request()
+			{
+				//Request_ID = "",
+				Department_Code = "",
+				Part_Code = "",
+				Module_Code = "",
+				Day_ID = "",
+				Start_Time = "",
+				Duration = "",
+				Number_Students = "",
+				Number_Rooms = "",
+				Priority = "",
+				Park_ID = "",
+				Custom_Comments = "",
+				Current_Round = "",
+				Request_Status = "",
+			};
+
+			db.timetable_request.Add(timetable_request);
+			db.SaveChanges();
+
+			timetable_request_facility timetable_request_facility = new timetable_request_facility()
+			{
+				//Request_ID = "",
+				Facility_ID = 0,
+				Quantity = 0,
+			};
+
+			db.timetable_request_facility.Add(timetable_request_facility);
+			db.SaveChanges();
+
+			timetable_request_room_allocation timetable_request_room_allocation = new timetable_request_room_allocation()
+			{
+				//Request_ID = "",
+				Building_ID = "",
+				Room_ID = "",
+			};
+
+			db.timetable_request_room_allocation.Add(timetable_request_room_allocation);
+			db.SaveChanges();
+
+			timetable_request_week timetable_request_week = new timetable_request_week()
+			{
+				Request_ID = "",
+				Week = "",
+			};
+
+			db.timetable_request_week.Add(timetable_request_week);
+			db.SaveChanges();
         }
 
         // GET: /Request/Edit/5
