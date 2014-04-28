@@ -40,7 +40,7 @@ namespace TeamProjects.Controllers.manage
             ViewBag.Duration = new SelectList(new[] { "1/T", "2/T", "3/T", "4/T", "5/T", "6/T", "7/T", "8/T", "9/T" });
             ViewBag.Department_Code = new SelectList(db.timetable_department, "Department_Code", "Department_Name");
             ViewBag.Part_Code = new SelectList(db.timetable_request, "Part_Code", "Part_Code");
-            ViewBag.Module_Code = new SelectList(db.timetable_request, "Module_Code", "Module_Title");
+            ViewBag.Module_Code = new SelectList(db.timetable_request, "Module_Code", "Module_Code");
             ViewBag.Day_ID = new SelectList(db.timetable_day, "Day_ID", "Day_Name");
             ViewBag.Park_ID = new SelectList(db.timetable_park, "Park_ID", "Park_Name");
 			ViewBag.Building_ID = new SelectList(db.timetable_building, "Building_ID", "Building_Name");
@@ -69,7 +69,8 @@ namespace TeamProjects.Controllers.manage
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include="Request_ID,Department_Code,Part_Code,Module_Code,Day_ID,Start_Time,Duration,Number_Students,Number_Rooms,Priority,Room_Type,Park_ID,Custom_Comments,Current_Year,Current_Semester,Current_Round,Request_Status")] RequestViewModel requestView)
+        public ActionResult Create(RequestViewModel requestView)
+		//public ActionResult Create([Bind(Include="Request_ID,Department_Code,Part_Code,Module_Code,Day_ID,Start_Time,Duration,Number_Students,Number_Rooms,Priority,Room_Type,Park_ID,Custom_Comments,Current_Year,Current_Semester,Current_Round,Request_Status")] RequestViewModel requestView)
         {
             // Make new timetable_request object, add requestView ("master data") Current_Round value.
             // Do this for all tables which need subsets of data from requestView.
@@ -82,20 +83,20 @@ namespace TeamProjects.Controllers.manage
 
 			timetable_request timetable_request = new timetable_request()
 			{
-				//Request_ID = "",
-				Department_Code = "",
-				Part_Code = "",
-				Module_Code = "",
-				Day_ID = "",
-				Start_Time = "",
-				Duration = "",
-				Number_Students = "",
-				Number_Rooms = "",
-				Priority = "",
-				Park_ID = "",
-				Custom_Comments = "",
-				Current_Round = "",
-				Request_Status = "",
+				Request_ID = 1, //AUTO
+				Department_Code = requestView.Department_Code,
+				Part_Code = requestView.Part_Code.ToString(),
+				Module_Code = requestView.Module_Code,
+				Day_ID = (byte) requestView.Day_ID,
+				Start_Time = (byte) requestView.Start_Time,
+				Duration = (byte) requestView.Duration,
+				Number_Students = requestView.Number_Students,
+				Number_Rooms = (byte) requestView.Number_Rooms,
+				Priority = requestView.Priority,
+				Park_ID = requestView.Park_ID,
+				Custom_Comments = requestView.Custom_Comments,
+				Current_Round = requestView.Current_Round,
+				Request_Status = 0, //AUTO
 			};
 
 			db.timetable_request.Add(timetable_request);
@@ -103,7 +104,7 @@ namespace TeamProjects.Controllers.manage
 
 			timetable_request_facility timetable_request_facility = new timetable_request_facility()
 			{
-				//Request_ID = "",
+				Request_ID = 1,
 				Facility_ID = 0,
 				Quantity = 0,
 			};
@@ -113,9 +114,9 @@ namespace TeamProjects.Controllers.manage
 
 			timetable_request_room_allocation timetable_request_room_allocation = new timetable_request_room_allocation()
 			{
-				//Request_ID = "",
-				Building_ID = "",
-				Room_ID = "",
+				Request_ID = 1,
+				Building_ID = requestView.Building_ID.ToString(),
+				Room_ID = requestView.Room_ID.ToString(),
 			};
 
 			db.timetable_request_room_allocation.Add(timetable_request_room_allocation);
@@ -123,13 +124,17 @@ namespace TeamProjects.Controllers.manage
 
 			timetable_request_week timetable_request_week = new timetable_request_week()
 			{
-				Request_ID = "",
-				Week = "",
+				Request_ID = 1,
+				Week = 010,
+				//Week = requestView.Week,
 			};
 
 			db.timetable_request_week.Add(timetable_request_week);
 			db.SaveChanges();
+
+			return RedirectToAction("Index");
         }
+			
 
         // GET: /Request/Edit/5
         public ActionResult Edit(string id = null)
@@ -155,12 +160,6 @@ namespace TeamProjects.Controllers.manage
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            ViewBag.Day_ID = new SelectList(db.timetable_day, "Day_ID", "Day_Name", timetable_request.Day_ID);
-            ViewBag.Department_Code = new SelectList(db.timetable_request, "Department_Code", "Module_Title", timetable_request.Department_Code);
-            ViewBag.Request_ID = new SelectList(db.timetable_request, "Request_ID", "Department_Code", timetable_request.Request_ID);
-            ViewBag.Request_ID = new SelectList(db.timetable_request, "Request_ID", "Department_Code", timetable_request.Request_ID);
-            ViewBag.Request_ID = new SelectList(db.timetable_request_room_allocation, "Request_ID", "Building_ID", timetable_request.Request_ID);
-            ViewBag.Request_ID = new SelectList(db.timetable_request_week, "Request_ID", "Request_ID", timetable_request.Request_ID);
             return View(timetable_request);
         }
 
