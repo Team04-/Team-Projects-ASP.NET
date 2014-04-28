@@ -51,16 +51,21 @@ namespace TeamProjects.Controllers.manage
             return View();
         }
 
-		public bool GetRoomPrefCollection(string roomPrefColl)
+		//public bool GetRoomPrefCollection(string[][] roomPrefColl)
+		public ActionResult GetRoomPrefCollection(string[][] roomPrefColl)
 		{
-			if (roomPrefColl != null)
-			{
-				return true;
-			}
+			var cr = new JsonResult();
+			cr.Data = roomPrefColl;
+			return cr;
 
-			else {
-				return false;
-			}
+			//if (roomPrefColl != null)
+			//{
+			//	return true;
+			//}
+
+			//else {
+			//	return false;
+			//}
 			
 		}
 

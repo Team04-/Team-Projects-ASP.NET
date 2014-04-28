@@ -10,9 +10,9 @@ using System.Web;
 using System.Web.Http;
 using TeamProjects.Models;
 
-namespace TeamProjects.Controllers
+namespace TeamProjects.Controllers.api
 {
-    public class RoomAPIController : ApiController
+    public class BuildingAPIController : ApiController
     {
         private team04Entities db = new team04Entities();
 
