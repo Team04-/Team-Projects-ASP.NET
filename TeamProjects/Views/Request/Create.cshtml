@@ -15,6 +15,8 @@
 
 		$("#Room_ID").empty();
 
+		findRooms(document.getElementById('Building_ID').options[document.getElementById('Building_ID').selectedIndex].value);
+
 		$("#Building_ID").change(function () {
 
 			$("#Room_ID").empty();
@@ -61,7 +63,7 @@
 				var chkbox = row.cells[0].childNodes[0];
 
 				if (null != chkbox && true == chkbox.checked) {
-					roomPrefCollection.splice(i, 1);
+					roomPrefCollection.splice(i-1, 1);
 
 					table.deleteRow(i);
 					rowCount--;
@@ -72,6 +74,7 @@
 			alert(e);
 		}
 	}
+
 
 	function addRoomPref() {
 
@@ -165,32 +168,28 @@
         <div class="form-group">
             @Html.LabelFor(model => model.Module_Code, "Module Code", new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.DropDownList("Module_Code", String.Empty)
-                @Html.ValidationMessageFor(model => model.Module_Code)
+				@Html.DropDownListFor(model => model.Module_Code, (SelectList) ViewBag.Module_Code)
             </div>
         </div>
 
         <div class="form-group">
             @Html.LabelFor(model => model.Day_ID, "Day", new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.DropDownList("Day_ID", String.Empty)
-                @Html.ValidationMessageFor(model => model.Day_ID)
+                @Html.DropDownListFor(model => model.Day_ID, (SelectList) ViewBag.Day_ID)
             </div>
         </div>
 
         <div class="form-group">
             @Html.LabelFor(model => model.Start_Time, "Start Time", new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.DropDownList("Start_Time", String.Empty)
-                @Html.ValidationMessageFor(model => model.Start_Time)
+                @Html.DropDownListFor(model => model.Start_Time, (SelectList) ViewBag.Start_Time)
             </div>
         </div>
 
         <div class="form-group">
             @Html.LabelFor(model => model.Duration, "Duration", new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.DropDownList("Duration", String.Empty)
-                @Html.ValidationMessageFor(model => model.Duration)
+                @Html.DropDownListFor(model => model.Duration, (SelectList) ViewBag.Duration)
             </div>
         </div>
 
@@ -205,8 +204,7 @@
 		<div class="form-group">
 			@Html.LabelFor(model => model.Park_ID, "Park Preference", new { @class = "control-label col-md-2" })
 			<div class="col-md-10">
-				@Html.DropDownList("Park_ID", String.Empty)
-				@Html.ValidationMessageFor(model => model.Park_ID)
+				@Html.DropDownListFor(model => model.Park_ID, (SelectList) ViewBag.Park_ID)
 			</div>
 		</div>
 
@@ -216,30 +214,27 @@
                 @Html.LabelFor(model => model.Park_ID, "Filter by Park", new { @class = "control-label col-md-2" })
                 <div class="col-md-10">
                     @Html.DropDownList("Park_ID2", (SelectList) ViewBag.Park_ID, String.Empty)
-                    @Html.ValidationMessageFor(model => model.Park_ID)
                 </div>
             </div>
 
 		<div class="form-group">
 			@Html.LabelFor(model => model.Building_ID, "Building", new { @class = "control-label col-md-2" })
 			<div class="col-md-10">
-				@Html.DropDownList("Building_ID", String.Empty).
-				@Html.ValidationMessageFor(model => model.Building_ID)
+				@Html.DropDownListFor(model => model.Building_ID, (SelectList) ViewBag.Building_ID)
 			</div>
 		</div>
 
 		<div class="form-group">
 			@Html.LabelFor(model => model.Room_Type, "Filter by Room Type", new { @class = "control-label col-md-2" })
 			<div class="col-md-10">
-				@Html.DropDownList("Room_Type", String.Empty)
-				@Html.ValidationMessageFor(model => model.Room_Type)
+				@Html.DropDownList("Room_Type", (SelectList) ViewBag.Room_Type, String.Empty)
 			</div>
 		</div>
 
 		<div class="form-group">
 			@Html.LabelFor(model => model.Room_ID, "Room", new { @class = "control-label col-md-2" })
 			<div class="col-md-10">
-				@Html.DropDownList("Room_ID", String.Empty)
+				@Html.DropDownListFor(model => model.Room_ID, (SelectList) ViewBag.Room_ID)
 				@Html.ValidationMessageFor(model => model.Room_ID)
 			</div>
 		</div>
@@ -250,7 +245,7 @@
 
         <input type="button" value="Delete Room Preference(s)" onclick="deleteRowAndPref('dataTable')" />
 
-        <table id="dataTable" width="350" border="1">
+        <table id="dataTable" width="350" border="1"><tr><th>Select</th><th>Room Type</th><th>Park</th><th>Building</th><th>Room</th></tr>
         </table>
 
         <div id="roomChoices" class="form-group"></div>
@@ -260,7 +255,6 @@
                 @Html.LabelFor(model => model.Priority, "Priority", new { @class = "control-label col-md-2" })
                 <div class="col-md-10">
                     @Html.CheckBoxFor(model => model.Priority)
-                    @Html.ValidationMessageFor(model => model.Priority)
                 </div>
             </div>
 
@@ -268,7 +262,6 @@
                 @Html.LabelFor(model => model.Custom_Comments, "Additional Information", new { @class = "control-label col-md-2" })
                 <div class="col-md-10">
                     @Html.EditorFor(model => model.Custom_Comments)
-                    @Html.ValidationMessageFor(model => model.Custom_Comments)
                 </div>
             </div>
 
