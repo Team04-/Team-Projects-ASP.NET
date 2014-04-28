@@ -12,7 +12,7 @@ using TeamProjects.Models;
 
 namespace TeamProjects.Controllers.api
 {
-    public class BuildingAPIController : ApiController
+    public class RoomAPIController : ApiController
     {
         private team04Entities db = new team04Entities();
 
@@ -24,19 +24,37 @@ namespace TeamProjects.Controllers.api
         }
 
         // GET api/RoomAPIController/5
-        public IEnumerable<timetable_room> Gettimetable_room(string BuildingID)
-        {
+        //public IEnumerable<timetable_room> Gettimetable_room(string BuildingID)
+        //{
 
-			var timetable_room = from m in db.timetable_room select m;
-			timetable_room = timetable_room.Where(e => e.Building_ID.Equals(BuildingID));
+			//var timetable_room = from m in db.timetable_room select m;
+			//timetable_room = timetable_room.Where(e => e.Building_ID.Equals(BuildingID));
 
-            if (timetable_room == null)
-            {
-                throw new HttpResponseException(Request.CreateResponse(HttpStatusCode.NotFound));
-            }
+            //if (timetable_room == null)
+            //{
+                //throw new HttpResponseException(Request.CreateResponse(HttpStatusCode.NotFound));
+            //}
 
-            return timetable_room;
-        }
+            //return timetable_room;
+        //}
+
+		// GET api/RoomAPIController/5
+		public IEnumerable<timetable_room> Gettimetable_room(string BuildingID, string RoomType)
+		{
+
+			var timetable_room_type = (from m in db.timetable_room_type where m.Type_Name == RoomType select m.Type_ID).ToList();
+
+			byte selID = timetable_room_type.FirstOrDefault();
+
+			var timetable_room = from m in db.timetable_room where m.Building_ID == BuildingID && m.Type_ID == selID select m;
+
+			if (timetable_room == null)
+			{
+				throw new HttpResponseException(Request.CreateResponse(HttpStatusCode.NotFound));
+			}
+
+			return timetable_room;
+		}
 
         protected override void Dispose(bool disposing)
         {

@@ -10,7 +10,7 @@ using System.Web;
 using System.Web.Http;
 using TeamProjects.Models;
 
-namespace TeamProjects.Controllers.api
+namespace TeamProjects.Controllers
 {
 	public class BuildingAPIController : ApiController
 	{
@@ -28,7 +28,7 @@ namespace TeamProjects.Controllers.api
 		{
 
 			var timetable_building = from m in db.timetable_building select m;
-			timetable_building = timetable_building.Where(e => e.Park_ID.Equals(ParkID));
+			//timetable_building = timetable_building.Where(e => e.Park_ID.Equals(ParkID));
 
 			if (timetable_building == null)
 			{
