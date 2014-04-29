@@ -264,6 +264,67 @@
         </div>
 
         <div class="form-group">
+            @Html.LabelFor(model => model.Week, "Weeks", new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                <table>
+                    <tr>
+                        <th>1</th>
+                        <th>2</th>
+                        <th>3</th>
+                        <th>4</th>
+                        <th>5</th>
+                        <th>6</th>
+                        <th>7</th>
+                        <th>8</th>
+                        <th>9</th>
+                        <th>10</th>
+                        <th>11</th>
+                        <th>12</th>
+                    </tr>
+                    <tr>
+                        <td>
+                            @Html.CheckBox("weekOne", false, new { @name = "weeks" })
+                        </td>
+                        <td>
+                            @Html.CheckBox("weekTwo", false, new { @name = "weeks" })
+                        </td>
+                        <td>
+                            @Html.CheckBox("weekThree", false, new { @name = "weeks" })
+                        </td>
+                        <td>
+                            @Html.CheckBox("weekFour", false, new { @name = "weeks" })
+                        </td>
+                        <td>
+                            @Html.CheckBox("weekFive", false, new { @name = "weeks" })
+                        </td>
+                        <td>
+                            @Html.CheckBox("weekSix", false, new { @name = "weeks" })
+                        </td>
+                        <td>
+                            @Html.CheckBox("weekSeven", false, new { @name = "weeks" })
+                        </td>
+                        <td>
+                            @Html.CheckBox("weekEight", false, new { @name = "weeks" })
+                        </td>
+                        <td>
+                            @Html.CheckBox("weekNine", false, new { @name = "weeks" })
+                        </td>
+                        <td>
+                            @Html.CheckBox("weekTen", false, new { @name = "weeks" })
+                        </td>
+                        <td>
+                            @Html.CheckBox("weekEleven", false, new { @name = "weeks" })
+                        </td>
+                        <td>
+                            @Html.CheckBox("weekTwelve", false, new { @name = "weeks" })
+                        </td>
+                    </tr>
+                </table>            
+            </div>
+        </div>
+
+
+        <div class="form-group">
             @Html.LabelFor(model => model.Number_Students, "Number Of Students", new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.EditorFor(model => model.Number_Students)

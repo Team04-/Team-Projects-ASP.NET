@@ -35,7 +35,7 @@ namespace TeamProjects.Models
         public int Facility_ID { get; set; }
         public int Room_ID { get; set; }
         public int Building_ID { get; set; }
-
+        public string Week { get; set; }
     }
 
     public class RoomPref {

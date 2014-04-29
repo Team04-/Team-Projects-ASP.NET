@@ -16,12 +16,14 @@ namespace TeamProjects.Models
     {
         public timetable_park()
         {
+            this.timetable_building = new HashSet<timetable_building>();
             this.timetable_request = new HashSet<timetable_request>();
         }
     
         public int Park_ID { get; set; }
         public string Park_Name { get; set; }
     
+        public virtual ICollection<timetable_building> timetable_building { get; set; }
         public virtual ICollection<timetable_request> timetable_request { get; set; }
     }
 }

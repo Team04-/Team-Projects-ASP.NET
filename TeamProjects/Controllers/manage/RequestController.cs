@@ -15,16 +15,24 @@ namespace TeamProjects.Controllers.manage
         private team04Entities db = new team04Entities();
 
 
+        //
         // GET: /Request/
+
         public ActionResult Index()
         {
-            string query = "SELECT dept.Department_Code as Department_Code, mod.Part_Code as Part_Code, mod.Module_Code as Module_Code, roomt.Type_Name as Room_Type, park.Park_ID as Park_ID from timetable_department dept, timetable_request mod, timetable_room_type roomt, timetable_park park";
-            var viewModel = db.Database.SqlQuery<TeamProjects.Models.RequestViewModel>(query);
-            return View(viewModel.ToList());
+            var check = db.timetable_round.Where(r => r.Round_Status == "Current").First();
+            if (!(check is timetable_round))
+            {
+                check = db.timetable_round.Last();
+            }
+            ViewBag.currentRoundCode = check.Round_Code;
+            return View(db.timetable_request.ToList());
         }
 
+        //
         // GET: /Request/Details/5
-        public ActionResult Details(string id = null)
+
+        public ActionResult Details(short id = 0)
         {
             timetable_request timetable_request = db.timetable_request.Find(id);
             if (timetable_request == null)
@@ -33,6 +41,8 @@ namespace TeamProjects.Controllers.manage
             }
             return View(timetable_request);
         }
+
+        //
 
         // GET: /Request/Create
         public ActionResult Create()
@@ -84,6 +94,8 @@ namespace TeamProjects.Controllers.manage
 			//string query = "SELECT dept.Department_Code as Department_Code, mod.Part_Code as Part_Code, mod.Module_Code as Module_Code, roomt.Type_Name as Room_Type, park.Park_ID as Park_ID from timetable_department dept, timetable_request mod, timetable_room_type roomt, timetable_park park";
 			//var viewModel = db.Database.SqlQuery<TeamProjects.Models.RequestViewModel>(query);
 			//return View(viewModel.ToList());
+
+
 
 			timetable_request timetable_request = new timetable_request()
 			{
@@ -146,10 +158,12 @@ namespace TeamProjects.Controllers.manage
 
 			return RedirectToAction("Index");
         }
-			
 
+
+        //
         // GET: /Request/Edit/5
-        public ActionResult Edit(string id = null)
+
+        public ActionResult Edit(short id = 0)
         {
             timetable_request timetable_request = db.timetable_request.Find(id);
             if (timetable_request == null)
@@ -159,12 +173,11 @@ namespace TeamProjects.Controllers.manage
             return View(timetable_request);
         }
 
+        //
         // POST: /Request/Edit/5
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
+
         [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include="Request_ID,Department_Code,Part_Code,Module_Code,Day_ID,Start_Time,Duration,Number_Students,Number_Rooms,Priority,Room_Type,Park_ID,Custom_Comments,Current_Year,Current_Semester,Current_Round,Request_Status")] timetable_request timetable_request)
+        public ActionResult Edit(timetable_request timetable_request)
         {
             if (ModelState.IsValid)
             {
@@ -175,8 +188,10 @@ namespace TeamProjects.Controllers.manage
             return View(timetable_request);
         }
 
+        //
         // GET: /Request/Delete/5
-        public ActionResult Delete(string id = null)
+
+        public ActionResult Delete(short id = 0)
         {
             timetable_request timetable_request = db.timetable_request.Find(id);
             if (timetable_request == null)
@@ -186,9 +201,10 @@ namespace TeamProjects.Controllers.manage
             return View(timetable_request);
         }
 
+        //
         // POST: /Request/Delete/5
+
         [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(short id)
         {
             timetable_request timetable_request = db.timetable_request.Find(id);
@@ -199,10 +215,7 @@ namespace TeamProjects.Controllers.manage
 
         protected override void Dispose(bool disposing)
         {
-            if (disposing)
-            {
-                db.Dispose();
-            }
+            db.Dispose();
             base.Dispose(disposing);
         }
     }

@@ -18,6 +18,8 @@ namespace TeamProjects.Models
         public string Department_Code { get; set; }
         public string Department_Name { get; set; }
         public short Current_Round { get; set; }
+        public string Password { get; set; }
+        public string Password_Salt { get; set; }
     
         public virtual timetable_round timetable_round { get; set; }
     }

@@ -4,6 +4,7 @@
     <EntitySetMapping Name="timetable_building">
       <EntityTypeMapping TypeName="team04Model.timetable_building">
         <MappingFragment StoreEntitySet="timetable_building">
+          <ScalarProperty Name="Park_ID" ColumnName="Park_ID" />
           <ScalarProperty Name="Building_Name" ColumnName="Building_Name" />
           <ScalarProperty Name="Building_ID" ColumnName="Building_ID" />
         </MappingFragment>
@@ -20,6 +21,8 @@
     <EntitySetMapping Name="timetable_department">
       <EntityTypeMapping TypeName="team04Model.timetable_department">
         <MappingFragment StoreEntitySet="timetable_department">
+          <ScalarProperty Name="Password_Salt" ColumnName="Password_Salt" />
+          <ScalarProperty Name="Password" ColumnName="Password" />
           <ScalarProperty Name="Current_Round" ColumnName="Current_Round" />
           <ScalarProperty Name="Department_Name" ColumnName="Department_Name" />
           <ScalarProperty Name="Department_Code" ColumnName="Department_Code" />
@@ -68,7 +71,6 @@
           <ScalarProperty Name="Park_ID" ColumnName="Park_ID" />
           <ScalarProperty Name="Day_ID" ColumnName="Day_ID" />
           <ScalarProperty Name="Module_Code" ColumnName="Module_Code" />
-          <ScalarProperty Name="Part_Code" ColumnName="Part_Code" />
           <ScalarProperty Name="Department_Code" ColumnName="Department_Code" />
           <ScalarProperty Name="Request_ID" ColumnName="Request_ID" />
         </MappingFragment>
@@ -107,7 +109,6 @@
           <ScalarProperty Name="Capacity" ColumnName="Capacity" />
           <ScalarProperty Name="Room_ID" ColumnName="Room_ID" />
           <ScalarProperty Name="Building_ID" ColumnName="Building_ID" />
-          <ScalarProperty Name="Park_ID" ColumnName="Park_ID" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

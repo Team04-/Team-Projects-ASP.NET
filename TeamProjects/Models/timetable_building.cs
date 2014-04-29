@@ -14,7 +14,16 @@ namespace TeamProjects.Models
     
     public partial class timetable_building
     {
+        public timetable_building()
+        {
+            this.timetable_request_room_allocation = new HashSet<timetable_request_room_allocation>();
+        }
+    
         public string Building_ID { get; set; }
         public string Building_Name { get; set; }
+        public int Park_ID { get; set; }
+    
+        public virtual timetable_park timetable_park { get; set; }
+        public virtual ICollection<timetable_request_room_allocation> timetable_request_room_allocation { get; set; }
     }
 }

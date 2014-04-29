@@ -18,9 +18,8 @@ namespace TeamProjects.Models
         public string Building_ID { get; set; }
         public string Room_ID { get; set; }
     
+        public virtual timetable_building timetable_building { get; set; }
         public virtual timetable_request timetable_request { get; set; }
-        public virtual timetable_request_room_allocation timetable_request_room_allocation1 { get; set; }
-        public virtual timetable_request_room_allocation timetable_request_room_allocation2 { get; set; }
         public virtual timetable_room timetable_room { get; set; }
     }
 }

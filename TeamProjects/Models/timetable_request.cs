@@ -16,7 +16,6 @@ namespace TeamProjects.Models
     {
         public short Request_ID { get; set; }
         public string Department_Code { get; set; }
-        public string Part_Code { get; set; }
         public string Module_Code { get; set; }
         public byte Day_ID { get; set; }
         public int Park_ID { get; set; }
@@ -29,14 +28,15 @@ namespace TeamProjects.Models
         public short Current_Round { get; set; }
         public byte Request_Status { get; set; }
     
-        public virtual timetable_module timetable_module { get; set; }
         public virtual timetable_park timetable_park { get; set; }
         public virtual timetable_request timetable_request1 { get; set; }
         public virtual timetable_request timetable_request2 { get; set; }
-        public virtual timetable_request_week timetable_request_week { get; set; }
         public virtual timetable_request_room_allocation timetable_request_room_allocation { get; set; }
+        public virtual timetable_request_week timetable_request_week { get; set; }
         public virtual timetable_request timetable_request11 { get; set; }
         public virtual timetable_request timetable_request3 { get; set; }
+        public virtual timetable_request timetable_request12 { get; set; }
+        public virtual timetable_request timetable_request4 { get; set; }
         public virtual timetable_round timetable_round { get; set; }
     }
 }
