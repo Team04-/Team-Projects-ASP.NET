@@ -16,5 +16,15 @@ namespace TeamProjects.Controllers
             return View();
         }
 
+        [HttpGet]
+        public ActionResult LogIn() {
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult LogIn(TeamProjects.Models.DepartmentModel department) {
+        
+        }
+
     }
 }

@@ -181,12 +181,15 @@
     <Compile Include="Controllers\manage\ModuleController.cs" />
     <Compile Include="Controllers\manage\RequestController.cs" />
     <Compile Include="Controllers\manage\RoomController.cs" />
+    <Compile Include="Controllers\manage\RoundController.cs" />
     <Compile Include="Controllers\RequestsController.cs" />
+    <Compile Include="Controllers\UserController.cs" />
     <Compile Include="Filters\InitializeSimpleMembershipAttribute.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\AccountModels.cs" />
+    <Compile Include="Models\DepartmentModel.cs" />
     <Compile Include="Models\RequestViewModel.cs" />
     <Compile Include="Models\RoomBuildingViewModel.cs" />
     <Compile Include="Models\timetable_building.cs">
@@ -425,6 +428,11 @@
     <Content Include="Views\Requests\Details.cshtml" />
     <Content Include="Views\Requests\Edit.cshtml" />
     <Content Include="Views\Requests\Delete.cshtml" />
+    <Content Include="Views\Round\Index.cshtml" />
+    <Content Include="Views\Round\Details.cshtml" />
+    <Content Include="Views\Round\Create.cshtml" />
+    <Content Include="Views\Round\Edit.cshtml" />
+    <Content Include="Views\Round\Delete.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
