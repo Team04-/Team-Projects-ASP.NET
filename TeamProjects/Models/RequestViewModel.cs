@@ -15,7 +15,7 @@ namespace TeamProjects.Models
         // Tinyint in DB --> byte in ASP.NET
         public int Request_ID { get; set; }
         public string Department_Code { get; set; }
-        public char Part_Code { get; set; }
+        //public char Part_Code { get; set; }
         public string Module_Code { get; set; }
         public string Room_Pref_JSON { get; set; }
         public int Day_ID { get; set; }
@@ -31,7 +31,7 @@ namespace TeamProjects.Models
         public int Current_Year { get; set; }
         public byte Current_Semester { get; set; }
         public byte Current_Round { get; set; }
-        public int Request_Status { get; set; }
+        //public int Request_Status { get; set; }
         public int Facility_ID { get; set; }
         public int Room_ID { get; set; }
         public int Building_ID { get; set; }

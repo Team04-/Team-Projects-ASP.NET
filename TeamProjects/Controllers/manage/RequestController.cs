@@ -40,7 +40,7 @@ namespace TeamProjects.Controllers.manage
             ViewBag.Start_Time = new SelectList(new[] { "1/T", "2/T", "3/T", "4/T", "5/T", "6/T", "7/T", "8/T", "9/T" });
             ViewBag.Duration = new SelectList(new[] { "1/T", "2/T", "3/T", "4/T", "5/T", "6/T", "7/T", "8/T", "9/T" });
             ViewBag.Department_Code = new SelectList(db.timetable_department, "Department_Code", "Department_Name");
-            ViewBag.Part_Code = new SelectList(db.timetable_request, "Part_Code", "Part_Code");
+            //ViewBag.Part_Code = new SelectList(db.timetable_request, "Part_Code", "Part_Code");
             ViewBag.Module_Code = new SelectList(db.timetable_module, "Module_Code", "Module_Title");
             ViewBag.Day_ID = new SelectList(db.timetable_day, "Day_ID", "Day_Name");
             ViewBag.Park_ID = new SelectList(db.timetable_park, "Park_ID", "Park_Name");
@@ -89,7 +89,7 @@ namespace TeamProjects.Controllers.manage
 			{
 				//Request_ID = 1, //AUTO
 				Department_Code = requestView.Department_Code, // Get from logged in user
-				Part_Code = requestView.Part_Code.ToString(), // Dropdown
+				//Part_Code = requestView.Part_Code.ToString(), // Dropdown
 				Module_Code = requestView.Module_Code,
 				Day_ID = (byte) requestView.Day_ID,
 				Start_Time = (byte) requestView.Start_Time,
@@ -135,7 +135,7 @@ namespace TeamProjects.Controllers.manage
 
 			timetable_request_week timetable_request_week = new timetable_request_week()
 			{
-				Request_ID = 1,
+                Request_ID = db.timetable_request.Last().Request_ID,
 				Week = 010,
 				//Week = requestView.Week,
 			};

@@ -1,5 +1,6 @@
 // TO DO
 
+- Add weeks checkboxes - check what boxes are ticked, convert to string then hidden input ready for post
 - Filter by Park - uncomment from BuildingAPI
 - POST action
 
