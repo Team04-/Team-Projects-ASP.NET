@@ -58,6 +58,12 @@
 
 	});
 
+    //FUNCTIONS//
+
+	function updateRoomPrefJSON() {
+	    document.getElementById("hdnRoomPrefJSON").value(JSON.stringify(roomPrefCollection));
+	}
+
 	function addRow(tableID) {
 
 		var table = document.getElementById(tableID);
@@ -261,10 +267,6 @@
 //			});
 //	}
 
-	function updateRoomPrefJSON() {
-	    $("#Room_Pref_JSON").val(JSON.stringify(roomPrefCollection));
-	}
-
 </script>
 
 
@@ -395,7 +397,7 @@
                 </div>
             </div>
 
-        @Html.HiddenFor(model => model.Room_Pref_JSON)
+        @Html.HiddenFor(model => model.Room_Pref_JSON, new { @ID = "hdnRoomPrefJSON" })
 
             <div class="form-group">
                 <div class="col-md-offset-2 col-md-10">
