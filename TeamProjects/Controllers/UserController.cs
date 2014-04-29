@@ -23,7 +23,7 @@ namespace TeamProjects.Controllers
 
         [HttpPost]
         public ActionResult LogIn(TeamProjects.Models.DepartmentModel department) {
-        
+            return View();
         }
 
     }

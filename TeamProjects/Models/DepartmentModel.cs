@@ -16,6 +16,6 @@ namespace TeamProjects.Models
         [Required]
         [DataType(DataType.Password)]
         [StringLength(200)]
-        public string Department { get; set; }
+        public string Password { get; set; }
     }
 }

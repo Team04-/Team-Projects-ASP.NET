@@ -99,7 +99,8 @@ namespace TeamProjects.Controllers.manage
 				Priority = requestView.Priority,
 				Park_ID = requestView.Park_ID,
 				Custom_Comments = requestView.Custom_Comments,
-				Current_Round = requestView.Current_Round,
+                //TODO change so that it uses the departments selected active round
+				Current_Round = db.timetable_round.Where(r => r.Round_Status == "Current").First().Round_Code,
 				//Request_Status = 0, //AUTO
 			};
 
