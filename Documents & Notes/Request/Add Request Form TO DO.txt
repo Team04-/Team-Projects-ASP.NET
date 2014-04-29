@@ -1,11 +1,8 @@
 // TO DO
 
-- Filter by Park
-- Filter by Room Type
-- JS Room Pref Array to POST
+- Filter by Park - uncomment from BuildingAPI
 - POST action
 
 - Add Dept from login
-- Add available module codes
 
 - Redesign

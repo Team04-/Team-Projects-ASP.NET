@@ -4,6 +4,7 @@ using System.Data;
 using System.Data.Entity;
 using System.Linq;
 using System.Web;
+using System.Web.Script.Serialization;
 using System.Web.Mvc;
 using TeamProjects.Models;
 
@@ -84,11 +85,9 @@ namespace TeamProjects.Controllers.manage
 			//var viewModel = db.Database.SqlQuery<TeamProjects.Models.RequestViewModel>(query);
 			//return View(viewModel.ToList());
 
-
-
 			timetable_request timetable_request = new timetable_request()
 			{
-				Request_ID = 1, //AUTO
+				//Request_ID = 1, //AUTO
 				Department_Code = requestView.Department_Code, // Get from logged in user
 				Part_Code = requestView.Part_Code.ToString(), // Dropdown
 				Module_Code = requestView.Module_Code,
@@ -101,7 +100,7 @@ namespace TeamProjects.Controllers.manage
 				Park_ID = requestView.Park_ID,
 				Custom_Comments = requestView.Custom_Comments,
 				Current_Round = requestView.Current_Round,
-				Request_Status = 0, //AUTO
+				//Request_Status = 0, //AUTO
 			};
 
 			db.timetable_request.Add(timetable_request);
@@ -117,15 +116,22 @@ namespace TeamProjects.Controllers.manage
 			db.timetable_request_facility.Add(timetable_request_facility);
 			db.SaveChanges();
 
-			timetable_request_room_allocation timetable_request_room_allocation = new timetable_request_room_allocation()
-			{
-				Request_ID = 1,
-				Building_ID = requestView.Building_ID.ToString(),
-				Room_ID = requestView.Room_ID.ToString(),
-			};
 
-			db.timetable_request_room_allocation.Add(timetable_request_room_allocation);
-			db.SaveChanges();
+            JavaScriptSerializer serializer = new JavaScriptSerializer();
+            var roomPrefs = serializer.Deserialize<RoomPref[]>(requestView.Room_Pref_JSON);
+
+            foreach (var item in roomPrefs) {
+			    timetable_request_room_allocation timetable_request_room_allocation = new timetable_request_room_allocation()
+			    {
+				    Request_ID = db.timetable_request.Last().Request_ID,
+				    Building_ID = item.Building.ToString(),
+				    Room_ID = item.Room.ToString(),
+			    };
+
+			    db.timetable_request_room_allocation.Add(timetable_request_room_allocation);
+			    db.SaveChanges();
+
+            }
 
 			timetable_request_week timetable_request_week = new timetable_request_week()
 			{

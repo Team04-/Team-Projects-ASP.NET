@@ -24,24 +24,10 @@ namespace TeamProjects.Controllers
         }
 
         // GET api/moduleAPIController/5
-        public IEnumerable<timetable_module> Gettimetable_module(string DeptCode, string PartCode)
+        public IEnumerable<timetable_module> Gettimetable_module(string DeptCode)
         {
 
-            var timetable_module = (from m in db.timetable_module where m.Department_Code == DeptCode && m.Part_Code == PartCode select m);
-
-            if (timetable_module == null)
-            {
-                throw new HttpResponseException(Request.CreateResponse(HttpStatusCode.NotFound));
-            }
-
-            return timetable_module;
-        }
-
-		public IEnumerable<timetable_module> Gettimetable_modulePartCode(string DeptCode2)
-        {
-
-            var timetable_module =  (from m in db.timetable_module where m.Department_Code == DeptCode2 select m);
-			//timetable_module = timetable_module.GroupBy(cust => cust.Part_Code).Select(grp => grp.First());
+            var timetable_module = (from m in db.timetable_module where m.Department_Code == DeptCode select m);
 
             if (timetable_module == null)
             {
