@@ -101,6 +101,9 @@
 					i--;
 				}
 			}
+
+			updateRoomPrefJSON();
+
 		} catch (e) {
 			alert(e);
 		}
@@ -134,6 +137,7 @@
 			document.getElementById('Room_ID').value = "";
 
 			addRow('dataTable');
+			updateRoomPrefJSON();
 
 			alert("Room preference successfully added!");
 		}
@@ -235,26 +239,30 @@
 });
     }
 
-	function sendRoomPref() {
+//	function sendRoomPref() {
 
-		$.ajax({
-			type: "POST",
-			cache: false,
-			url: "/Request/GetRoomPrefCollection",
-			dataType: "json",
-			contentType: "application/json",
+//		$.ajax({
+//			type: "POST",
+//			cache: false,
+//			url: "/Request/GetRoomPrefCollection",
+//			dataType: "json",
+//			contentType: "application/json",
 			//dataType: "html",
-			traditional: true,
-			data: {
-				roomPrefCollection: JSON.stringify(roomPrefCollection)
-			}
-		})
-			.done(function (data) {
-				console.log('WOOT: ' + data);
-			})
-			.fail(function (jqXHR, textStatus, err) {
-				console.log('Error: ' + err);
-			});
+//			traditional: true,
+//			data: {
+//				roomPrefCollection: JSON.stringify(roomPrefCollection)
+//			}
+//		})
+//			.done(function (data) {
+//				console.log('WOOT: ' + data);
+//			})
+//			.fail(function (jqXHR, textStatus, err) {
+//				console.log('Error: ' + err);
+//			});
+//	}
+
+	function updateRoomPrefJSON() {
+	    $("#Room_Pref_JSON").val(JSON.stringify(roomPrefCollection));
 	}
 
 </script>
@@ -387,9 +395,11 @@
                 </div>
             </div>
 
+        @Html.HiddenFor(model => model.Room_Pref_JSON)
+
             <div class="form-group">
                 <div class="col-md-offset-2 col-md-10">
-                    <input type="submit" value="Create" class="btn btn-default" onclick="sendRoomPref();" />
+                    <input type="submit" value="Create" class="btn btn-default" />
                 </div>
             </div>
         </div>
