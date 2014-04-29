@@ -1,0 +1,53 @@
+﻿@model TeamProjects.Models.timetable_round
+
+@{
+    ViewBag.Title = "Delete Round @Model.Round_Code";
+}
+
+<h2>Delete Round @Model.Round_Code</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<fieldset>
+    <legend>timetable_round</legend>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Round_Code)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Round_Code)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Round_Status)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Round_Status)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Semester)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Semester)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Start_Date)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Start_Date)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.End_Date)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.End_Date)
+    </div>
+</fieldset>
+@using (Html.BeginForm()) {
+    <p>
+        <input type="submit" value="Delete" /> |
+        @Html.ActionLink("Back to List", "Index")
+    </p>
+}
