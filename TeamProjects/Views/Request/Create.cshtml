@@ -11,9 +11,6 @@
 
 	$(document).ready(function () {
 
-		//$("#Park_ID2").prepend("<option value='-Select Park-' selected='selected'></option>");
-		//$("#Room_Type").prepend("<option value='-Select Room Type-' selected='selected'></option>");
-
 		$("#Building_ID").change(function () {
 
 			$("#Room_ID").empty();
@@ -22,11 +19,11 @@
 
 		});
 
-		$("#Dept_Code").change(function () {
+		$("#Department_Code").change(function () {
 
 		    $("#Part_Code").empty();
 
-		    findPartCodes(document.getElementById('Dept_Code').options[document.getElementById('Dept_Code').selectedIndex].value);
+		    findPartCodes(document.getElementById('Department_Code').options[document.getElementById('Department_Code').selectedIndex].value);
 
 		});
 
@@ -34,7 +31,7 @@
 
 		    $("#Module_Code").empty();
 
-		    findModules(document.getElementById('Dept_Code').options[document.getElementById('Dept_Code').selectedIndex].value, document.getElementById('Part_Code').options[document.getElementById('Part_Code').selectedIndex].text);
+		    findModules(document.getElementById('Department_Code').options[document.getElementById('Department_Code').selectedIndex].value, document.getElementById('Part_Code').options[document.getElementById('Part_Code').selectedIndex].text);
 
 		});
 
@@ -131,8 +128,6 @@
 
 			roomPrefCollection.push(roomPref);
 
-			// Once added, empty the roompref inputs
-			// old table: //document.getElementById("roomChoices").innerHTML = document.getElementById("roomChoices").innerHTML + roomPrefArray[roomPrefCount][0] + " | " + roomPrefArray[roomPrefCount][1] + " | " + roomPrefArray[roomPrefCount][2] + " | " + roomPrefArray[roomPrefCount][3] + "</br>";
 			document.getElementById('Room_Type').value = "";
 			document.getElementById('Park_ID').value = "";
 			document.getElementById('Building_ID').value = "";
@@ -143,24 +138,6 @@
 			alert("Room preference successfully added!");
 		}
 	}
-
-	//function findRooms(buildingID) {
-
-	//	$.getJSON("//Url.Action("RoomAPI", "api", null, Request.Url.Scheme)" + '?BuildingID=' + buildingID)
-    //    .done(function (data) {
-    //    	console.log(data);
-    //   	data.forEach(function (entry) {
-    //    		var select = document.getElementById("Room_ID");
-    //    		var option = document.createElement('option');
-    //    		option.text = entry.Room_ID;
-    //    		option.value = entry.Room_ID;
-    //    		select.add(option);
-    //    	});
-    //    })
-    //    .fail(function (jqXHR, textStatus, err) {
-    //    	console.log('Error: ' + err);
-    //    });
-	//}
 
 	function findRooms(buildingID, roomType) {
 
@@ -238,7 +215,7 @@
 
         var select = document.getElementById("Part_Code");
         var option = document.createElement('option');
-        option.text = "-Select Module Code-";
+        option.text = "-Select Part Code-";
         option.value = "";
         select.add(option);
 
@@ -298,14 +275,14 @@
         <div class="form-group">
             @Html.LabelFor(model => model.Department_Code, "Department Code", new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.DropDownListFor(model => model.Department_Code, (SelectList)ViewBag.Department_Code)
+                @Html.DropDownListFor(model => model.Department_Code, (SelectList)ViewBag.Department_Code, "-Select Department-")
             </div>
         </div>
 
         <div class="form-group">
             @Html.LabelFor(model => model.Part_Code, "Part Code", new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.DropDownListFor(model => model.Part_Code, (SelectList)ViewBag.Part_Code)
+                @Html.DropDownListFor(model => model.Part_Code, (SelectList)ViewBag.Part_Code, "-Select Part Code-")
             </div>
         </div>
 
@@ -313,15 +290,7 @@
         <div class="form-group">
             @Html.LabelFor(model => model.Module_Code, "Module Code", new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.DropDownListFor(model => model.Module_Code, (SelectList)ViewBag.Module_Code)
-            </div>
-        </div>
-
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.Module_Code, "Module Code", new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-				@Html.DropDownListFor(model => model.Module_Code, (SelectList) ViewBag.Module_Code)
+				@Html.DropDownListFor(model => model.Module_Code, (SelectList)ViewBag.Module_Code, "-Select Module Code-")
             </div>
         </div>
 
@@ -366,21 +335,21 @@
             <div class="form-group">
                 @Html.LabelFor(model => model.Park_ID, "Filter by Park", new { @class = "control-label col-md-2" })
                 <div class="col-md-10">
-					@Html.DropDownListFor(model => model.Park_ID2, (SelectList) ViewBag.Park_ID, "", new {@id="Park_ID2"})
+					@Html.DropDownListFor(model => model.Park_ID2, (SelectList) ViewBag.Park_ID, "-Select Park-", new {@id="Park_ID2"})
                 </div>
             </div>
 
 		<div class="form-group">
 			@Html.LabelFor(model => model.Building_ID, "Building", new { @class = "control-label col-md-2" })
 			<div class="col-md-10">
-				@Html.DropDownListFor(model => model.Building_ID, (SelectList) ViewBag.Building_ID, "")
+				@Html.DropDownListFor(model => model.Building_ID, (SelectList) ViewBag.Building_ID, "-Select Building-")
 			</div>
 		</div>
 
 		<div class="form-group">
 			@Html.LabelFor(model => model.Room_Type, "Filter by Room Type", new { @class = "control-label col-md-2" })
 			<div class="col-md-10">
-				@Html.DropDownListFor(model => model.Room_Type, (SelectList) ViewBag.Room_Type, "")
+				@Html.DropDownListFor(model => model.Room_Type, (SelectList) ViewBag.Room_Type, "-Select Room-")
 			</div>
 		</div>
 

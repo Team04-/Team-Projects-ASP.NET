@@ -40,7 +40,7 @@ namespace TeamProjects.Controllers.manage
             ViewBag.Duration = new SelectList(new[] { "1/T", "2/T", "3/T", "4/T", "5/T", "6/T", "7/T", "8/T", "9/T" });
             ViewBag.Department_Code = new SelectList(db.timetable_department, "Department_Code", "Department_Name");
             ViewBag.Part_Code = new SelectList(db.timetable_request, "Part_Code", "Part_Code");
-            ViewBag.Module_Code = new SelectList(db.timetable_request, "Module_Code", "Module_Code");
+            ViewBag.Module_Code = new SelectList(db.timetable_module, "Module_Code", "Module_Title");
             ViewBag.Day_ID = new SelectList(db.timetable_day, "Day_ID", "Day_Name");
             ViewBag.Park_ID = new SelectList(db.timetable_park, "Park_ID", "Park_Name");
 			ViewBag.Building_ID = new SelectList(db.timetable_building, "Building_ID", "Building_Name");
