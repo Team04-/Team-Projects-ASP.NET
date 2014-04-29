@@ -38,4 +38,11 @@ namespace TeamProjects.Models
 
     }
 
+    public class RoomPref {
+        public string Room_Type;
+        public string Park;
+        public string Building;
+        public string Room;
+    }
+
 }

@@ -21,17 +21,9 @@
 
 		$("#Department_Code").change(function () {
 
-		    $("#Part_Code").empty();
-
-		    findPartCodes(document.getElementById('Department_Code').options[document.getElementById('Department_Code').selectedIndex].value);
-
-		});
-
-		$("#Part_Code").change(function () {
-
 		    $("#Module_Code").empty();
 
-		    findModules(document.getElementById('Department_Code').options[document.getElementById('Department_Code').selectedIndex].value, document.getElementById('Part_Code').options[document.getElementById('Part_Code').selectedIndex].text);
+		    findModules(document.getElementById('Department_Code').options[document.getElementById('Department_Code').selectedIndex].value);
 
 		});
 
@@ -61,7 +53,7 @@
     //FUNCTIONS//
 
 	function updateRoomPrefJSON() {
-	    document.getElementById("hdnRoomPrefJSON").value(JSON.stringify(roomPrefCollection));
+	    $("#hdnRoomPrefJSON").val(JSON.stringify(roomPrefCollection));
 	}
 
 	function addRow(tableID) {
@@ -197,7 +189,7 @@
 	});
 	}
 
-    function findModules(deptCode, partCode) {
+    function findModules(deptCode) {
 
         var select = document.getElementById("Module_Code");
         var option = document.createElement('option');
@@ -205,7 +197,7 @@
         option.value = "";
         select.add(option);
 
-        $.getJSON("@Url.Action("ModuleAPI", "api", null, Request.Url.Scheme)" + '?DeptCode=' + deptCode + "&PartCode=" + partCode)
+        $.getJSON("@Url.Action("ModuleAPI", "api", null, Request.Url.Scheme)" + '?DeptCode=' + deptCode)
 .done(function (data) {
     console.log(data);
     data.forEach(function (entry) {
@@ -220,52 +212,6 @@
     console.log('Error: ' + err);
 });
     }
-
-    function findPartCodes(deptCode) {
-
-        var select = document.getElementById("Part_Code");
-        var option = document.createElement('option');
-        option.text = "-Select Part Code-";
-        option.value = "";
-        select.add(option);
-
-        $.getJSON("@Url.Action("ModuleAPI", "api", null, Request.Url.Scheme)" + '?DeptCode2=' + deptCode)
-.done(function (data) {
-    console.log(data);
-    data.forEach(function (entry) {
-        var select = document.getElementById("Part_Code");
-        var option = document.createElement('option');
-        option.text = entry.Part_Code;
-        option.value = entry.Part_Code;
-        select.add(option);
-    });
-})
-.fail(function (jqXHR, textStatus, err) {
-    console.log('Error: ' + err);
-});
-    }
-
-//	function sendRoomPref() {
-
-//		$.ajax({
-//			type: "POST",
-//			cache: false,
-//			url: "/Request/GetRoomPrefCollection",
-//			dataType: "json",
-//			contentType: "application/json",
-			//dataType: "html",
-//			traditional: true,
-//			data: {
-//				roomPrefCollection: JSON.stringify(roomPrefCollection)
-//			}
-//		})
-//			.done(function (data) {
-//				console.log('WOOT: ' + data);
-//			})
-//			.fail(function (jqXHR, textStatus, err) {
-//				console.log('Error: ' + err);
-//			});
-//	}
 
 </script>
 
@@ -288,14 +234,6 @@
                 @Html.DropDownListFor(model => model.Department_Code, (SelectList)ViewBag.Department_Code, "-Select Department-")
             </div>
         </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.Part_Code, "Part Code", new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.DropDownListFor(model => model.Part_Code, (SelectList)ViewBag.Part_Code, "-Select Part Code-")
-            </div>
-        </div>
-
 
         <div class="form-group">
             @Html.LabelFor(model => model.Module_Code, "Module Code", new { @class = "control-label col-md-2" })
