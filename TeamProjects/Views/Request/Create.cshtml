@@ -22,7 +22,21 @@
 
 		});
 
+		$("#Dept_Code").change(function () {
 
+		    $("#Part_Code").empty();
+
+		    findPartCodes(document.getElementById('Dept_Code').options[document.getElementById('Dept_Code').selectedIndex].value);
+
+		});
+
+		$("#Part_Code").change(function () {
+
+		    $("#Module_Code").empty();
+
+		    findModules(document.getElementById('Dept_Code').options[document.getElementById('Dept_Code').selectedIndex].value, document.getElementById('Part_Code').options[document.getElementById('Part_Code').selectedIndex].text);
+
+		});
 
 		$("#Room_Type").change(function () {
 
@@ -196,6 +210,54 @@
 	});
 	}
 
+    function findModules(deptCode, partCode) {
+
+        var select = document.getElementById("Module_Code");
+        var option = document.createElement('option');
+        option.text = "-Select Module Code-";
+        option.value = "";
+        select.add(option);
+
+        $.getJSON("@Url.Action("ModuleAPI", "api", null, Request.Url.Scheme)" + '?DeptCode=' + deptCode + "&PartCode=" + partCode)
+.done(function (data) {
+    console.log(data);
+    data.forEach(function (entry) {
+        var select = document.getElementById("Module_Code");
+        var option = document.createElement('option');
+        option.text = entry.Module_Title;
+        option.value = entry.Module_Code;
+        select.add(option);
+    });
+})
+.fail(function (jqXHR, textStatus, err) {
+    console.log('Error: ' + err);
+});
+    }
+
+    function findPartCodes(deptCode) {
+
+        var select = document.getElementById("Part_Code");
+        var option = document.createElement('option');
+        option.text = "-Select Module Code-";
+        option.value = "";
+        select.add(option);
+
+        $.getJSON("@Url.Action("ModuleAPI", "api", null, Request.Url.Scheme)" + '?DeptCode2=' + deptCode)
+.done(function (data) {
+    console.log(data);
+    data.forEach(function (entry) {
+        var select = document.getElementById("Part_Code");
+        var option = document.createElement('option');
+        option.text = entry.Part_Code;
+        option.value = entry.Part_Code;
+        select.add(option);
+    });
+})
+.fail(function (jqXHR, textStatus, err) {
+    console.log('Error: ' + err);
+});
+    }
+
 	function sendRoomPref() {
 
 		$.ajax({
@@ -232,6 +294,29 @@
         <h4>timetable_request</h4>
         <hr />
         @Html.ValidationSummary(true)
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Department_Code, "Department Code", new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownListFor(model => model.Department_Code, (SelectList)ViewBag.Department_Code)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Part_Code, "Part Code", new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownListFor(model => model.Part_Code, (SelectList)ViewBag.Part_Code)
+            </div>
+        </div>
+
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Module_Code, "Module Code", new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownListFor(model => model.Module_Code, (SelectList)ViewBag.Module_Code)
+            </div>
+        </div>
+
 
         <div class="form-group">
             @Html.LabelFor(model => model.Module_Code, "Module Code", new { @class = "control-label col-md-2" })
