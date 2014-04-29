@@ -37,10 +37,11 @@ namespace TeamProjects.Controllers
             return timetable_module;
         }
 
-        public IEnumerable<timetable_module> Gettimetable_modulePartCode(string DeptCode2)
+		public IEnumerable<timetable_module> Gettimetable_modulePartCode(string DeptCode2)
         {
 
-            var timetable_module = (IEnumerable<timetable_module>) (from m in db.timetable_module where m.Department_Code == DeptCode2 select m.Part_Code).Distinct();
+            var timetable_module =  (from m in db.timetable_module where m.Department_Code == DeptCode2 select m);
+			//timetable_module = timetable_module.GroupBy(cust => cust.Part_Code).Select(grp => grp.First());
 
             if (timetable_module == null)
             {
