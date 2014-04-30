@@ -1,5 +1,34 @@
-﻿@{
+﻿@model TeamProjects.Models.DepartmentModel
+@{
     ViewBag.Title = "Registration";
 }
 
 <h2>Registration</h2>
+
+@using (Html.BeginForm())
+{
+    @Html.ValidationSummary(true, "Creating the department failed.");
+    <div>
+        <fieldset>
+            <legend>Create new user</legend>
+            <div>@Html.LabelFor(u=>u.Code)</div>
+            <div>
+                @Html.TextBoxFor(u => u.Code)
+                @Html.ValidationMessageFor(u => u.Code) 
+            </div>
+
+            <div>@Html.LabelFor(u=>u.Name)</div>
+            <div>
+                @Html.TextBoxFor(u => u.Name)
+                @Html.ValidationMessageFor(u => u.Name) 
+            </div>
+            
+            <div>@Html.LabelFor(u=>u.Password)</div>
+            <div>
+                @Html.PasswordFor(u=>u.Password)
+                @Html.ValidationMessageFor(u=>u.Password) 
+            </div>
+            <input type="submit" value="Create Department"/>
+        </fieldset>
+    </div>
+}

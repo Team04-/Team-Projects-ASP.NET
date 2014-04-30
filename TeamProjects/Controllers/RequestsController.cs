@@ -7,7 +7,7 @@ using System.Web;
 using System.Web.Mvc;
 using TeamProjects.Models;
 
-namespace TeamProjects.Controllers
+namespace TeamProjects.Controllers  
 {
     public class RequestsController : Controller
     {

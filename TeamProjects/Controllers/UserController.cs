@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.Security;
 using System.Text;
 using System.Security.Cryptography;
 using System.Globalization;
@@ -28,7 +29,19 @@ namespace TeamProjects.Controllers
         [HttpPost]
         public ActionResult LogIn(Models.DepartmentModel department) 
         {
-            return View();
+            if (ModelState.IsValid)
+            {
+                if (isValid(department.Code, department.Password))
+                {
+                    FormsAuthentication.SetAuthCookie(department.Code, false);
+                    return RedirectToAction("Index", "Home");
+                }
+                else
+                {
+                    ModelState.AddModelError("","Login data is incorrect.");
+                }
+            }
+            return View(department);
         }
 
         [HttpGet]
@@ -40,7 +53,25 @@ namespace TeamProjects.Controllers
         [HttpPost]
         public ActionResult Register(Models.DepartmentModel department)
         {
-            return View();
+            if (ModelState.IsValid)
+            {
+                using (var db = new Models.team04Entities())
+                {
+                    var crypto = new Misc.BCryptHasher();
+                    var salt = GenerateSaltValue();
+                    HashAlgorithm bcrypt = new Misc.BCryptHasher();
+                    var hashedpassword = HashPassword(department.Password, salt, bcrypt);
+                    var newDep = db.timetable_department.Create();
+                    newDep.Department_Code = department.Code;
+                    newDep.Department_Name = department.Name;
+                    newDep.Password = hashedpassword;
+                    newDep.Password_Salt = salt;
+                    db.timetable_department.Add(newDep);
+                    db.SaveChanges();
+                    return RedirectToAction("Index","Home");
+                }
+            }
+            return View(department);
         }
 
         public ActionResult LogOut()
@@ -51,13 +82,13 @@ namespace TeamProjects.Controllers
         private bool isValid(string department, string password)
         {
             bool isValid = false;
-            using (var db = new TeamProjects.Models.team04Entities())
+            using (var db = new Models.team04Entities())
             {
                 var user = db.timetable_department.FirstOrDefault(u => u.Department_Code == department);
                 if (user != null)
                 {
-                    HashAlgorithm sha = new SHA1CryptoServiceProvider();
-                    if (user.Password == HashPassword(password, user.Password_Salt, sha))
+                    HashAlgorithm bcrypt = new Misc.BCryptHasher();
+                    if (user.Password == HashPassword(password, user.Password_Salt, bcrypt))
                     {
                         isValid = true;
                     }

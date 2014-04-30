@@ -10,9 +10,15 @@ namespace TeamProjects.Models
     {
         [Required]
         [DataType(DataType.Text)]
-        [StringLength(4)]
+        [StringLength(2)]
         [Display(Name="Department Code: ")]
-        public string Department { get; set; }
+        public string Code { get; set; }
+
+        [Required]
+        [DataType(DataType.Text)]
+        [StringLength(50)]
+        [Display(Name = "Department Name: ")]
+        public string Name { get; set; }
 
         [Required]
         [DataType(DataType.Password)]
