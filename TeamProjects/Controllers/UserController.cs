@@ -7,11 +7,22 @@ using System.Web.Security;
 using System.Text;
 using System.Security.Cryptography;
 using System.Globalization;
+using TeamProjects.Models;
 
 namespace TeamProjects.Controllers
 {
     public class UserController : Controller
     {
+        private string[][] getDepartmentInfo()
+        {
+            team04Entities db = new team04Entities();
+            string[] Department_Names = db.timetable_department.Select(name => name.Department_Name).ToArray();
+            string[] Department_Codes = db.timetable_department.Select(name => name.Department_Code).ToArray();
+            string[][] DepartmentsInfo = new string[2][];
+            DepartmentsInfo[0] = Department_Names;
+            DepartmentsInfo[1] = Department_Codes;
+            return DepartmentsInfo;
+        }
         //
         // GET: /User/
 
@@ -89,7 +100,8 @@ namespace TeamProjects.Controllers
                 var user = db.timetable_department.FirstOrDefault(u => u.Department_Code == department);
                 if (user != null)
                 {
-                    if (user.Password == crypto.Compute(password, user.Password_Salt))
+                    var hashedpassword = crypto.Compute(password, user.Password_Salt);
+                    if (user.Password == hashedpassword)
                     {
                         isValid = true;
                     }
