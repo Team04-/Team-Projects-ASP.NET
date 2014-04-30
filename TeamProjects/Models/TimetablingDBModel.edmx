@@ -27,7 +27,7 @@
           <Property Name="Department_ID" Type="int" Nullable="false" />
           <Property Name="Department_Code" Type="varchar" MaxLength="2" Nullable="false" />
           <Property Name="Department_Name" Type="varchar" MaxLength="50" />
-          <Property Name="Current_Round" Type="smallint" Nullable="false" />
+          <Property Name="Round" Type="smallint" Nullable="false" />
           <Property Name="Password" Type="varchar" MaxLength="256" />
           <Property Name="Password_Salt" Type="varchar" MaxLength="256" />
         </EntityType>
@@ -157,7 +157,7 @@
               <PropertyRef Name="Round_Code" />
             </Principal>
             <Dependent Role="timetable_department">
-              <PropertyRef Name="Current_Round" />
+              <PropertyRef Name="Round" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -481,7 +481,7 @@
           <Property Name="Department_ID" Type="Int32" Nullable="false" />
           <Property Name="Department_Code" Type="String" Nullable="false" MaxLength="2" FixedLength="false" Unicode="false" />
           <Property Name="Department_Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="Current_Round" Type="Int16" Nullable="false" />
+          <Property Name="Round" Type="Int16" Nullable="false" />
           <Property Name="Password" Type="String" MaxLength="256" FixedLength="false" Unicode="false" />
           <Property Name="Password_Salt" Type="String" MaxLength="256" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="timetable_round" Relationship="team04Model.FK_timetable_department_timetable_round" FromRole="timetable_department" ToRole="timetable_round" />
@@ -649,7 +649,7 @@
               <PropertyRef Name="Round_Code" />
             </Principal>
             <Dependent Role="timetable_department">
-              <PropertyRef Name="Current_Round" />
+              <PropertyRef Name="Round" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -817,7 +817,7 @@
               <MappingFragment StoreEntitySet="timetable_department">
                 <ScalarProperty Name="Password_Salt" ColumnName="Password_Salt" />
                 <ScalarProperty Name="Password" ColumnName="Password" />
-                <ScalarProperty Name="Current_Round" ColumnName="Current_Round" />
+                <ScalarProperty Name="Round" ColumnName="Round" />
                 <ScalarProperty Name="Department_Name" ColumnName="Department_Name" />
                 <ScalarProperty Name="Department_Code" ColumnName="Department_Code" />
                 <ScalarProperty Name="Department_ID" ColumnName="Department_ID" />
@@ -958,20 +958,20 @@
     <!-- Diagram content (shape and connector positions) -->
     <Diagrams>
       <Diagram Name="TimetablingDBModel" ZoomLevel="67">
-        <EntityTypeShape EntityType="team04Model.timetable_building" Width="1.5" PointX="3" PointY="4.125" />
-        <EntityTypeShape EntityType="team04Model.timetable_day" Width="1.5" PointX="0.75" PointY="7" />
-        <EntityTypeShape EntityType="team04Model.timetable_department" Width="1.5" PointX="7.5" PointY="12.125" />
-        <EntityTypeShape EntityType="team04Model.timetable_facility" Width="1.5" PointX="7.75" PointY="9.5" />
-        <EntityTypeShape EntityType="team04Model.timetable_module" Width="1.5" PointX="0.75" PointY="10" />
-        <EntityTypeShape EntityType="team04Model.timetable_park" Width="1.5" PointX="0.75" PointY="4.25" />
-        <EntityTypeShape EntityType="team04Model.timetable_request" Width="1.5" PointX="7.5" PointY="2.375" />
-        <EntityTypeShape EntityType="team04Model.timetable_request_facility" Width="1.5" PointX="10" PointY="9.25" />
-        <EntityTypeShape EntityType="team04Model.timetable_request_room_allocation" Width="1.5" PointX="5.25" PointY="4" />
-        <EntityTypeShape EntityType="team04Model.timetable_request_week" Width="1.5" PointX="5.25" PointY="0.75" />
-        <EntityTypeShape EntityType="team04Model.timetable_room" Width="1.5" PointX="3" PointY="1" />
-        <EntityTypeShape EntityType="team04Model.timetable_room_facility" Width="1.5" PointX="9.75" PointY="2" />
-        <EntityTypeShape EntityType="team04Model.timetable_room_type" Width="1.5" PointX="0.75" PointY="1.5" />
-        <EntityTypeShape EntityType="team04Model.timetable_round" Width="1.5" PointX="5.25" PointY="7.125" />
+        <EntityTypeShape EntityType="team04Model.timetable_building" Width="1.5" PointX="1.5" PointY="14.375" />
+        <EntityTypeShape EntityType="team04Model.timetable_day" Width="1.5" PointX="0.75" PointY="0.75" />
+        <EntityTypeShape EntityType="team04Model.timetable_department" Width="1.5" PointX="3" PointY="4.375" />
+        <EntityTypeShape EntityType="team04Model.timetable_facility" Width="1.5" PointX="8.75" PointY="1.25" />
+        <EntityTypeShape EntityType="team04Model.timetable_module" Width="1.5" PointX="2.75" PointY="0.75" />
+        <EntityTypeShape EntityType="team04Model.timetable_park" Width="1.5" PointX="3.75" PointY="16.5" />
+        <EntityTypeShape EntityType="team04Model.timetable_request" Width="1.5" PointX="6" PointY="2.75" />
+        <EntityTypeShape EntityType="team04Model.timetable_request_facility" Width="1.5" PointX="11" PointY="0.875" />
+        <EntityTypeShape EntityType="team04Model.timetable_request_room_allocation" Width="1.5" PointX="3.75" PointY="9.875" />
+        <EntityTypeShape EntityType="team04Model.timetable_request_week" Width="1.5" PointX="3.75" PointY="14.125" />
+        <EntityTypeShape EntityType="team04Model.timetable_room" Width="1.5" PointX="1.5" PointY="8.5" />
+        <EntityTypeShape EntityType="team04Model.timetable_room_facility" Width="1.5" PointX="8.75" PointY="4.75" />
+        <EntityTypeShape EntityType="team04Model.timetable_room_type" Width="1.5" PointX="1.5" PointY="11.75" />
+        <EntityTypeShape EntityType="team04Model.timetable_round" Width="1.5" PointX="0.75" PointY="4.375" />
         <AssociationConnector Association="team04Model.FK_timetable_building_timetable_park" />
         <AssociationConnector Association="team04Model.FK_timetable_request_room_allocation_timetable_building" />
         <AssociationConnector Association="team04Model.FK_timetable_department_timetable_round" />
