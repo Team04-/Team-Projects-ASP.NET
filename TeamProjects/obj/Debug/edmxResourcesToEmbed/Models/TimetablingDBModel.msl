@@ -23,7 +23,7 @@
         <MappingFragment StoreEntitySet="timetable_department">
           <ScalarProperty Name="Password_Salt" ColumnName="Password_Salt" />
           <ScalarProperty Name="Password" ColumnName="Password" />
-          <ScalarProperty Name="Current_Round" ColumnName="Current_Round" />
+          <ScalarProperty Name="Round" ColumnName="Round" />
           <ScalarProperty Name="Department_Name" ColumnName="Department_Name" />
           <ScalarProperty Name="Department_Code" ColumnName="Department_Code" />
           <ScalarProperty Name="Department_ID" ColumnName="Department_ID" />

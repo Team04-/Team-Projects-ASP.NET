@@ -96,7 +96,7 @@
     <Property Name="Department_ID" Type="Int32" Nullable="false" />
     <Property Name="Department_Code" Type="String" Nullable="false" MaxLength="2" FixedLength="false" Unicode="false" />
     <Property Name="Department_Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-    <Property Name="Current_Round" Type="Int16" Nullable="false" />
+    <Property Name="Round" Type="Int16" Nullable="false" />
     <Property Name="Password" Type="String" MaxLength="256" FixedLength="false" Unicode="false" />
     <Property Name="Password_Salt" Type="String" MaxLength="256" FixedLength="false" Unicode="false" />
     <NavigationProperty Name="timetable_round" Relationship="team04Model.FK_timetable_department_timetable_round" FromRole="timetable_department" ToRole="timetable_round" />
@@ -264,7 +264,7 @@
         <PropertyRef Name="Round_Code" />
       </Principal>
       <Dependent Role="timetable_department">
-        <PropertyRef Name="Current_Round" />
+        <PropertyRef Name="Round" />
       </Dependent>
     </ReferentialConstraint>
   </Association>

@@ -11,6 +11,14 @@
 
 	$(document).ready(function () {
 
+	    $("input:checkbox").each(function () {
+	        fixHiddenCheckField(this);
+	    });
+
+	    $("input:checkbox").change(function () {
+	        fixHiddenCheckField(this);
+	    });
+
 		$("#Building_ID").change(function () {
 
 			$("#Room_ID").empty();
@@ -51,6 +59,21 @@
 	});
 
     //FUNCTIONS//
+
+	function fixHiddenCheckField(checkField) {
+	    var name = $(checkField).attr("name");
+	    var hiddenSelector = "input:hidden[name=" + name + "]";
+	    var checkBoxesInListSelector = "input:checkbox[name=" + name + "]";
+	    var checkedCheckBoxesInListSelector = "input:checked[name=" + name + "]";
+
+	    if ($(checkedCheckBoxesInListSelector).length >= 1 || $(checkBoxesInListSelector).length > 1) {
+	        $("input").remove(hiddenSelector);
+	    }
+	    else {
+	        if ($(hiddenSelector).length == 0)
+	            $(checkField).parents("form").append("<input type='hidden' name='" + name + "' value='false' />");
+	    }
+	}
 
 	function updateRoomPrefJSON() {
 	    $("#hdnRoomPrefJSON").val(JSON.stringify(roomPrefCollection));
@@ -213,6 +236,17 @@
 });
     }
 
+    function selWeeks() {
+        $(".weekBox").each(function () { $(this).prop("checked", true); });
+        //$("weekBox12").value(false);
+        //$("weekBox13").prop("value", false);
+        //$("weekBox14").prop("value", false);
+    }
+
+    function unselAll() {
+        $(".weekBox").each(function () { $(this).prop("checked", false); });
+    }
+
 </script>
 
 
@@ -280,49 +314,23 @@
                         <th>10</th>
                         <th>11</th>
                         <th>12</th>
+                        <th>13</th>
+                        <th>14</th>
+                        <th>15</th>
                     </tr>
                     <tr>
-                        <td>
-                            @Html.CheckBox("weekOne", false, new { @name = "weeks" })
-                        </td>
-                        <td>
-                            @Html.CheckBox("weekTwo", false, new { @name = "weeks" })
-                        </td>
-                        <td>
-                            @Html.CheckBox("weekThree", false, new { @name = "weeks" })
-                        </td>
-                        <td>
-                            @Html.CheckBox("weekFour", false, new { @name = "weeks" })
-                        </td>
-                        <td>
-                            @Html.CheckBox("weekFive", false, new { @name = "weeks" })
-                        </td>
-                        <td>
-                            @Html.CheckBox("weekSix", false, new { @name = "weeks" })
-                        </td>
-                        <td>
-                            @Html.CheckBox("weekSeven", false, new { @name = "weeks" })
-                        </td>
-                        <td>
-                            @Html.CheckBox("weekEight", false, new { @name = "weeks" })
-                        </td>
-                        <td>
-                            @Html.CheckBox("weekNine", false, new { @name = "weeks" })
-                        </td>
-                        <td>
-                            @Html.CheckBox("weekTen", false, new { @name = "weeks" })
-                        </td>
-                        <td>
-                            @Html.CheckBox("weekEleven", false, new { @name = "weeks" })
-                        </td>
-                        <td>
-                            @Html.CheckBox("weekTwelve", false, new { @name = "weeks" })
-                        </td>
+                        @for (int i = 0; i < 15; i++)
+                        {
+                            <td>
+                            @Html.CheckBoxFor(m => m.Week[i], new { @class = "weekBox", id = "weekBox"+i })
+                            </td>
+                        }
                     </tr>
-                </table>            
+                </table>
+                <input type="button" value="Select All" onclick="selWeeks()" />
+                <input type="button" value="Unselect all" onclick="unselAll()" />
             </div>
         </div>
-
 
         <div class="form-group">
             @Html.LabelFor(model => model.Number_Students, "Number Of Students", new { @class = "control-label col-md-2" })
@@ -338,6 +346,14 @@
 				@Html.DropDownListFor(model => model.Park_ID, (SelectList) ViewBag.Park_ID)
 			</div>
 		</div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Number_Rooms, "# Of Rooms", new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownListFor(model => model.Number_Rooms, (SelectList)ViewBag.Number_Rooms)
+            </div>
+        </div>
+
 
         <div class="form-group">--Individual Room Preferences--</div>
 

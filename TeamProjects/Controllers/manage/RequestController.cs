@@ -47,6 +47,7 @@ namespace TeamProjects.Controllers.manage
         // GET: /Request/Create
         public ActionResult Create()
         {
+            ViewBag.Number_Rooms = new SelectList(new[] { "1", "2", "3" });
             ViewBag.Start_Time = new SelectList(new[] { "1/T", "2/T", "3/T", "4/T", "5/T", "6/T", "7/T", "8/T", "9/T" });
             ViewBag.Duration = new SelectList(new[] { "1/T", "2/T", "3/T", "4/T", "5/T", "6/T", "7/T", "8/T", "9/T" });
             ViewBag.Department_Code = new SelectList(db.timetable_department, "Department_Code", "Department_Name");
@@ -149,12 +150,21 @@ namespace TeamProjects.Controllers.manage
 			timetable_request_week timetable_request_week = new timetable_request_week()
 			{
                 Request_ID = db.timetable_request.Last().Request_ID,
-				Week = 010,
-				//Week = requestView.Week,
+				//Week = Convert.ToByte(requestView.WeekOne),
 			};
 
-			db.timetable_request_week.Add(timetable_request_week);
-			db.SaveChanges();
+            byte weekCount = 1;
+
+            foreach (bool i in requestView.Week)
+            {
+                if (i == true)
+                {
+                    timetable_request_week.Week = weekCount;
+                    db.timetable_request_week.Add(timetable_request_week);
+                    db.SaveChanges();
+                }
+                weekCount++;
+            }
 
 			return RedirectToAction("Index");
         }

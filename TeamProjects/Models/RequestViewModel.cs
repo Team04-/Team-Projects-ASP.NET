@@ -22,7 +22,6 @@ namespace TeamProjects.Models
         public int Start_Time { get; set; }
         public int Duration { get; set; }
         public int Number_Students { get; set; }
-        public int Number_Rooms { get; set; }
         public bool Priority { get; set; }
         public int Room_Type { get; set; }
         public int Park_ID { get; set; }
@@ -35,7 +34,24 @@ namespace TeamProjects.Models
         public int Facility_ID { get; set; }
         public int Room_ID { get; set; }
         public int Building_ID { get; set; }
-        public string Week { get; set; }
+        public bool[] Week { get; set; }
+
+        public byte Number_Rooms { get; set; }
+        public bool WeekOne { get; set; }
+        public bool WeekTwo { get; set; }
+        public bool WeekThree { get; set; }
+        public bool WeekFour { get; set; }
+        public bool WeekFive { get; set; }
+        public bool WeekSix { get; set; }
+        public bool WeekSeven { get; set; }
+        public bool WeekEight { get; set; }
+        public bool WeekNine { get; set; }
+        public bool WeekTen { get; set; }
+        public bool WeekEleven { get; set; }
+        public bool WeekTwelve { get; set; }
+        public bool WeekThirteen { get; set; }
+        public bool WeekFourteen { get; set; }
+        public bool WeekFifteen { get; set; }
     }
 
     public class RoomPref {

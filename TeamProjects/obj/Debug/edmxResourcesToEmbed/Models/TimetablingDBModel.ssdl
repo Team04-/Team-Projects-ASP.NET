@@ -22,7 +22,7 @@
     <Property Name="Department_ID" Type="int" Nullable="false" />
     <Property Name="Department_Code" Type="varchar" MaxLength="2" Nullable="false" />
     <Property Name="Department_Name" Type="varchar" MaxLength="50" />
-    <Property Name="Current_Round" Type="smallint" Nullable="false" />
+    <Property Name="Round" Type="smallint" Nullable="false" />
     <Property Name="Password" Type="varchar" MaxLength="256" />
     <Property Name="Password_Salt" Type="varchar" MaxLength="256" />
   </EntityType>
@@ -152,7 +152,7 @@
         <PropertyRef Name="Round_Code" />
       </Principal>
       <Dependent Role="timetable_department">
-        <PropertyRef Name="Current_Round" />
+        <PropertyRef Name="Round" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
