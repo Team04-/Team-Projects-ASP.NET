@@ -11,11 +11,13 @@ namespace TeamProjects.Models
         [Required]
         [DataType(DataType.Text)]
         [StringLength(4)]
+        [Display(Name="Department Code: ")]
         public string Department { get; set; }
 
         [Required]
         [DataType(DataType.Password)]
-        [StringLength(200)]
+        [StringLength(200, MinimumLength = 8)]
+        [Display(Name = "Password: ")]
         public string Password { get; set; }
     }
 }
