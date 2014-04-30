@@ -39,7 +39,7 @@ namespace TeamProjects.Controllers.api
         //}
 
 		// GET api/RoomAPIController/5
-		public IEnumerable<timetable_room> Gettimetable_room(string BuildingID, string RoomType, string facIdString)
+		public IEnumerable<timetable_room> Gettimetable_room(string BuildingID, string RoomType, string FacIdString)
 		{
 
 			var timetable_room_type = (from m in db.timetable_room_type where m.Type_Name == RoomType select m.Type_ID).ToList();
@@ -48,7 +48,7 @@ namespace TeamProjects.Controllers.api
 
 			var timetable_room = from m in db.timetable_room where m.Building_ID == BuildingID && m.Type_ID == selID select m;
 
-            string[] facIdArray = facIdString.Split('|');
+            string[] facIdArray = FacIdString.Split('|');
 
             //Filter by the first facility
             if (facIdArray.Length > 0)
