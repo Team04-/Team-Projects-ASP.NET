@@ -24,11 +24,10 @@ namespace TeamProjects.Controllers
 		}
 
 		// GET api/buildingAPIController/5
-		public IEnumerable<timetable_building> Gettimetable_building(string ParkID)
+		public IEnumerable<timetable_building> Gettimetable_building(int ParkID)
 		{
 
-			var timetable_building = from m in db.timetable_building select m;
-			timetable_building = timetable_building.Where(e => e.Park_ID.Equals(ParkID));
+			IEnumerable<timetable_building> timetable_building = db.timetable_building.Where(e => e.Park_ID.Equals(ParkID));
 
 			if (timetable_building == null)
 			{

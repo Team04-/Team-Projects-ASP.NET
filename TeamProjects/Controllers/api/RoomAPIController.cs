@@ -41,7 +41,6 @@ namespace TeamProjects.Controllers.api
 		// GET api/RoomAPIController/5
 		public IEnumerable<timetable_room> Gettimetable_room(string BuildingID, string RoomType, string FacIdString)
 		{
-
 			var timetable_room_type = (from m in db.timetable_room_type where m.Type_Name == RoomType select m.Type_ID).ToList();
 
 			byte selID = timetable_room_type.FirstOrDefault();
