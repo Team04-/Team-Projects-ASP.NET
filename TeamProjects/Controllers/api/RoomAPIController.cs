@@ -48,8 +48,15 @@ namespace TeamProjects.Controllers.api
 
 			var timetable_room = from m in db.timetable_room where m.Building_ID == Params[0] && m.Type_ID == selID select m;
 
-            //var timetable_room_facility = (from m in db.timetable_room_facility where m.Facility_ID == Convert.ToInt32(Params[2]) select m.Room_ID);
-
+            //Filter by the first facility
+            if (Params.Length > 2)
+            {
+                IQueryable<timetable_room_facility> timetable_room_facility = db.timetable_room_facility.Where(m => m.Facility_ID == Convert.ToInt32(Params[2])).AsQueryable<timetable_room_facility>();
+                for (var i = 3; i < Params.Length; i++)
+                {
+                    timetable_room_facility = timetable_room_facility.Where(f => f.Facility_ID == Convert.ToInt32(Params[i]));
+                }
+            }
 			if (timetable_room == null)
 			{
 				throw new HttpResponseException(Request.CreateResponse(HttpStatusCode.NotFound));
