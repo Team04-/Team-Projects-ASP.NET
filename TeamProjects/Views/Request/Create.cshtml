@@ -11,6 +11,27 @@
 
 	$(document).ready(function () {
 
+	        $.getJSON("@Url.Action("RoomAPI", "api", null, Request.Url.Scheme)" + '?BuildingID=' + parkID)
+            .done(function (data) {
+                console.log(data);
+                $("#facTable").append("<tr>");
+
+                foreach(function (entry) {
+                    $("#facTable").append("<th>" + entry.Facility_Name + "</th>");
+                })
+
+                $("#facTable").append("</tr><tr>");
+
+                foreach(function (entry) {
+                    $("#facTable").append("<td>" + "<input type='checkbox' class='facBox' data-fac-id='" + entry.Facility_ID + "'>" > + "</td>");
+                })
+
+                $("#facTable").append("</tr>");
+            })
+            .fail(function (jqXHR, textStatus, err) {
+                console.log('Error: ' + err);
+            });
+	        
 	    $("input:checkbox").each(function () {
 	        fixHiddenCheckField(this);
 	    });
@@ -377,6 +398,8 @@
 				@Html.DropDownListFor(model => model.Room_Type, (SelectList) ViewBag.Room_Type, "-Select Room-")
 			</div>
 		</div>
+
+        <div id="facTableDiv"><table id="facTable"></table></div>
 
 		<div class="form-group">
 			@Html.LabelFor(model => model.Room_ID, "Room", new { @class = "control-label col-md-2" })

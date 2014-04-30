@@ -39,31 +39,39 @@ namespace TeamProjects.Controllers.api
         //}
 
 		// GET api/RoomAPIController/5
-		public IEnumerable<timetable_room> Gettimetable_room(params string[] Params)
+		public IEnumerable<timetable_room> Gettimetable_room(string BuildingID, string RoomType, string facIdString)
 		{
 
-			var timetable_room_type = (from m in db.timetable_room_type where m.Type_Name == Params[1] select m.Type_ID).ToList();
+			var timetable_room_type = (from m in db.timetable_room_type where m.Type_Name == RoomType select m.Type_ID).ToList();
 
 			byte selID = timetable_room_type.FirstOrDefault();
 
-			var timetable_room = from m in db.timetable_room where m.Building_ID == Params[0] && m.Type_ID == selID select m;
+			var timetable_room = from m in db.timetable_room where m.Building_ID == BuildingID && m.Type_ID == selID select m;
+
+            string[] facIdArray = facIdString.Split('|');
 
             //Filter by the first facility
-            if (Params.Length > 2)
+            if (facIdArray.Length > 0)
             {
-                IQueryable<timetable_room_facility> timetable_room_facility = db.timetable_room_facility.Where(m => m.Facility_ID == Convert.ToInt32(Params[2])).AsQueryable<timetable_room_facility>();
-                for (var i = 3; i < Params.Length; i++)
-                {
-                    timetable_room_facility = timetable_room_facility.Where(f => f.Facility_ID == Convert.ToInt32(Params[i]));
-                }
-            }
-			if (timetable_room == null)
-			{
-				throw new HttpResponseException(Request.CreateResponse(HttpStatusCode.NotFound));
-			}
+                IQueryable<timetable_room_facility> timetable_room_facility = db.timetable_room_facility.Where(m => m.Facility_ID == Convert.ToInt32(facIdArray[0])).AsQueryable<timetable_room_facility>();
 
-			return timetable_room;
-		}
+                for (var i = 1; i < facIdArray.Length; i++)
+                {
+                    timetable_room_facility = timetable_room_facility.Where(f => f.Facility_ID == Convert.ToInt32(facIdArray[i]));
+                }
+
+                var result = from r in timetable_room
+                             join f in timetable_room_facility on r.Room_ID equals f.Room_ID
+                             select r;
+
+                return result;
+            }
+
+            else
+            {
+                return timetable_room;
+            }
+        }
 
         protected override void Dispose(bool disposing)
         {
