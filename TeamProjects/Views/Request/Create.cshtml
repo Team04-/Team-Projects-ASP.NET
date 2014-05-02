@@ -6,7 +6,8 @@
 <h2>Create</h2>
 
 <script>
-	var roomPrefCollection = new Array();
+	var roomPrefCollection = new Array(); // Holds room preference info
+	var facIdString = ""; //String for holding checked checkbox's facility ID's
 
 	$(document).ready(function () {
 
@@ -49,10 +50,12 @@
 
 		$("#Building_ID").change(function () {
 			$("#Room_ID").empty();
+			findRooms(document.getElementById('Building_ID').options[document.getElementById('Building_ID').selectedIndex].value, document.getElementById('Room_Type').options[document.getElementById('Room_Type').selectedIndex].text, facIdString);
 		});
 
 		$("#Room_Type").change(function () {
 			$("#Room_ID").empty();
+			findRooms(document.getElementById('Building_ID').options[document.getElementById('Building_ID').selectedIndex].value, document.getElementById('Room_Type').options[document.getElementById('Room_Type').selectedIndex].text, facIdString);
 		});
 
 		$("#Park_ID2").change(function () {
@@ -66,22 +69,22 @@
 				alert("Your room preferences have been reset as the chosen # Of Rooms is less than the number of room preferences you have added. Please try again.");
 			}
 		});
-
+		$("#Building_ID").empty();
+		$("#Room_ID").empty();
 		$("#Module_Code").empty();
 		findModules("@User.Identity.Name");
-		//$("#roomPrefForm2").hide();
-		//$("#roomPrefForm3").hide();
+		findBuildings(document.getElementById('Park_ID2').options[document.getElementById('Park_ID2').selectedIndex].value);
+		findRooms(document.getElementById('Building_ID').options[document.getElementById('Building_ID').selectedIndex].value, document.getElementById('Room_Type').options[document.getElementById('Room_Type').selectedIndex].text, facIdString);
 
 	});
 
 	//FUNCTIONS//
 
     function collFacIds() {
-        var facIdString; //String for holding checked checkbox's facility ID's
 
         $(".facBox").each(function () { // For each checkbox
             if($(this).prop("checked")){ // If checkbox is checked...
-                facIdString = facIdString + $(this).data("fac-id");
+                facIdString = facIdString + $(this).data("fac-id") + "|";
             }
         }
                         ); //...Add checkbox's fac-id to array
@@ -179,11 +182,11 @@
 
 	function addRoomPref() {
 
-		if (document.getElementById('Room_ID').value == "" || document.getElementById('Building_ID').value == "") {
-			alert("Please fill in both Building and Room fields before attempting to add a new preference.")
-		}
+		//if (document.getElementById('Room_ID').value == "" || document.getElementById('Building_ID').value == "") {
+		//	alert("Please fill in both Building and Room fields before attempting to add a new preference.")
+		//}
 
-		else if (roomPrefCollection.length > (document.getElementById('Number_Rooms').options[document.getElementById('Number_Rooms').selectedIndex].value)-1) {
+		if (roomPrefCollection.length > (document.getElementById('Number_Rooms').options[document.getElementById('Number_Rooms').selectedIndex].value)-1) {
 			// Already got max room preferences. Tell them that they can remove a roompref from the list of already added roomprefs, then add new one.
 
 			alert("The maximum number of room preferences has already been filled. If you wish to add another, please remove an existing room preference.")
@@ -214,8 +217,8 @@
 
 		var select = document.getElementById("Room_ID");
 		var option = document.createElement('option');
-		option.text = "";
-		option.value = "";
+		option.text = "N/A";
+		option.value = "N/A";
 		select.add(option);
 
 		$.getJSON("@Url.Action("RoomAPI", "api", null, Request.Url.Scheme)" + '?BuildingID=' + buildingID + '&RoomType=' + roomType + '?FacIdString=' + facIdString)
@@ -238,8 +241,8 @@
 
 		var select = document.getElementById("Building_ID");
 		var option = document.createElement('option');
-		option.text = "-Select Building-";
-		option.value = "";
+		option.text = "N/A";
+		option.value = "N/A";
 		select.add(option);
 
 		$.getJSON("@Url.Action("BuildingAPI", "api", null, Request.Url.Scheme)" + '?ParkID=' + parkID)
@@ -423,7 +426,6 @@
 				@Html.LabelFor(model => model.Room_ID, "Room", new { @class = "control-label col-md-2" })
 				<div class="col-md-10">
 					@Html.DropDownListFor(model => model.Room_ID, (SelectList)ViewBag.Room_ID)
-					@Html.ValidationMessageFor(model => model.Room_ID)
 				</div>
 			</div>
 		</div>

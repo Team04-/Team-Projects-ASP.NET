@@ -39,15 +39,25 @@ namespace TeamProjects.Controllers.api
         //}
 
 		// GET api/RoomAPIController/5
-		public IEnumerable<timetable_room> Gettimetable_room(string BuildingID, string RoomType, string FacIdString)
+		public IQueryable<String> Gettimetable_room(string BuildingID, string RoomType, string FacIdString)
 		{
 			var timetable_room_type = (from m in db.timetable_room_type where m.Type_Name == RoomType select m.Type_ID).ToList();
 
 			byte selID = timetable_room_type.FirstOrDefault();
 
-			var timetable_room = from m in db.timetable_room where m.Building_ID == BuildingID && m.Type_ID == selID select m;
+			IQueryable<string> timetable_room;
 
-            string[] facIdArray = FacIdString.Split('|');
+			if (BuildingID == "N/A") {
+				timetable_room = from m in db.timetable_room where m.Type_ID == selID select m.Room_ID;
+			}
+
+			else
+			{
+				timetable_room = from m in db.timetable_room where m.Building_ID == BuildingID && m.Type_ID == selID select m.Room_ID;
+
+			}
+
+			string[] facIdArray = (FacIdString.Remove(FacIdString.Length - 1, 1)).Split('|');
 
             //Filter by the first facility
             if (facIdArray.Length > 0)
@@ -56,14 +66,14 @@ namespace TeamProjects.Controllers.api
 
                 for (var i = 1; i < facIdArray.Length; i++)
                 {
-                    timetable_room_facility = timetable_room_facility.Where(f => f.Facility_ID == Convert.ToInt32(facIdArray[i]));
+						timetable_room_facility = timetable_room_facility.Where(f => f.Facility_ID == Convert.ToInt32(facIdArray[i]));
                 }
 
-                var result = from r in timetable_room
-                             join f in timetable_room_facility on r.Room_ID equals f.Room_ID
-                             select r;
+				IQueryable<string> result = from r in timetable_room_facility
+                             join f in timetable_room on r.Room_ID equals f
+                             select r.Room_ID;
 
-                return result;
+				return result;
             }
 
             else
