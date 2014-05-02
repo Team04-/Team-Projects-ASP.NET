@@ -101,7 +101,7 @@ namespace TeamProjects.Controllers.manage
 			timetable_request timetable_request = new timetable_request()
 			{
 				//Request_ID = 1, //AUTO
-				Department_Code = requestView.Department_Code, // Get from logged in user
+				Department_Code = User.Identity.Name, //requestView.Department_Code, // Get from logged in user
 				//Part_Code = requestView.Part_Code.ToString(), // Dropdown
 				Module_Code = requestView.Module_Code,
 				Day_ID = (byte) requestView.Day_ID,

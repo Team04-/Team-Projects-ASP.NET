@@ -11,14 +11,13 @@
 
 	$(document).ready(function () {
 
-	    collFacIds();
+		collFacIds();
+		findModules(User.Identity.Name);
 
 	        $.getJSON("@Url.Action("FacilityAPI", "api", null, Request.Url.Scheme)")
             .done(function (data) {
                 console.log(data);
-
                 var facTableString;
-
                 facTableString = facTableString + "<tr>";
 
                 data.forEach(function (entry) {
@@ -32,7 +31,6 @@
                 })
 
                 facTableString = facTableString + "</tr>";
-
                 $("#facTable").append(facTableString);
             })
             .fail(function (jqXHR, textStatus, err) {
@@ -52,40 +50,22 @@
 	    })
 
 		$("#Building_ID").change(function () {
-
 			$("#Room_ID").empty();
-
-			//findRooms(document.getElementById('Building_ID').options[document.getElementById('Building_ID').selectedIndex].value, document.getElementById('Room_Type').options[document.getElementById('Room_Type').selectedIndex].text);
-
 		});
 
 		$("#Department_Code").change(function () {
-
 		    $("#Module_Code").empty();
-
 		    findModules(document.getElementById('Department_Code').options[document.getElementById('Department_Code').selectedIndex].value);
-
 		});
 
 		$("#Room_Type").change(function () {
-
 			$("#Room_ID").empty();
-
-			//findRooms(document.getElementById('Building_ID').options[document.getElementById('Building_ID').selectedIndex].value, document.getElementById('Room_Type').options[document.getElementById('Room_Type').selectedIndex].text);
-
 		});
 
 		$("#Park_ID2").change(function () {
-
 			$("#Building_ID").empty();
-
 			$("#Room_ID").empty();
-
 			findBuildings(document.getElementById('Park_ID2').options[document.getElementById('Park_ID2').selectedIndex].value);
-
-			//findRooms(document.getElementById('Building_ID').options[document.getElementById('Building_ID').selectedIndex].value, document.getElementById('Room_Type').options[document.getElementById('Room_Type').selectedIndex].text);
-
-
 		});
 
 	});
@@ -263,7 +243,7 @@
         option.value = "";
         select.add(option);
 
-        $.getJSON("@Url.Action("ModuleAPI", "api", null, Request.Url.Scheme)" + '?DeptCode=' + deptCode)
+    	$.getJSON("@Url.Action("ModuleAPI", "api", null, Request.Url.Scheme)" + '?DeptCode=' + deptCode)
 .done(function (data) {
     console.log(data);
     data.forEach(function (entry) {
@@ -304,13 +284,6 @@
         <h4>timetable_request</h4>
         <hr />
         @Html.ValidationSummary(true)
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.Department_Code, "Department Code", new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.DropDownListFor(model => model.Department_Code, (SelectList)ViewBag.Department_Code, "-Select Department-")
-            </div>
-        </div>
 
         <div class="form-group">
             @Html.LabelFor(model => model.Module_Code, "Module Code", new { @class = "control-label col-md-2" })
