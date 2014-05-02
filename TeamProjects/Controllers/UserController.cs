@@ -13,7 +13,7 @@ namespace TeamProjects.Controllers
 {
     public class UserController : Controller
     {
-        private string[][] getDepartmentInfo()
+        private string[][] getDepartmentsInfo()
         {
             team04Entities db = new team04Entities();
             string[] Department_Names = db.timetable_department.Select(name => name.Department_Name).ToArray();
@@ -33,7 +33,7 @@ namespace TeamProjects.Controllers
         [HttpGet]
         public ActionResult LogIn() 
         {
-            ViewBag.departmentcode = getDepartmentInfo();
+            ViewBag.DepartmentsInfo = getDepartmentsInfo();
             return View();
         }
 
