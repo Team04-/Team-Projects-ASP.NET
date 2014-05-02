@@ -22,6 +22,6 @@ namespace TeamProjects.Models
         public byte Type_ID { get; set; }
         public string Type_Name { get; set; }
     
-        public virtual ICollection<timetable_room> timetable_room { get; set; }
+        public virtual ICollection<timetable_room> timetable_room { internal get; set; }
     }
 }

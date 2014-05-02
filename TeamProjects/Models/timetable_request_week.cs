@@ -17,6 +17,6 @@ namespace TeamProjects.Models
         public short Request_ID { get; set; }
         public byte Week { get; set; }
     
-        public virtual timetable_request timetable_request { get; set; }
+        public virtual timetable_request timetable_request { internal get; set; }
     }
 }
