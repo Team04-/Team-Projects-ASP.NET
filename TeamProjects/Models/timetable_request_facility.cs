@@ -18,8 +18,6 @@ namespace TeamProjects.Models
         public byte Facility_ID { get; set; }
         public byte Quantity { get; set; }
     
-        public virtual timetable_facility timetable_facility { get; set; }
-        public virtual timetable_request_facility timetable_request_facility1 { get; set; }
-        public virtual timetable_request_facility timetable_request_facility2 { get; set; }
+        public virtual timetable_facility timetable_facility { internal get; set; }
     }
 }

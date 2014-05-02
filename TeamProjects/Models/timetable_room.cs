@@ -24,7 +24,7 @@ namespace TeamProjects.Models
         public Nullable<int> Capacity { get; set; }
         public byte Type_ID { get; set; }
     
-        public virtual ICollection<timetable_request_room_allocation> timetable_request_room_allocation { get; set; }
-        public virtual timetable_room_type timetable_room_type { get; set; }
+        public virtual ICollection<timetable_request_room_allocation> timetable_request_room_allocation { internal get; set; }
+        public virtual timetable_room_type timetable_room_type { internal get; set; }
     }
 }

@@ -23,7 +23,7 @@ namespace TeamProjects.Models
         public int Park_ID { get; set; }
         public string Park_Name { get; set; }
     
-        public virtual ICollection<timetable_building> timetable_building { get; set; }
-        public virtual ICollection<timetable_request> timetable_request { get; set; }
+        public virtual ICollection<timetable_building> timetable_building { internal get; set; }
+        public virtual ICollection<timetable_request> timetable_request { internal get; set; }
     }
 }
