@@ -30,10 +30,10 @@ namespace TeamProjects.Controllers
         {
             return View();
         }
-
         [HttpGet]
         public ActionResult LogIn() 
         {
+            ViewBag.departmentcode = getDepartmentInfo();
             return View();
         }
 

@@ -37,7 +37,7 @@
 .detailscontent {
     padding: 5px; 
 }
-/*Hide extra columns that will be show in detailed view*/
+/*Hide extra columns that will be show in detailed view
 .requestsTable *:nth-child(10) {
     display:none;
-}
+}*/

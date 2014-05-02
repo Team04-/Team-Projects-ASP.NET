@@ -775,12 +775,15 @@ tr.pager td {
 	border-radius: 7px 7px 7px 7px;
 }
     /*dropdown - new*/
-.dropdown{display:table;width:100%;background-color:#dddddd;padding:0;}
+.dropdown{display:table;width:100%;background-color:#dfdddf;padding:0;}
 .dropdown a{text-decoration: none;}
 .dropdown>li:first-child{border-left:none;}
-.dropdown>li{position:relative;display:table-cell;border-left:1px solid #cccccc;}
-.dropdown li{padding:10px;background-color:#dddddd;cursor:pointer;}
-.dropdown li:hover:not(.dropdown--disabled){background-color:#cccccc;}
+.dropdown>li{position:relative;display:table-cell;border-left:1px solid #dfdddf;}
+.dropdown li{padding:10px;background-color:#efeeef;cursor:pointer;}
+.dropdown li:hover:not(.dropdown--disabled){background-color:#dfdddf;}
 .dropdown li:hover:not(.dropdown--disabled)>ul{display:block;}
 .dropdown .dropdown--disabled{cursor:default;}
 .dropdown ul{display:none;padding:0;position:absolute;top:100%;left:0;list-style:none;}
+.dropdown ul li{background-color:#d6d4d6;border-top:1px solid #cecbce;}
+.dropdown ul li:first-child{border-top:none;}
+.dropdown ul li:hover:not(.dropdown--disabled){background-color:#cecbce;}

@@ -140,7 +140,16 @@
             @Html.DisplayFor(modelItem => item.Number_Rooms)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.Priority)
+            @{
+                if (item.Priority)
+                {
+                    <i class="fa fa-check"></i>
+                }
+                else
+                {
+                    <i class="fa fa-times"></i>
+                }
+            }
         </td>
         <td class="requestComments">
             @Html.DisplayFor(modelItem => item.Custom_Comments)
@@ -165,10 +174,11 @@
         </td>
         <td>
             @{
-                if (item.Current_Round==ViewBag.CurrentRoundCode){
+                if (item.Current_Round == ViewBag.CurrentRoundCode)
+                {
                     @Html.ActionLink("Edit", "Edit", new { id = item.Request_ID });
                     <span>|</span>
-                    @Html.ActionLink("Delete", "Delete", new { id = item.Request_ID });  
+                    @Html.ActionLink("Delete", "Delete", new { id = item.Request_ID });
                 }
             }
         </td>
