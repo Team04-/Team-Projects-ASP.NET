@@ -8,6 +8,7 @@
         @Styles.Render("~/Content/css")
         @Scripts.Render("~/bundles/modernizr")
         @Scripts.Render("~/bundles/jquery")
+        <link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
         <script type="text/javascript" src="~/Scripts/accessibility.js"></script>
         @{
             int tourID;
@@ -51,21 +52,32 @@
                     <a href="javascript:resetFont();"><img src="~/images/zoom.png" alt="Reset Zoom to Defaults" /></a>
                     <a href="javascript:negativar();"><img src="~/images/contrast.png" alt="Invert Colours" /></a>
                 </div>
+                <div class="float-left">
+                    <nav>
+                        <ul class="dropdown">
+                            <li>@Html.ActionLink("Home", "Index", "Home")</li>
+                            @if (Request.IsAuthenticated)
+                            {
+                                <li>@Html.ActionLink("Add Request", "Create", "Request") <i class="fa fa-plus"></i></li>
+                                <li>@Html.ActionLink("View Requests", "Index", "Request") <i class="fa fa-list"></i></li>
+                                <li>
+                                Manage <i class="fa fa-caret-down"></i>
+                                <ul>
+                                    <li>@Html.ActionLink("Modules", "Index", "Module")</li>
+                                    <li>@Html.ActionLink("Rooms", "Index", "Room")</li>
+                                    <li>@Html.ActionLink("Buildings", "Index", "Building")</li>
+                                    <li>@Html.ActionLink("Facilities", "Index", "Facility")</li>
+                                </ul>
+                                </li>
+                                <li>@Html.ActionLink("Help", "Index", "Help") <i class="fa fa-question"></i></li>
+                            }
+                        </ul>
+                    </nav>
+                </div>
                 <div class="float-right">
                     <section id="login">
                         @Html.Partial("_LoginPartial")
                     </section>
-                    <nav>
-                        <ul id="menu">
-                            <li>@Html.ActionLink("Home", "Index", "Home")</li>
-                            <li>@Html.ActionLink("Add Request", "Create", "Request")</li>
-                            <li>@Html.ActionLink("Modules", "Index", "Module")</li>
-                            <li>@Html.ActionLink("Rooms", "Index", "Room")</li>
-                            <li>@Html.ActionLink("Buildings", "Index", "Building")</li>
-                            <li>@Html.ActionLink("Facilities", "Index", "Facility")</li>
-                            <li>@Html.ActionLink("Help", "Index", "Help")</li>
-                        </ul>
-                    </nav>
                 </div>
             </div>
         </header>

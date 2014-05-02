@@ -18,7 +18,7 @@ namespace TeamProjects.Controllers.manage
 
         public ActionResult Index()
         {
-            string query = "SELECT b.Building_Name as Building_Name, r.Building_ID as Building_ID, r.Park_ID as Park_ID, r.Room_ID as Room_ID, r.Capacity as Capacity, r.Type_ID as Type_ID from timetable_building b, timetable_room r WHERE b.Building_ID = r.Building_ID";
+            string query = "SELECT b.Building_Name as Building_Name, r.Building_ID as Building_ID, b.Park_ID as Park_ID, r.Room_ID as Room_ID, r.Capacity as Capacity, r.Type_ID as Type_ID from timetable_building b, timetable_room r WHERE b.Building_ID = r.Building_ID";
             var viewModel = db.Database.SqlQuery<TeamProjects.Models.RoomBuildingViewModel>(query);
             return View(viewModel.ToList());
         }
@@ -32,7 +32,7 @@ namespace TeamProjects.Controllers.manage
             {
                 return RedirectToAction("Index");
             }
-            string query = "SELECT b.Building_Name as Building_Name, r.Building_ID as Building_ID, r.Park_ID as Park_ID, r.Room_ID as Room_ID, r.Capacity as Capacity, r.Type_ID as Type_ID from timetable_building b, timetable_room r WHERE b.Building_ID = r.Building_ID AND r.Building_ID = '" + buildingID + "' AND r.Room_ID = '" + roomID + "'";
+            string query = "SELECT b.Building_Name as Building_Name, r.Building_ID as Building_ID, b.Park_ID as Park_ID, r.Room_ID as Room_ID, r.Capacity as Capacity, r.Type_ID as Type_ID from timetable_building b, timetable_room r WHERE b.Building_ID = r.Building_ID AND r.Building_ID = '" + buildingID + "' AND r.Room_ID = '" + roomID + "'";
             var viewModel = db.Database.SqlQuery<TeamProjects.Models.RoomBuildingViewModel>(query).First();
             if (viewModel == null)
             {
