@@ -107,6 +107,26 @@ namespace TeamProjects.Controllers
             return RedirectToAction("Index");
         }
 
+        //
+        // GET: /Requests/Timetable
+        [HttpGet]
+        public ActionResult Timetable()
+        {
+            ViewBag.RoundCodes = db.timetable_round.Where(r => r.Round_Status == "Current" || r.Round_Status == "Active").Select(r => r.Round_Code).ToArray();
+            var roundStarts = db.timetable_round.Where(r => r.Round_Status == "Current" || r.Round_Status == "Active").Select(r => r.Start_Date).ToArray();
+            var roundEnds = db.timetable_round.Where(r => r.Round_Status == "Current" || r.Round_Status == "Active").Select(r => r.End_Date).ToArray();
+            string[] newRoundStarts = new string[roundStarts.Length];
+            string[] newRoundEnds = new string[roundEnds.Length];
+            for (int i = 0; i < roundStarts.Length;i++ )
+            {
+                newRoundStarts[i] = roundStarts[i].ToString().Split()[0];
+                newRoundEnds[i] = roundEnds[i].ToString().Split()[0];
+            }
+            ViewBag.RoundStarts = newRoundStarts;
+            ViewBag.RoundEnds = newRoundEnds;
+            return View();
+        }
+
         protected override void Dispose(bool disposing)
         {
             db.Dispose();

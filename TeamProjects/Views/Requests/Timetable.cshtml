@@ -1,0 +1,14 @@
+﻿@{
+    ViewBag.Title = "Timetable";
+}
+
+<h2>Timetable</h2>
+
+<select>
+    @{
+        for (var i = 0; i < ViewBag.RoundCodes.Length; i++)
+        {
+            <option>Round @ViewBag.RoundCodes[i] @ViewBag.RoundStarts[i]-@ViewBag.RoundEnds[i]</option>   
+        }
+    }
+</select>
