@@ -1,5 +1,4 @@
 ﻿@model IEnumerable<TeamProjects.Models.timetable_request>
-
 @{
     ViewBag.Title = "Index";
     string department = "CO";
@@ -11,6 +10,51 @@
 <h2>Request</h2>
 <script type="text/javascript">
     window.onload = function () {
+        //TODO - Change period->time mapping to use database, so then mapping can be changed
+        function getTime(period) {
+            switch (period) {
+                case 1:
+                    time = "09:00";
+                    break;
+                case 2:
+                    time = "10:00";
+                    break;
+                case 3:
+                    time = "11:00";
+                    break;
+                case 4:
+                    time = "12:00";
+                    break;
+                case 5:
+                    time = "13:00";
+                    break;
+                case 6:
+                    time = "14:00";
+                    break;
+                case 7:
+                    time = "15:00";
+                    break;
+                case 8:
+                    time = "16:00";
+                    break;
+                case 9:
+                    time = "17:00";
+                    break;
+                case 10:
+                    time = "18:00";
+                    break;
+            }
+            return time;
+        }
+        function parkIDtoPark(parkID){
+                $.getJSON("@Url.Action("ParkAPI", "api", null, Request.Url.Scheme)"+"?deptCode=@User.Identity.Name&modCode="+String($(this).find('.requestModCode').attr('data-modCode')))
+                .done(function (data) {
+                    $(".detailsrow td").prepend("<div class='detailsheader'>Module Title</div><div class='detailscontent'>"+data.Module_Title+"</div>");
+                })
+                .fail(function (jqXHR, textStatus, err){
+                    console.log('Error: ' + err);
+                });            
+        }
         function refineResults() {
             //Initially hide "no results" indicator
             //Will be shown if needed at the end of the refinement function
@@ -67,10 +111,20 @@
                 //Pull the request comments from the hidden comment column
                 var comment = ($.trim($(this).find(".requestComments").text()) == "") ? "No comments" : String($(this).find(".requestComments").text());
                 $(this).addClass("selectedrow").after("<tr class='detailsrow'><td colspan=13><div class='detailsheader'>Comments</div><div class='detailscontent'>" + comment + "</div></td></tr>");
+                $.getJSON("@Url.Action("ModuleInfoAPI", "api", null, Request.Url.Scheme)"+"?deptCode=@User.Identity.Name&modCode="+String($(this).find('.requestModCode').attr('data-modCode')))
+                .done(function (data) {
+                    $(".detailsrow td").prepend("<div class='detailsheader'>Module Title</div><div class='detailscontent'>"+data.Module_Title+"</div>");
+                })
+                .fail(function (jqXHR, textStatus, err){
+                    console.log('Error: ' + err);
+                });
             } else {
                 $('.detailsrow').remove();
                 $(this).removeClass("selectedrow");
             }
+        });
+        $('.period').each(function () {
+            $(this).append(" ("+getTime(parseInt($.trim($(this).text())))+")");
         });
     }
 </script>
@@ -100,15 +154,14 @@
 </div>
 <table class="RequestTable">
     <tr>
-        <th>Module Code</th>
+        <th>Module</th>
         <th>Day</th>
         <th>Park</th>
-        <th>Start Time</th>
-        <th>Duration</th>
+        <th>Booked Block</th>
         <th>Students</th>
         <th>Rooms</th>
         <th>Priority</th>
-        <th>Comments</th>
+        <th class="hidecell">Comments</th>
         <th>Comment</th>
         <th>Round</th>
         <th>Status</th>
@@ -118,7 +171,7 @@
 @foreach (var item in Model)
 {
     <tr class="requestRow showrow">
-        <td>
+        <td class="requestModCode" data-modCode="@item.Module_Code">
             @Html.Raw(department)@Html.DisplayFor(modelItem => item.Module_Code)
         </td>
         <td>
@@ -128,10 +181,9 @@
             @Html.DisplayFor(modelItem => item.Park_ID)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.Start_Time)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Duration)
+            <span class="period">@Html.DisplayFor(modelItem => item.Start_Time)</span>
+            -
+            <span class="period">@(item.Start_Time + item.Duration)</span>
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.Number_Students)
@@ -151,18 +203,18 @@
                 }
             }
         </td>
-        <td class="requestComments">
+        <td class="requestComments hidecell">
             @Html.DisplayFor(modelItem => item.Custom_Comments)
         </td>
         <td class="">
             @{
-                if (item.Custom_Comments.ToString() == " ")
+                if (item.Custom_Comments.Trim()=="")
                 {
-                    <span>N</span>
+                    <span><i class="fa fa-times"></i></span>
                 }
                 else
                 {
-                    <span>Y</span>
+                    <span><i class="fa fa-check"></i></span>
                 }
             }
         </td>
@@ -170,7 +222,26 @@
             @Html.DisplayFor(modelItem => item.Current_Round)
         </td>
         <td class="requestControls">
-            @Html.DisplayFor(modelItem => item.Request_Status)
+            @{
+                switch (item.Request_Status)
+                {
+                    case 1:
+                        <span>Pending</span>
+                        break;
+                    case 2:
+                        <span>Accepted</span>
+                        break;
+                    case 3:
+                        <span>Failed</span>
+                        break;
+                    case 4:
+                        <span>Altered</span>
+                        break;
+                    default:
+                        <span>Unknown</span>
+                        break;
+                }
+             }
         </td>
         <td>
             @{

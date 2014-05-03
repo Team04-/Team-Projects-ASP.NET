@@ -172,7 +172,9 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\api\BuildingAPIController.cs" />
+    <Compile Include="Controllers\api\BuildingInfoAPIController.cs" />
     <Compile Include="Controllers\api\ModuleAPIController.cs" />
+    <Compile Include="Controllers\api\ModuleInfoAPIController.cs" />
     <Compile Include="Controllers\api\RequestAPIController.cs" />
     <Compile Include="Controllers\api\FacilityAPIController.cs" />
     <Compile Include="Controllers\api\RoomAPIController.cs" />
@@ -426,6 +428,11 @@
     <Content Include="Views\User\LogIn.cshtml" />
     <Content Include="Views\User\Register.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
+    <Content Include="Views\BuildingInfoAPI\Index.cshtml" />
+    <Content Include="Views\BuildingInfoAPI\Details.cshtml" />
+    <Content Include="Views\BuildingInfoAPI\Create.cshtml" />
+    <Content Include="Views\BuildingInfoAPI\Edit.cshtml" />
+    <Content Include="Views\BuildingInfoAPI\Delete.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />

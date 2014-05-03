@@ -32,7 +32,7 @@
 			    .fail(function (jqXHR, textStatus, err) {
 			        $(".CurrentRoundCode").html("Unknown");
 			    });
-                if (tour != null) {
+                if (!(tour === undefined)) {
                     tour.start();
                 }
             };
@@ -57,7 +57,7 @@
                         <ul class="dropdown">
                         @if (Request.IsAuthenticated)
                             {
-                                <li>@Html.ActionLink("Home", "Index", "Home")</li>
+                                <li class="main-cell">@Html.ActionLink("Dashboard", "Index", "Home")</li>
                                 <li>@Html.ActionLink("Add Request", "Create", "Request") <i class="fa fa-plus"></i></li>
                                 <li>@Html.ActionLink("View Requests", "Index", "Request") <i class="fa fa-list"></i></li>
                                 <li>
