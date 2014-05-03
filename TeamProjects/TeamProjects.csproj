@@ -315,6 +315,7 @@
     <Content Include="Content\themes\base\minified\jquery.ui.slider.min.css" />
     <Content Include="Content\themes\base\minified\jquery.ui.tabs.min.css" />
     <Content Include="Content\themes\base\minified\jquery.ui.theme.min.css" />
+    <Content Include="Content\Timetable.css" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
     <Content Include="Scripts\chosen.jquery.js" />
@@ -337,6 +338,7 @@
     <Content Include="Scripts\knockout-2.1.0.js" />
     <Content Include="Scripts\modernizr-2.5.3.js" />
     <Content Include="Scripts\shepherd.js" />
+    <Content Include="Scripts\tools\calendar.js" />
     <Content Include="Scripts\tours\Building-1.js" />
     <Content Include="Scripts\tours\Module-1.js" />
     <Content Include="Web.config">

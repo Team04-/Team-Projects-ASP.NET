@@ -1,7 +1,10 @@
 ﻿@{
     ViewBag.Title = "Timetable";
 }
-
+@section Includes{
+    <link href="@Url.Content("/Content/Timetable.css")" rel="stylesheet" />
+    <script type="text/javascript" src="~/Scripts/tools/calendar.js"></script>
+}
 <h2>Timetable</h2>
 
 <select>
@@ -12,3 +15,5 @@
         }
     }
 </select>
+<div id="timetable"></div>
+<script>calendar.make('timetable');</script>

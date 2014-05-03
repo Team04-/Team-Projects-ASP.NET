@@ -1,0 +1,8 @@
+﻿#timetable 
+{
+    margin-top:20px;
+}
+#timetable th span, #timetable #revert, #timetable .period, #calendar .day, #timetable .month, #timetable .year
+{
+    cursor:pointer;
+}
