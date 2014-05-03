@@ -17,7 +17,7 @@ namespace TeamProjects.Controllers.manage
 
         //
         // GET: /Request/
-
+        [Authorize]
         public ActionResult Index()
         {
             var check = db.timetable_round.Where(r => r.Round_Status == "Current").First();
@@ -31,7 +31,7 @@ namespace TeamProjects.Controllers.manage
 
         //
         // GET: /Request/Details/5
-
+        [Authorize]
         public ActionResult Details(short id = 0)
         {
             timetable_request timetable_request = db.timetable_request.Find(id);
@@ -45,6 +45,7 @@ namespace TeamProjects.Controllers.manage
         //
 
         // GET: /Request/Create
+        [Authorize]
         public ActionResult Create()
         {
             ViewBag.Number_Rooms = new SelectList(new[] { "1", "2", "3" });
@@ -180,7 +181,7 @@ namespace TeamProjects.Controllers.manage
 
         //
         // GET: /Request/Edit/5
-
+        [Authorize]
         public ActionResult Edit(short id = 0)
         {
             timetable_request timetable_request = db.timetable_request.Find(id);
@@ -208,7 +209,7 @@ namespace TeamProjects.Controllers.manage
 
         //
         // GET: /Request/Delete/5
-
+        [Authorize]
         public ActionResult Delete(short id = 0)
         {
             timetable_request timetable_request = db.timetable_request.Find(id);

@@ -15,7 +15,7 @@ namespace TeamProjects.Controllers
 
         //
         // GET: /Requests/
-
+        [Authorize]
         public ActionResult Index()
         {
             var check = db.timetable_round.Where(r => r.Round_Status == "Current").First();
@@ -29,7 +29,7 @@ namespace TeamProjects.Controllers
 
         //
         // GET: /Requests/Details/5
-
+        [Authorize]
         public ActionResult Details(short id = 0)
         {
             timetable_request timetable_request = db.timetable_request.Find(id);
@@ -42,7 +42,7 @@ namespace TeamProjects.Controllers
 
         //
         // GET: /Requests/Create
-
+        [Authorize]
         public void Create()
         {
             Response.Redirect("~/Request/Create");
@@ -50,7 +50,6 @@ namespace TeamProjects.Controllers
 
         //
         // POST: /Requests/Create
-
         [HttpPost]
         public void Create(timetable_request timetable_request)
         {
@@ -59,7 +58,7 @@ namespace TeamProjects.Controllers
 
         //
         // GET: /Requests/Edit/5
-
+        [Authorize]
         public ActionResult Edit(short id = 0)
         {
             timetable_request timetable_request = db.timetable_request.Find(id);
@@ -72,7 +71,6 @@ namespace TeamProjects.Controllers
 
         //
         // POST: /Requests/Edit/5
-
         [HttpPost]
         public ActionResult Edit(timetable_request timetable_request)
         {
@@ -87,7 +85,7 @@ namespace TeamProjects.Controllers
 
         //
         // GET: /Requests/Delete/5
-
+        [Authorize]
         public ActionResult Delete(short id = 0)
         {
             timetable_request timetable_request = db.timetable_request.Find(id);
@@ -100,7 +98,6 @@ namespace TeamProjects.Controllers
 
         //
         // POST: /Requests/Delete/5
-
         [HttpPost, ActionName("Delete")]
         public ActionResult DeleteConfirmed(short id)
         {

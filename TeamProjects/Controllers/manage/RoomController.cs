@@ -15,7 +15,7 @@ namespace TeamProjects.Controllers.manage
 
         //
         // GET: /Room/
-
+        [Authorize]
         public ActionResult Index()
         {
             string query = "SELECT b.Building_Name as Building_Name, r.Building_ID as Building_ID, b.Park_ID as Park_ID, r.Room_ID as Room_ID, r.Capacity as Capacity, r.Type_ID as Type_ID from timetable_building b, timetable_room r WHERE b.Building_ID = r.Building_ID";
@@ -25,7 +25,7 @@ namespace TeamProjects.Controllers.manage
 
         //
         // GET: /Room/Details/5
-
+        [Authorize]
         public ActionResult Details(string buildingID = null, string roomID = null)
         {
             if (roomID == null || buildingID == null)
@@ -43,7 +43,7 @@ namespace TeamProjects.Controllers.manage
 
         //
         // GET: /Room/Create
-
+        [Authorize]
         public ActionResult Create()
         {
             return View();
@@ -67,7 +67,7 @@ namespace TeamProjects.Controllers.manage
 
         //
         // GET: /Room/Edit/5
-
+        [Authorize]
         public ActionResult Edit(string buildingID = null, string roomID = null)
         {
             if (roomID == null || buildingID == null)
@@ -99,7 +99,7 @@ namespace TeamProjects.Controllers.manage
 
         //
         // GET: /Room/Delete/5
-
+        [Authorize]
         public ActionResult Delete(string buildingID = null, string roomID = null)
         {
             if (roomID == null || buildingID == null)

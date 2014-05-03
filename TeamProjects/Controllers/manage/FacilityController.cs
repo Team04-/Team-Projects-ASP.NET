@@ -15,7 +15,7 @@ namespace TeamProjects.Controllers.manage
 
         //
         // GET: /Facility/
-
+        [Authorize]
         public ActionResult Index()
         {
             return View(db.timetable_facility.ToList());
@@ -36,7 +36,7 @@ namespace TeamProjects.Controllers.manage
 
         //
         // GET: /Facility/Create
-
+        [Authorize]
         public ActionResult Create()
         {
             return View();
@@ -60,7 +60,7 @@ namespace TeamProjects.Controllers.manage
 
         //
         // GET: /Facility/Edit/5
-
+        [Authorize]
         public ActionResult Edit(byte id = 0)
         {
             timetable_facility timetable_facility = db.timetable_facility.Find(id);
@@ -88,7 +88,7 @@ namespace TeamProjects.Controllers.manage
 
         //
         // GET: /Facility/Delete/5
-
+        [Authorize]
         public ActionResult Delete(byte id = 0)
         {
             timetable_facility timetable_facility = db.timetable_facility.Find(id);
