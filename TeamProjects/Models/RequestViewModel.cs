@@ -18,6 +18,7 @@ namespace TeamProjects.Models
         //public char Part_Code { get; set; }
         public string Module_Code { get; set; }
         public string Room_Pref_JSON { get; set; }
+		public string Fac_JSON { get; set; }
         public int Day_ID { get; set; }
         public int Start_Time { get; set; }
         public int Duration { get; set; }

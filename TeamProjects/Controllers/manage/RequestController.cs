@@ -48,8 +48,8 @@ namespace TeamProjects.Controllers.manage
         public ActionResult Create()
         {
             ViewBag.Number_Rooms = new SelectList(new[] { "1", "2", "3" });
-            ViewBag.Start_Time = new SelectList(new[] { "1/T", "2/T", "3/T", "4/T", "5/T", "6/T", "7/T", "8/T", "9/T" });
-            ViewBag.Duration = new SelectList(new[] { "1/T", "2/T", "3/T", "4/T", "5/T", "6/T", "7/T", "8/T", "9/T" });
+            ViewBag.Start_Time = new SelectList(new[] { "1 | 9:00", "2 | 10:00", "3 | 11:00", "4 | 12:00", "5 | 13:00", "6 | 14:00", "7 | 15:00", "8 | 16:00", "9 | 17:00" });
+            ViewBag.Duration = new SelectList(new[] { "1", "2", "3", "4", "5", "6", "7", "8", "9" });
             ViewBag.Department_Code = new SelectList(db.timetable_department, "Department_Code", "Department_Name");
             //ViewBag.Part_Code = new SelectList(db.timetable_request, "Part_Code", "Part_Code");
             ViewBag.Module_Code = new SelectList(db.timetable_module, "Module_Code", "Module_Title");
@@ -105,12 +105,12 @@ namespace TeamProjects.Controllers.manage
 				//Part_Code = requestView.Part_Code.ToString(), // Dropdown
 				Module_Code = requestView.Module_Code,
 				Day_ID = (byte) requestView.Day_ID,
+				Park_ID = requestView.Park_ID,
 				Start_Time = (byte) requestView.Start_Time,
 				Duration = (byte) requestView.Duration,
 				Number_Students = requestView.Number_Students,
 				Number_Rooms = (byte) requestView.Number_Rooms,
 				Priority = requestView.Priority,
-				Park_ID = requestView.Park_ID,
 				Custom_Comments = requestView.Custom_Comments,
                 //TODO change so that it uses the departments selected active round
 				Current_Round = db.timetable_round.Where(r => r.Round_Status == "Current").First().Round_Code,
@@ -120,21 +120,28 @@ namespace TeamProjects.Controllers.manage
 			db.timetable_request.Add(timetable_request);
 			db.SaveChanges();
 
-			timetable_request_facility timetable_request_facility = new timetable_request_facility()
+			JavaScriptSerializer serializer = new JavaScriptSerializer();
+
+			var facs = serializer.Deserialize<byte[]>(requestView.Fac_JSON);
+
+			foreach (var item in facs)
 			{
-				Request_ID = 1,
-				Facility_ID = 0,
-				Quantity = 0,
-			};
+				timetable_request_facility timetable_request_facility = new timetable_request_facility()
+				{
+					Request_ID = db.timetable_request.Last().Request_ID,
+					Facility_ID = item,
+					Quantity = 1,
+				};
 
-			db.timetable_request_facility.Add(timetable_request_facility);
-			db.SaveChanges();
-
-
-            JavaScriptSerializer serializer = new JavaScriptSerializer();
+				db.timetable_request_facility.Add(timetable_request_facility);
+				db.SaveChanges();
+			}
+            
             var roomPrefs = serializer.Deserialize<RoomPref[]>(requestView.Room_Pref_JSON);
 
             foreach (var item in roomPrefs) {
+				if (item.Building.ToString() == "N/A" || item.Room.ToString() == "N/A")
+				{
 			    timetable_request_room_allocation timetable_request_room_allocation = new timetable_request_room_allocation()
 			    {
 				    Request_ID = db.timetable_request.Last().Request_ID,
@@ -146,6 +153,7 @@ namespace TeamProjects.Controllers.manage
 			    db.SaveChanges();
 
             }
+		}
 
 			timetable_request_week timetable_request_week = new timetable_request_week()
 			{
