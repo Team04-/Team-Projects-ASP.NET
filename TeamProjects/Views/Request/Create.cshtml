@@ -7,7 +7,7 @@
 
 <script>
 	var roomPrefCollection = new Array(); // Holds room preference info
-	var facIdString = ""; //String for holding checked checkbox's facility ID's
+	var facIdString = "-"; //String for holding checked checkbox's facility ID's
 
 	$(document).ready(function () {
 
@@ -82,12 +82,18 @@
 
     function collFacIds() {
 
+    	facIdString = "";
+
         $(".facBox").each(function () { // For each checkbox
             if($(this).prop("checked")){ // If checkbox is checked...
                 facIdString = facIdString + $(this).data("fac-id") + "|";
             }
         }
                         ); //...Add checkbox's fac-id to array
+
+        if(!facIdString){
+        	facIdString = "-";
+        }
     }
 
 	function fixHiddenCheckField(checkField) {
@@ -154,6 +160,7 @@
 			}
 
 			updateRoomPrefJSON();
+			alert("Selected room preference(s) successfully removed.");
 
 		} catch (e) {
 			alert(e);
@@ -221,14 +228,14 @@
 		option.value = "N/A";
 		select.add(option);
 
-		$.getJSON("@Url.Action("RoomAPI", "api", null, Request.Url.Scheme)" + '?BuildingID=' + buildingID + '&RoomType=' + roomType + '?FacIdString=' + facIdString)
+		$.getJSON("@Url.Action("RoomAPI", "api", null, Request.Url.Scheme)" + '?BuildingID=' + buildingID + '&RoomType=' + roomType + '&FacIdString=' + facIdString)
 	.done(function (data) {
 		console.log(data);
 		data.forEach(function (entry) {
 			var select = document.getElementById("Room_ID");
 			var option = document.createElement('option');
-			option.text = entry.Room_ID;
-			option.value = entry.Room_ID;
+			option.text = entry;
+			option.value = entry;
 			select.add(option);
 		});
 	})
