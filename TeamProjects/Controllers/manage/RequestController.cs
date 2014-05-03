@@ -49,7 +49,7 @@ namespace TeamProjects.Controllers.manage
         public ActionResult Create()
         {
             ViewBag.Number_Rooms = new SelectList(new[] { "1", "2", "3" });
-            ViewBag.Start_Time = new SelectList(new[] { "1 | 9:00", "2 | 10:00", "3 | 11:00", "4 | 12:00", "5 | 13:00", "6 | 14:00", "7 | 15:00", "8 | 16:00", "9 | 17:00" });
+            ViewBag.Start_Time = new SelectList(new[] { "1", "2", "3", "4", "5", "6", "7", "8", "9" });
             ViewBag.Duration = new SelectList(new[] { "1", "2", "3", "4", "5", "6", "7", "8", "9" });
             ViewBag.Department_Code = new SelectList(db.timetable_department, "Department_Code", "Department_Name");
             //ViewBag.Part_Code = new SelectList(db.timetable_request, "Part_Code", "Part_Code");
