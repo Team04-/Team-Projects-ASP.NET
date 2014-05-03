@@ -19,66 +19,58 @@ namespace TeamProjects.Controllers.api
         // GET api/RoomAPIController
         public IEnumerable<timetable_room> Gettimetable_room()
         {
-			//return Json(db.timetable_room.AsEnumerable(), JsonRequestBehavior.AllowGet);
 			return db.timetable_room;
         }
 
-        // GET api/RoomAPIController/5
-        //public IEnumerable<timetable_room> Gettimetable_room(string BuildingID)
-        //{
-
-			//var timetable_room = from m in db.timetable_room select m;
-			//timetable_room = timetable_room.Where(e => e.Building_ID.Equals(BuildingID));
-
-            //if (timetable_room == null)
-            //{
-                //throw new HttpResponseException(Request.CreateResponse(HttpStatusCode.NotFound));
-            //}
-
-            //return timetable_room;
-        //}
-
 		// GET api/RoomAPIController/5
-		public IQueryable<String> Gettimetable_room(string BuildingID, string RoomType, string FacIdString)
+		public IQueryable<string> Gettimetable_room(string BuildingID, string RoomType, string FacIdString)
 		{
 			var timetable_room_type = (from m in db.timetable_room_type where m.Type_Name == RoomType select m.Type_ID).ToList();
 
 			byte selID = timetable_room_type.FirstOrDefault();
 
-			IQueryable<string> timetable_room;
+			IQueryable<timetable_room> timetable_room;
+
 
 			if (BuildingID == "N/A") {
-				timetable_room = from m in db.timetable_room where m.Type_ID == selID select m.Room_ID;
+				timetable_room = from m in db.timetable_room where m.Type_ID == selID select m;
 			}
 
 			else
 			{
-				timetable_room = from m in db.timetable_room where m.Building_ID == BuildingID && m.Type_ID == selID select m.Room_ID;
+				timetable_room = from m in db.timetable_room where m.Building_ID == BuildingID && m.Type_ID == selID select m;
 
 			}
 
-			string[] facIdArray = (FacIdString.Remove(FacIdString.Length - 1, 1)).Split('|');
+			int facIdInt;
 
             //Filter by the first facility
-            if (facIdArray.Length > 0)
+			if (FacIdString.Length > 1)
             {
-                IQueryable<timetable_room_facility> timetable_room_facility = db.timetable_room_facility.Where(m => m.Facility_ID == Convert.ToInt32(facIdArray[0])).AsQueryable<timetable_room_facility>();
+				string[] facIdArray = (FacIdString.Remove(FacIdString.Length - 1, 1)).Split('|');
+
+				facIdInt = Convert.ToInt32(facIdArray[0]);
+
+				IQueryable<timetable_room_facility> timetable_room_facility = from m in db.timetable_room_facility where m.Facility_ID == facIdInt select m;
+					//db.timetable_room_facility.Where(m => m.Facility_ID == Convert.ToInt32(facIdArray[0]));
 
                 for (var i = 1; i < facIdArray.Length; i++)
                 {
-						timetable_room_facility = timetable_room_facility.Where(f => f.Facility_ID == Convert.ToInt32(facIdArray[i]));
+					facIdInt = Convert.ToInt32(facIdArray[i]);
+					timetable_room_facility = timetable_room_facility.Where(f => f.Facility_ID == facIdInt);
                 }
 
-				IQueryable<string> result = from r in timetable_room_facility
-                             join f in timetable_room on r.Room_ID equals f
-                             select r.Room_ID;
+				IQueryable<string> result = from r in timetable_room_facility join f in timetable_room on r.Room_ID equals f.Room_ID select r.Room_ID;
+
+				result = result.Distinct();
 
 				return result;
             }
 
             else
             {
-                return timetable_room;
+				IQueryable<string> result = from r in timetable_room select r.Room_ID;
+                return result;
             }
         }
 
