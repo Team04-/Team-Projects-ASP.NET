@@ -15,7 +15,7 @@ namespace TeamProjects.Controllers.manage
 
         //
         // GET: /Module/
-
+        [Authorize]
         public ActionResult Index()
         {
             return View(db.timetable_module.Where(dc => dc.Department_Code == User.Identity.Name));
@@ -23,7 +23,7 @@ namespace TeamProjects.Controllers.manage
 
         //
         // GET: /Module/Details/5
-
+        [Authorize]
         public ActionResult Details(string moduleCode = null)
         {
             if (moduleCode == null)
@@ -40,7 +40,7 @@ namespace TeamProjects.Controllers.manage
 
         //
         // GET: /Module/Create
-
+        [Authorize]
         public ActionResult Create()
         {
             return View();
@@ -64,7 +64,7 @@ namespace TeamProjects.Controllers.manage
 
         //
         // GET: /Module/Edit/5
-
+        [Authorize]
         public ActionResult Edit(string moduleCode = null)
         {
             if (moduleCode == null)
@@ -96,7 +96,7 @@ namespace TeamProjects.Controllers.manage
 
         //
         // GET: /Module/Delete/5
-
+        [Authorize]
         public ActionResult Delete(string moduleCode = null)
         {
             if (moduleCode == null)

@@ -15,7 +15,7 @@ namespace TeamProjects.Controllers.manage
 
         //
         // GET: /Building/
-
+        [Authorize]
         public ActionResult Index()
         {
             return View(db.timetable_building.ToList());
@@ -23,7 +23,7 @@ namespace TeamProjects.Controllers.manage
 
         //
         // GET: /Building/Details/5
-
+        [Authorize]
         public ActionResult Details(string id = null)
         {
             timetable_building timetable_building = db.timetable_building.Find(id);
@@ -36,7 +36,7 @@ namespace TeamProjects.Controllers.manage
 
         //
         // GET: /Building/Create
-
+        [Authorize]
         public ActionResult Create()
         {
             return View();
@@ -60,7 +60,7 @@ namespace TeamProjects.Controllers.manage
 
         //
         // GET: /Building/Edit/5
-
+        [Authorize]
         public ActionResult Edit(string id = null)
         {
             timetable_building timetable_building = db.timetable_building.Find(id);
@@ -88,7 +88,7 @@ namespace TeamProjects.Controllers.manage
 
         //
         // GET: /Building/Delete/5
-
+        [Authorize]
         public ActionResult Delete(string id = null)
         {
             timetable_building timetable_building = db.timetable_building.Find(id);

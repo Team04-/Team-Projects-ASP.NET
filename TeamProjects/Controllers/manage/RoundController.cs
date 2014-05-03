@@ -15,7 +15,7 @@ namespace TeamProjects.Controllers.manage
 
         //
         // GET: /Round/
-
+        [Authorize]
         public ActionResult Index()
         {
             return View(db.timetable_round.ToList());
@@ -23,7 +23,7 @@ namespace TeamProjects.Controllers.manage
 
         //
         // GET: /Round/Details/5
-
+        [Authorize]
         public ActionResult Details(short id = 0)
         {
             timetable_round timetable_round = db.timetable_round.Find(id);
@@ -36,7 +36,7 @@ namespace TeamProjects.Controllers.manage
 
         //
         // GET: /Round/Create
-
+        [Authorize]
         public ActionResult Create()
         {
             return View();
@@ -60,7 +60,7 @@ namespace TeamProjects.Controllers.manage
 
         //
         // GET: /Round/Edit/5
-
+        [Authorize]
         public ActionResult Edit(short id = 0)
         {
             timetable_round timetable_round = db.timetable_round.Find(id);
@@ -88,7 +88,7 @@ namespace TeamProjects.Controllers.manage
 
         //
         // GET: /Round/Delete/5
-
+        [Authorize]
         public ActionResult Delete(short id = 0)
         {
             timetable_round timetable_round = db.timetable_round.Find(id);

@@ -25,7 +25,7 @@ namespace TeamProjects.Controllers
         }
         //
         // GET: /User/
-
+        [Authorize]
         public ActionResult Index()
         {
             return View();

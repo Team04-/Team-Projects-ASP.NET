@@ -55,9 +55,9 @@
                 <div class="float-left">
                     <nav>
                         <ul class="dropdown">
-                            <li>@Html.ActionLink("Home", "Index", "Home")</li>
-                            @if (Request.IsAuthenticated)
+                        @if (Request.IsAuthenticated)
                             {
+                                <li>@Html.ActionLink("Home", "Index", "Home")</li>
                                 <li>@Html.ActionLink("Add Request", "Create", "Request") <i class="fa fa-plus"></i></li>
                                 <li>@Html.ActionLink("View Requests", "Index", "Request") <i class="fa fa-list"></i></li>
                                 <li>
