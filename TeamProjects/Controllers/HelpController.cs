@@ -10,7 +10,7 @@ namespace TeamProjects.Controllers
     {
         //
         // GET: /Help/
-
+        [Authorize]
         public ActionResult Index()
         {
             return View();
