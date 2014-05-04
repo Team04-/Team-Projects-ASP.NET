@@ -3,13 +3,18 @@
 @{
     ViewBag.Title = "Index";
 }
-
-<h2>Index</h2>
+<script type="text/javascript">
+    window.onload = function () {
+        $(".moduleTable").tablesorter({ sortList: [[0, 0]] });
+    }
+</script>
+<h2>Modules</h2>
 
 <p>
     @Html.ActionLink("Create New", "Create")
 </p>
-<table>
+<table class="moduleTable">
+<thead>
     <tr>
         <th>
             Module Code
@@ -25,7 +30,8 @@
         </th>
         <th></th>
     </tr>
-
+</thead>
+<tbody>
 @foreach (var item in Model)
 {
     <tr>
@@ -48,5 +54,5 @@
         </td>
     </tr>
 }
-
+</tbody>
 </table>
