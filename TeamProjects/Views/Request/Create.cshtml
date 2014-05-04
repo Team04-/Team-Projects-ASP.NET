@@ -267,7 +267,7 @@
 			var select = document.getElementById("Room_ID");
 			var option = document.createElement('option');
 			option.text = "N/A";
-			option.value = "N/A";
+			option.value = "null";
 			select.add(option);
 		}
 
@@ -275,7 +275,7 @@
 			var select = document.getElementById("Room_ID");
 			var option = document.createElement('option');
 			option.text = "N/A";
-			option.value = "N/A";
+			option.value = "0";
 			select.add(option);
 
 			$.getJSON("@Url.Action("RoomAPI", "api", null, Request.Url.Scheme)" + '?BuildingID=' + buildingID + '&RoomType=' + roomType + '&FacIdString=' + facIdString)
@@ -300,7 +300,7 @@
 		var select = document.getElementById("Building_ID");
 		var option = document.createElement('option');
 		option.text = "N/A";
-		option.value = "N/A";
+		option.value = "null";
 		select.add(option);
 
 		$.getJSON("@Url.Action("BuildingAPI", "api", null, Request.Url.Scheme)" + '?ParkID=' + parkID)

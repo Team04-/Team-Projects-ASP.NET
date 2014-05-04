@@ -141,7 +141,7 @@ namespace TeamProjects.Controllers.manage
             var roomPrefs = serializer.Deserialize<RoomPref[]>(requestView.Room_Pref_JSON);
 
             foreach (var item in roomPrefs) {
-				if (item.Building.ToString() == "N/A" || item.Room.ToString() == "N/A")
+				if (item.Building.ToString() == "null" || item.Building.ToString() == "N/A" || item.Room.ToString() == "0" || item.Room.ToString() == "N/A")
 				{
 			    timetable_request_room_allocation timetable_request_room_allocation = new timetable_request_room_allocation()
 			    {

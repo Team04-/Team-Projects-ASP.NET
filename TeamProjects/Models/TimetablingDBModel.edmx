@@ -421,8 +421,8 @@
             <End Role="timetable_request" EntitySet="timetable_request" />
           </AssociationSet>
           <AssociationSet Name="FK_timetable_request_timetable_request" Association="team04Model.FK_timetable_request_timetable_request">
-            <End Role="timetable_request" EntitySet="timetable_request" />
-            <End Role="timetable_request1" EntitySet="timetable_request" />
+            <End EntitySet="timetable_request" Role="timetable_request" />
+            <End EntitySet="timetable_request" Role="timetable_request1" />
           </AssociationSet>
           <AssociationSet Name="FK_timetable_request_timetable_request_room_allocation" Association="team04Model.FK_timetable_request_timetable_request_room_allocation">
             <End Role="timetable_request_room_allocation" EntitySet="timetable_request_room_allocation" />
@@ -433,12 +433,12 @@
             <End Role="timetable_request" EntitySet="timetable_request" />
           </AssociationSet>
           <AssociationSet Name="FK_timetable_request_timetable_request1" Association="team04Model.FK_timetable_request_timetable_request1">
-            <End Role="timetable_request" EntitySet="timetable_request" />
-            <End Role="timetable_request1" EntitySet="timetable_request" />
+            <End EntitySet="timetable_request" Role="timetable_request" />
+            <End EntitySet="timetable_request" Role="timetable_request1" />
           </AssociationSet>
           <AssociationSet Name="FK_timetable_request_timetable_request2" Association="team04Model.FK_timetable_request_timetable_request2">
-            <End Role="timetable_request" EntitySet="timetable_request" />
-            <End Role="timetable_request1" EntitySet="timetable_request" />
+            <End EntitySet="timetable_request" Role="timetable_request" />
+            <End EntitySet="timetable_request" Role="timetable_request1" />
           </AssociationSet>
           <AssociationSet Name="FK_timetable_request_timetable_round" Association="team04Model.FK_timetable_request_timetable_round">
             <End Role="timetable_round" EntitySet="timetable_round" />
@@ -670,8 +670,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_timetable_request_timetable_request">
-          <End Type="team04Model.timetable_request" Role="timetable_request" Multiplicity="1" />
-          <End Type="team04Model.timetable_request" Role="timetable_request1" Multiplicity="0..1" />
+          <End Type="team04Model.timetable_request" Multiplicity="1" Role="timetable_request" />
+          <End Type="team04Model.timetable_request" Multiplicity="0..1" Role="timetable_request1" />
           <ReferentialConstraint>
             <Principal Role="timetable_request">
               <PropertyRef Name="Request_ID" />
@@ -706,8 +706,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_timetable_request_timetable_request1">
-          <End Type="team04Model.timetable_request" Role="timetable_request" Multiplicity="1" />
-          <End Type="team04Model.timetable_request" Role="timetable_request1" Multiplicity="0..1" />
+          <End Type="team04Model.timetable_request" Multiplicity="1" Role="timetable_request" />
+          <End Type="team04Model.timetable_request" Multiplicity="0..1" Role="timetable_request1" />
           <ReferentialConstraint>
             <Principal Role="timetable_request">
               <PropertyRef Name="Request_ID" />
@@ -718,8 +718,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_timetable_request_timetable_request2">
-          <End Type="team04Model.timetable_request" Role="timetable_request" Multiplicity="1" />
-          <End Type="team04Model.timetable_request" Role="timetable_request1" Multiplicity="0..1" />
+          <End Type="team04Model.timetable_request" Multiplicity="1" Role="timetable_request" />
+          <End Type="team04Model.timetable_request" Multiplicity="0..1" Role="timetable_request1" />
           <ReferentialConstraint>
             <Principal Role="timetable_request">
               <PropertyRef Name="Request_ID" />
