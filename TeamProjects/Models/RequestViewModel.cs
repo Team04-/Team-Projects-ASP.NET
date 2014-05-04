@@ -34,7 +34,7 @@ namespace TeamProjects.Models
         //public int Request_Status { get; set; }
         public int Facility_ID { get; set; }
         public int Room_ID { get; set; }
-        public int Building_ID { get; set; }
+        public string Building_ID { get; set; }
         public bool[] Week { get; set; }
 
         public byte Number_Rooms { get; set; }
