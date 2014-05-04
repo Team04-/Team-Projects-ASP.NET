@@ -24,7 +24,7 @@ namespace TeamProjects.Controllers
                 check = db.timetable_round.Last();
             }
             ViewBag.currentRoundCode = check.Round_Code;
-            return View(db.timetable_request.ToList());
+            return View(db.timetable_request.OrderBy(r => r.Current_Round).ToList());
         }
 
         //

@@ -145,16 +145,27 @@ footer {
     font-size: .85em;
     margin: 0 0 10px;
     text-align: right;
+    position:relative;
+    top:-11px;
 }
 
     #login a {
-        background-color: #d3dce0;
-        margin-left: 10px;
-        margin-right: 3px;
-        padding: 2px 3px;
+        margin-right: 2px;
         text-decoration: none;
     }
-
+    #login i 
+    {
+        margin-right:8px;
+    }
+    #login .loginBlock
+    {
+        padding: 11px;
+        background-color: #efeeef;
+    }
+    #login strong 
+    {
+        margin-right: 15px;
+    }
     #login a.username {
         background: none;
         margin: 0;
@@ -773,6 +784,8 @@ tr.pager td {
 	-moz-border-radius: 0px;
 	-webkit-border-radius: 7px 7px 7px 7px;
 	border-radius: 7px 7px 7px 7px;
+	position:relative;
+	top:-25px;
 }
     /*dropdown - new*/
 .dropdown{display:table;width:100%;background-color:#dfdddf;padding:0;}
