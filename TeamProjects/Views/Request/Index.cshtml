@@ -60,7 +60,7 @@
         function refineResults() {
             //Initially hide "no results" indicator
             //Will be shown if needed at the end of the refinement function
-            $(".noresults").removeClass("showrow").addClass("hiderow");
+            $(".noresults").remove();
             //Get array of rounds to be shown
             var rounds = new Array();
             $(".roundsOptions input:checked").each(function () {
@@ -90,7 +90,7 @@
             }
             //If the refinement has produced no results, add an indicator
             if ($(".showrow").length == 0) {
-                $(".noresults").removeClass("hiderow").addClass("showrow");
+                $(".RequestTable").append('<tr class="noresults showrow"><td colspan=13>No Request could be found.</td></tr>');
             }
         }
         //Trigger result refinement on any appropriate change
@@ -257,8 +257,4 @@
         </td>
     </tr>
 }
-    <tr class="noresults hiderow">
-        <td colspan=13>No Request could be found.</td>
-    </tr>
-
 </table>
