@@ -10,8 +10,8 @@
 <h2>Request</h2>
 <script type="text/javascript">
     window.onload = function () {
-        //initialize dataTables
-        //$('.RequestTable').dataTable({"order":[9, 'asc']});
+        //initialize tablesorter
+        $(".RequestTable").tablesorter({sortList: [[9,1]]}); 
         //TODO - Change period->time mapping to use database, so then mapping can be changed
         function getTime(period) {
             switch (period) {
@@ -155,6 +155,7 @@
     Search comments: <input class="commentSearchInput" type="text" />
 </div>
 <table class="RequestTable">
+<thead>
     <tr>
         <th>Module</th>
         <th>Day</th>
@@ -169,7 +170,8 @@
         <th>Status</th>
         <th></th>
     </tr>
-
+</thead>
+<tbody>
 @foreach (var item in Model)
 {
     <tr class="requestRow showrow">
@@ -257,4 +259,5 @@
         </td>
     </tr>
 }
+</tbody>
 </table>
