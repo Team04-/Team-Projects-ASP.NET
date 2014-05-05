@@ -91,7 +91,7 @@
     <Key>
       <PropertyRef Name="Request_ID" />
     </Key>
-    <Property Name="Request_ID" Type="smallint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Request_ID" Type="smallint" StoreGeneratedPattern="None" Nullable="false" />
     <Property Name="Week" Type="tinyint" Nullable="false" />
   </EntityType>
   <EntityType Name="timetable_room">

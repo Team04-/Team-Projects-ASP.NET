@@ -167,7 +167,7 @@
     <Key>
       <PropertyRef Name="Request_ID" />
     </Key>
-    <Property Name="Request_ID" Type="Int16" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Request_ID" Type="Int16" Nullable="false" annotation:StoreGeneratedPattern="None" />
     <Property Name="Week" Type="Byte" Nullable="false" />
     <NavigationProperty Name="timetable_request" Relationship="team04Model.FK_timetable_request_timetable_request_week" FromRole="timetable_request_week" ToRole="timetable_request" />
   </EntityType>
