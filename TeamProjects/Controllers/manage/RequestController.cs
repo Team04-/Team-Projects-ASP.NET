@@ -97,11 +97,11 @@ namespace TeamProjects.Controllers.manage
 			//var viewModel = db.Database.SqlQuery<TeamProjects.Models.RequestViewModel>(query);
 			//return View(viewModel.ToList());
 
-
+			var newReqID = (Int16)((db.timetable_request.ToList().Last().Request_ID) + 1);
 
 			timetable_request timetable_request = new timetable_request()
 			{
-				//Request_ID = 1, //AUTO
+				Request_ID = newReqID,
 				Department_Code = User.Identity.Name, //requestView.Department_Code, // Get from logged in user
 				//Part_Code = requestView.Part_Code.ToString(), // Dropdown
 				Module_Code = requestView.Module_Code,
@@ -129,7 +129,7 @@ namespace TeamProjects.Controllers.manage
 			{
 				timetable_request_facility timetable_request_facility = new timetable_request_facility()
 				{
-					Request_ID = db.timetable_request.Last().Request_ID,
+					Request_ID = newReqID,
 					Facility_ID = item,
 					Quantity = 1,
 				};
@@ -145,7 +145,7 @@ namespace TeamProjects.Controllers.manage
 				{
 			    timetable_request_room_allocation timetable_request_room_allocation = new timetable_request_room_allocation()
 			    {
-				    Request_ID = db.timetable_request.Last().Request_ID,
+					Request_ID = newReqID,
 				    Building_ID = item.Building.ToString(),
 				    Room_ID = item.Room.ToString(),
 			    };
@@ -158,7 +158,7 @@ namespace TeamProjects.Controllers.manage
 
 			timetable_request_week timetable_request_week = new timetable_request_week()
 			{
-                Request_ID = db.timetable_request.Last().Request_ID,
+				Request_ID = newReqID,
 				//Week = Convert.ToByte(requestView.WeekOne),
 			};
 
