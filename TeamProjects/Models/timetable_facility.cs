@@ -22,6 +22,6 @@ namespace TeamProjects.Models
         public byte Facility_ID { get; set; }
         public string Facility_Name { get; set; }
     
-        public virtual ICollection<timetable_request_facility> timetable_request_facility { internal get; set; }
+        public virtual ICollection<timetable_request_facility> timetable_request_facility { get; set; }
     }
 }

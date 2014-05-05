@@ -56,7 +56,7 @@
     <Key>
       <PropertyRef Name="Request_ID" />
     </Key>
-    <Property Name="Request_ID" Type="smallint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Request_ID" Type="smallint" Nullable="false" />
     <Property Name="Department_Code" Type="varchar" MaxLength="2" Nullable="false" />
     <Property Name="Module_Code" Type="varchar" MaxLength="3" Nullable="false" />
     <Property Name="Day_ID" Type="tinyint" Nullable="false" />

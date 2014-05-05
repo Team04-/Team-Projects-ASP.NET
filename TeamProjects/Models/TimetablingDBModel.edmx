@@ -61,7 +61,7 @@
           <Key>
             <PropertyRef Name="Request_ID" />
           </Key>
-          <Property Name="Request_ID" Type="smallint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Request_ID" Type="smallint" Nullable="false" />
           <Property Name="Department_Code" Type="varchar" MaxLength="2" Nullable="false" />
           <Property Name="Module_Code" Type="varchar" MaxLength="3" Nullable="false" />
           <Property Name="Day_ID" Type="tinyint" Nullable="false" />
@@ -420,10 +420,6 @@
             <End Role="timetable_park" EntitySet="timetable_park" />
             <End Role="timetable_request" EntitySet="timetable_request" />
           </AssociationSet>
-          <AssociationSet Name="FK_timetable_request_timetable_request" Association="team04Model.FK_timetable_request_timetable_request">
-            <End EntitySet="timetable_request" Role="timetable_request" />
-            <End EntitySet="timetable_request" Role="timetable_request1" />
-          </AssociationSet>
           <AssociationSet Name="FK_timetable_request_timetable_request_room_allocation" Association="team04Model.FK_timetable_request_timetable_request_room_allocation">
             <End Role="timetable_request_room_allocation" EntitySet="timetable_request_room_allocation" />
             <End Role="timetable_request" EntitySet="timetable_request" />
@@ -431,14 +427,6 @@
           <AssociationSet Name="FK_timetable_request_timetable_request_week" Association="team04Model.FK_timetable_request_timetable_request_week">
             <End Role="timetable_request_week" EntitySet="timetable_request_week" />
             <End Role="timetable_request" EntitySet="timetable_request" />
-          </AssociationSet>
-          <AssociationSet Name="FK_timetable_request_timetable_request1" Association="team04Model.FK_timetable_request_timetable_request1">
-            <End EntitySet="timetable_request" Role="timetable_request" />
-            <End EntitySet="timetable_request" Role="timetable_request1" />
-          </AssociationSet>
-          <AssociationSet Name="FK_timetable_request_timetable_request2" Association="team04Model.FK_timetable_request_timetable_request2">
-            <End EntitySet="timetable_request" Role="timetable_request" />
-            <End EntitySet="timetable_request" Role="timetable_request1" />
           </AssociationSet>
           <AssociationSet Name="FK_timetable_request_timetable_round" Association="team04Model.FK_timetable_request_timetable_round">
             <End Role="timetable_round" EntitySet="timetable_round" />
@@ -464,8 +452,8 @@
           <Property Name="Building_ID" Type="String" Nullable="false" MaxLength="5" FixedLength="false" Unicode="false" />
           <Property Name="Building_Name" Type="String" Nullable="false" MaxLength="60" FixedLength="false" Unicode="false" />
           <Property Name="Park_ID" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="timetable_park" Relationship="team04Model.FK_timetable_building_timetable_park" FromRole="timetable_building" ToRole="timetable_park" a:GetterAccess="Internal" xmlns:a="http://schemas.microsoft.com/ado/2006/04/codegeneration" />
-          <NavigationProperty Name="timetable_request_room_allocation" Relationship="team04Model.FK_timetable_request_room_allocation_timetable_building" FromRole="timetable_building" ToRole="timetable_request_room_allocation" a:GetterAccess="Internal" xmlns:a="http://schemas.microsoft.com/ado/2006/04/codegeneration" />
+          <NavigationProperty Name="timetable_park" Relationship="team04Model.FK_timetable_building_timetable_park" FromRole="timetable_building" ToRole="timetable_park" />
+          <NavigationProperty Name="timetable_request_room_allocation" Relationship="team04Model.FK_timetable_request_room_allocation_timetable_building" FromRole="timetable_building" ToRole="timetable_request_room_allocation" />
         </EntityType>
         <EntityType Name="timetable_day">
           <Key>
@@ -484,7 +472,7 @@
           <Property Name="Round" Type="Int16" Nullable="false" />
           <Property Name="Password" Type="String" MaxLength="256" FixedLength="false" Unicode="false" />
           <Property Name="Password_Salt" Type="String" MaxLength="256" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="timetable_round" Relationship="team04Model.FK_timetable_department_timetable_round" FromRole="timetable_department" ToRole="timetable_round" a:GetterAccess="Internal" xmlns:a="http://schemas.microsoft.com/ado/2006/04/codegeneration" />
+          <NavigationProperty Name="timetable_round" Relationship="team04Model.FK_timetable_department_timetable_round" FromRole="timetable_department" ToRole="timetable_round" />
         </EntityType>
         <EntityType Name="timetable_facility">
           <Key>
@@ -492,7 +480,7 @@
           </Key>
           <Property Name="Facility_ID" Type="Byte" Nullable="false" />
           <Property Name="Facility_Name" Type="String" MaxLength="60" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="timetable_request_facility" Relationship="team04Model.FK_timetable_request_facility_timetable_facility" FromRole="timetable_facility" ToRole="timetable_request_facility" a:GetterAccess="Internal" xmlns:a="http://schemas.microsoft.com/ado/2006/04/codegeneration" />
+          <NavigationProperty Name="timetable_request_facility" Relationship="team04Model.FK_timetable_request_facility_timetable_facility" FromRole="timetable_facility" ToRole="timetable_request_facility" />
         </EntityType>
         <EntityType Name="timetable_module">
           <Key>
@@ -512,14 +500,14 @@
           </Key>
           <Property Name="Park_ID" Type="Int32" Nullable="false" />
           <Property Name="Park_Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="timetable_building" Relationship="team04Model.FK_timetable_building_timetable_park" FromRole="timetable_park" ToRole="timetable_building" a:GetterAccess="Internal" xmlns:a="http://schemas.microsoft.com/ado/2006/04/codegeneration" />
-          <NavigationProperty Name="timetable_request" Relationship="team04Model.FK_timetable_request_timetable_park" FromRole="timetable_park" ToRole="timetable_request" a:GetterAccess="Internal" xmlns:a="http://schemas.microsoft.com/ado/2006/04/codegeneration" />
+          <NavigationProperty Name="timetable_building" Relationship="team04Model.FK_timetable_building_timetable_park" FromRole="timetable_park" ToRole="timetable_building" />
+          <NavigationProperty Name="timetable_request" Relationship="team04Model.FK_timetable_request_timetable_park" FromRole="timetable_park" ToRole="timetable_request" />
         </EntityType>
         <EntityType Name="timetable_request">
           <Key>
             <PropertyRef Name="Request_ID" />
           </Key>
-          <Property Name="Request_ID" Type="Int16" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Request_ID" Type="Int16" Nullable="false" />
           <Property Name="Department_Code" Type="String" Nullable="false" MaxLength="2" FixedLength="false" Unicode="false" />
           <Property Name="Module_Code" Type="String" Nullable="false" MaxLength="3" FixedLength="false" Unicode="false" />
           <Property Name="Day_ID" Type="Byte" Nullable="false" />
@@ -532,10 +520,10 @@
           <Property Name="Custom_Comments" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
           <Property Name="Current_Round" Type="Int16" Nullable="false" />
           <Property Name="Request_Status" Type="Byte" Nullable="false" />
-          <NavigationProperty Name="timetable_park" Relationship="team04Model.FK_timetable_request_timetable_park" FromRole="timetable_request" ToRole="timetable_park" a:GetterAccess="Internal" xmlns:a="http://schemas.microsoft.com/ado/2006/04/codegeneration" />
-          <NavigationProperty Name="timetable_request_room_allocation" Relationship="team04Model.FK_timetable_request_timetable_request_room_allocation" FromRole="timetable_request" ToRole="timetable_request_room_allocation" a:GetterAccess="Internal" xmlns:a="http://schemas.microsoft.com/ado/2006/04/codegeneration" />
-          <NavigationProperty Name="timetable_request_week" Relationship="team04Model.FK_timetable_request_timetable_request_week" FromRole="timetable_request" ToRole="timetable_request_week" a:GetterAccess="Internal" xmlns:a="http://schemas.microsoft.com/ado/2006/04/codegeneration" />
-          <NavigationProperty Name="timetable_round" Relationship="team04Model.FK_timetable_request_timetable_round" FromRole="timetable_request" ToRole="timetable_round" a:GetterAccess="Internal" xmlns:a="http://schemas.microsoft.com/ado/2006/04/codegeneration" />
+          <NavigationProperty Name="timetable_park" Relationship="team04Model.FK_timetable_request_timetable_park" FromRole="timetable_request" ToRole="timetable_park" />
+          <NavigationProperty Name="timetable_request_room_allocation" Relationship="team04Model.FK_timetable_request_timetable_request_room_allocation" FromRole="timetable_request" ToRole="timetable_request_room_allocation" />
+          <NavigationProperty Name="timetable_request_week" Relationship="team04Model.FK_timetable_request_timetable_request_week" FromRole="timetable_request" ToRole="timetable_request_week" />
+          <NavigationProperty Name="timetable_round" Relationship="team04Model.FK_timetable_request_timetable_round" FromRole="timetable_request" ToRole="timetable_round" />
         </EntityType>
         <EntityType Name="timetable_request_facility">
           <Key>
@@ -545,7 +533,9 @@
           <Property Name="Request_ID" Type="Int16" Nullable="false" />
           <Property Name="Facility_ID" Type="Byte" Nullable="false" />
           <Property Name="Quantity" Type="Byte" Nullable="false" />
-          <NavigationProperty Name="timetable_facility" Relationship="team04Model.FK_timetable_request_facility_timetable_facility" FromRole="timetable_request_facility" ToRole="timetable_facility" a:GetterAccess="Internal" xmlns:a="http://schemas.microsoft.com/ado/2006/04/codegeneration" />
+          <NavigationProperty Name="timetable_facility" Relationship="team04Model.FK_timetable_request_facility_timetable_facility" FromRole="timetable_request_facility" ToRole="timetable_facility" />
+          <NavigationProperty Name="timetable_request_facility1" Relationship="team04Model.FK_timetable_request_facility_timetable_request_facility" FromRole="timetable_request_facility" ToRole="timetable_request_facility1" />
+          <NavigationProperty Name="timetable_request_facility2" Relationship="team04Model.FK_timetable_request_facility_timetable_request_facility" FromRole="timetable_request_facility1" ToRole="timetable_request_facility" />
         </EntityType>
         <EntityType Name="timetable_request_room_allocation">
           <Key>
@@ -554,9 +544,9 @@
           <Property Name="Request_ID" Type="Int16" Nullable="false" />
           <Property Name="Building_ID" Type="String" Nullable="false" MaxLength="5" FixedLength="false" Unicode="false" />
           <Property Name="Room_ID" Type="String" Nullable="false" MaxLength="5" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="timetable_building" Relationship="team04Model.FK_timetable_request_room_allocation_timetable_building" FromRole="timetable_request_room_allocation" ToRole="timetable_building" a:GetterAccess="Internal" xmlns:a="http://schemas.microsoft.com/ado/2006/04/codegeneration" />
-          <NavigationProperty Name="timetable_request" Relationship="team04Model.FK_timetable_request_timetable_request_room_allocation" FromRole="timetable_request_room_allocation" ToRole="timetable_request" a:GetterAccess="Internal" xmlns:a="http://schemas.microsoft.com/ado/2006/04/codegeneration" />
-          <NavigationProperty Name="timetable_room" Relationship="team04Model.FK_timetable_request_room_allocation_timetable_room" FromRole="timetable_request_room_allocation" ToRole="timetable_room" a:GetterAccess="Internal" xmlns:a="http://schemas.microsoft.com/ado/2006/04/codegeneration" />
+          <NavigationProperty Name="timetable_building" Relationship="team04Model.FK_timetable_request_room_allocation_timetable_building" FromRole="timetable_request_room_allocation" ToRole="timetable_building" />
+          <NavigationProperty Name="timetable_request" Relationship="team04Model.FK_timetable_request_timetable_request_room_allocation" FromRole="timetable_request_room_allocation" ToRole="timetable_request" />
+          <NavigationProperty Name="timetable_room" Relationship="team04Model.FK_timetable_request_room_allocation_timetable_room" FromRole="timetable_request_room_allocation" ToRole="timetable_room" />
         </EntityType>
         <EntityType Name="timetable_request_week">
           <Key>
@@ -564,7 +554,7 @@
           </Key>
           <Property Name="Request_ID" Type="Int16" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Week" Type="Byte" Nullable="false" />
-          <NavigationProperty Name="timetable_request" Relationship="team04Model.FK_timetable_request_timetable_request_week" FromRole="timetable_request_week" ToRole="timetable_request" a:GetterAccess="Internal" xmlns:a="http://schemas.microsoft.com/ado/2006/04/codegeneration" />
+          <NavigationProperty Name="timetable_request" Relationship="team04Model.FK_timetable_request_timetable_request_week" FromRole="timetable_request_week" ToRole="timetable_request" />
         </EntityType>
         <EntityType Name="timetable_room">
           <Key>
@@ -575,8 +565,8 @@
           <Property Name="Room_ID" Type="String" Nullable="false" MaxLength="5" FixedLength="false" Unicode="false" />
           <Property Name="Capacity" Type="Int32" />
           <Property Name="Type_ID" Type="Byte" Nullable="false" />
-          <NavigationProperty Name="timetable_request_room_allocation" Relationship="team04Model.FK_timetable_request_room_allocation_timetable_room" FromRole="timetable_room" ToRole="timetable_request_room_allocation" a:GetterAccess="Internal" xmlns:a="http://schemas.microsoft.com/ado/2006/04/codegeneration" />
-          <NavigationProperty Name="timetable_room_type" Relationship="team04Model.FK_timetable_room_timetable_room_type" FromRole="timetable_room" ToRole="timetable_room_type" a:GetterAccess="Internal" xmlns:a="http://schemas.microsoft.com/ado/2006/04/codegeneration" />
+          <NavigationProperty Name="timetable_request_room_allocation" Relationship="team04Model.FK_timetable_request_room_allocation_timetable_room" FromRole="timetable_room" ToRole="timetable_request_room_allocation" />
+          <NavigationProperty Name="timetable_room_type" Relationship="team04Model.FK_timetable_room_timetable_room_type" FromRole="timetable_room" ToRole="timetable_room_type" />
         </EntityType>
         <EntityType Name="timetable_room_facility">
           <Key>
@@ -595,7 +585,7 @@
           </Key>
           <Property Name="Type_ID" Type="Byte" Nullable="false" />
           <Property Name="Type_Name" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="timetable_room" Relationship="team04Model.FK_timetable_room_timetable_room_type" FromRole="timetable_room_type" ToRole="timetable_room" a:GetterAccess="Internal" xmlns:a="http://schemas.microsoft.com/ado/2006/04/codegeneration" />
+          <NavigationProperty Name="timetable_room" Relationship="team04Model.FK_timetable_room_timetable_room_type" FromRole="timetable_room_type" ToRole="timetable_room" />
         </EntityType>
         <EntityType Name="timetable_round">
           <Key>
@@ -606,8 +596,8 @@
           <Property Name="Semester" Type="Int16" Nullable="false" />
           <Property Name="Start_Date" Type="DateTime" Nullable="false" Precision="0" />
           <Property Name="End_Date" Type="DateTime" Nullable="false" Precision="0" />
-          <NavigationProperty Name="timetable_department" Relationship="team04Model.FK_timetable_department_timetable_round" FromRole="timetable_round" ToRole="timetable_department" a:GetterAccess="Internal" xmlns:a="http://schemas.microsoft.com/ado/2006/04/codegeneration" />
-          <NavigationProperty Name="timetable_request" Relationship="team04Model.FK_timetable_request_timetable_round" FromRole="timetable_round" ToRole="timetable_request" a:GetterAccess="Internal" xmlns:a="http://schemas.microsoft.com/ado/2006/04/codegeneration" />
+          <NavigationProperty Name="timetable_department" Relationship="team04Model.FK_timetable_department_timetable_round" FromRole="timetable_round" ToRole="timetable_department" />
+          <NavigationProperty Name="timetable_request" Relationship="team04Model.FK_timetable_request_timetable_round" FromRole="timetable_round" ToRole="timetable_request" />
         </EntityType>
         <Association Name="FK_timetable_building_timetable_park">
           <End Type="team04Model.timetable_park" Role="timetable_park" Multiplicity="1" />
@@ -669,18 +659,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_timetable_request_timetable_request">
-          <End Type="team04Model.timetable_request" Multiplicity="1" Role="timetable_request" />
-          <End Type="team04Model.timetable_request" Multiplicity="0..1" Role="timetable_request1" />
-          <ReferentialConstraint>
-            <Principal Role="timetable_request">
-              <PropertyRef Name="Request_ID" />
-            </Principal>
-            <Dependent Role="timetable_request1">
-              <PropertyRef Name="Request_ID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_timetable_request_timetable_request_room_allocation">
           <End Type="team04Model.timetable_request_room_allocation" Role="timetable_request_room_allocation" Multiplicity="1" />
           <End Type="team04Model.timetable_request" Role="timetable_request" Multiplicity="0..1" />
@@ -701,30 +679,6 @@
               <PropertyRef Name="Request_ID" />
             </Principal>
             <Dependent Role="timetable_request">
-              <PropertyRef Name="Request_ID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_timetable_request_timetable_request1">
-          <End Type="team04Model.timetable_request" Multiplicity="1" Role="timetable_request" />
-          <End Type="team04Model.timetable_request" Multiplicity="0..1" Role="timetable_request1" />
-          <ReferentialConstraint>
-            <Principal Role="timetable_request">
-              <PropertyRef Name="Request_ID" />
-            </Principal>
-            <Dependent Role="timetable_request1">
-              <PropertyRef Name="Request_ID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_timetable_request_timetable_request2">
-          <End Type="team04Model.timetable_request" Multiplicity="1" Role="timetable_request" />
-          <End Type="team04Model.timetable_request" Multiplicity="0..1" Role="timetable_request1" />
-          <ReferentialConstraint>
-            <Principal Role="timetable_request">
-              <PropertyRef Name="Request_ID" />
-            </Principal>
-            <Dependent Role="timetable_request1">
               <PropertyRef Name="Request_ID" />
             </Dependent>
           </ReferentialConstraint>
@@ -969,11 +923,8 @@
         <AssociationConnector Association="team04Model.FK_timetable_department_timetable_round" />
         <AssociationConnector Association="team04Model.FK_timetable_request_facility_timetable_facility" />
         <AssociationConnector Association="team04Model.FK_timetable_request_timetable_park" />
-        <AssociationConnector Association="team04Model.FK_timetable_request_timetable_request" />
         <AssociationConnector Association="team04Model.FK_timetable_request_timetable_request_room_allocation" />
         <AssociationConnector Association="team04Model.FK_timetable_request_timetable_request_week" />
-        <AssociationConnector Association="team04Model.FK_timetable_request_timetable_request1" />
-        <AssociationConnector Association="team04Model.FK_timetable_request_timetable_request2" />
         <AssociationConnector Association="team04Model.FK_timetable_request_timetable_round" />
         <AssociationConnector Association="team04Model.FK_timetable_request_facility_timetable_request_facility" />
         <AssociationConnector Association="team04Model.FK_timetable_request_room_allocation_timetable_room" />
