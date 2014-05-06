@@ -10,17 +10,17 @@
     position:relative;
 }
 /*Show selected request and details for it*/
-.selectedrow td, .detailsrow td {
+.selectedrow td {
     background-color: #d7d7d7;
 }
 .selectedrow td {
     border-top: 10px solid #F3F3F3;
 }
 .detailsrow td {
-    border-bottom: 10px solid #F3F3F3;
+    border-bottom: 10px solid #e8e8e8;
 }
 .detailsrow {
-    background-color:#d7d7d7;
+    background-color:#e8e8e8;
     padding:10px;
 }
 .detailsheader {
@@ -36,6 +36,9 @@
 }
 .detailscontent {
     padding: 5px; 
+}
+.selected {
+    background-color:#F3F3F3;
 }
 /*Hide extra columns that will be show in detailed view*/
 .hidecell {

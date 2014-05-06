@@ -340,6 +340,7 @@
     <Content Include="Scripts\modernizr-2.5.3.js" />
     <Content Include="Scripts\shepherd.js" />
     <Content Include="Scripts\tools\calendar.js" />
+    <Content Include="Scripts\tools\jquery.freezeheader.js" />
     <Content Include="Scripts\tools\jquery.tablesorter.js" />
     <Content Include="Scripts\tools\jquery.tablesorter.min.js" />
     <Content Include="Scripts\tours\Building-1.js" />
@@ -431,6 +432,7 @@
     <Content Include="Views\User\Register.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Views\Requests\Timetable.cshtml" />
+    <Content Include="Views\Requests\List.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />

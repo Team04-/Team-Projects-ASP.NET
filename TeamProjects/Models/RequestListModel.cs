@@ -17,11 +17,12 @@ namespace TeamProjects.Models
         public int Park { get; set; }
         public int Start_Period { get; set; }
         public int End_Period { get; set; }
+        public string Time_String { get; set; }
         public int Number_Students { get; set; }
         public bool Priority { get; set; }
         public bool Has_Comments { get; set; }
         public int Round { get; set; }
-        public int Status { get; set; }
+        public string Status { get; set; }
         public bool[] Weeks { get; set; }
     }
 }

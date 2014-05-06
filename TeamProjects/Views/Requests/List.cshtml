@@ -1,0 +1,110 @@
+﻿@model List<TeamProjects.Models.RequestListModel>
+@{
+    ViewBag.Title = "List";
+}
+@section Includes{
+    <link href="@Url.Content("/Content/Request.css")" rel="stylesheet" />
+    <script src="@Url.Content("/Scripts/tools/jquery.freezeheader.js")" type="text/javascript"></script>
+}
+<h2>List</h2>
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<p>
+    <i class="fa fa-info-circle"></i> Click on a request to view it in detail.
+</p>
+<div class="roundsOptions change-search">
+@{
+    //Display checkboxes for each round that is it possible for a request to have been made for
+    for (var i = 1; i <= ViewBag.currentRoundCode; i++)
+    {
+        <label style="display:inline-block;margin-bottom:10px;margin-right:10px;">
+            <input class="round-@i" checked type="checkbox" />Round @i
+            @{
+                //Check if the round the checkbox is being shown for is the current round
+                //Add an indicator if it is
+                if(i==ViewBag.currentRoundCode){
+                    <span>(Current)</span>
+                }
+            }
+        </label>
+    }
+}
+</div>
+<div>
+Module
+<select class="moduleSelect change-search">
+    <option value="">Choose a module</option>
+@{
+List<string> moduleList = new List<string>();
+foreach (var item in Model.OrderBy(r => r.Module_Code))
+{
+    string moduleCode = String.Concat(User.Identity.Name,item.Module_Code);
+    if(!(moduleList.Contains(moduleCode))){
+        moduleList.Add(moduleCode);
+        <option value="@Html.Raw(moduleCode)">@Html.Raw(User.Identity.Name)@Html.DisplayFor(modelItem => item.Module_Code)</option>  
+    }
+    
+}
+}
+</select>
+</div>
+<div class="commentSearch">
+    Search comments: <input class="commentSearchInput" type="text" />
+</div>
+<table id="RequestTable">
+<thead>
+    <tr>
+        <th>Code</th>
+        <th>Round</th>
+        <th>Day</th>
+        <th>Periods</th>
+        <th>Park</th>
+        <th>Rooms</th>
+        <th>Priority</th>
+        <th>Comment</th>
+        <th>Status</th>
+        <th><i class="fa fa-wrench"></i></th>
+    </tr>
+</thead>
+<tbody>
+@foreach (var item in Model)
+{
+    <span class="requestBlock">
+    <tr>
+        <td>@User.Identity.Name@item.Module_Code</td>
+        <td>@item.Round</td>
+        <td>@item.Day</td>
+        <td>@item.Start_Period - @item.End_Period | @item.Time_String</td>
+        <td>@item.Park</td>
+        <td>@item.Number_Rooms</td>
+        <td>@((item.Priority) ? Html.Raw("<span><i class='fa fa-check'></i></span>") : Html.Raw("<span><i class='fa fa-times'></i></span>"))</td>
+        <td>@((item.Has_Comments) ? Html.Raw("<span><i class='fa fa-check'></i></span>") : Html.Raw("<span><i class='fa fa-times'></i></span>"))</td>
+        <td>@item.Status</td>
+        <td>
+            @{
+                if (item.Round == ViewBag.CurrentRoundCode)
+                {
+                            @Html.ActionLink("Edit", "Edit", new { id = item.Request_ID });
+                            <span>|</span>
+                            @Html.ActionLink("Delete", "Delete", new { id = item.Request_ID });
+                }
+            }
+        </td>
+    </tr>
+    <tr class="detailsrow">
+        <td colspan="10">
+            <div class='detail'><div class='detailsheader'>Title</div><div class='detailscontent'>@item.Module_Title</div></div>
+            <div class='detail'><div class='detailsheader'>Title</div><div class='detailscontent'>@item.Rooms.Length</div></div>
+            <div class='detail'><div class='detailsheader'>Comments</div><div class='detailscontent'>@item.Custom_Comments</div></div>
+        </td>
+    </tr>
+    </span>    
+}
+</tbody>
+</table>
+<script>
+    $('.detailscontent:empty').parent().remove();
+    //Add a frozen header to top of the requests table
+    //$("#RequestTable").freezeHeader();
+</script>
