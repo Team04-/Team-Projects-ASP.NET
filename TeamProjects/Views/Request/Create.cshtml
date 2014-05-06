@@ -350,6 +350,13 @@
         //$("weekBox14").prop("value", false);
     }
 
+    function selWeeksTwelve() {
+        $(".weekBox").each(function () { $(this).prop("checked", true); });
+        $("weekBox12").value(false);
+        $("weekBox13").prop("value", false);
+        $("weekBox14").prop("value", false);
+    }
+
     function unselAll() {
         $(".weekBox").each(function () { $(this).prop("checked", false); });
     }
@@ -427,6 +434,7 @@
                         }
                     </tr>
                 </table>
+                <input type="button" value="Select Weeks 1-12" onclick="selWeeksTwelve()" />
                 <input type="button" value="Select All" onclick="selWeeks()" />
                 <input type="button" value="Unselect all" onclick="unselAll()" />
             </div>
