@@ -270,14 +270,19 @@ foreach (var item in Model.OrderBy(r => r.Module_Code))
         </td>
         <td class="">
             @{
-        if (item.Custom_Comments.Trim() == "")
-        {
+                if (!(item.Custom_Comments == null)) {
+                    if (item.Custom_Comments.Trim() == "")
+                    {
+                        <span><i class="fa fa-times"></i></span>
+                    }
+                    else
+                    {
+                        <span><i class="fa fa-check"></i></span>
+                    }
+                }
+                else {
                     <span><i class="fa fa-times"></i></span>
-        }
-        else
-        {
-                    <span><i class="fa fa-check"></i></span>
-        }
+                }
             }
         </td>
         <td class="requestRound">

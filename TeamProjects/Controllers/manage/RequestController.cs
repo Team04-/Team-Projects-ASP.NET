@@ -101,7 +101,7 @@ namespace TeamProjects.Controllers.manage
 
 			timetable_request timetable_request = new timetable_request()
 			{
-				Request_ID = newReqID,
+				//Request_ID = newReqID,
 				Department_Code = User.Identity.Name, //requestView.Department_Code, // Get from logged in user
 				//Part_Code = requestView.Part_Code.ToString(), // Dropdown
 				Module_Code = requestView.Module_Code,
@@ -123,52 +123,70 @@ namespace TeamProjects.Controllers.manage
 
 			JavaScriptSerializer serializer = new JavaScriptSerializer();
 
-			var facs = serializer.Deserialize<byte[]>(requestView.Fac_JSON);
+            if (requestView.Fac_JSON != null)
+            {
 
-			foreach (var item in facs)
-			{
-				timetable_request_facility timetable_request_facility = new timetable_request_facility()
-				{
-					Request_ID = newReqID,
-					Facility_ID = item,
-					Quantity = 1,
-				};
+                var facs = serializer.Deserialize<byte[]>(requestView.Fac_JSON);
 
-				db.timetable_request_facility.Add(timetable_request_facility);
-				db.SaveChanges();
-			}
-            
-            var roomPrefs = serializer.Deserialize<RoomPref[]>(requestView.Room_Pref_JSON);
+                foreach (var item in facs)
+                {
+                    timetable_request_facility timetable_request_facility = new timetable_request_facility()
+                    {
+                        Request_ID = newReqID,
+                        Facility_ID = item,
+                        Quantity = 1,
+                    };
 
-            foreach (var item in roomPrefs) {
-				if (item.Building.ToString() == "null" || item.Building.ToString() == "N/A" || item.Room.ToString() == "0" || item.Room.ToString() == "N/A")
-				{
-			    timetable_request_room_allocation timetable_request_room_allocation = new timetable_request_room_allocation()
-			    {
-					Request_ID = newReqID,
-				    Building_ID = item.Building.ToString(),
-				    Room_ID = item.Room.ToString(),
-			    };
-
-			    db.timetable_request_room_allocation.Add(timetable_request_room_allocation);
-			    db.SaveChanges();
-
+                    db.timetable_request_facility.Add(timetable_request_facility);
+                    db.SaveChanges();
+                }
             }
-		}
 
-			timetable_request_week timetable_request_week = new timetable_request_week()
-			{
-				Request_ID = newReqID,
+            if (requestView.Room_Pref_JSON != null)
+            {
+
+                var roomPrefs = serializer.Deserialize<RoomPref[]>(requestView.Room_Pref_JSON);
+
+                foreach (var item in roomPrefs)
+                {
+                    if (item.Building.ToString() == "null" || item.Building.ToString() == "N/A" || item.Room.ToString() == "0" || item.Room.ToString() == "N/A")
+                    {
+                        timetable_request_room_allocation timetable_request_room_allocation = new timetable_request_room_allocation()
+                        {
+                            Request_ID = newReqID,
+                            Building_ID = item.Building.ToString(),
+                            Room_ID = item.Room.ToString(),
+                        };
+
+                        db.timetable_request_room_allocation.Add(timetable_request_room_allocation);
+                        db.SaveChanges();
+
+                    }
+                }
+            }
+
+			//timetable_request_week timetable_request_week = new timetable_request_week()
+			//{
+			//	Request_ID = newReqID,
 				//Week = Convert.ToByte(requestView.WeekOne),
-			};
+			//};
+
+           // timetable_request_week timetable_request_week = new timetable_request_week();
 
             byte weekCount = 1;
+
+            timetable_request_week timetable_request_week;
 
             foreach (bool i in requestView.Week)
             {
                 if (i == true)
                 {
-                    timetable_request_week.Week = weekCount;
+                    timetable_request_week = new timetable_request_week()
+                    {
+                        Request_ID = newReqID,
+                        Week = weekCount,
+                    };
+                    
                     db.timetable_request_week.Add(timetable_request_week);
                     db.SaveChanges();
                 }
