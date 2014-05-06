@@ -72,6 +72,15 @@
                     $(this).parent().removeClass("hiderow").addClass("showrow");
                 }
             });
+            //Limit by selected module
+            var moduleCode = $('.moduleSelect').val();
+            if (moduleCode != ""){
+                $(".showrow .requestModCode").each(function () {
+                    if (String($(this).text()).indexOf(moduleCode) == -1) {
+                        $(this).parent().removeClass("showrow").addClass("hiderow");
+                    }
+                });                
+            }
             //Search the comments - Case insensitive
             var searchTerm = $(".commentSearchInput").val().toLowerCase();
             if (searchTerm != "") {
@@ -96,6 +105,9 @@
             refineResults();
         });
         $(".commentSearchInput").keyup(function () {
+            refineResults();
+        });
+        $(".moduleSelect").change(function () {
             refineResults();
         });
         //NOTE - SUBJECT TO CHANGE
@@ -133,6 +145,9 @@
 <p>
     @Html.ActionLink("Create New", "Create")
 </p>
+<p>
+    <i class="fa fa-info-circle"></i> Click on a request to view it in detail.
+</p>
 <div class="roundsOptions">
 @{
     //Display checkboxes for each round that is it possible for a request to have been made for
@@ -151,6 +166,24 @@
     }
 }
 </div>
+<div>
+Module
+<select class="moduleSelect">
+    <option value="">Choose a module</option>
+@{
+List<string> moduleList = new List<string>();
+foreach (var item in Model.OrderBy(r => r.Module_Code))
+{
+    string moduleCode = String.Concat(department,item.Module_Code);
+    if(!(moduleList.Contains(moduleCode))){
+        moduleList.Add(moduleCode);
+        <option value="@Html.Raw(moduleCode)">@Html.Raw(department)@Html.DisplayFor(modelItem => item.Module_Code)</option>  
+    }
+    
+}
+}
+</select>
+</div>
 <div class="commentSearch">
     Search comments: <input class="commentSearchInput" type="text" />
 </div>
@@ -168,7 +201,7 @@
         <th>Comment</th>
         <th>Round</th>
         <th>Status</th>
-        <th></th>
+        <th><i class="fa fa-wrench"></i></th>
     </tr>
 </thead>
 <tbody>
@@ -179,7 +212,32 @@
             @Html.Raw(department)@Html.DisplayFor(modelItem => item.Module_Code)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.Day_ID)
+        @{
+        switch (item.Day_ID)
+        {
+            case 1:
+                <span>Mon</span>
+                break; 
+            case 2:
+                <span>Tues</span>
+                break;
+            case 3:
+                <span>Wed</span>
+                break;
+            case 4:
+                <span>Thur</span>
+                break;
+            case 5:
+                <span>Fri</span>
+                break;
+            case 6:
+                <span>Sat</span>
+                break;
+            case 7:
+                <span>Sun</span>
+                break;
+        }                
+        }
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.Park_ID)
@@ -197,14 +255,14 @@
         </td>
         <td>
             @{
-                if (item.Priority)
-                {
+        if (item.Priority)
+        {
                     <i class="fa fa-check"></i>
-                }
-                else
-                {
+        }
+        else
+        {
                     <i class="fa fa-times"></i>
-                }
+        }
             }
         </td>
         <td class="requestComments hidecell">
@@ -212,14 +270,14 @@
         </td>
         <td class="">
             @{
-                if (item.Custom_Comments.Trim()=="")
-                {
+        if (item.Custom_Comments.Trim() == "")
+        {
                     <span><i class="fa fa-times"></i></span>
-                }
-                else
-                {
+        }
+        else
+        {
                     <span><i class="fa fa-check"></i></span>
-                }
+        }
             }
         </td>
         <td class="requestRound">
@@ -227,34 +285,34 @@
         </td>
         <td class="requestControls">
             @{
-                switch (item.Request_Status)
-                {
-                    case 1:
+        switch (item.Request_Status)
+        {
+            case 1:
                         <span>Pending</span>
-                        break;
-                    case 2:
+                break;
+            case 2:
                         <span>Accepted</span>
-                        break;
-                    case 3:
+                break;
+            case 3:
                         <span>Failed</span>
-                        break;
-                    case 4:
+                break;
+            case 4:
                         <span>Altered</span>
-                        break;
-                    default:
+                break;
+            default:
                         <span>Unknown</span>
-                        break;
-                }
+                break;
+        }
              }
         </td>
         <td>
             @{
-                if (item.Current_Round == ViewBag.CurrentRoundCode)
-                {
+        if (item.Current_Round == ViewBag.CurrentRoundCode)
+        {
                     @Html.ActionLink("Edit", "Edit", new { id = item.Request_ID });
                     <span>|</span>
                     @Html.ActionLink("Delete", "Delete", new { id = item.Request_ID });
-                }
+        }
             }
         </td>
     </tr>
