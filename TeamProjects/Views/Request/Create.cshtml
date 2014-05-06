@@ -352,9 +352,9 @@
 
     function selWeeksTwelve() {
         $(".weekBox").each(function () { $(this).prop("checked", true); });
-        $("weekBox12").value(false);
-        $("weekBox13").prop("value", false);
-        $("weekBox14").prop("value", false);
+        $("#weekBox12").prop("checked", false);
+        $("#weekBox13").prop("checked", false);
+        $("#weekBox14").prop("checked", false);
     }
 
     function unselAll() {
