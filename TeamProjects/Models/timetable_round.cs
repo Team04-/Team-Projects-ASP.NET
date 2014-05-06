@@ -26,7 +26,7 @@ namespace TeamProjects.Models
         public System.DateTime Start_Date { get; set; }
         public System.DateTime End_Date { get; set; }
     
-        public virtual ICollection<timetable_department> timetable_department { get; set; }
-        public virtual ICollection<timetable_request> timetable_request { get; set; }
+        public virtual ICollection<timetable_department> timetable_department { get; internal set; }
+        public virtual ICollection<timetable_request> timetable_request { get; internal set; }
     }
 }

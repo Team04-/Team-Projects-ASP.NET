@@ -56,7 +56,7 @@
     <Key>
       <PropertyRef Name="Request_ID" />
     </Key>
-    <Property Name="Request_ID" Type="smallint" Nullable="false" />
+    <Property Name="Request_ID" Type="smallint" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="Department_Code" Type="varchar" MaxLength="2" Nullable="false" />
     <Property Name="Module_Code" Type="varchar" MaxLength="3" Nullable="false" />
     <Property Name="Day_ID" Type="tinyint" Nullable="false" />
@@ -91,7 +91,7 @@
     <Key>
       <PropertyRef Name="Request_ID" />
     </Key>
-    <Property Name="Request_ID" Type="smallint" StoreGeneratedPattern="None" Nullable="false" />
+    <Property Name="Request_ID" Type="smallint" Nullable="false" />
     <Property Name="Week" Type="tinyint" Nullable="false" />
   </EntityType>
   <EntityType Name="timetable_room">
@@ -220,66 +220,6 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK_timetable_request_timetable_request">
-    <End Role="timetable_request" Type="Self.timetable_request" Multiplicity="1" />
-    <End Role="timetable_request1" Type="Self.timetable_request" Multiplicity="0..1" />
-    <ReferentialConstraint>
-      <Principal Role="timetable_request">
-        <PropertyRef Name="Request_ID" />
-      </Principal>
-      <Dependent Role="timetable_request1">
-        <PropertyRef Name="Request_ID" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_timetable_request_timetable_request_room_allocation">
-    <End Role="timetable_request_room_allocation" Type="Self.timetable_request_room_allocation" Multiplicity="1" />
-    <End Role="timetable_request" Type="Self.timetable_request" Multiplicity="0..1" />
-    <ReferentialConstraint>
-      <Principal Role="timetable_request_room_allocation">
-        <PropertyRef Name="Request_ID" />
-      </Principal>
-      <Dependent Role="timetable_request">
-        <PropertyRef Name="Request_ID" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_timetable_request_timetable_request_week">
-    <End Role="timetable_request_week" Type="Self.timetable_request_week" Multiplicity="1" />
-    <End Role="timetable_request" Type="Self.timetable_request" Multiplicity="0..1" />
-    <ReferentialConstraint>
-      <Principal Role="timetable_request_week">
-        <PropertyRef Name="Request_ID" />
-      </Principal>
-      <Dependent Role="timetable_request">
-        <PropertyRef Name="Request_ID" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_timetable_request_timetable_request1">
-    <End Role="timetable_request" Type="Self.timetable_request" Multiplicity="1" />
-    <End Role="timetable_request1" Type="Self.timetable_request" Multiplicity="0..1" />
-    <ReferentialConstraint>
-      <Principal Role="timetable_request">
-        <PropertyRef Name="Request_ID" />
-      </Principal>
-      <Dependent Role="timetable_request1">
-        <PropertyRef Name="Request_ID" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_timetable_request_timetable_request2">
-    <End Role="timetable_request" Type="Self.timetable_request" Multiplicity="1" />
-    <End Role="timetable_request1" Type="Self.timetable_request" Multiplicity="0..1" />
-    <ReferentialConstraint>
-      <Principal Role="timetable_request">
-        <PropertyRef Name="Request_ID" />
-      </Principal>
-      <Dependent Role="timetable_request1">
-        <PropertyRef Name="Request_ID" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
   <Association Name="FK_timetable_request_timetable_round">
     <End Role="timetable_round" Type="Self.timetable_round" Multiplicity="1" />
     <End Role="timetable_request" Type="Self.timetable_request" Multiplicity="*" />
@@ -289,6 +229,18 @@
       </Principal>
       <Dependent Role="timetable_request">
         <PropertyRef Name="Current_Round" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_timetable_request_week_timetable_request_week1">
+    <End Role="timetable_request_week" Type="Self.timetable_request_week" Multiplicity="1" />
+    <End Role="timetable_request_week1" Type="Self.timetable_request_week" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="timetable_request_week">
+        <PropertyRef Name="Request_ID" />
+      </Principal>
+      <Dependent Role="timetable_request_week1">
+        <PropertyRef Name="Request_ID" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -347,29 +299,13 @@
       <End Role="timetable_park" EntitySet="timetable_park" />
       <End Role="timetable_request" EntitySet="timetable_request" />
     </AssociationSet>
-    <AssociationSet Name="FK_timetable_request_timetable_request" Association="Self.FK_timetable_request_timetable_request">
-      <End Role="timetable_request" EntitySet="timetable_request" />
-      <End Role="timetable_request1" EntitySet="timetable_request" />
-    </AssociationSet>
-    <AssociationSet Name="FK_timetable_request_timetable_request_room_allocation" Association="Self.FK_timetable_request_timetable_request_room_allocation">
-      <End Role="timetable_request_room_allocation" EntitySet="timetable_request_room_allocation" />
-      <End Role="timetable_request" EntitySet="timetable_request" />
-    </AssociationSet>
-    <AssociationSet Name="FK_timetable_request_timetable_request_week" Association="Self.FK_timetable_request_timetable_request_week">
-      <End Role="timetable_request_week" EntitySet="timetable_request_week" />
-      <End Role="timetable_request" EntitySet="timetable_request" />
-    </AssociationSet>
-    <AssociationSet Name="FK_timetable_request_timetable_request1" Association="Self.FK_timetable_request_timetable_request1">
-      <End Role="timetable_request" EntitySet="timetable_request" />
-      <End Role="timetable_request1" EntitySet="timetable_request" />
-    </AssociationSet>
-    <AssociationSet Name="FK_timetable_request_timetable_request2" Association="Self.FK_timetable_request_timetable_request2">
-      <End Role="timetable_request" EntitySet="timetable_request" />
-      <End Role="timetable_request1" EntitySet="timetable_request" />
-    </AssociationSet>
     <AssociationSet Name="FK_timetable_request_timetable_round" Association="Self.FK_timetable_request_timetable_round">
       <End Role="timetable_round" EntitySet="timetable_round" />
       <End Role="timetable_request" EntitySet="timetable_request" />
+    </AssociationSet>
+    <AssociationSet Name="FK_timetable_request_week_timetable_request_week1" Association="Self.FK_timetable_request_week_timetable_request_week1">
+      <End Role="timetable_request_week" EntitySet="timetable_request_week" />
+      <End Role="timetable_request_week1" EntitySet="timetable_request_week" />
     </AssociationSet>
     <AssociationSet Name="FK_timetable_room_timetable_room_type" Association="Self.FK_timetable_room_timetable_room_type">
       <End Role="timetable_room_type" EntitySet="timetable_room_type" />

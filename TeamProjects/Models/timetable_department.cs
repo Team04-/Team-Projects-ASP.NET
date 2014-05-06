@@ -21,6 +21,6 @@ namespace TeamProjects.Models
         public string Password { get; set; }
         public string Password_Salt { get; set; }
     
-        public virtual timetable_round timetable_round { get; set; }
+        public virtual timetable_round timetable_round { get; internal set; }
     }
 }
