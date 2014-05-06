@@ -26,6 +26,56 @@ namespace TeamProjects.Controllers
             ViewBag.currentRoundCode = check.Round_Code;
             return View(db.timetable_request.OrderBy(r => r.Current_Round).ToList());
         }
+        
+        //
+        //GET: /Requests/List
+        [Authorize]
+        public ActionResult List()
+        {
+            List<Models.RequestListModel> RequestList = new List<Models.RequestListModel>();
+            List<timetable_request> Requests = db.timetable_request.OrderBy(r => r.Current_Round).ToList();
+            foreach(timetable_request request in Requests)
+            {
+                Models.RequestListModel newRequest = new Models.RequestListModel();
+                newRequest.Request_ID = request.Request_ID;
+                newRequest.Module_Code = request.Module_Code;
+                newRequest.Custom_Comments = request.Custom_Comments;
+                newRequest.Round = request.Current_Round;
+                newRequest.Park = request.Park_ID;
+                newRequest.Priority = request.Priority;
+                newRequest.Number_Rooms = request.Number_Rooms;
+                newRequest.Number_Students = request.Number_Students;
+                newRequest.Start_Period = request.Start_Time;
+
+                newRequest.Module_Code = db.timetable_module.Where(m => m.Module_Code == request.Module_Code).First().Module_Title;
+                newRequest.Has_Comments = (request.Custom_Comments.Trim() == "");
+                newRequest.End_Period = (request.Start_Time + request.Duration);
+                
+                List<timetable_request_week> weekList = db.timetable_request_week.Where(rw => rw.Request_ID == request.Request_ID).ToList();
+                bool[] weekArray = new bool[weekList.Count];
+                int weekCounter = 0;
+                foreach(timetable_request_week week in weekList)
+                {
+                    bool weekBooked = false;
+                    if(week.Week == 1){
+                        weekBooked = true;
+                    }
+                    weekArray[weekCounter] = weekBooked;
+                    weekCounter++;
+                }
+                newRequest.Weeks = weekArray;
+                List<timetable_request_room_allocation> roomList = db.timetable_request_room_allocation.Where(ra => ra.Request_ID == request.Request_ID).ToList();
+                string[] roomArray = new string[roomList.Count];
+                int roomCounter = 0;
+                foreach(timetable_request_room_allocation room in roomList)
+                {
+                    roomArray[roomCounter] = room.timetable_building.ToString() + room.Room_ID.ToString();
+                    roomCounter++;
+                }
+                newRequest.Rooms = roomArray; 
+            }
+            return View();
+        }
 
         //
         // GET: /Requests/Details/5

@@ -193,6 +193,7 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\DepartmentModel.cs" />
+    <Compile Include="Models\RequestListModel.cs" />
     <Compile Include="Models\RequestViewModel.cs" />
     <Compile Include="Models\RoomBuildingViewModel.cs" />
     <Compile Include="Models\timetable_building.cs">

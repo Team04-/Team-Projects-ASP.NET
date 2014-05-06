@@ -101,13 +101,10 @@
             }
         }
         //Trigger result refinement on any appropriate change
-        $(".roundsOptions input").change(function () {
+        $(".change-search").change(function () {
             refineResults();
         });
         $(".commentSearchInput").keyup(function () {
-            refineResults();
-        });
-        $(".moduleSelect").change(function () {
             refineResults();
         });
         //NOTE - SUBJECT TO CHANGE
@@ -148,7 +145,7 @@
 <p>
     <i class="fa fa-info-circle"></i> Click on a request to view it in detail.
 </p>
-<div class="roundsOptions">
+<div class="roundsOptions change-search">
 @{
     //Display checkboxes for each round that is it possible for a request to have been made for
     for (var i = 1; i <= ViewBag.currentRoundCode; i++)
@@ -168,7 +165,7 @@
 </div>
 <div>
 Module
-<select class="moduleSelect">
+<select class="moduleSelect change-search">
     <option value="">Choose a module</option>
 @{
 List<string> moduleList = new List<string>();
