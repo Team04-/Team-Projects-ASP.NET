@@ -101,18 +101,25 @@ namespace TeamProjects.Controllers
                 newRequest.End_Period = ((request.Start_Time + request.Duration)-1);
 
                 newRequest.Time_String = GetTimeString(newRequest.Start_Period) + " - " + GetTimeString(newRequest.End_Period+1);
-                
+
                 List<timetable_request_week> weekList = db.timetable_request_week.Where(rw => rw.Request_ID == request.Request_ID).ToList();
-                bool[] weekArray = new bool[weekList.Count];
+                int[] weekListArray = new int[weekList.Count];
                 int weekCounter = 0;
-                foreach(timetable_request_week week in weekList)
+                foreach (timetable_request_week week in weekList)
                 {
-                    bool weekBooked = false;
-                    if(week.Week == 1){
-                        weekBooked = true;
+                    weekListArray[weekCounter] = week.Week;
+                }
+                bool[] weekArray = new bool[15];
+                for (var i = 0; i < 15; i++)
+                {
+                    if (weekListArray.Contains(i + 1))
+                    {
+                        weekArray[i] = true;
                     }
-                    weekArray[weekCounter] = weekBooked;
-                    weekCounter++;
+                    else
+                    {
+                        weekArray[i] = false;
+                    }
                 }
                 newRequest.Weeks = weekArray;
                 List<timetable_request_room_allocation> roomList = db.timetable_request_room_allocation.Where(ra => ra.Request_ID == request.Request_ID).ToList();
