@@ -16,5 +16,6 @@ namespace TeamProjects.Models
     {
         public short Request_ID { get; set; }
         public byte Week { get; set; }
+        public short WeekReqID { get; set; }
     }
 }
