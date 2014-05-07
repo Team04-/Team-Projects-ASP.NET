@@ -193,6 +193,7 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\DepartmentModel.cs" />
+    <Compile Include="Models\PasswordModel.cs" />
     <Compile Include="Models\RequestListModel.cs" />
     <Compile Include="Models\RequestViewModel.cs" />
     <Compile Include="Models\RoomBuildingViewModel.cs" />
@@ -256,6 +257,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\AddRequest.css" />
     <Content Include="Content\chosen\chosen-sprite%402x.png" />
     <Content Include="Content\chosen\chosen-sprite.png" />
     <Content Include="Content\chosen\chosen.css" />
@@ -344,7 +346,9 @@
     <Content Include="Scripts\tools\jquery.tablesorter.js" />
     <Content Include="Scripts\tools\jquery.tablesorter.min.js" />
     <Content Include="Scripts\tours\Building-1.js" />
+    <Content Include="Scripts\tours\Facility-1.js" />
     <Content Include="Scripts\tours\Module-1.js" />
+    <Content Include="Scripts\tours\Request-1.js" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
@@ -433,6 +437,7 @@
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Views\Requests\Timetable.cshtml" />
     <Content Include="Views\Requests\List.cshtml" />
+    <Content Include="Views\User\Account.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />

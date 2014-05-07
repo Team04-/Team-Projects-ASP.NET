@@ -98,7 +98,7 @@ namespace TeamProjects.Controllers
 
                 newRequest.Module_Title = db.timetable_module.Where(m => m.Module_Code == request.Module_Code).First().Module_Title;
                 newRequest.Has_Comments = (request.Custom_Comments == null) ? (false) : (!(request.Custom_Comments.Trim() == ""));
-                newRequest.End_Period = (request.Start_Time + request.Duration);
+                newRequest.End_Period = ((request.Start_Time + request.Duration)-1);
 
                 newRequest.Time_String = GetTimeString(newRequest.Start_Period) + " - " + GetTimeString(newRequest.End_Period+1);
                 
@@ -120,7 +120,7 @@ namespace TeamProjects.Controllers
                 int roomCounter = 0;
                 foreach(timetable_request_room_allocation room in roomList)
                 {
-                    roomArray[roomCounter] = room.timetable_building.ToString() + room.Room_ID.ToString();
+                    roomArray[roomCounter] = room.Building_ID.ToString() + room.Room_ID.ToString();
                     roomCounter++;
                 }
                 newRequest.Rooms = roomArray;

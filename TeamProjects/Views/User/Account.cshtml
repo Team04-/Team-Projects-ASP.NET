@@ -1,0 +1,15 @@
+﻿@model TeamProjects.Models.PasswordModel
+@{
+    ViewBag.Title = "Account";
+}
+<h2>Account</h2>
+@using (Html.BeginForm())
+{
+    <div><label for="Password">New Password: </label></div>
+    <div>
+        @Html.PasswordFor(u => u.Password)
+        @Html.ValidationMessageFor(u => u.Password) 
+    </div>
+    
+    <input type="submit" value="Save Changes"/>
+}

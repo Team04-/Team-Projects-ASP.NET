@@ -13,7 +13,6 @@
 	var facIdString = "-"; //String for holding checked checkbox's facility ID's
 
 	$(document).ready(function () {
-
 	        $.getJSON("@Url.Action("FacilityAPI", "api", null, Request.Url.Scheme)")
             .done(function (data) {
                 console.log(data);

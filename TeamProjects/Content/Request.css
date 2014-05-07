@@ -5,7 +5,7 @@
 .showrow {
     display:table-row;
 }
-.requestRow {
+.requestrow {
     cursor:pointer;
     position:relative;
 }
@@ -17,7 +17,7 @@
     border-top: 10px solid #F3F3F3;
 }
 .detailsrow td {
-    border-bottom: 10px solid #e8e8e8;
+    border-bottom: 10px solid #F3F3F3;
 }
 .detailsrow {
     background-color:#e8e8e8;
@@ -37,10 +37,16 @@
 .detailscontent {
     padding: 5px; 
 }
-.selected {
-    background-color:#F3F3F3;
+.selected td {
+    background-color:#d7d7d7;
 }
 /*Hide extra columns that will be show in detailed view*/
 .hidecell {
     display:none;
 }
+/*columns*/
+.detail{margin-bottom:10px;}
+.detail:last-child{margin-bottom:0px;}
+.detail__title{box-sizing:border-box;float:left;width:49%;}
+.detail__rooms{box-sizing:border-box;float:right;width:49%;}
+.detail__comment{clear:both;width:100%;}

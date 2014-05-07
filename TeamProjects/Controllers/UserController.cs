@@ -28,7 +28,7 @@ namespace TeamProjects.Controllers
         [Authorize]
         public ActionResult Index()
         {
-            return View();
+            return RedirectToAction("Account", "User");
         }
         [HttpGet]
         public ActionResult LogIn() 
@@ -49,6 +49,7 @@ namespace TeamProjects.Controllers
                 }
                 else
                 {
+                    ViewBag.DepartmentsInfo = getDepartmentsInfo();
                     ModelState.AddModelError("","Login data is incorrect.");
                 }
             }
@@ -108,6 +109,27 @@ namespace TeamProjects.Controllers
                 }
             }
             return isValid;
+        }
+
+        //
+        //Password Change
+        [HttpGet]
+        public ActionResult Account()
+        {
+            return View();
+        }
+        [HttpPost]
+        public ActionResult Account(Models.DepartmentModel department)
+        {
+            using (var db = new Models.team04Entities())
+            {
+                var crypto = new SimpleCrypto.PBKDF2();
+                var encryptedPass = crypto.Compute(department.Password);
+                db.timetable_department.Where(d => d.Department_Code == User.Identity.Name).First().Password = encryptedPass;
+                db.timetable_department.Where(d => d.Department_Code == User.Identity.Name).First().Password_Salt = crypto.Salt;
+                db.SaveChanges();
+            }
+            return RedirectToAction("Account", "User");
         }
     }
 }

@@ -800,5 +800,7 @@ tr.pager td {
 .dropdown ul li{background-color:#d6d4d6;border-top:1px solid #cecbce;}
 .dropdown ul li:first-child{border-top:none;}
 .dropdown ul li:hover:not(.dropdown--disabled){background-color:#cecbce;}
+.dropdown ul li.separated{border-bottom:5px solid #cecbce;}
+.dropdown .wide-dropdown{padding-left:15px;padding-right:15px;}
 /*Main cell*/
 .main-cell{font-weight:bold;}

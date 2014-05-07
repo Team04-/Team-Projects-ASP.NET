@@ -4,7 +4,6 @@
 }
 @section Includes{
     <link href="@Url.Content("/Content/Request.css")" rel="stylesheet" />
-    <script src="@Url.Content("/Scripts/tools/jquery.freezeheader.js")" type="text/javascript"></script>
 }
 <h2>List</h2>
 <p>
@@ -70,8 +69,7 @@ foreach (var item in Model.OrderBy(r => r.Module_Code))
 <tbody>
 @foreach (var item in Model)
 {
-    <span class="requestBlock">
-    <tr>
+    <tr class="requestrow request-@item.Request_ID" data-request="@item.Request_ID">
         <td>@User.Identity.Name@item.Module_Code</td>
         <td>@item.Round</td>
         <td>@item.Day</td>
@@ -85,26 +83,52 @@ foreach (var item in Model.OrderBy(r => r.Module_Code))
             @{
                 if (item.Round == ViewBag.CurrentRoundCode)
                 {
-                            @Html.ActionLink("Edit", "Edit", new { id = item.Request_ID });
-                            <span>|</span>
-                            @Html.ActionLink("Delete", "Delete", new { id = item.Request_ID });
+                                        @Html.ActionLink("Edit", "Edit", new { id = item.Request_ID });
+                                        <span>|</span>
+                                        @Html.ActionLink("Delete", "Delete", new { id = item.Request_ID });
                 }
             }
         </td>
     </tr>
-    <tr class="detailsrow">
+    <tr class="detailsrow details-@item.Request_ID hiderow" data-request="@item.Request_ID">
         <td colspan="10">
-            <div class='detail'><div class='detailsheader'>Title</div><div class='detailscontent'>@item.Module_Title</div></div>
-            <div class='detail'><div class='detailsheader'>Title</div><div class='detailscontent'>@item.Rooms.Length</div></div>
-            <div class='detail'><div class='detailsheader'>Comments</div><div class='detailscontent'>@item.Custom_Comments</div></div>
+            <div class='detail detail__title'><div class='detailsheader'>Title</div><div class='detailscontent'>@item.Module_Title</div></div>
+            <div class='detail detail__rooms'><div class='detailsheader'>@((ViewBag.CurrentRoundCode==item.Round) ? "Room Preferences" : "Allocated Rooms")</div><div class='detailscontent'>
+            @{
+                if(item.Rooms.Length > 0) {
+                    foreach (string room in item.Rooms)
+                    {
+                        <span>@room</span>
+                    }
+                }
+                else {
+                    <span>No rooms allocated.</span>
+                } 
+            }
+            </div></div>
+            @{
+                if(item.Has_Comments){
+                    <div class='detail detail__comment'><div class='detailsheader'>Comments</div><div class='detailscontent'>@item.Custom_Comments</div></div>
+                }
+            }
+            
         </td>
-    </tr>
-    </span>    
+    </tr>    
 }
 </tbody>
 </table>
-<script>
-    $('.detailscontent:empty').parent().remove();
-    //Add a frozen header to top of the requests table
-    //$("#RequestTable").freezeHeader();
+<script type="text/javascript">
+    var detailsrows = null;
+    $("#RequestTable").tablesorter({ sortList: [[1, 1]] });
+    //assign the sortStart event
+    $("#RequestTable").bind("sortEnd", function () {
+        var detailsrows = $(".detailsrow").remove();
+        detailsrows.each(function () {
+            $('.request-' + $(this).data('request')).after($(this));
+        });
+    });
+    $('.requestrow').click(function () {
+        $(this).toggleClass('selected');
+        $('.details-' + $(this).data('request')).toggleClass('hiderow').toggleClass('selected');
+    });
 </script>

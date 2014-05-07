@@ -61,11 +61,12 @@
                             {
                                 <li class="main-cell">@Html.ActionLink("Dashboard", "Index", "Home")</li>
                                 <li>@Html.ActionLink("Add Request", "Create", "Request") <i class="fa fa-plus"></i></li>
-                                <li>@Html.ActionLink("View Requests List", "Index", "Request") <i class="fa fa-list"></i></li>
-                                <li>@Html.ActionLink("View Requests Timetable", "Timetable", "Requests") <i class="fa fa-list-alt"></i></li>
-                                <li>
+                                <li>@Html.ActionLink("Request List", "Index", "Request") <i class="fa fa-list"></i></li>
+                                <li>@Html.ActionLink("Request Timetable", "Timetable", "Requests") <i class="fa fa-list-alt"></i></li>
+                                <li class="wide-dropdown">
                                 Manage <i class="fa fa-caret-down"></i>
                                 <ul>
+                                    <li class="separated"><i class="fa fa-user"></i> @Html.ActionLink("Account", "Account", "User")</li>
                                     <li>@Html.ActionLink("Modules", "Index", "Module")</li>
                                     <li>@Html.ActionLink("Rooms", "Index", "Room")</li>
                                     <li>@Html.ActionLink("Buildings", "Index", "Building")</li>
