@@ -8,8 +8,8 @@ tour = new Shepherd.Tour({
 });
 
 tour.addStep('step1', {
-    title: 'Create a new building',
-    text: 'Here we can add a new building.',
+    title: 'Create a new Facility',
+    text: 'Here we can add a new Facility.',
     attachTo: '.tour1',
     classes: 'shepherd shepherd-open shepherd-theme-arrows shepherd-transparent-text',
     buttons: [
@@ -23,7 +23,7 @@ tour.addStep('step1', {
 
 tour.addStep('step2', {
     title: 'Add, delete or view details',
-    text: 'By clicking on one of these links, we can add, delete or view details of a building',
+    text: 'By clicking on one of these links, we can add, delete or view details of a Facility',
     attachTo: '.tour2',
     classes: 'shepherd shepherd-open shepherd-theme-arrows shepherd-transparent-text',
     buttons: [
