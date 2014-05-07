@@ -1,19 +1,156 @@
-﻿@{
+﻿@model TeamProjects.Models.RequestViewModel
+@{
     ViewBag.Title = "Timetable";
 }
 @section Includes{
     <link href="@Url.Content("/Content/Timetable.css")" rel="stylesheet" />
-    <script type="text/javascript" src="~/Scripts/tools/calendar.js"></script>
 }
+
 <h2>Timetable</h2>
 
-<select>
-    @{
-        for (var i = 0; i < ViewBag.RoundCodes.Length; i++)
-        {
-            <option>Round @ViewBag.RoundCodes[i] @ViewBag.RoundStarts[i]-@ViewBag.RoundEnds[i]</option>   
-        }
+<script type="text/javascript">
+
+    $(document).ready(function () {
+        //populateTableData();
+    });
+
+    function populateRoundSelect() {
+        // TASK: Populate rounds from table
+        
+        // 
     }
-</select>
-<div id="timetable"></div>
-<script>calendar.make('timetable');</script>
+
+    function populateTableData() {
+        // TASK: populate table with all requests for selected round and week
+
+        // Get all request data via getJSON() from RequestAPIController (make it from Matt's list code)
+        
+        $.getJSON("@Url.Action("RequestAPI", "api", null, Request.Url.Scheme)")
+            .done(function (data) {
+                console.log(data);
+                    //
+                    var added = false;
+                    $('.'+data.Day).each(function(){
+                        for(var col=data.Start_Time;col<(data.Start_Time+data.Duration);){
+                            if($(this).find('td:nth-of-type('+col+')').empty()){
+                                if(col==((data.Start_Time+data.Duration)-1)){
+                                    //IT'S A FREE PERIOD
+                                    //ADD REQUEST TO $(this).find('td:nth-of-type('+col+')')
+                                    added = true;
+                                }
+                            } else {
+                                //IT'S BOOKED, THIS ROW IS USELESS
+                                break;
+                            }
+                        }
+                    });
+                    if (!added) {
+                        var tableCellsString = "<td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td>";
+                        $("." + data.Day + ":last-of-type").after("<tr class='" + data.Day + "'>"+tableCellsString+"<tr>");
+
+                        for(var col=data.Start_Time;col<(data.Start_Time+data.Duration);){
+                            $("." + data.Day + ":last-of-type").find('td:nth-of-type(' + col + ')').append("REQUEST STUFF TO PUT IN CELL(S)");
+                        }
+                        //ADD NEW ROW HERE, THEN ADD THE REQUEST
+                    }
+                })
+
+        .fail(function (jqXHR, textStatus, err) {
+            console.log('Error: ' + err);
+        });
+
+        // for each request:
+        // find request day
+        // find request start time/period
+        // find request duration
+        // check first day row/start time crosschecked cell is free, then check ones for duration
+        // if conflict, check next day row / start time cell is free then check ones for duration OR create new day row
+
+        // make request cells clickable, which then shows all the requests data
+    }
+
+</script>
+
+<body>
+    <select id="roundSelect"></select>
+
+    <select id="weekSelect">
+        <option>1</option>
+        <option>2</option>
+        <option>3</option>
+        <option>4</option>
+        <option>5</option>
+        <option>6</option>
+        <option>7</option>
+        <option>8</option>
+        <option>9</option>
+        <option>10</option>
+        <option>11</option>
+        <option>12</option>
+        <option>13</option>
+        <option>14</option>
+        <option>15</option>
+    </select>
+    <br /><br />
+    <div id="timetableDiv">
+    <table>
+        <tr class="1">
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+        </tr>
+        <tr class="2">
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+        </tr>
+        <tr class="3">
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+        </tr>
+        <tr class="4">
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+        </tr>
+        <tr class="5">
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+        </tr>
+    </table>
+        </div>
+</body>
+
+
