@@ -3,14 +3,14 @@
     ViewBag.Title = "List";
 }
 @section Includes{
-    <link href="@Url.Content("/Content/Request.css")" rel="stylesheet" />
+    <link href="@Url.Content("~/Content/Request.css")" rel="stylesheet" />
 }
 <h2>List</h2>
 <p>
-    @Html.ActionLink("Create New", "Create")
+    @Html.ActionLink("Add Request", "Create") <i class="fa fa-plus"></i>
 </p>
 <p>
-    <i class="fa fa-info-circle"></i> Click on a request to view it in detail.
+    <i class="fa fa-info-circle"></i> Click on a request to view it in detail. Click on headings to sort the table.
 </p>
 <div class="roundsOptions change-search">
 @{
