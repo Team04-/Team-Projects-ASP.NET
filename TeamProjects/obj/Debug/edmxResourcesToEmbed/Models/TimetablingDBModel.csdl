@@ -47,10 +47,6 @@
       <End Role="timetable_room" EntitySet="timetable_room" />
       <End Role="timetable_request_room_allocation" EntitySet="timetable_request_room_allocation" />
     </AssociationSet>
-    <AssociationSet Name="FK_timetable_request_week_timetable_request_week1" Association="team04Model.FK_timetable_request_week_timetable_request_week1">
-      <End Role="timetable_request_week" EntitySet="timetable_request_week" />
-      <End Role="timetable_request_week1" EntitySet="timetable_request_week" />
-    </AssociationSet>
     <AssociationSet Name="FK_timetable_room_timetable_room_type" Association="team04Model.FK_timetable_room_timetable_room_type">
       <End Role="timetable_room_type" EntitySet="timetable_room_type" />
       <End Role="timetable_room" EntitySet="timetable_room" />
@@ -162,8 +158,6 @@
     </Key>
     <Property Name="Request_ID" Type="Int16" Nullable="false" />
     <Property Name="Week" Type="Byte" Nullable="false" />
-    <NavigationProperty Name="timetable_request_week1" Relationship="team04Model.FK_timetable_request_week_timetable_request_week1" FromRole="timetable_request_week" ToRole="timetable_request_week1" a:SetterAccess="Internal" xmlns:a="http://schemas.microsoft.com/ado/2006/04/codegeneration" />
-    <NavigationProperty Name="timetable_request_week2" Relationship="team04Model.FK_timetable_request_week_timetable_request_week1" FromRole="timetable_request_week1" ToRole="timetable_request_week" a:SetterAccess="Internal" xmlns:a="http://schemas.microsoft.com/ado/2006/04/codegeneration" />
   </EntityType>
   <EntityType Name="timetable_room">
     <Key>
@@ -305,18 +299,6 @@
       <Dependent Role="timetable_request_room_allocation">
         <PropertyRef Name="Building_ID" />
         <PropertyRef Name="Room_ID" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_timetable_request_week_timetable_request_week1">
-    <End Type="team04Model.timetable_request_week" Role="timetable_request_week" Multiplicity="1" />
-    <End Type="team04Model.timetable_request_week" Role="timetable_request_week1" Multiplicity="0..1" />
-    <ReferentialConstraint>
-      <Principal Role="timetable_request_week">
-        <PropertyRef Name="Request_ID" />
-      </Principal>
-      <Dependent Role="timetable_request_week1">
-        <PropertyRef Name="Request_ID" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
