@@ -47,7 +47,7 @@
           <Property Name="Department_Code" Type="varchar" MaxLength="2" Nullable="false" />
           <Property Name="Part_Code" Type="varchar" MaxLength="1" Nullable="false" />
           <Property Name="Module_Code" Type="varchar" MaxLength="3" Nullable="false" />
-          <Property Name="Module_Title" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Module_Title" Type="varchar" MaxLength="70" Nullable="false" />
           <Property Name="Active" Type="bit" Nullable="false" />
         </EntityType>
         <EntityType Name="timetable_park">
@@ -96,6 +96,7 @@
           <Key>
             <PropertyRef Name="Request_ID" />
           </Key>
+          <Property Name="WeekReqID" Type="smallint" />
           <Property Name="Request_ID" Type="smallint" Nullable="false" />
           <Property Name="Week" Type="tinyint" Nullable="false" />
         </EntityType>
@@ -419,7 +420,7 @@
           <Property Name="Department_Code" Type="String" Nullable="false" MaxLength="2" FixedLength="false" Unicode="false" />
           <Property Name="Part_Code" Type="String" Nullable="false" MaxLength="1" FixedLength="false" Unicode="false" />
           <Property Name="Module_Code" Type="String" Nullable="false" MaxLength="3" FixedLength="false" Unicode="false" />
-          <Property Name="Module_Title" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Module_Title" Type="String" Nullable="false" MaxLength="70" FixedLength="false" Unicode="false" />
           <Property Name="Active" Type="Boolean" Nullable="false" />
         </EntityType>
         <EntityType Name="timetable_park">
@@ -479,6 +480,7 @@
           </Key>
           <Property Name="Request_ID" Type="Int16" Nullable="false" />
           <Property Name="Week" Type="Byte" Nullable="false" />
+          <Property Name="WeekReqID" Type="Int16" Nullable="false" />
           </EntityType>
         <EntityType Name="timetable_room">
           <Key>
@@ -737,6 +739,7 @@
           <EntitySetMapping Name="timetable_request_week">
             <EntityTypeMapping TypeName="team04Model.timetable_request_week">
               <MappingFragment StoreEntitySet="timetable_request_week">
+                <ScalarProperty Name="WeekReqID" ColumnName="WeekReqID" />
                 <ScalarProperty Name="Week" ColumnName="Week" />
                 <ScalarProperty Name="Request_ID" ColumnName="Request_ID" />
               </MappingFragment>

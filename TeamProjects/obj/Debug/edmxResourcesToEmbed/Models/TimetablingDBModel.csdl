@@ -98,7 +98,7 @@
     <Property Name="Department_Code" Type="String" Nullable="false" MaxLength="2" FixedLength="false" Unicode="false" />
     <Property Name="Part_Code" Type="String" Nullable="false" MaxLength="1" FixedLength="false" Unicode="false" />
     <Property Name="Module_Code" Type="String" Nullable="false" MaxLength="3" FixedLength="false" Unicode="false" />
-    <Property Name="Module_Title" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Module_Title" Type="String" Nullable="false" MaxLength="70" FixedLength="false" Unicode="false" />
     <Property Name="Active" Type="Boolean" Nullable="false" />
   </EntityType>
   <EntityType Name="timetable_park">
@@ -158,6 +158,7 @@
     </Key>
     <Property Name="Request_ID" Type="Int16" Nullable="false" />
     <Property Name="Week" Type="Byte" Nullable="false" />
+    <Property Name="WeekReqID" Type="Int16" Nullable="false" />
   </EntityType>
   <EntityType Name="timetable_room">
     <Key>

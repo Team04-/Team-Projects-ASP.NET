@@ -97,6 +97,7 @@
     <EntitySetMapping Name="timetable_request_week">
       <EntityTypeMapping TypeName="team04Model.timetable_request_week">
         <MappingFragment StoreEntitySet="timetable_request_week">
+          <ScalarProperty Name="WeekReqID" ColumnName="WeekReqID" />
           <ScalarProperty Name="Week" ColumnName="Week" />
           <ScalarProperty Name="Request_ID" ColumnName="Request_ID" />
         </MappingFragment>
