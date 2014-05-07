@@ -11,7 +11,7 @@
 <script type="text/javascript">
 
     $(document).ready(function () {
-        //populateTableData();
+        populateTableData(1, 4);
     });
 
     function populateRoundSelect() {
@@ -20,22 +20,22 @@
         // 
     }
 
-    function populateTableData() {
+    function populateTableData(round, week) {
         // TASK: populate table with all requests for selected round and week
 
         // Get all request data via getJSON() from RequestAPIController (make it from Matt's list code)
         
-        $.getJSON("@Url.Action("RequestAPI", "api", null, Request.Url.Scheme)")
+        $.getJSON("@Url.Action("RequestAPI", "api", null, Request.Url.Scheme)" + "?Round=" + round + "&Week=" + week)
             .done(function (data) {
                 console.log(data);
-                    //
+                //
                     var added = false;
                     $('.'+data.Day).each(function(){
                         for(var col=data.Start_Time;col<(data.Start_Time+data.Duration);){
                             if($(this).find('td:nth-of-type('+col+')').empty()){
                                 if(col==((data.Start_Time+data.Duration)-1)){
                                     //IT'S A FREE PERIOD
-                                    //ADD REQUEST TO $(this).find('td:nth-of-type('+col+')')
+                                    $(this).find('td:nth-of-type(' + col + ')').append(data.Module_Code);
                                     added = true;
                                 }
                             } else {
@@ -49,7 +49,7 @@
                         $("." + data.Day + ":last-of-type").after("<tr class='" + data.Day + "'>"+tableCellsString+"<tr>");
 
                         for(var col=data.Start_Time;col<(data.Start_Time+data.Duration);){
-                            $("." + data.Day + ":last-of-type").find('td:nth-of-type(' + col + ')').append("REQUEST STUFF TO PUT IN CELL(S)");
+                            $("." + data.Day + ":last-of-type").find('td:nth-of-type(' + col + ')').append(data.Module_Code);
                         }
                         //ADD NEW ROW HERE, THEN ADD THE REQUEST
                     }
@@ -94,7 +94,7 @@
     <br /><br />
     <div id="timetableDiv">
     <table>
-        <tr class="1">
+        <tr class="Mon">
             <td></td>
             <td></td>
             <td></td>
@@ -105,7 +105,7 @@
             <td></td>
             <td></td>
         </tr>
-        <tr class="2">
+        <tr class="Tues">
             <td></td>
             <td></td>
             <td></td>
@@ -116,7 +116,7 @@
             <td></td>
             <td></td>
         </tr>
-        <tr class="3">
+        <tr class="Wed">
             <td></td>
             <td></td>
             <td></td>
@@ -127,7 +127,7 @@
             <td></td>
             <td></td>
         </tr>
-        <tr class="4">
+        <tr class="Thur">
             <td></td>
             <td></td>
             <td></td>
@@ -138,7 +138,7 @@
             <td></td>
             <td></td>
         </tr>
-        <tr class="5">
+        <tr class="Fri">
             <td></td>
             <td></td>
             <td></td>
