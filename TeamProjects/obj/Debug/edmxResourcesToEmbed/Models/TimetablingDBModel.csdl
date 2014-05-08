@@ -156,7 +156,7 @@
     <Key>
       <PropertyRef Name="WeekReqID" />
     </Key>
-    <Property Name="WeekReqID" Type="Int16" Nullable="false" />
+    <Property Name="WeekReqID" Type="Int16" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="Request_ID" Type="Int16" Nullable="false" />
     <Property Name="Week" Type="Byte" Nullable="false" />
   </EntityType>

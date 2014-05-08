@@ -25,14 +25,14 @@ namespace TeamProjects.Models
         public short Semester { get; set; }
         public System.DateTime Start_Date { get; set; }
         public System.DateTime End_Date { get; set; }
+
 		public string RoundSemesterString
 		{
 			get
 			{
-            return "Round " + Round_Code + " (Semester " + Semester + ")";
+				return "Round " + Round_Code + " (Semester " + Semester + ")";
 			}
 		}
-    
         public virtual ICollection<timetable_department> timetable_department { get; internal set; }
         public virtual ICollection<timetable_request> timetable_request { get; internal set; }
     }

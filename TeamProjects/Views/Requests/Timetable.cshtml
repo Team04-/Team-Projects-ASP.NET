@@ -10,32 +10,33 @@
 
 <script type="text/javascript">
 
+	var timetableData;
+
     $(document).ready(function () {
     	//populateTableData(4,1);
     });
-
 
     function populateTableData(round, week) {
         // TASK: populate table with all requests for selected round and week
 
         // Get all request data via getJSON() from RequestAPIController (make it from Matt's list code)
-        $('#timetableDiv td').each(function(){$(this).empty();});
+    	$('#timetableDiv td').each(function(){$(this).empty();});
         $.getJSON("@Url.Action("RequestAPI", "api", null, Request.Url.Scheme)" + "?Round=" + round + "&Week=" + week)
             .done(function (data) {
             	console.log(data);
+            	timetableData = data;
             	data.forEach(function (entry) {
             		var Start_Time = entry.Start_Period;
             		var Duration = (entry.End_Period) - (entry.Start_Period) + 1;
                     var added = false;
             		$("." + entry.Day).each(function () {
-                        i++;
             			for (var col = Start_Time; col < (Start_Time + Duration) ; col++) {
-            				alert("inside for: "+col);
+            				//alert("inside for: "+col);
             				if ($(this).find('td:nth-of-type(' + col + ')').text() == "") {
             					//if (col < ((Start_Time + Duration))) {
-            						//IT'S A FREE PERIOD
-            						$(this).find('td:nth-of-type(' + col + ')').append(entry.Module_Code);
-                                    console.log(entry.Module_Code + " added to " + entry.Day + " row in column " + col);
+            					//IT'S A FREE PERIOD
+            					$(this).find('td:nth-of-type(' + col + ')').append("<div onclick='updateRequestInfoPanel(\"" + entry.Request_ID + "\");'>"+entry.Module_Code+"</div>");
+                                    //console.log(entry.Module_Code + " added to " + entry.Day + " row in column " + col);
             						added = true;
             					//}
             				} else {
@@ -45,13 +46,13 @@
             			}
             		});
             		if (!added) {
-            			console.log("not added" + entry.Module_Code + " added to " + entry.Day + " in column " + col);
+            			//console.log("not added" + entry.Module_Code + " added to " + entry.Day + " in column " + col);
             			var tableCellsString = "<td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td>";
             			$("." + entry.Day).last().after("<tr class='" + entry.Day + "'>" + tableCellsString + "</tr>");
 
             			for (var col = Start_Time; col < (Start_Time + Duration) ; col++) {
-            				alert("inside not added for: "+col);
-            				$("." + entry.Day).last().find('td:nth-of-type(' + col + ')').append(entry.Module_Code);
+            				//alert("inside not added for: "+col);
+            				$("." + entry.Day).last().find('td:nth-of-type(' + col + ')').append("<div onclick='updateRequestInfoPanel(\"" + entry.Request_ID + "\");'>" + entry.Module_Code + "</div>");
             			}
             			//ADD NEW ROW HERE, THEN ADD THE REQUEST
             		}
@@ -62,6 +63,24 @@
             console.log('Error: ' + err);
         });
 
+    }
+
+	function updateRequestInfoPanel(RequestID) {
+
+		timetableData.forEach(function (entry) {
+			if (entry.Request_ID == RequestID) {
+				$('#requestInfoDiv').empty();
+				$.each(entry, function (key, value) {
+					//alert("woo");
+					$('#requestInfoDiv').append("<div class='detail detail__" + key + "'>");
+					$('#requestInfoDiv').append("<div class='detailsheader'>" + key + "</div>");
+					$('#requestInfoDiv').append("<div class='detailscontent'>" + value + "</div>");
+					$('#requestInfoDiv').append("</div>");
+				});
+			}
+		});
+	}
+
         // for each request:
         // find request day
         // find request start time/period
@@ -70,7 +89,6 @@
         // if conflict, check next day row / start time cell is free then check ones for duration OR create new day row
 
         // make request cells clickable, which then shows all the requests data
-    }
 
 </script>
 
@@ -97,7 +115,7 @@
 	<input type="button" value="Update" onclick="populateTableData(document.getElementById('RoundSemester').options[document.getElementById('RoundSemester').selectedIndex].value, document.getElementById('weekSelect').options[document.getElementById('weekSelect').selectedIndex].value);" />
     <br /><br />
     <div id="timetableDiv">
-    <table>
+    <table id="requestTable">
         <tr class="Mon">
             <td></td>
             <td></td>
@@ -155,6 +173,12 @@
         </tr>
     </table>
         </div>
+	<div id="requestInfoDiv">
+		<!--<div class="detail detail__infoname">
+			<div class="detailsheader">Info Name</div>
+			<div class="detailscontent">Content Goes Here</div>
+		</div>-->
+	</div>
 </body>
 
 

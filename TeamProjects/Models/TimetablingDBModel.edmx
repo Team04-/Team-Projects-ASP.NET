@@ -96,7 +96,7 @@
           <Key>
             <PropertyRef Name="WeekReqID" />
           </Key>
-          <Property Name="WeekReqID" Type="smallint" Nullable="false" />
+          <Property Name="WeekReqID" Type="smallint" Nullable="false" StoreGeneratedPattern="Identity" />
           <Property Name="Request_ID" Type="smallint" Nullable="false" />
           <Property Name="Week" Type="tinyint" Nullable="false" />
         </EntityType>
@@ -462,7 +462,7 @@
           <Key>
             <PropertyRef Name="WeekReqID" />
           </Key>
-          <Property Name="WeekReqID" Type="Int16" Nullable="false" />
+          <Property Name="WeekReqID" Type="Int16" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Request_ID" Type="Int16" Nullable="false" />
           <Property Name="Week" Type="Byte" Nullable="false" />
         </EntityType>
