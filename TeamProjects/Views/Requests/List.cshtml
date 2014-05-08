@@ -1,10 +1,29 @@
 ﻿@model List<TeamProjects.Models.RequestListModel>
 @{
-    ViewBag.Title = "List";
+    ViewBag.Title = "Request List";
 }
 @section Includes{
     <link href="@Url.Content("~/Content/Request.css")" rel="stylesheet" />
 }
+<script type="text/javascript">
+    window.onload = function () {
+        function refineRequests() {
+            //Search the comments - Case insensitive
+            var searchTerm = $(".commentSearchInput").val().toLowerCase();
+            if (searchTerm != "") {
+                $('.detail__comment').each(function () {
+                    if (String($(this).text().toLowerCase()).indexOf(searchTerm) != -1) {
+                        console.log(this);
+                    }
+                });
+            }
+        }
+        $('.commentSearchInput').keyup(function () {
+            refineRequests();
+        });
+
+    }
+</script>
 <h2>List</h2>
 <p>
     @Html.ActionLink("Add Request", "Create") <i class="fa fa-plus"></i>
@@ -69,8 +88,8 @@ foreach (var item in Model.OrderBy(r => r.Module_Code))
 <tbody>
 @foreach (var item in Model)
 {
-    <tr class="requestrow request-@item.Request_ID" data-request="@item.Request_ID">
-        <td>@User.Identity.Name@item.Module_Code</td>
+    <tr class="requestrow request-@item.Request_ID showrow" data-request="@item.Request_ID">
+        <td class="requestModCode" data-modCode="@item.Module_Code">@User.Identity.Name@item.Module_Code</td>
         <td>@item.Round</td>
         <td>@item.Day</td>
         <td>@item.Start_Period - @item.End_Period | @item.Time_String</td>
@@ -83,9 +102,9 @@ foreach (var item in Model.OrderBy(r => r.Module_Code))
             @{
                 if (item.Round == ViewBag.CurrentRoundCode)
                 {
-                                        @Html.ActionLink("Edit", "Edit", new { id = item.Request_ID });
-                                        <span>|</span>
-                                        @Html.ActionLink("Delete", "Delete", new { id = item.Request_ID });
+                    @Html.ActionLink("Edit", "Edit", new { id = item.Request_ID });
+                    <span>|</span>
+                    @Html.ActionLink("Delete", "Delete", new { id = item.Request_ID });
                 }
             }
         </td>
@@ -115,20 +134,24 @@ foreach (var item in Model.OrderBy(r => r.Module_Code))
         </td>
     </tr>    
 }
+    <tr class="noresults hiderow"><td colspan=13>No Request could be found.</td></tr>
 </tbody>
 </table>
 <script type="text/javascript">
-    var detailsrows = null;
-    $("#RequestTable").tablesorter({ sortList: [[1, 1]] });
-    //assign the sortStart event
-    $("#RequestTable").bind("sortEnd", function () {
-        var detailsrows = $(".detailsrow").remove();
-        detailsrows.each(function () {
-            $('.request-' + $(this).data('request')).after($(this));
+    if($('#RequestTable tbody tr').length > 1){
+        $("#RequestTable").tablesorter({ sortList: [[1, 1]] });
+        //assign the sortStart event
+        $("#RequestTable").bind("sortEnd", function () {
+            var detailsrows = $(".detailsrow").remove();
+            detailsrows.each(function () {
+                $('.request-' + $(this).data('request')).after($(this));
+            });
         });
-    });
-    $('.requestrow').click(function () {
-        $(this).toggleClass('selected');
-        $('.details-' + $(this).data('request')).toggleClass('hiderow').toggleClass('selected');
-    });
+        $('.requestrow').click(function () {
+            $(this).toggleClass('selected');
+            $('.details-' + $(this).data('request')).toggleClass('hiderow').toggleClass('selected');
+        });
+    } else {
+        $('.noresults').removeClass('hiderow').addClass('showrow');
+    }
 </script>

@@ -1,0 +1,541 @@
+﻿@model TeamProjects.Models.RequestViewModel
+@{
+    ViewBag.Title = "Edit";
+}
+@section Includes{
+    <link href="@Url.Content("~/Content/AddRequest.css")" rel="stylesheet" />
+}
+<h2>Edit</h2>
+
+<script type="text/javascript">
+	var roomPrefCollection = new Array(); // Holds room preference info
+	var facArray = new Array();
+	var facIdString = "-"; //String for holding checked checkbox's facility ID's
+
+	$(document).ready(function () {
+	        $.getJSON("@Url.Action("FacilityAPI", "api", null, Request.Url.Scheme)")
+            .done(function (data) {
+                console.log(data);
+                var facTableString;
+                facTableString = facTableString + "<tr>";
+
+                data.forEach(function (entry) {
+                    facTableString = facTableString + "<th>" + entry.Facility_Name + "</th>";
+                })
+
+                facTableString = facTableString +"</tr><tr>";
+
+                data.forEach(function (entry) {
+                	facTableString = facTableString + "<td>" + "<input type='checkbox' class='facBox' data-fac-id='" + entry.Facility_ID + "' onchange='facChange();'>" + "</td>";
+                })
+
+                facTableString = facTableString + "</tr>";
+                $("#facTable").append(facTableString);
+            })
+            .fail(function (jqXHR, textStatus, err) {
+                console.log('Error: ' + err);
+            });
+	    
+		$("#Start_Time").empty();
+		for (var i = 1; i < 10; i++) {
+			var select = document.getElementById("Start_Time");
+			var option = document.createElement('option');
+			option.text = (i) + " | " + (i+8) + ":00";
+			option.value = i;
+			select.add(option);
+		}
+
+		$("#Start_Time").change(function () {
+			$("#Duration").empty();
+			for (var i = 0; i > -(9-(document.getElementById('Start_Time').options[document.getElementById('Start_Time').selectedIndex].value-1)); i--) {
+				var select = document.getElementById("Duration");
+				var option = document.createElement('option');
+				option.text = (((9 - (document.getElementById('Start_Time').options[document.getElementById('Start_Time').selectedIndex].value - 1))+i));
+				option.value = (((9 - (document.getElementById('Start_Time').options[document.getElementById('Start_Time').selectedIndex].value - 1)) + i));
+				select.add(option);
+			}
+		});
+
+	    $("input:checkbox").each(function () {
+	        fixHiddenCheckField(this);
+	    });
+
+	    $("input:checkbox").change(function () {
+	        fixHiddenCheckField(this);
+	    });
+
+		$("#Building_ID").change(function () {
+			$("#Room_ID").empty();
+			findRooms(document.getElementById('Building_ID').options[document.getElementById('Building_ID').selectedIndex].value, document.getElementById('Room_Type').options[document.getElementById('Room_Type').selectedIndex].text, facIdString);
+		});
+
+		$("#Room_Type").change(function () {
+			$("#Room_ID").empty();
+			findRooms(document.getElementById('Building_ID').options[document.getElementById('Building_ID').selectedIndex].value, document.getElementById('Room_Type').options[document.getElementById('Room_Type').selectedIndex].text, facIdString);
+		});
+
+		$("#Park_ID2").change(function () {
+			$("#Building_ID").empty();
+			$("#Room_ID").empty();
+			findBuildings(document.getElementById('Park_ID2').options[document.getElementById('Park_ID2').selectedIndex].value);
+			findRooms(document.getElementById('Building_ID').options[document.getElementById('Building_ID').selectedIndex].value, document.getElementById('Room_Type').options[document.getElementById('Room_Type').selectedIndex].text, facIdString);
+		});
+
+		$("#Number_Rooms").change(function () {
+			if (roomPrefCollection.length > (document.getElementById('Number_Rooms').options[document.getElementById('Number_Rooms').selectedIndex].value) - 1) {
+				deleteAllRowAndPref('dataTable');
+				alert("Your room preferences have been reset as the chosen # Of Rooms is less than the number of room preferences you have added. Please try again.");
+			}
+		});
+
+		$("#Building_ID").empty();
+		$("#Room_ID").empty();
+		$("#Module_Code").empty();
+		findModules("@User.Identity.Name");
+		findBuildings(document.getElementById('Park_ID2').options[document.getElementById('Park_ID2').selectedIndex].value);
+		findRooms(document.getElementById('Building_ID').options[document.getElementById('Building_ID').selectedIndex].value, document.getElementById('Room_Type').options[document.getElementById('Room_Type').selectedIndex].text, facIdString);
+	});
+
+	//FUNCTIONS//
+
+	function facChange() {
+		collFacIds();
+		$('#Room_ID').empty();
+		findRooms(document.getElementById('Building_ID').options[document.getElementById('Building_ID').selectedIndex].value, document.getElementById('Room_Type').options[document.getElementById('Room_Type').selectedIndex].text, facIdString);
+	}
+
+    function collFacIds() {
+
+    	facIdString = "";
+
+        $(".facBox").each(function () { // For each checkbox
+            if($(this).prop("checked")){ // If checkbox is checked...
+                facIdString = facIdString + $(this).data("fac-id") + "|";
+            }
+        }
+                        ); //...Add checkbox's fac-id to array
+
+        if(!facIdString){
+        	facIdString = "-";
+        }
+        updateFacJSON();
+    }
+
+	function fixHiddenCheckField(checkField) {
+	    var name = $(checkField).attr("name");
+	    var hiddenSelector = "input:hidden[name=" + name + "]";
+	    var checkBoxesInListSelector = "input:checkbox[name=" + name + "]";
+	    var checkedCheckBoxesInListSelector = "input:checked[name=" + name + "]";
+
+	    if ($(checkedCheckBoxesInListSelector).length >= 1 || $(checkBoxesInListSelector).length > 1) {
+	        $("input").remove(hiddenSelector);
+	    }
+	    else {
+	        if ($(hiddenSelector).length == 0)
+	            $(checkField).parents("form").append("<input type='hidden' name='" + name + "' value='false' />");
+	    }
+	}
+
+	function updateRoomPrefJSON() {
+	    $("#hdnRoomPrefJSON").val(JSON.stringify(roomPrefCollection));
+	}
+
+	function updateFacJSON() {
+		if (facIdString != "") {
+			facArray = (facIdString.substring(0, facIdString.length - 1)).split("|");
+			$("#hdnfacJSON").val(JSON.stringify(facArray));
+		}
+		else {
+			$("#hdnfacJSON").val("");
+		}
+	}
+
+	function addRow(tableID) {
+
+		var table = document.getElementById(tableID);
+
+		var rowCount = table.rows.length;
+		var row = table.insertRow(rowCount);
+
+		var cell1 = row.insertCell(0);
+		var element1 = document.createElement("input");
+		element1.type = "checkbox";
+		element1.name = "chkbox[]";
+		cell1.appendChild(element1);
+
+		var cell2 = row.insertCell(1);
+		cell2.innerHTML = roomPrefCollection[roomPrefCollection.length - 1][0];
+
+		var cell3 = row.insertCell(2);
+		cell3.innerHTML = roomPrefCollection[roomPrefCollection.length - 1][1];
+
+		var cell4 = row.insertCell(3);
+		cell4.innerHTML = roomPrefCollection[roomPrefCollection.length - 1][2];
+
+		var cell5 = row.insertCell(4);
+		cell5.innerHTML = roomPrefCollection[roomPrefCollection.length - 1][3];
+	}
+
+	function deleteRowAndPref(tableID) {
+		try {
+			var table = document.getElementById(tableID);
+			var rowCount = table.rows.length;
+			var deleted = false;
+
+			for (var i = 0; i < rowCount; i++) {
+				var row = table.rows[i];
+				var chkbox = row.cells[0].childNodes[0];
+
+				if (null != chkbox && true == chkbox.checked) {
+					roomPrefCollection.splice(i-1, 1);
+
+					table.deleteRow(i);
+					rowCount--;
+					i--;
+					deleted = true;
+				}
+			}
+
+			updateRoomPrefJSON();
+
+			if (deleted == true) {
+				alert("Selected room preference(s) successfully removed.");
+			}
+
+		} catch (e) {
+			alert(e);
+		}
+	}
+
+	function deleteAllRowAndPref(tableID) {
+		try {
+			var table = document.getElementById(tableID);
+			var rowCount = table.rows.length;
+
+			for (var i = 1; i < rowCount; i++) {
+					roomPrefCollection.splice(i - 1, 1);
+					table.deleteRow(i);
+					rowCount--;
+					i--;
+			}
+
+			updateRoomPrefJSON();
+			}
+		catch (e) {
+			alert(e);
+		}
+	}
+
+
+	function addRoomPref() {
+
+		//if (document.getElementById('Room_ID').value == "" || document.getElementById('Building_ID').value == "") {
+		//	alert("Please fill in both Building and Room fields before attempting to add a new preference.")
+		//}
+
+		if (roomPrefCollection.length > (document.getElementById('Number_Rooms').options[document.getElementById('Number_Rooms').selectedIndex].value)-1) {
+			// Already got max room preferences. Tell them that they can remove a roompref from the list of already added roomprefs, then add new one.
+
+			alert("The maximum number of room preferences has already been filled. If you wish to add another, please remove an existing room preference.")
+		}
+
+		else {
+			roomPref = new Array();
+			roomPref[0] = document.getElementById('Room_Type').options[document.getElementById('Room_Type').selectedIndex].text;
+			roomPref[1] = document.getElementById('Park_ID2').options[document.getElementById('Park_ID2').selectedIndex].text;
+			roomPref[2] = document.getElementById('Building_ID').options[document.getElementById('Building_ID').selectedIndex].text;
+			roomPref[3] = document.getElementById('Room_ID').options[document.getElementById('Room_ID').selectedIndex].text;
+
+			roomPrefCollection.push(roomPref);
+
+			document.getElementById('Room_Type').value = "";
+			document.getElementById('Park_ID2').value = "";
+			document.getElementById('Building_ID').value = "";
+			document.getElementById('Room_ID').value = "";
+
+			addRow('dataTable');
+			updateRoomPrefJSON();
+
+			alert("Room preference successfully added!");
+		}
+	}
+
+	function findRooms(buildingID, roomType, facIdString) {
+
+		$("#Room_ID").empty();
+
+		if (buildingID == "N/A") {
+			var select = document.getElementById("Room_ID");
+			var option = document.createElement('option');
+			option.text = "N/A";
+			option.value = "null";
+			select.add(option);
+		}
+
+		else {
+			var select = document.getElementById("Room_ID");
+			var option = document.createElement('option');
+			option.text = "N/A";
+			option.value = "0";
+			select.add(option);
+
+			$.getJSON("@Url.Action("RoomAPI", "api", null, Request.Url.Scheme)" + '?BuildingID=' + buildingID + '&RoomType=' + roomType + '&FacIdString=' + facIdString)
+		.done(function (data) {
+			console.log(data);
+			data.forEach(function (entry) {
+				var select = document.getElementById("Room_ID");
+				var option = document.createElement('option');
+				option.text = entry;
+				option.value = entry;
+				select.add(option);
+			});
+		})
+		.fail(function (jqXHR, textStatus, err) {
+			console.log('Error: ' + err);
+		});
+		}
+	}
+
+	function findBuildings(parkID) {
+
+		var select = document.getElementById("Building_ID");
+		var option = document.createElement('option');
+		option.text = "N/A";
+		option.value = "null";
+		select.add(option);
+
+		$.getJSON("@Url.Action("BuildingAPI", "api", null, Request.Url.Scheme)" + '?ParkID=' + parkID)
+	.done(function (data) {
+		console.log(data);
+		data.forEach(function (entry) {
+			var select = document.getElementById("Building_ID");
+			var option = document.createElement('option');
+			option.text = entry.Building_Name;
+			option.value = entry.Building_ID;
+			select.add(option);
+		});
+	})
+	.fail(function (jqXHR, textStatus, err) {
+		console.log('Error: ' + err);
+	});
+	}
+
+    function findModules(deptCode) {
+
+        var select = document.getElementById("Module_Code");
+        var option = document.createElement('option');
+        option.text = "-Select Module Code-";
+        option.value = "";
+        select.add(option);
+
+    	$.getJSON("@Url.Action("ModuleAPI", "api", null, Request.Url.Scheme)" + '?DeptCode=' + deptCode)
+.done(function (data) {
+    console.log(data);
+    data.forEach(function (entry) {
+        var select = document.getElementById("Module_Code");
+        var option = document.createElement('option');
+        option.text = entry.Module_Title;
+        option.value = entry.Module_Code;
+        select.add(option);
+    });
+})
+.fail(function (jqXHR, textStatus, err) {
+    console.log('Error: ' + err);
+});
+    }
+
+    function selWeeks() {
+        $(".weekBox").each(function () { $(this).prop("checked", true); });
+        //$("weekBox12").value(false);
+        //$("weekBox13").prop("value", false);
+        //$("weekBox14").prop("value", false);
+    }
+
+    function selWeeksTwelve() {
+        $(".weekBox").each(function () { $(this).prop("checked", true); });
+        $("#weekBox12").prop("checked", false);
+        $("#weekBox13").prop("checked", false);
+        $("#weekBox14").prop("checked", false);
+    }
+
+    function unselAll() {
+        $(".weekBox").each(function () { $(this).prop("checked", false); });
+    }
+
+</script>
+
+
+
+
+
+@using (Html.BeginForm()) 
+{
+    @Html.AntiForgeryToken()
+    
+    <div class="form-horizontal">
+        <h4>timetable_request</h4>
+        <hr />
+        @Html.ValidationSummary(true)
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Module_Code, "Module Code", new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+				@Html.DropDownListFor(model => model.Module_Code, (SelectList)ViewBag.Module_Code, "-Select Module Code-")
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Day_ID, "Day", new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownListFor(model => model.Day_ID, (SelectList) ViewBag.Day_ID)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Start_Time, "Start Time", new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownListFor(model => model.Start_Time, (SelectList) ViewBag.Start_Time)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Duration, "Duration", new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownListFor(model => model.Duration, (SelectList) ViewBag.Duration)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Week, "Weeks", new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                <table>
+                    <tr>
+                        <th>1</th>
+                        <th>2</th>
+                        <th>3</th>
+                        <th>4</th>
+                        <th>5</th>
+                        <th>6</th>
+                        <th>7</th>
+                        <th>8</th>
+                        <th>9</th>
+                        <th>10</th>
+                        <th>11</th>
+                        <th>12</th>
+                        <th>13</th>
+                        <th>14</th>
+                        <th>15</th>
+                    </tr>
+                    <tr>
+                        @for (int i = 0; i < 15; i++)
+                        {
+                            <td>
+                            @Html.CheckBoxFor(m => m.Week[i], new { @class = "weekBox", id = "weekBox"+i })
+                            </td>
+                        }
+                    </tr>
+                </table>
+                <input type="button" value="Select Weeks 1-12" onclick="selWeeksTwelve()" />
+                <input type="button" value="Select All" onclick="selWeeks()" />
+                <input type="button" value="Unselect all" onclick="unselAll()" />
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Number_Students, "Number Of Students", new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Number_Students)
+                @Html.ValidationMessageFor(model => model.Number_Students)
+            </div>
+        </div>
+
+		<div class="form-group">
+			@Html.LabelFor(model => model.Park_ID, "Park Preference", new { @class = "control-label col-md-2" })
+			<div class="col-md-10">
+				@Html.DropDownListFor(model => model.Park_ID, (SelectList) ViewBag.Park_ID)
+			</div>
+		</div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Number_Rooms, "# Of Rooms", new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownListFor(model => model.Number_Rooms, (SelectList)ViewBag.Number_Rooms)
+            </div>
+        </div>
+
+
+		<div id="prefForm1" class="form-group">---PREFERENCE FORM---
+
+			<div class="form-group">
+				@Html.LabelFor(model => model.Park_ID, "Filter by Park", new { @class = "control-label col-md-2" })
+				<div class="col-md-10">
+					@Html.DropDownListFor(model => model.Park_ID2, (SelectList)ViewBag.Park_ID, new { @id = "Park_ID2" })
+				</div>
+			</div>
+
+			<div class="form-group">
+				@Html.LabelFor(model => model.Building_ID, "Building", new { @class = "control-label col-md-2" })
+				<div class="col-md-10">
+					@Html.DropDownListFor(model => model.Building_ID, (SelectList)ViewBag.Building_ID)
+				</div>
+			</div>
+
+			<div class="form-group">
+				@Html.LabelFor(model => model.Room_Type, "Filter by Room Type", new { @class = "control-label col-md-2" })
+				<div class="col-md-10">
+					@Html.DropDownListFor(model => model.Room_Type, (SelectList)ViewBag.Room_Type)
+				</div>
+			</div>
+
+			<div id="facTableDiv"><table id="facTable"></table></div>
+
+			<div class="form-group">
+				@Html.LabelFor(model => model.Room_ID, "Room", new { @class = "control-label col-md-2" })
+				<div class="col-md-10">
+					@Html.DropDownListFor(model => model.Room_ID, (SelectList)ViewBag.Room_ID)
+				</div>
+			</div>
+		</div>
+
+        <div class="form-group">---</div>
+
+        <input type="button" value="Add Room Preference" onclick="addRoomPref()" />
+
+        <input type="button" value="Delete Room Preference(s)" onclick="deleteRowAndPref('dataTable')" />
+
+        <table id="dataTable" width="350" border="1"><tr><th>Select</th><th>Room Type</th><th>Park</th><th>Building</th><th>Room</th></tr>
+        </table>
+
+        <div id="roomChoices" class="form-group"></div>
+
+        <div class="form-group">---</div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.Priority, "Priority", new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.CheckBoxFor(model => model.Priority)
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.Custom_Comments, "Additional Information", new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.Custom_Comments)
+                </div>
+            </div>
+            <div class="form-group">
+                <input type="hidden" id="Department_Code" name="Department_Code" value="@User.Identity.Name"/>
+                @Html.HiddenFor(model => model.Room_Pref_JSON, new { @ID = "hdnRoomPrefJSON" })
+		        @Html.HiddenFor(model => model.Fac_JSON, new { @ID = "hdnfacJSON" })
+            </div>
+		    <input type="submit" value="Save" class="btn btn-default"/>
+        </div>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
