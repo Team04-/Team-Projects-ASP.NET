@@ -26,26 +26,34 @@
             	//
             	var added = false;
             	data.forEach(function (entry) {
+            		var Start_Time = entry.Start_Period;
+            		var Duration = (entry.End_Period) - (entry.Start_Period) + 1;
             		//alert(entry.Day);
             		$("." + entry.Day).each(function () {
-            			for (var col = entry.Start_Time; col < (entry.Start_Time + entry.Duration); col++) {
-            				if ($(this).find('td:nth-of-type(' + col + ')').empty()) {
-            					//if (col < ((entry.Start_Time + entry.Duration))) {
+            			alert(".each complete");
+            			for (var col = Start_Time; col < (Start_Time + Duration) ; col++) {
+            				alert("inside for: "+col);
+            				if ($(this).find('td:nth-of-type(' + col + ')').text() == "") {
+            					alert("col is empty");
+            					//if (col < ((Start_Time + Duration))) {
             						//IT'S A FREE PERIOD
             						$(this).find('td:nth-of-type(' + col + ')').append(entry.Module_Code);
             						added = true;
             					//}
             				} else {
+            					alert("col is NOT empty - row useless");
             					//IT'S BOOKED, THIS ROW IS USELESS
             					break;
             				}
             			}
             		});
             		if (!added) {
+            			alert("not added");
             			var tableCellsString = "<td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td>";
             			$("." + entry.Day + ":last-of-type").after("<tr class='" + entry.Day + "'>" + tableCellsString + "<tr>");
 
-            			for (var col = entry.Start_Time; col < (entry.Start_Time + entry.Duration) ; col++) {
+            			for (var col = Start_Time; col < (Start_Time + Duration) ; col++) {
+            				alert("inside not added for: "+col);
             				$("." + entry.Day + ":last-of-type").find('td:nth-of-type(' + col + ')').append(entry.Module_Code);
             			}
             			//ADD NEW ROW HERE, THEN ADD THE REQUEST
