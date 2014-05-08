@@ -10,6 +10,81 @@
         </div>
     </section>
 }
-<h3>Need Attention</h3>
-<h3>Recent Activity</h3>
 <h3>Round Info</h3>
+@{
+    TeamProjects.Models.timetable_round roundInfo = ViewBag.RoundInfo;   
+}
+<div>Round: @roundInfo.Round_Code</div>
+<div>Semester: @roundInfo.Semester</div>
+<div>Start Date: @roundInfo.Start_Date</div>
+<div>End Date: @roundInfo.End_Date</div>
+<h3>Need Attention</h3>
+<table>
+    <thead>
+        <tr>
+            <th>Code</th>
+            <th>Round</th>
+            <th>Day</th>
+            <th>Periods</th>
+            <th>Park</th>
+            <th>Rooms</th>
+            <th>Priority</th>
+            <th>Comment</th>
+            <th>Status</th>
+            <th>Tools</th>
+        </tr>
+    </thead>
+    <tbody>
+    @{
+        foreach(TeamProjects.Models.timetable_request request in ViewBag.Attention){
+            <tr>
+                <td>@User.Identity.Name@request.Module_Code</td>
+                <td>@request.Current_Round</td>
+                <td>@request.Day_ID</td>
+                <td></td>
+                <td>@request.Park_ID</td>
+                <td>@request.Number_Rooms</td>
+                <td>@request.Priority</td>
+                <td>@request.Custom_Comments</td>
+                <td>@request.Request_Status</td>
+                <td></td>
+            </tr>
+        }
+    } 
+    </tbody>
+</table>
+<h3>Recently Added</h3>
+<table>
+    <thead>
+        <tr>
+            <th>Code</th>
+            <th>Round</th>
+            <th>Day</th>
+            <th>Periods</th>
+            <th>Park</th>
+            <th>Rooms</th>
+            <th>Priority</th>
+            <th>Comment</th>
+            <th>Status</th>
+            <th>Tools</th>
+        </tr>
+    </thead>
+    <tbody>
+    @{
+        foreach(TeamProjects.Models.timetable_request request in ViewBag.RecentlyAdded){
+            <tr>
+                <td>@User.Identity.Name@request.Module_Code</td>
+                <td>@request.Current_Round</td>
+                <td>@request.Day_ID</td>
+                <td></td>
+                <td>@request.Park_ID</td>
+                <td>@request.Number_Rooms</td>
+                <td>@request.Priority</td>
+                <td>@request.Custom_Comments</td>
+                <td>@request.Request_Status</td>
+                <td></td>
+            </tr>  
+        }
+    }    
+    </tbody>
+</table>
