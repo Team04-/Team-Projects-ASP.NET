@@ -222,7 +222,8 @@ namespace TeamProjects.Controllers
             {
                 return HttpNotFound();
             }
-            return View(getFullRequest(request));
+			ViewBag.id = id;
+            return View();
         }
 
         //

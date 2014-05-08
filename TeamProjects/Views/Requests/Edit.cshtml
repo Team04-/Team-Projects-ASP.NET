@@ -98,6 +98,66 @@
 
 	//FUNCTIONS//
 
+	function getReqInfo() {
+		// TASK: populate table with all requests for selected round and week
+		var reqID = @ViewBag.id
+		// Get all request data via getJSON() from RequestAPIController (make it from Matt's list code)
+		$('#timetableDiv td').each(function(){$(this).empty();});
+		$.getJSON("@Url.Action("RequestAPI", "api", null, Request.Url.Scheme)" + "?Round=0" + "&Week=0")
+		.done(function (data) {
+			console.log(data);
+			timetableData = data;
+			data.forEach(function (entry) {
+
+				if(entry.Request_ID == reqID){
+					var Start_Time = entry.Start_Period;
+					var Duration = (entry.End_Period) - (entry.Start_Period) + 1;
+
+					$("#Module_Code option:contains(" + entry.Module_Code + ")").attr('selected', 'selected');
+					$("#Day_ID option:contains(" + entry.Day + ")").attr('selected', 'selected');
+
+					$("#Start_Time option").each(function () {
+						if ($(this).text() == Start_Time) {
+							$(this).attr('selected', 'selected');
+						}
+					});
+
+					$("#Duration option:contains(" + Duration + ")").attr('selected', 'selected');
+
+					//WEEKS
+
+					$("#Number_Students").val(entry.Number_Students);
+					$("#Park_ID option:contains(" + entry.Park + ")").attr('selected', 'selected');
+					$("#Park_ID option:contains(" + entry.Number_Rooms + ")").attr('selected', 'selected');
+
+					//Building - don't need
+					//Room Type - don't need
+
+					//TODO: FACILITIES - see Edit Page Plan on Git
+
+					//TODO: ROOM PREFERENCES  - see Edit Page Plan on Git
+
+					//Room - don't need
+
+					if (entry.Priority = true) {
+						$('.myCheckbox').prop('checked', true);
+					}
+					else {
+						$('.myCheckbox').prop('checked', false);
+					}
+
+					$("#Custom_Comments").val(entry.Custom_Comments);
+
+				}
+			});
+		})
+
+	.fail(function (jqXHR, textStatus, err) {
+		console.log('Error: ' + err);
+	});
+
+	}
+
 	function facChange() {
 		collFacIds();
 		$('#Room_ID').empty();
@@ -528,6 +588,7 @@
                 @Html.HiddenFor(model => model.Room_Pref_JSON, new { @ID = "hdnRoomPrefJSON" })
 		        @Html.HiddenFor(model => model.Fac_JSON, new { @ID = "hdnfacJSON" })
             </div>
+		<!-- TODO: Change button to delete existing records with RequestID then do normal submit to Add Request -->
 		    <input type="submit" value="Save" class="btn btn-default"/>
         </div>
 }

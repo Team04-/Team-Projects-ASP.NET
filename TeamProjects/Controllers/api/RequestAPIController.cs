@@ -16,7 +16,10 @@ namespace TeamProjects.Controllers.api
         public IEnumerable<RequestListModel> Gettimetable_requests(int Round, int Week)
         {
             List<Models.RequestListModel> RequestList = new List<Models.RequestListModel>();
-            List<timetable_request> Requests = db.timetable_request.Where(m => m.Current_Round == Round).ToList();
+			List<timetable_request> Requests;
+
+			if (Round == 0) { Requests = db.timetable_request.ToList(); }
+			else { Requests = db.timetable_request.Where(m => m.Current_Round == Round).ToList(); }
             //Requests = from m in db.timetable_room join Requests where m.Type_ID == selID select m;
             foreach (timetable_request request in Requests)
             {
@@ -30,6 +33,7 @@ namespace TeamProjects.Controllers.api
                 newRequest.Number_Rooms = request.Number_Rooms;
                 newRequest.Number_Students = request.Number_Students;
                 newRequest.Start_Period = request.Start_Time;
+				//newRequest.Duration = request.Duration;
                 string weekDay = "";
                 switch (int.Parse(request.Day_ID.ToString()))
                 {
@@ -124,7 +128,7 @@ namespace TeamProjects.Controllers.api
             List<Models.RequestListModel> FinalList = new List<Models.RequestListModel>();
             RequestList.ForEach(delegate(Models.RequestListModel request)
             {
-                if (request.Weeks[Week-1])
+                if (request.Weeks[Week-1] && Week != 0)
                 {
                     FinalList.Add(request);
                 }
