@@ -19,42 +19,39 @@
         // TASK: populate table with all requests for selected round and week
 
         // Get all request data via getJSON() from RequestAPIController (make it from Matt's list code)
-        
+        $('#timetableDiv td').each(function(){$(this).empty();});
         $.getJSON("@Url.Action("RequestAPI", "api", null, Request.Url.Scheme)" + "?Round=" + round + "&Week=" + week)
             .done(function (data) {
             	console.log(data);
-            	//
-            	var added = false;
             	data.forEach(function (entry) {
             		var Start_Time = entry.Start_Period;
             		var Duration = (entry.End_Period) - (entry.Start_Period) + 1;
-            		//alert(entry.Day);
+                    var added = false;
             		$("." + entry.Day).each(function () {
-            			alert(".each complete");
+                        i++;
             			for (var col = Start_Time; col < (Start_Time + Duration) ; col++) {
             				alert("inside for: "+col);
             				if ($(this).find('td:nth-of-type(' + col + ')').text() == "") {
-            					alert("col is empty");
             					//if (col < ((Start_Time + Duration))) {
             						//IT'S A FREE PERIOD
             						$(this).find('td:nth-of-type(' + col + ')').append(entry.Module_Code);
+                                    console.log(entry.Module_Code + " added to " + entry.Day + " row in column " + col);
             						added = true;
             					//}
             				} else {
-            					alert("col is NOT empty - row useless");
             					//IT'S BOOKED, THIS ROW IS USELESS
             					break;
             				}
             			}
             		});
             		if (!added) {
-            			alert("not added");
+            			console.log("not added" + entry.Module_Code + " added to " + entry.Day + " in column " + col);
             			var tableCellsString = "<td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td>";
-            			$("." + entry.Day + ":last-of-type").after("<tr class='" + entry.Day + "'>" + tableCellsString + "<tr>");
+            			$("." + entry.Day).last().after("<tr class='" + entry.Day + "'>" + tableCellsString + "</tr>");
 
             			for (var col = Start_Time; col < (Start_Time + Duration) ; col++) {
             				alert("inside not added for: "+col);
-            				$("." + entry.Day + ":last-of-type").find('td:nth-of-type(' + col + ')').append(entry.Module_Code);
+            				$("." + entry.Day).last().find('td:nth-of-type(' + col + ')').append(entry.Module_Code);
             			}
             			//ADD NEW ROW HERE, THEN ADD THE REQUEST
             		}
