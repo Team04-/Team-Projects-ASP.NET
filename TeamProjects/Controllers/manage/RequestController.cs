@@ -185,6 +185,7 @@ namespace TeamProjects.Controllers.manage
                     {
                         Request_ID = newReqID,
                         Week = weekCount,
+						//WeekReqID = (Int16)((db.timetable_request_week.ToList().Last().WeekReqID) + 1),
                     };
                     
                     db.timetable_request_week.Add(timetable_request_week);

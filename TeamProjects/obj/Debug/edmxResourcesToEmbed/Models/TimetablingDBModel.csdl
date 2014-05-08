@@ -59,8 +59,8 @@
     <Property Name="Building_ID" Type="String" Nullable="false" MaxLength="5" FixedLength="false" Unicode="false" />
     <Property Name="Building_Name" Type="String" Nullable="false" MaxLength="60" FixedLength="false" Unicode="false" />
     <Property Name="Park_ID" Type="Int32" Nullable="false" />
-    <NavigationProperty Name="timetable_park" Relationship="team04Model.FK_timetable_building_timetable_park" FromRole="timetable_building" ToRole="timetable_park" a:SetterAccess="Internal" xmlns:a="http://schemas.microsoft.com/ado/2006/04/codegeneration" />
-    <NavigationProperty Name="timetable_request_room_allocation" Relationship="team04Model.FK_timetable_request_room_allocation_timetable_building" FromRole="timetable_building" ToRole="timetable_request_room_allocation" a:SetterAccess="Internal" xmlns:a="http://schemas.microsoft.com/ado/2006/04/codegeneration" />
+    <NavigationProperty Name="timetable_park" Relationship="team04Model.FK_timetable_building_timetable_park" FromRole="timetable_building" ToRole="timetable_park" />
+    <NavigationProperty Name="timetable_request_room_allocation" Relationship="team04Model.FK_timetable_request_room_allocation_timetable_building" FromRole="timetable_building" ToRole="timetable_request_room_allocation" />
   </EntityType>
   <EntityType Name="timetable_day">
     <Key>
@@ -154,11 +154,11 @@
   </EntityType>
   <EntityType Name="timetable_request_week">
     <Key>
-      <PropertyRef Name="Request_ID" />
+      <PropertyRef Name="WeekReqID" />
     </Key>
+    <Property Name="WeekReqID" Type="Int16" Nullable="false" />
     <Property Name="Request_ID" Type="Int16" Nullable="false" />
     <Property Name="Week" Type="Byte" Nullable="false" />
-    <Property Name="WeekReqID" Type="Int16" Nullable="false" />
   </EntityType>
   <EntityType Name="timetable_room">
     <Key>

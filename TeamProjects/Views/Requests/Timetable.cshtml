@@ -11,14 +11,9 @@
 <script type="text/javascript">
 
     $(document).ready(function () {
-        populateTableData(4,1);
+    	//populateTableData(4,1);
     });
 
-    function populateRoundSelect() {
-        // TASK: Populate rounds from table
-        
-        // 
-    }
 
     function populateTableData(round, week) {
         // TASK: populate table with all requests for selected round and week
@@ -27,32 +22,35 @@
         
         $.getJSON("@Url.Action("RequestAPI", "api", null, Request.Url.Scheme)" + "?Round=" + round + "&Week=" + week)
             .done(function (data) {
-                console.log(data);
-                //
-                    var added = false;
-                    $('.'+data.Day).each(function(){
-                        for(var col=data.Start_Time;col<(data.Start_Time+data.Duration);){
-                            if($(this).find('td:nth-of-type('+col+')').empty()){
-                                if(col==((data.Start_Time+data.Duration)-1)){
-                                    //IT'S A FREE PERIOD
-                                    $(this).find('td:nth-of-type(' + col + ')').append(data.Module_Code);
-                                    added = true;
-                                }
-                            } else {
-                                //IT'S BOOKED, THIS ROW IS USELESS
-                                break;
-                            }
-                        }
-                    });
-                    if (!added) {
-                        var tableCellsString = "<td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td>";
-                        $("." + data.Day + ":last-of-type").after("<tr class='" + data.Day + "'>"+tableCellsString+"<tr>");
+            	console.log(data);
+            	//
+            	var added = false;
+            	data.forEach(function (entry) {
+            		//alert(entry.Day);
+            		$("." + entry.Day).each(function () {
+            			for (var col = entry.Start_Time; col < (entry.Start_Time + entry.Duration); col++) {
+            				if ($(this).find('td:nth-of-type(' + col + ')').empty()) {
+            					//if (col < ((entry.Start_Time + entry.Duration))) {
+            						//IT'S A FREE PERIOD
+            						$(this).find('td:nth-of-type(' + col + ')').append(entry.Module_Code);
+            						added = true;
+            					//}
+            				} else {
+            					//IT'S BOOKED, THIS ROW IS USELESS
+            					break;
+            				}
+            			}
+            		});
+            		if (!added) {
+            			var tableCellsString = "<td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td>";
+            			$("." + entry.Day + ":last-of-type").after("<tr class='" + entry.Day + "'>" + tableCellsString + "<tr>");
 
-                        for(var col=data.Start_Time;col<(data.Start_Time+data.Duration);){
-                            $("." + data.Day + ":last-of-type").find('td:nth-of-type(' + col + ')').append(data.Module_Code);
-                        }
-                        //ADD NEW ROW HERE, THEN ADD THE REQUEST
-                    }
+            			for (var col = entry.Start_Time; col < (entry.Start_Time + entry.Duration) ; col++) {
+            				$("." + entry.Day + ":last-of-type").find('td:nth-of-type(' + col + ')').append(entry.Module_Code);
+            			}
+            			//ADD NEW ROW HERE, THEN ADD THE REQUEST
+            		}
+            	});
                 })
 
         .fail(function (jqXHR, textStatus, err) {
@@ -72,7 +70,7 @@
 </script>
 
 <body>
-    <select id="roundSelect"></select>
+    @Html.DropDownList("RoundSemester")
 
     <select id="weekSelect">
         <option>1</option>
@@ -91,6 +89,7 @@
         <option>14</option>
         <option>15</option>
     </select>
+	<input type="button" value="Update" onclick="populateTableData(document.getElementById('RoundSemester').options[document.getElementById('RoundSemester').selectedIndex].value, document.getElementById('weekSelect').options[document.getElementById('weekSelect').selectedIndex].value);" />
     <br /><br />
     <div id="timetableDiv">
     <table>

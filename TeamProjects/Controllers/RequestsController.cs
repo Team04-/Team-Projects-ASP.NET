@@ -277,6 +277,7 @@ namespace TeamProjects.Controllers
             }
             ViewBag.RoundStarts = newRoundStarts;
             ViewBag.RoundEnds = newRoundEnds;
+			ViewBag.RoundSemester = new SelectList(db.timetable_round, "Round_Code", "RoundSemesterString");
             return View();
         }
 

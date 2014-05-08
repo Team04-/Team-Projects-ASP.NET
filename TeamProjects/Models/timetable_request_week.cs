@@ -14,8 +14,8 @@ namespace TeamProjects.Models
     
     public partial class timetable_request_week
     {
+        public short WeekReqID { get; set; }
         public short Request_ID { get; set; }
         public byte Week { get; set; }
-        public short WeekReqID { get; set; }
     }
 }

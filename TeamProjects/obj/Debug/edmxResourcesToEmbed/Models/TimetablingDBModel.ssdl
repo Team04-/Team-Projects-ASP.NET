@@ -89,9 +89,9 @@
   </EntityType>
   <EntityType Name="timetable_request_week">
     <Key>
-      <PropertyRef Name="Request_ID" />
+      <PropertyRef Name="WeekReqID" />
     </Key>
-    <Property Name="WeekReqID" Type="smallint" />
+    <Property Name="WeekReqID" Type="smallint" Nullable="false" />
     <Property Name="Request_ID" Type="smallint" Nullable="false" />
     <Property Name="Week" Type="tinyint" Nullable="false" />
   </EntityType>
@@ -233,18 +233,6 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK_timetable_request_week_timetable_request_week1">
-    <End Role="timetable_request_week" Type="Self.timetable_request_week" Multiplicity="1" />
-    <End Role="timetable_request_week1" Type="Self.timetable_request_week" Multiplicity="0..1" />
-    <ReferentialConstraint>
-      <Principal Role="timetable_request_week">
-        <PropertyRef Name="Request_ID" />
-      </Principal>
-      <Dependent Role="timetable_request_week1">
-        <PropertyRef Name="Request_ID" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
   <Association Name="FK_timetable_room_timetable_room_type">
     <End Role="timetable_room_type" Type="Self.timetable_room_type" Multiplicity="1" />
     <End Role="timetable_room" Type="Self.timetable_room" Multiplicity="*" />
@@ -303,10 +291,6 @@
     <AssociationSet Name="FK_timetable_request_timetable_round" Association="Self.FK_timetable_request_timetable_round">
       <End Role="timetable_round" EntitySet="timetable_round" />
       <End Role="timetable_request" EntitySet="timetable_request" />
-    </AssociationSet>
-    <AssociationSet Name="FK_timetable_request_week_timetable_request_week1" Association="Self.FK_timetable_request_week_timetable_request_week1">
-      <End Role="timetable_request_week" EntitySet="timetable_request_week" />
-      <End Role="timetable_request_week1" EntitySet="timetable_request_week" />
     </AssociationSet>
     <AssociationSet Name="FK_timetable_room_timetable_room_type" Association="Self.FK_timetable_room_timetable_room_type">
       <End Role="timetable_room_type" EntitySet="timetable_room_type" />
