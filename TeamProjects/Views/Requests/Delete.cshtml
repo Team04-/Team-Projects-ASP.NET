@@ -1,0 +1,91 @@
+﻿@model TeamProjects.Models.RequestListModel
+
+@{
+    ViewBag.Title = "Delete Request";
+}
+@section Includes{
+    <link href="@Url.Content("~/Content/Request.css")" rel="stylesheet" />
+}
+<h2>Delete Request</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<table class="RequestTable">
+<thead>
+    <tr>
+        <th>Code</th>
+        <th>Round</th>
+        <th>Day</th>
+        <th>Periods</th>
+        <th>Park</th>
+        <th>Rooms</th>
+        <th>Students</th>
+        <th>Priority</th>
+        <th>Comment</th>
+        <th>Status</th>
+    </tr>
+</thead>
+<tbody>
+    <tr>
+        <td>@User.Identity.Name@Model.Module_Code</td>
+        <td>@Model.Round</td>
+        <td>@Model.Day</td>
+        <td>@Model.Start_Period - @Model.End_Period | @Model.Time_String</td>
+        <td>@Model.Park</td>
+        <td>@Model.Number_Rooms</td>
+        <td>@Model.Number_Students</td>
+        <td>@Model.Priority</td>
+        <td>@Model.Has_Comments</td>
+        <td>@Model.Status</td>   
+    </tr>
+    <tr>
+        <td colspan="10">
+            <div class='detail detail__title'><div class='detailsheader'>Title</div><div class='detailscontent'>@Model.Module_Title</div></div>
+            <div class='detail detail__rooms'><div class='detailsheader'>@((ViewBag.CurrentRoundCode == Model.Round) ? "Room Preferences" : "Allocated Rooms")</div><div class='detailscontent'>
+            @{
+                if (Model.Rooms.Length > 0)
+                {
+                    foreach (string room in Model.Rooms)
+                    {
+                        <span>@room</span>
+                    }
+                }
+                else {
+                    <span>No rooms allocated.</span>
+                } 
+            }
+            </div></div>
+            <div class='detail detail__weeks'><div class='detailsheader'>Weeks</div>
+            <div class='detailscontent'>
+            @{
+                bool hasAWeek = false;
+                for (int i = 0; i < Model.Weeks.Count(); i++)
+                {
+                    if (Model.Weeks[i])
+                    {
+                        hasAWeek = true;
+                        @i
+                    }
+                }
+                if (!hasAWeek)
+                {
+                    <span>No weeks selected for this request.</span>
+                }
+            }
+            </div></div>
+            @{
+                if (Model.Has_Comments)
+                {
+                    <div class='detail detail__comment'><div class='detailsheader'>Comments</div><div class='detailscontent'>@Model.Custom_Comments</div></div>
+                }
+            }
+            
+        </td>
+    </tr> 
+</tbody>
+</table>
+@using (Html.BeginForm()) {
+    <p>
+        <input type="submit" value="Delete" /> |
+        <a href="~/Requests/List">Back to List</a>
+    </p>
+}

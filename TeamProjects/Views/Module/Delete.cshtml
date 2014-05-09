@@ -7,37 +7,40 @@
 <h2>Delete</h2>
 
 <h3>Are you sure you want to delete this?</h3>
-<fieldset>
-    <legend>timetable_module</legend>
-
-    <div class="display-label">
-         Module
-    </div>
-    <div class="display-field">
-        @Model.Department_Code@Model.Module_Code
-    </div>
-
-    <div class="display-label">
-         @Html.DisplayNameFor(model => model.Part_Code)
-    </div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.Part_Code)
-    </div>
-
-    <div class="display-label">
-         @Html.DisplayNameFor(model => model.Module_Title)
-    </div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.Module_Title)
-    </div>
-
-    <div class="display-label">
-         @Html.DisplayNameFor(model => model.Active)
-    </div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.Active)
-    </div>
-</fieldset>
+<table class="moduleTable">
+<thead>
+    <tr>
+        <th>
+            Module Code
+        </th>
+        <th>
+            Part Code
+        </th>
+        <th>
+            Module Title
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Active)
+        </th>
+    </tr>
+</thead>
+<tbody>
+    <tr>
+        <td>
+            @Model.Department_Code@Model.Module_Code
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => Model.Part_Code)
+        </td>
+        <td>
+            @Model.Module_Title
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => Model.Active)
+        </td>
+    </tr>
+</tbody>
+</table>
 @using (Html.BeginForm()) {
     <p>
         <input type="submit" value="Delete" /> |

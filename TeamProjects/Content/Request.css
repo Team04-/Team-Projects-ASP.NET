@@ -49,4 +49,5 @@
 .detail:last-child{margin-bottom:0px;}
 .detail__title{box-sizing:border-box;float:left;width:49%;}
 .detail__rooms{box-sizing:border-box;float:right;width:49%;}
+.detail__weeks{clear:both;width:100%;}
 .detail__comment{clear:both;width:100%;}

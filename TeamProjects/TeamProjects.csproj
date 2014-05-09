@@ -423,9 +423,8 @@
     <Content Include="Views\Room\Delete.cshtml" />
     <Content Include="Views\Help\Index.cshtml" />
     <Content Include="Views\Request\Index.cshtml" />
-    <Content Include="Views\Request\Details.cshtml" />
     <Content Include="Views\Request\Edit-old.cshtml" />
-    <Content Include="Views\Request\Delete.cshtml" />
+    <Content Include="Views\Requests\Delete.cshtml" />
     <Content Include="Views\Round\Index.cshtml" />
     <Content Include="Views\Round\Details.cshtml" />
     <Content Include="Views\Round\Create.cshtml" />
@@ -438,7 +437,7 @@
     <Content Include="Views\Requests\Timetable.cshtml" />
     <Content Include="Views\Requests\List.cshtml" />
     <Content Include="Views\User\Account.cshtml" />
-    <Content Include="Views\Requests\Edit.cshtml" />
+    <Content Include="Views\Request\Edit.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />

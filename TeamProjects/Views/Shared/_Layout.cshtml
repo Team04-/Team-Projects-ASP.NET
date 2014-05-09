@@ -21,24 +21,6 @@
                     <script src="@Url.Content("~/Scripts/tours/"+controller+"-"+tourID+".js")" type="text/javascript"></script>
             }
         }
-        <script type="text/javascript">
-            window.onload = function () {
-                $.ajax({
-                    type: "GET",
-                    url: "/api/RoundAPI",
-                    dataType: "json"
-                })
-			    .done(function (data) {
-			        $(".CurrentRoundCode").html(data.Round_Code);
-			    })
-			    .fail(function (jqXHR, textStatus, err) {
-			        $(".CurrentRoundCode").html("Unknown");
-			    });
-                if (!(tour === undefined)) {
-                    tour.start();
-                }
-            }
-        </script>
         @RenderSection("scripts", required: false)
         @RenderSection("Includes", required: false)
     </head>
@@ -58,7 +40,7 @@
                     <nav>
                         <ul class="dropdown">
                         @if (Request.IsAuthenticated)
-                            {
+                        {
                                 <li class="main-cell">@Html.ActionLink("Dashboard", "Index", "Home")</li>
                                 <li>@Html.ActionLink("Add Request", "Create", "Request") <i class="fa fa-plus"></i></li>
                                 <li>@Html.ActionLink("Request List", "List", "Requests") <i class="fa fa-list"></i></li>
@@ -74,7 +56,7 @@
                                 </ul>
                                 </li>
                                 <li>@Html.ActionLink("Help", "Index", "Help") <i class="fa fa-question"></i></li>
-                            }
+                        }
                         </ul>
                     </nav>
                 </div>
@@ -99,5 +81,29 @@
                 </div>
             </div>
         </footer>
+            <script type="text/javascript">
+                window.onload = function () {
+                    var roundCode = "@ViewBag.currentRoundCode";
+                    if (roundCode != "") {
+                        $(".CurrentRoundCode").html("@ViewBag.currentRoundCode");
+
+                    } else {
+                        $.ajax({
+                            type: "GET",
+                            url: "/api/RoundAPI",
+                            dataType: "json"
+                        })
+			            .done(function (data) {
+			                $(".CurrentRoundCode").html(data.Round_Code);
+			            })
+			            .fail(function (jqXHR, textStatus, err) {
+			                $(".CurrentRoundCode").html("Unknown");
+			            });
+                    }
+                    if (!(tour === undefined)) {
+                        tour.start();
+                    }
+                }
+            </script>
     </body>
 </html>

@@ -6,37 +6,40 @@
 
 <h2>Details</h2>
 
-<fieldset>
-    <legend>timetable_module</legend>
-
-    <div class="display-label">
-         Module Code
-    </div>
-    <div class="display-field">
-        @Model.Department_Code@Model.Module_Code
-    </div>
-
-    <div class="display-label">
-         @Html.DisplayNameFor(model => model.Part_Code)
-    </div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.Part_Code)
-    </div>
-
-    <div class="display-label">
-         @Html.DisplayNameFor(model => model.Module_Title)
-    </div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.Module_Title)
-    </div>
-
-    <div class="display-label">
-         @Html.DisplayNameFor(model => model.Active)
-    </div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.Active)
-    </div>
-</fieldset>
+<table class="moduleTable">
+<thead>
+    <tr>
+        <th>
+            Module Code
+        </th>
+        <th>
+            Part Code
+        </th>
+        <th>
+            Module Title
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Active)
+        </th>
+    </tr>
+</thead>
+<tbody>
+    <tr>
+        <td>
+            @Model.Department_Code@Model.Module_Code
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => Model.Part_Code)
+        </td>
+        <td>
+            @Model.Module_Title
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => Model.Active)
+        </td>
+    </tr>
+</tbody>
+</table>
 <p>
     @Html.ActionLink("Edit", "Edit", new { moduleCode = Model.Module_Code }) |
     @Html.ActionLink("Back to List", "Index")

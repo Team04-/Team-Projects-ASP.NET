@@ -16,8 +16,8 @@
 }
 <div>Round: @roundInfo.Round_Code</div>
 <div>Semester: @roundInfo.Semester</div>
-<div>Start Date: @roundInfo.Start_Date</div>
-<div>End Date: @roundInfo.End_Date</div>
+<div>Start Date: @roundInfo.Start_Date.ToString().Split(' ')[0]</div>
+<div>End Date: @roundInfo.End_Date.ToString().Split(' ')[0]</div>
 <h3>Need Attention</h3>
 <table>
     <thead>

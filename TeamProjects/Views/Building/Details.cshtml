@@ -6,23 +6,29 @@
 
 <h2>Details for @Model.Building_Name</h2>
 
-<fieldset>
-    <legend>timetable_building</legend>
+<table class="buildingTable">
+<thead>
+    <tr>
+        <th>
+            Building Code
+        </th>
+        <th>
+            Name
+        </th>
+    </tr>
+</thead>
+<tbody>
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => Model.Building_ID)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => Model.Building_Name)
+        </td>
+    </tr>
+</tbody>
+</table>
 
-    <div class="display-label">
-         @Html.DisplayNameFor(model => model.Building_ID)
-    </div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.Building_ID)
-    </div>
-
-    <div class="display-label">
-         @Html.DisplayNameFor(model => model.Building_Name)
-    </div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.Building_Name)
-    </div>
-</fieldset>
 <p>
     @Html.ActionLink("Edit", "Edit", new { id=Model.Building_ID }) |
     @Html.ActionLink("Back to List", "Index")

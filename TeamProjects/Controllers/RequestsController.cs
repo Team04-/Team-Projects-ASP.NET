@@ -154,13 +154,7 @@ namespace TeamProjects.Controllers
         [Authorize]
         public ActionResult Index()
         {
-            var check = db.timetable_round.Where(r => r.Round_Status == "Current").First();
-            if (!(check is timetable_round))
-            {
-                check = db.timetable_round.Last();
-            }
-            ViewBag.currentRoundCode = check.Round_Code;
-            return View(db.timetable_request.OrderBy(r => r.Current_Round).ToList());
+            return RedirectToAction("List");
         }
         
         //
@@ -188,12 +182,7 @@ namespace TeamProjects.Controllers
         [Authorize]
         public ActionResult Details(short id = 0)
         {
-            timetable_request timetable_request = db.timetable_request.Find(id);
-            if (timetable_request == null)
-            {
-                return HttpNotFound();
-            }
-            return View(timetable_request);
+            return RedirectToAction("List");
         }
 
         //
@@ -235,7 +224,7 @@ namespace TeamProjects.Controllers
             {
                 db.Entry(timetable_request).State = EntityState.Modified;
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction("List");
             }
             return View(timetable_request);
         }
@@ -250,7 +239,14 @@ namespace TeamProjects.Controllers
             {
                 return HttpNotFound();
             }
-            return View(timetable_request);
+            var check = db.timetable_round.Where(r => r.Round_Status == "Current").First();
+            if (!(check is timetable_round))
+            {
+                check = db.timetable_round.Last();
+            }
+            ViewBag.currentRoundCode = check.Round_Code;
+            Models.RequestListModel request = getFullRequest(timetable_request);
+            return View(request);
         }
 
         //
@@ -258,10 +254,28 @@ namespace TeamProjects.Controllers
         [HttpPost, ActionName("Delete")]
         public ActionResult DeleteConfirmed(short id)
         {
+            //Get rows to remove
             timetable_request timetable_request = db.timetable_request.Find(id);
+            IQueryable<timetable_request_facility> facilities = db.timetable_request_facility.Where(rf => rf.Request_ID == id);
+            IQueryable<timetable_request_room_allocation> allocations = db.timetable_request_room_allocation.Where(ra => ra.Request_ID == id);
+            IQueryable<timetable_request_week> weeks = db.timetable_request_week.Where(rw => rw.Request_ID == id);
+            //Remove rows from tables
             db.timetable_request.Remove(timetable_request);
+            foreach (timetable_request_facility facility in facilities)
+            {
+                db.timetable_request_facility.Remove(facility);
+            }
+            foreach (timetable_request_room_allocation allocation in allocations)
+            {
+                db.timetable_request_room_allocation.Remove(allocation);
+            }
+            foreach (timetable_request_week week in weeks)
+            {
+                db.timetable_request_week.Remove(week);
+            }
+            //Save db with rows removed
             db.SaveChanges();
-            return RedirectToAction("Index");
+            return RedirectToAction("List");
         }
 
         //

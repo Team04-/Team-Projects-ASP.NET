@@ -538,7 +538,12 @@ table {
 	-moz-border-radius: 0px;
 	-webkit-border-radius: 5px 5px 5px 5px;
 	border-radius: 5px 5px 5px 5px;
-	margin-bottom:12px;
+	margin: 12px auto;
+	width:100%;
+}
+table.toolslast tr td:last-of-type
+{
+    text-align:center;
 }
 
 th {
@@ -802,5 +807,6 @@ tr.pager td {
 .dropdown ul li:hover:not(.dropdown--disabled){background-color:#cecbce;}
 .dropdown ul li.separated{border-bottom:5px solid #cecbce;}
 .dropdown .wide-dropdown{padding-left:15px;padding-right:15px;}
+
 /*Main cell*/
 .main-cell{font-weight:bold;}

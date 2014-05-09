@@ -115,7 +115,7 @@ namespace TeamProjects.Controllers.manage
 				Custom_Comments = requestView.Custom_Comments,
                 //TODO change so that it uses the departments selected active round
 				Current_Round = db.timetable_round.Where(r => r.Round_Status == "Current").First().Round_Code,
-				//Request_Status = 0, //AUTO
+				Request_Status = 1
 			};
 
 			db.timetable_request.Add(timetable_request);
@@ -194,7 +194,7 @@ namespace TeamProjects.Controllers.manage
                 weekCount++;
             }
 
-			return RedirectToAction("Index");
+			return RedirectToAction("List");
         }
 
 

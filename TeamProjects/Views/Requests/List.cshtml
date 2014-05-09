@@ -70,7 +70,7 @@ foreach (var item in Model.OrderBy(r => r.Module_Code))
 <div class="commentSearch">
     Search comments: <input class="commentSearchInput" type="text" />
 </div>
-<table id="RequestTable">
+<table id="RequestTable" class="toolslast">
 <thead>
     <tr>
         <th>Code</th>
@@ -79,6 +79,7 @@ foreach (var item in Model.OrderBy(r => r.Module_Code))
         <th>Periods</th>
         <th>Park</th>
         <th>Rooms</th>
+        <th>Students</th>
         <th>Priority</th>
         <th>Comment</th>
         <th>Status</th>
@@ -95,6 +96,7 @@ foreach (var item in Model.OrderBy(r => r.Module_Code))
         <td>@item.Start_Period - @item.End_Period | @item.Time_String</td>
         <td>@item.Park</td>
         <td>@item.Number_Rooms</td>
+        <td>@item.Number_Students</td>
         <td>@((item.Priority) ? Html.Raw("<span><i class='fa fa-check'></i></span>") : Html.Raw("<span><i class='fa fa-times'></i></span>"))</td>
         <td>@((item.Has_Comments) ? Html.Raw("<span><i class='fa fa-check'></i></span>") : Html.Raw("<span><i class='fa fa-times'></i></span>"))</td>
         <td>@item.Status</td>
@@ -102,17 +104,17 @@ foreach (var item in Model.OrderBy(r => r.Module_Code))
             @{
                 if (item.Round == ViewBag.CurrentRoundCode)
                 {
-                    @Html.ActionLink("Edit", "Edit", new { id = item.Request_ID });
-                    <span>|</span>
-                    @Html.ActionLink("Delete", "Delete", new { id = item.Request_ID });
+                                <a href="~/Requests/Edit/@item.Request_ID">Edit</a>
+                                <span>|</span>
+                                <a href="~/Requests/Delete/@item.Request_ID">Delete</a>
                 }
             }
         </td>
     </tr>
     <tr class="detailsrow details-@item.Request_ID hiderow" data-request="@item.Request_ID">
-        <td colspan="10">
+        <td colspan="11">
             <div class='detail detail__title'><div class='detailsheader'>Title</div><div class='detailscontent'>@item.Module_Title</div></div>
-            <div class='detail detail__rooms'><div class='detailsheader'>@((ViewBag.CurrentRoundCode==item.Round) ? "Room Preferences" : "Allocated Rooms")</div><div class='detailscontent'>
+            <div class='detail detail__rooms'><div class='detailsheader'>@((ViewBag.CurrentRoundCode == item.Round) ? "Room Preferences" : "Allocated Rooms")</div><div class='detailscontent'>
             @{
                 if(item.Rooms.Length > 0) {
                     foreach (string room in item.Rooms)
@@ -125,6 +127,24 @@ foreach (var item in Model.OrderBy(r => r.Module_Code))
                 } 
             }
             </div></div>
+            <div class='detail detail__weeks'><div class='detailsheader'>Weeks</div>
+            <div class='detailscontent'>
+            @{
+                bool hasAWeek = false;
+                for (int i = 0; i < item.Weeks.Count(); i++)
+                {
+                    if (item.Weeks[i])
+                    {
+                        hasAWeek = true;
+                        @i
+                    }
+                }
+                if (!hasAWeek)
+                {
+                    <span>No weeks selected for this request.</span>
+                }
+            }
+            </div></div>
             @{
                 if(item.Has_Comments){
                     <div class='detail detail__comment'><div class='detailsheader'>Comments</div><div class='detailscontent'>@item.Custom_Comments</div></div>
@@ -134,7 +154,7 @@ foreach (var item in Model.OrderBy(r => r.Module_Code))
         </td>
     </tr>    
 }
-    <tr class="noresults hiderow"><td colspan=13>No Request could be found.</td></tr>
+    <tr class="noresults hiderow"><td colspan=11>No Request could be found.</td></tr>
 </tbody>
 </table>
 <script type="text/javascript">
