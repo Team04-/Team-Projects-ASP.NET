@@ -262,6 +262,7 @@
     <Content Include="Content\chosen\chosen-sprite.png" />
     <Content Include="Content\chosen\chosen.css" />
     <Content Include="Content\chosen\chosen.min.css" />
+    <Content Include="Content\Login.css" />
     <Content Include="Content\Request.css" />
     <Content Include="Content\shepherd\shepherd-theme-arrows.css" />
     <Content Include="Content\themes\base\images\ui-bg_flat_0_aaaaaa_40x100.png" />
