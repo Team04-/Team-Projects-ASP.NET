@@ -90,7 +90,7 @@
                     } else {
                         $.ajax({
                             type: "GET",
-                            url: "/api/RoundAPI",
+                            url: "@Url.Action("RoundAPI", "api", null, Request.Url.Scheme)",
                             dataType: "json"
                         })
 			            .done(function (data) {

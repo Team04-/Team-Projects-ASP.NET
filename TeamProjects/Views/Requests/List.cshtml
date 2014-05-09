@@ -119,7 +119,7 @@ foreach (var item in Model.OrderBy(r => r.Module_Code))
                 if(item.Rooms.Length > 0) {
                     foreach (string room in item.Rooms)
                     {
-                        <span>@room</span>
+                        <span class="room">@room</span>
                     }
                 }
                 else {
@@ -135,8 +135,8 @@ foreach (var item in Model.OrderBy(r => r.Module_Code))
                 {
                     if (item.Weeks[i])
                     {
+                        <span class="week">@(i+1)</span>
                         hasAWeek = true;
-                        @i
                     }
                 }
                 if (!hasAWeek)

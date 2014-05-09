@@ -1,6 +1,9 @@
 ﻿@{
     ViewBag.Title = "Department Dashboard";
 }
+@section Includes{
+    <link href="@Url.Content("~/Content/Request.css")" rel="stylesheet" />
+}
 @section featured {
     <section class="featured">
         <div class="content-wrapper">
@@ -19,7 +22,7 @@
 <div>Start Date: @roundInfo.Start_Date.ToString().Split(' ')[0]</div>
 <div>End Date: @roundInfo.End_Date.ToString().Split(' ')[0]</div>
 <h3>Need Attention</h3>
-<table>
+<table id="AttentionTable" class="toolslast">
     <thead>
         <tr>
             <th>Code</th>
@@ -31,30 +34,80 @@
             <th>Priority</th>
             <th>Comment</th>
             <th>Status</th>
-            <th>Tools</th>
+            <th><i class="fa fa-wrench"></i></th>
         </tr>
     </thead>
     <tbody>
     @{
-        foreach(TeamProjects.Models.timetable_request request in ViewBag.Attention){
-            <tr>
+        foreach (TeamProjects.Models.RequestListModel request in ViewBag.Attention)
+        {
+            <tr class="requestrow request-@request.Request_ID showrow" data-request="@request.Request_ID">
                 <td>@User.Identity.Name@request.Module_Code</td>
-                <td>@request.Current_Round</td>
-                <td>@request.Day_ID</td>
-                <td></td>
-                <td>@request.Park_ID</td>
+                <td>@request.Round</td>
+                <td>@request.Day</td>
+                <td>@request.Start_Period - @request.End_Period | @request.Time_String</td>
+                <td>@request.Park</td>
                 <td>@request.Number_Rooms</td>
-                <td>@request.Priority</td>
-                <td>@request.Custom_Comments</td>
-                <td>@request.Request_Status</td>
-                <td></td>
+                <td>@((request.Priority) ? Html.Raw("<span><i class='fa fa-check'></i></span>") : Html.Raw("<span><i class='fa fa-times'></i></span>"))</td>
+                <td>@((request.Has_Comments) ? Html.Raw("<span><i class='fa fa-check'></i></span>") : Html.Raw("<span><i class='fa fa-times'></i></span>"))</td>
+                <td>@request.Status</td>
+                <td>
+                    <a href="~/Requests/Edit/@request.Request_ID">Edit</a>
+                    <span>|</span>
+                    <a href="~/Requests/Delete/@request.Request_ID">Delete</a>
+                </td>
             </tr>
+            <tr class="detailsrow details-@request.Request_ID hiderow" data-request="@request.Request_ID">
+                <td colspan="11">
+                    <div class='detail detail__title'><div class='detailsheader'>Title</div><div class='detailscontent'>@request.Module_Title</div></div>
+                    <div class='detail detail__rooms'><div class='detailsheader'>@((ViewBag.CurrentRoundCode == request.Round) ? "Room Preferences" : "Allocated Rooms")</div><div class='detailscontent'>
+                    @{
+                        if (request.Rooms.Length > 0)
+                        {
+                            foreach (string room in request.Rooms)
+                            {
+                                <span class="room">@room</span>
+                            }
+                        }
+                        else
+                        {
+                            <span>No rooms allocated.</span>
+                        } 
+                    }
+                    </div></div>
+                    <div class='detail detail__weeks'><div class='detailsheader'>Weeks</div>
+                    <div class='detailscontent'>
+                    @{
+                        bool hasAWeek = false;
+                        for (int i = 0; i < request.Weeks.Count(); i++)
+                        {
+                            if (request.Weeks[i])
+                            {
+                                <span class="week">@(i + 1)</span>
+                                hasAWeek = true;
+                            }
+                        }
+                        if (!hasAWeek)
+                        {
+                            <span>No weeks selected for this request.</span>
+                        }
+                    }
+                    </div></div>
+                    @{
+                        if (request.Has_Comments)
+                        {
+                            <div class='detail detail__comment'><div class='detailsheader'>Comments</div><div class='detailscontent'>@request.Custom_Comments</div></div>
+                        }
+                    }
+            
+                </td>
+            </tr>  
         }
     } 
     </tbody>
 </table>
 <h3>Recently Added</h3>
-<table>
+<table id="RecentTable" class="toolslast">
     <thead>
         <tr>
             <th>Code</th>
@@ -66,25 +119,92 @@
             <th>Priority</th>
             <th>Comment</th>
             <th>Status</th>
-            <th>Tools</th>
+            <th><i class="fa fa-wrench"></i></th>
         </tr>
     </thead>
     <tbody>
     @{
-        foreach(TeamProjects.Models.timetable_request request in ViewBag.RecentlyAdded){
-            <tr>
+        foreach (TeamProjects.Models.RequestListModel request in ViewBag.RecentlyAdded)
+        {
+            <tr class="requestrow request-@request.Request_ID showrow" data-request="@request.Request_ID">
                 <td>@User.Identity.Name@request.Module_Code</td>
-                <td>@request.Current_Round</td>
-                <td>@request.Day_ID</td>
-                <td></td>
-                <td>@request.Park_ID</td>
+                <td>@request.Round</td>
+                <td>@request.Day</td>
+                <td>@request.Start_Period - @request.End_Period | @request.Time_String</td>
+                <td>@request.Park</td>
                 <td>@request.Number_Rooms</td>
-                <td>@request.Priority</td>
-                <td>@request.Custom_Comments</td>
-                <td>@request.Request_Status</td>
-                <td></td>
+                <td>@((request.Priority) ? Html.Raw("<span><i class='fa fa-check'></i></span>") : Html.Raw("<span><i class='fa fa-times'></i></span>"))</td>
+                <td>@((request.Has_Comments) ? Html.Raw("<span><i class='fa fa-check'></i></span>") : Html.Raw("<span><i class='fa fa-times'></i></span>"))</td>
+                <td>@request.Status</td>
+                <td>
+                    <a href="~/Requests/Edit/@request.Request_ID">Edit</a>
+                    <span>|</span>
+                    <a href="~/Requests/Delete/@request.Request_ID">Delete</a>
+                </td>
+            </tr>
+            <tr class="detailsrow details-@request.Request_ID hiderow" data-request="@request.Request_ID">
+                <td colspan="11">
+                    <div class='detail detail__title'><div class='detailsheader'>Title</div><div class='detailscontent'>@request.Module_Title</div></div>
+                    <div class='detail detail__rooms'><div class='detailsheader'>@((ViewBag.CurrentRoundCode == request.Round) ? "Room Preferences" : "Allocated Rooms")</div><div class='detailscontent'>
+                    @{
+                        if (request.Rooms.Length > 0)
+                        {
+                            foreach (string room in request.Rooms)
+                            {
+                                <span class="room">@room</span>
+                            }
+                        }
+                        else
+                        {
+                            <span>No rooms allocated.</span>
+                        } 
+                    }
+                    </div></div>
+                    <div class='detail detail__weeks'><div class='detailsheader'>Weeks</div>
+                    <div class='detailscontent'>
+                    @{
+                        bool hasAWeek = false;
+                        for (int i = 0; i < request.Weeks.Count(); i++)
+                        {
+                            if (request.Weeks[i])
+                            {
+                                <span class="week">@(i + 1)</span>
+                                hasAWeek = true;
+                            }
+                        }
+                        if (!hasAWeek)
+                        {
+                            <span>No weeks selected for this request.</span>
+                        }
+                    }
+                    </div></div>
+                    @{
+                        if (request.Has_Comments)
+                        {
+                            <div class='detail detail__comment'><div class='detailsheader'>Comments</div><div class='detailscontent'>@request.Custom_Comments</div></div>
+                        }
+                    }
+                </td>
             </tr>  
         }
     }    
     </tbody>
 </table>
+<script type="text/javascript">
+    if ($('#AttentionTable tbody tr').length > 1) {
+        $('#AttentionTable .requestrow').click(function () {
+            $(this).toggleClass('selected');
+            $('#AttentionTable .details-' + $(this).data('request')).toggleClass('hiderow').toggleClass('selected');
+        });
+    } else {
+        $('#AttentionTable .noresults').removeClass('hiderow').addClass('showrow');
+    }
+    if ($('#RecentTable tbody tr').length > 1) {
+        $('#RecentTable .requestrow').click(function () {
+            $(this).toggleClass('selected');
+            $('#RecentTable .details-' + $(this).data('request')).toggleClass('hiderow').toggleClass('selected');
+        });
+    } else {
+        $('#RecentTable .noresults').removeClass('hiderow').addClass('showrow');
+    }
+</script>
