@@ -197,12 +197,21 @@ namespace TeamProjects.Controllers
         [Authorize]
         public ActionResult Edit(short id)
         {
-            timetable_request request = db.timetable_request.Where(r => r.Request_ID == id).FirstOrDefault();
-            if (id == null)
-            {
-                return HttpNotFound();
-            }
+			ViewBag.Number_Rooms = new SelectList(new[] { "1", "2", "3" });
+			ViewBag.Start_Time = new SelectList(new[] { "1", "2", "3", "4", "5", "6", "7", "8", "9" });
+			ViewBag.Duration = new SelectList(new[] { "1", "2", "3", "4", "5", "6", "7", "8", "9" });
+			ViewBag.Department_Code = new SelectList(db.timetable_department, "Department_Code", "Department_Name");
+			//ViewBag.Part_Code = new SelectList(db.timetable_request, "Part_Code", "Part_Code");
+			ViewBag.Module_Code = new SelectList(db.timetable_module, "Module_Code", "Module_Title");
+			ViewBag.Day_ID = new SelectList(db.timetable_day, "Day_ID", "Day_Name");
+			ViewBag.Park_ID = new SelectList(db.timetable_park, "Park_ID", "Park_Name");
+			ViewBag.Building_ID = new SelectList(db.timetable_building, "Building_ID", "Building_Name");
+			ViewBag.Room_ID = new SelectList(db.timetable_room, "Room_ID", "Room_ID");
+			ViewBag.Facility_ID = new SelectList(db.timetable_facility, "Facility_ID", "Facility_Name");
+			ViewBag.Room_Type = new SelectList(db.timetable_room_type, "Type_ID", "Type_Name");
+
 			ViewBag.id = id;
+
             return View();
         }
 

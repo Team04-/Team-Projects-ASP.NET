@@ -121,10 +121,10 @@ namespace TeamProjects.Controllers.api
             List<Models.RequestListModel> FinalList = new List<Models.RequestListModel>();
             RequestList.ForEach(delegate(Models.RequestListModel request)
             {
-                if (request.Weeks[Week-1] && Week != 0)
-                {
+                //if (request.Weeks[Week-1] && Week != 0)
+                //{
                     FinalList.Add(request);
-                }
+                //}
             });
             return FinalList;
         }

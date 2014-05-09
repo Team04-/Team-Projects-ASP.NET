@@ -1,16 +1,16 @@
 _ EDIT PAGE WORKFLOW/PLAN _
 
-- Get request info via GetJSON() (ala Timetable View - need to make sure it houses everything)
-- Filter to only have info for specific RequestID which was handed to page via clicking Edit button (could merge with above for efficiency?)
-- document.getElementById("whatever").value = requestObject.whatever;
+//- Get request info via GetJSON() (ala Timetable View - need to make sure it houses everything)
+//- Filter to only have info for specific RequestID which was handed to page via clicking Edit button (could merge with above for efficiency?)
+//- document.getElementById("whatever").value = requestObject.whatever;
 
-Weeks:
-var reqWeeksArray = weeksArrayFromGetJSON;
-$(.weeksCheckboxClass).each(function () {
-	weekCheckbox.value/checked/whatever == reqWeeksArray[0];
-	reqWeeksArray.shift(); // deletes first item from array
-	// loops again to next checkbox. by the end, reqWeeksArray should be empty. Might need if() to check for empty before setting val?
-});
+//Weeks:
+//var reqWeeksArray = weeksArrayFromGetJSON;
+//$(.weeksCheckboxClass).each(function () {
+//	weekCheckbox.value/checked/whatever == reqWeeksArray[0];
+//	reqWeeksArray.shift(); // deletes first item from array
+//	// loops again to next checkbox. by the end, reqWeeksArray should be empty. Might need if() to check for empty before setting val?
+//});
 
 Facilities:
 var reqFacArray = facsArrayFromGetJSON;

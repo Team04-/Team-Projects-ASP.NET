@@ -97,7 +97,7 @@ namespace TeamProjects.Controllers.manage
 			//var viewModel = db.Database.SqlQuery<TeamProjects.Models.RequestViewModel>(query);
 			//return View(viewModel.ToList());
 
-			var newReqID = (Int16)((db.timetable_request.ToList().Last().Request_ID) + 1);
+			
 
 			timetable_request timetable_request = new timetable_request()
 			{
@@ -122,6 +122,8 @@ namespace TeamProjects.Controllers.manage
 			db.SaveChanges();
 
 			JavaScriptSerializer serializer = new JavaScriptSerializer();
+
+			var newReqID = (Int16)((db.timetable_request.ToList().Last().Request_ID) + 1);
 
             if (requestView.Fac_JSON != null)
             {
@@ -151,17 +153,19 @@ namespace TeamProjects.Controllers.manage
                 {
                     if (item.Building.ToString() == "null" || item.Building.ToString() == "N/A" || item.Room.ToString() == "0" || item.Room.ToString() == "N/A")
                     {
-                        timetable_request_room_allocation timetable_request_room_allocation = new timetable_request_room_allocation()
-                        {
-                            Request_ID = newReqID,
-                            Building_ID = item.Building.ToString(),
-                            Room_ID = item.Room.ToString(),
-                        };
-
-                        db.timetable_request_room_allocation.Add(timetable_request_room_allocation);
-                        db.SaveChanges();
-
                     }
+					else
+					{
+						timetable_request_room_allocation timetable_request_room_allocation = new timetable_request_room_allocation()
+						{
+							Request_ID = newReqID,
+							Building_ID = item.Building.ToString(),
+							Room_ID = item.Room.ToString(),
+						};
+
+						db.timetable_request_room_allocation.Add(timetable_request_room_allocation);
+						db.SaveChanges();
+					}
                 }
             }
 
@@ -177,24 +181,36 @@ namespace TeamProjects.Controllers.manage
 
             timetable_request_week timetable_request_week;
 
-            foreach (bool i in requestView.Week)
-            {
-                if (i == true)
-                {
-                    timetable_request_week = new timetable_request_week()
-                    {
-                        Request_ID = newReqID,
-                        Week = weekCount,
-						//WeekReqID = (Int16)((db.timetable_request_week.ToList().Last().WeekReqID) + 1),
-                    };
-                    
-                    db.timetable_request_week.Add(timetable_request_week);
-                    db.SaveChanges();
-                }
-                weekCount++;
-            }
+			// TO DO TODO: From here....
+			for (var i = 0; i < requestView.Week.Length; i++)
+			{
+				if (requestView.Week[i] == null)
+				{
+					requestView.Week[i] = false;
+				}
+			}
 
-			return RedirectToAction("List");
+				foreach (bool i in requestView.Week)
+				{
+					if (i == true)
+					{
+						timetable_request_week = new timetable_request_week()
+						{
+							Request_ID = newReqID,
+							Week = weekCount,
+							//WeekReqID = (Int16)((db.timetable_request_week.ToList().Last().WeekReqID) + 1),
+						};
+
+						db.timetable_request_week.Add(timetable_request_week);
+						db.SaveChanges();
+					}
+					weekCount++;
+				}
+
+			// TO DO TODO: ...To here.
+
+			//return RedirectToAction("List");
+			return RedirectToAction("List", "Requests");
         }
 
 
