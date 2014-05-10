@@ -146,27 +146,37 @@ namespace TeamProjects.Controllers.manage
 
             if (requestView.Room_Pref_JSON != null)
             {
+				var roomPrefsArray = (requestView.Room_Pref_JSON).Split(',');
 
-                var roomPrefs = serializer.Deserialize<RoomPref[]>(requestView.Room_Pref_JSON);
-
-                foreach (var item in roomPrefs)
-                {
-                    if (item.Building.ToString() == "null" || item.Building.ToString() == "N/A" || item.Room.ToString() == "0" || item.Room.ToString() == "N/A")
-                    {
-                    }
-					else
+				for (var i = 0; i < roomPrefsArray.Length-1; i += 2)
+				{
+					timetable_request_room_allocation timetable_request_room_allocation = new timetable_request_room_allocation()
 					{
-						timetable_request_room_allocation timetable_request_room_allocation = new timetable_request_room_allocation()
-						{
-							Request_ID = newReqID,
-							Building_ID = item.Building.ToString(),
-							Room_ID = item.Room.ToString(),
-						};
+						Request_ID = newReqID,
+						Building_ID = roomPrefsArray[i].ToString(),
+						Room_ID = roomPrefsArray[i+1].ToString(),
+					};
 
-						db.timetable_request_room_allocation.Add(timetable_request_room_allocation);
-						db.SaveChanges();
-					}
-                }
+					db.timetable_request_room_allocation.Add(timetable_request_room_allocation);
+					db.SaveChanges();
+				}
+
+
+
+				//var roomPrefs = serializer.Deserialize<Array[]>(roomPrefsString);
+
+                //foreach (var item in roomPrefs)
+                //{
+						//timetable_request_room_allocation timetable_request_room_allocation = new timetable_request_room_allocation()
+						//{
+						//	Request_ID = newReqID,
+						//	Building_ID = item[2].ToString(),
+						//	Room_ID = item[3].ToString(),
+						//};
+
+						//db.timetable_request_room_allocation.Add(timetable_request_room_allocation);
+						//db.SaveChanges();
+                //}
             }
 
 			//timetable_request_week timetable_request_week = new timetable_request_week()
