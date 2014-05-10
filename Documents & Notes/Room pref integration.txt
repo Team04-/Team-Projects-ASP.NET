@@ -1,0 +1,5 @@
+var roomPref[] = new Array();
+roomPref[3] = Room_ID;
+roomPrefCollection.push(roomPref);
+addRow('dataTable');
+updateRoomPrefJSON();
