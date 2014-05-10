@@ -151,6 +151,18 @@
 
 					//TODO: ROOM PREFERENCES  - see Edit Page Plan on Git
 
+					for (var i=0; i < entry.Rooms.Length; i++){
+						var roomPref = new Array();
+						roomPref[0] = "";
+						roomPref[1] = "";
+						roomPref[2] = "";
+						roomPref[3] = entry.Rooms[i];
+						roomPrefCollection.push(roomPref);
+						addRow('dataTable');
+						updateRoomPrefJSON();
+					}
+
+
 					//Room - don't need
 
 					if (entry.Priority = true) {
