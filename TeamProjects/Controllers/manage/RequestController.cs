@@ -182,30 +182,24 @@ namespace TeamProjects.Controllers.manage
             timetable_request_week timetable_request_week;
 
 			// TO DO TODO: From here....
-			for (var i = 0; i < requestView.Week.Length; i++)
-			{
-				if (requestView.Week[i] == null)
-				{
-					requestView.Week[i] = false;
-				}
-			}
+            bool[] weekList = new bool[] {requestView.WeekOne, requestView.WeekTwo, requestView.WeekThree, requestView.WeekFour, requestView.WeekFive, requestView.WeekSix, requestView.WeekSeven, requestView.WeekEight, requestView.WeekNine, requestView.WeekTen, requestView.WeekEleven, requestView.WeekTwelve, requestView.WeekThirteen, requestView.WeekFourteen, requestView.WeekFifteen};
 
-				foreach (bool i in requestView.Week)
-				{
-					if (i == true)
-					{
-						timetable_request_week = new timetable_request_week()
-						{
-							Request_ID = newReqID,
-							Week = weekCount,
-							//WeekReqID = (Int16)((db.timetable_request_week.ToList().Last().WeekReqID) + 1),
-						};
+            for (int i = 0; i < weekList.Length;i++)
+            {
+                if (weekList[i] == true)
+                {
+                    timetable_request_week = new timetable_request_week()
+                    {
+                        Request_ID = newReqID,
+                        Week = Convert.ToByte(i),
+                        //WeekReqID = (Int16)((db.timetable_request_week.ToList().Last().WeekReqID) + 1),
+                    };
 
-						db.timetable_request_week.Add(timetable_request_week);
-						db.SaveChanges();
-					}
-					weekCount++;
-				}
+                    db.timetable_request_week.Add(timetable_request_week);
+                    db.SaveChanges();
+                }
+                weekCount++;
+            }
 
 			// TO DO TODO: ...To here.
 
