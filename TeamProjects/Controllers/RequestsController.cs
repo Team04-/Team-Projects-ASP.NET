@@ -88,7 +88,7 @@ namespace TeamProjects.Controllers
             }
             foreach (timetable_request_week week in weekList)
             {
-                weekListArray[week.Week] = true;
+                weekListArray[week.Week-1] = true;
             }
             newRequest.Weeks = weekListArray;
             List<timetable_request_room_allocation> roomList = db.timetable_request_room_allocation.Where(ra => ra.Request_ID == request.Request_ID).ToList();

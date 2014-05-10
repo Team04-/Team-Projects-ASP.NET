@@ -98,7 +98,7 @@ namespace TeamProjects.Controllers.api
                 }
                 foreach (timetable_request_week week in weekList)
                 {
-                    weekListArray[week.Week] = true;
+                    weekListArray[week.Week-1] = true;
                 }
                 newRequest.Weeks = weekListArray;
 
