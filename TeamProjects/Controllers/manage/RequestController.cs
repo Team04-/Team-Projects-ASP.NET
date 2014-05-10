@@ -125,6 +125,7 @@ namespace TeamProjects.Controllers.manage
 
 			var newReqID = (Int16)((db.timetable_request.ToList().Last().Request_ID) + 1);
 
+			// [Redundancy...
             if (requestView.Fac_JSON != null)
             {
 
@@ -143,18 +144,18 @@ namespace TeamProjects.Controllers.manage
                     db.SaveChanges();
                 }
             }
-
+			// ...]
             if (requestView.Room_Pref_JSON != null)
             {
 				var roomPrefsArray = (requestView.Room_Pref_JSON).Split(',');
 
-				for (var i = 0; i < roomPrefsArray.Length-1; i += 2)
+				for (var i = 1; i < roomPrefsArray.Length-1; i += 2)
 				{
 					timetable_request_room_allocation timetable_request_room_allocation = new timetable_request_room_allocation()
 					{
 						Request_ID = newReqID,
-						Building_ID = roomPrefsArray[i].ToString(),
-						Room_ID = roomPrefsArray[i+1].ToString(),
+						Building_ID = roomPrefsArray[i],
+						Room_ID = roomPrefsArray[i+1],
 					};
 
 					db.timetable_request_room_allocation.Add(timetable_request_room_allocation);

@@ -258,13 +258,18 @@
 
 			roomPrefCollection.push(roomPref);
 
+			addRow('dataTable');
+
+			roomPref[2] = document.getElementById('Building_ID').options[document.getElementById('Building_ID').selectedIndex].value;
+
+			updateRoomPrefJSON();
+
 			document.getElementById('Room_Type').value = "";
 			document.getElementById('Park_ID2').value = "";
 			document.getElementById('Building_ID').value = "";
 			document.getElementById('Room_ID').value = "";
 
-			addRow('dataTable');
-			updateRoomPrefJSON();
+
 
 			alert("Room preference successfully added!");
 		}
