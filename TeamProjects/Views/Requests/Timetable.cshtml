@@ -14,9 +14,22 @@
 
     $(document).ready(function () {
     	//populateTableData(4,1);
+        $('#requestTable td').click(function(){
+            if($(this).text()!=""){
+                var is_selected = $(this).hasClass('selected');
+                $('#requestTable .selected').removeClass('selected');
+                if(!is_selected){
+                    $(this).addClass('selected');
+                    $('#infoTable').removeClass('hidetable').addClass('showtable');
+                } else {
+                    $('#infoTable').removeClass('showtable').addClass('hidetable');
+                }
+            }
+        });
     });
 
     function populateTableData(round, week) {
+        $('.tableloading').addClass('loading').append('<i class="fa fa-spinner"></i>');
         // TASK: populate table with all requests for selected round and week
 
         // Get all request data via getJSON() from RequestAPIController (make it from Matt's list code)
@@ -47,7 +60,7 @@
             		});
             		if (!added) {
             			//console.log("not added" + entry.Module_Code + " added to " + entry.Day + " in column " + col);
-            			var tableCellsString = "<td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td>";
+            			var tableCellsString = "<th>"+entry.Day+"</th><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td>";
             			$("." + entry.Day).last().after("<tr class='" + entry.Day + "'>" + tableCellsString + "</tr>");
 
             			for (var col = Start_Time; col < (Start_Time + Duration) ; col++) {
@@ -56,27 +69,41 @@
             			}
             			//ADD NEW ROW HERE, THEN ADD THE REQUEST
             		}
+                    $('.tableloading').empty();
             	});
                 })
 
         .fail(function (jqXHR, textStatus, err) {
             console.log('Error: ' + err);
+            $('.tableloading').empty().removeClass('loading').append('<i class="fa fa-exclamation-triangle"></i>');
         });
-
     }
 
 	function updateRequestInfoPanel(RequestID) {
 
 		timetableData.forEach(function (entry) {
 			if (entry.Request_ID == RequestID) {
-				$('#requestInfoDiv').empty();
-				$.each(entry, function (key, value) {
-					//alert("woo");
-					$('#requestInfoDiv').append("<div class='detail detail__" + key + "'>");
-					$('#requestInfoDiv').append("<div class='detailsheader'>" + key + "</div>");
-					$('#requestInfoDiv').append("<div class='detailscontent'>" + value + "</div>");
-					$('#requestInfoDiv').append("</div>");
-				});
+                console.log(entry);
+				$('.entry').empty();
+				$('.Module_Code').html(entry.Module_Code);
+                $('.Round').html(entry.Round);
+                $('.Day').html(entry.Day);
+                $('.Periods').html(entry.Start_Period + ' - ' + entry.End_Period + " | " + entry.Time_String);
+                $('.Park').html(entry.Park);
+                $('.Number_Rooms').html(entry.Number_Rooms);
+                $('.Number_Students').html(entry.Number_Students);
+                if(entry.Priority){
+                    $('.Priority').html("<span><i class='fa fa-check'></i></span>");
+                } else {
+                    $('.Priority').html("<span><i class='fa fa-times'></i></span>");
+                }
+                if(entry.Has_Comments){
+                    $('.Has_Comments').html("<span><i class='fa fa-check'></i></span>");
+                } else {
+                    $('.Has_Comments').html("<span><i class='fa fa-times'></i></span>");
+                }
+                $('.Status').html(entry.Status);
+                $('.Module_Title').html(entry.Module_Title);
 			}
 		});
 	}
@@ -113,10 +140,12 @@
         <option>15</option>
     </select>
 	<input type="button" value="Update" onclick="populateTableData(document.getElementById('RoundSemester').options[document.getElementById('RoundSemester').selectedIndex].value, document.getElementById('weekSelect').options[document.getElementById('weekSelect').selectedIndex].value);" />
+    <div class="tableloading loading"></div>
     <br /><br />
     <div id="timetableDiv">
     <table id="requestTable">
         <tr class="Mon">
+            <th>Mon</th>
             <td></td>
             <td></td>
             <td></td>
@@ -128,6 +157,7 @@
             <td></td>
         </tr>
         <tr class="Tues">
+            <th>Tues</th>
             <td></td>
             <td></td>
             <td></td>
@@ -139,6 +169,7 @@
             <td></td>
         </tr>
         <tr class="Wed">
+            <th>Wed</th>
             <td></td>
             <td></td>
             <td></td>
@@ -150,6 +181,7 @@
             <td></td>
         </tr>
         <tr class="Thur">
+            <th>Thur</th>
             <td></td>
             <td></td>
             <td></td>
@@ -161,6 +193,7 @@
             <td></td>
         </tr>
         <tr class="Fri">
+            <th>Fri</th>
             <td></td>
             <td></td>
             <td></td>
@@ -172,12 +205,49 @@
             <td></td>
         </tr>
     </table>
-        </div>
+    </div>
 	<div id="requestInfoDiv">
-		<!--<div class="detail detail__infoname">
-			<div class="detailsheader">Info Name</div>
-			<div class="detailscontent">Content Goes Here</div>
-		</div>-->
+        <table id="infoTable" class="toolslast hidetable">
+        <thead>
+            <tr>
+                <th>Code</th>
+                <th>Round</th>
+                <th>Day</th>
+                <th>Periods</th>
+                <th>Park</th>
+                <th>Rooms</th>
+                <th>Students</th>
+                <th>Priority</th>
+                <th>Comment</th>
+                <th>Status</th>
+                <th><i class="fa fa-wrench"></i></th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+        </thead>
+                <td>@User.Identity.Name<span class="entry Module_Code"></span></td>
+                <td class="entry Round"></td>
+                <td class="entry Day"></td>
+                <td class="entry Periods"></td>
+                <td class="entry Park"></td>
+                <td class="entry Number_Rooms"></td>
+                <td class="entry Number_Students"></td>
+                <td class="entry Priority"></td>
+                <td class="entry Has_Comments"></td>
+                <td class="entry Status"></td>
+                <td class="entry Tools"></td>
+            </tr>
+            <tr class="detailsrow details-hiderow">
+                <td colspan="11">
+                    <div class='detail detail__title'><div class='detailsheader'>Title</div><div class='detailscontent entry Module_Title'></div></div>
+                    <div class='detail detail__rooms'><div class='detailsheader'>Room Preferences</div><div class='detailscontent entry Rooms'></div></div>
+                    <div class='detail detail__weeks'><div class='detailsheader'>Weeks</div><div class='detailscontent entry Weeks'></div></div>
+                    <div class='detail detail__comment'><div class='detailsheader'>Comments</div><div class='detailscontent entry Custom_Comments'></div></div>
+                </td>
+            </tr>  
+        </tbody>
+        </table>
 	</div>
 </body>
 

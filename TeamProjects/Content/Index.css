@@ -1,0 +1,28 @@
+﻿.featured .content-wrapper 
+{
+    overflow:hidden;
+}
+.featured .title 
+{
+    float: left;
+}
+.featured .title h1
+{
+    line-height: 3em;
+}
+.featured .roundInfo
+{
+    float:right;
+}
+.featured .roundInfo h3, h6 
+{
+    margin: 0;
+}
+.featured .roundInfo h3
+{
+    color:#CC0066;
+}
+.featured .roundInfo h6
+{
+    color:#FFFFFF;
+}

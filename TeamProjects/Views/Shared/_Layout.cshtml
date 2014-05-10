@@ -70,7 +70,7 @@
         <div id="body">
             @RenderSection("featured", required: false)
             <section class="content-wrapper main-content clear-fix">
-                <div>Current Round: <span class="CurrentRoundCode">Loading</span></div>
+                <div class="current-round">Current Round: <div class="CurrentRoundCode loading"><i class="fa fa-spinner"></i></div></div>
                 @RenderBody()
             </section>
         </div>
@@ -86,7 +86,7 @@
                     var roundCode = "@ViewBag.currentRoundCode";
                     if (roundCode != "") {
                         $(".CurrentRoundCode").html("@ViewBag.currentRoundCode");
-
+                        $(".CurrentRoundCode").removeClass("loading");
                     } else {
                         $.ajax({
                             type: "GET",
@@ -95,9 +95,10 @@
                         })
 			            .done(function (data) {
 			                $(".CurrentRoundCode").html(data.Round_Code);
+                            $(".CurrentRoundCode").removeClass("loading");
 			            })
 			            .fail(function (jqXHR, textStatus, err) {
-			                $(".CurrentRoundCode").html("Unknown");
+                            /*failed*/
 			            });
                     }
                     if (!(tour === undefined)) {

@@ -815,3 +815,91 @@ tr.pager td {
 
 /*Main cell*/
 .main-cell{font-weight:bold;}
+
+/*Current Round*/
+.current-round{text-align:center;}
+.CurrentRoundCode{display:inline-block;}
+.loading
+{
+    display:inline-block;
+    -webkit-animation: loading linear 2s infinite;
+    -moz-animation: loading linear 2s infinite;
+    -o-animation: loading linear 2s infinite;
+    -ms-animation: loading linear 2s infinite;
+    animation: loading linear 2s infinite;
+}
+
+@keyframes loading{
+  0% {
+    left:0px;
+    top:0px;
+    opacity:1;
+    transform:  rotate(0deg) scaleX(1) scaleY(1) ;
+  }
+  100% {
+    left:0px;
+    top:0px;
+    opacity:1;
+    transform:  rotate(360deg) scaleX(1) scaleY(1) ;
+  }
+}
+
+@-moz-keyframes loading{
+  0% {
+    left:0px;
+    top:0px;
+    opacity:1;
+    -moz-transform:  rotate(0deg) scaleX(1) scaleY(1) ;
+  }
+  100% {
+    left:0px;
+    top:0px;
+    opacity:1;
+    -moz-transform:  rotate(360deg) scaleX(1) scaleY(1) ;
+  }
+}
+
+@-webkit-keyframes loading {
+  0% {
+    left:0px;
+    top:0px;
+    opacity:1;
+    -webkit-transform:  rotate(0deg) scaleX(1) scaleY(1) ;
+  }
+  100% {
+    left:0px;
+    top:0px;
+    opacity:1;
+    -webkit-transform:  rotate(360deg) scaleX(1) scaleY(1) ;
+  }
+}
+
+@-o-keyframes loading {
+  0% {
+    left:0px;
+    top:0px;
+    opacity:1;
+    -o-transform:  rotate(0deg) scaleX(1) scaleY(1) ;
+  }
+  100% {
+    left:0px;
+    top:0px;
+    opacity:1;
+    -o-transform:  rotate(360deg) scaleX(1) scaleY(1) ;
+  }
+}
+
+@-ms-keyframes loading {
+  0% {
+    left:0px;
+    top:0px;
+    opacity:1;
+    -ms-transform:  rotate(0deg) scaleX(1) scaleY(1) ;
+  }
+  100% {
+    left:0px;
+    top:0px;
+    opacity:1;
+    -ms-transform:  rotate(360deg) scaleX(1) scaleY(1) ;
+  }
+}

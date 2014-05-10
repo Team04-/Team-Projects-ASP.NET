@@ -2,6 +2,7 @@
     ViewBag.Title = "Department Dashboard";
 }
 @section Includes{
+    <link href="@Url.Content("~/Content/Index.css")" rel="stylesheet" />
     <link href="@Url.Content("~/Content/Request.css")" rel="stylesheet" />
 }
 @section featured {
@@ -10,17 +11,19 @@
             <hgroup class="title">
                 <h1>@ViewBag.Title</h1>
             </hgroup>
+            <div class="roundInfo">
+                <h3>Round Info</h3>
+                @{
+                    TeamProjects.Models.timetable_round roundInfo = ViewBag.RoundInfo;   
+                }
+                <h6>Round: @roundInfo.Round_Code</h6>
+                <h6>Semester: @roundInfo.Semester</h6>
+                <h6>Start Date: @roundInfo.Start_Date.ToString().Split(' ')[0]</h6>
+                <h6>End Date: @roundInfo.End_Date.ToString().Split(' ')[0]</h6>
+            </div>
         </div>
     </section>
 }
-<h3>Round Info</h3>
-@{
-    TeamProjects.Models.timetable_round roundInfo = ViewBag.RoundInfo;   
-}
-<div>Round: @roundInfo.Round_Code</div>
-<div>Semester: @roundInfo.Semester</div>
-<div>Start Date: @roundInfo.Start_Date.ToString().Split(' ')[0]</div>
-<div>End Date: @roundInfo.End_Date.ToString().Split(' ')[0]</div>
 <h3>Need Attention</h3>
 <table id="AttentionTable" class="toolslast">
     <thead>

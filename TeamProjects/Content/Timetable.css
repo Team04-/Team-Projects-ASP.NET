@@ -1,8 +1,49 @@
-﻿#timetable 
+﻿#requestTable
 {
-    margin-top:20px;
+    text-align:center;
 }
-#timetable th span, #timetable #revert, #timetable .period, #calendar .day, #timetable .month, #timetable .year
+#requestTable td:not(:empty)
 {
     cursor:pointer;
+}
+#requestTable td:not(:empty):hover
+{
+    background-color:#dfdddf;
+}
+#requestTable .selected
+{
+   background-color:#dfdddf; 
+}
+.tableloading
+{
+    display:inline-block;
+}
+.hidetable
+{
+    display:none;
+}
+.showtable
+{
+    display:table;
+}
+/*columns*/
+.detail{margin-bottom:10px;}
+.detail:last-child{margin-bottom:0px;}
+.detail__title{box-sizing:border-box;float:left;width:49%;}
+.detail__rooms{box-sizing:border-box;float:right;width:49%;}
+.detail__weeks{clear:both;width:100%;}
+.detail__comment{clear:both;width:100%;}
+.detailsheader {
+    background-color: #330066;
+    color: #FFF;
+    border-color: #330066;
+    border-style: solid;
+    border-width: thin;
+    padding: 5px;
+    -moz-border-radius: 3px;
+    -webkit-border-radius: 3px;
+    border-radius: 3px;
+}
+.detailscontent {
+    padding: 5px; 
 }
