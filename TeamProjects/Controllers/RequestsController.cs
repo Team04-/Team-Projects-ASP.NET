@@ -4,6 +4,7 @@ using System.Data;
 using System.Data.Entity;
 using System.Linq;
 using System.Web;
+using System.Web.Script.Serialization;
 using System.Web.Mvc;
 using TeamProjects.Models;
 
@@ -218,15 +219,137 @@ namespace TeamProjects.Controllers
         //
         // POST: /Requests/Edit/5
         [HttpPost]
-        public ActionResult Edit(timetable_request timetable_request)
+		public ActionResult Edit(RequestViewModel requestView)
         {
-            if (ModelState.IsValid)
-            {
-                db.Entry(timetable_request).State = EntityState.Modified;
-                db.SaveChanges();
-                return RedirectToAction("List");
-            }
-            return View(timetable_request);
+			var requID = Convert.ToInt16(requestView.Request_ID);
+			
+			var queryReq = (from s in db.timetable_request where s.Request_ID == requID select s).FirstOrDefault();
+
+			db.timetable_request.Attach(queryReq);
+
+				//Request_ID = requID,
+				queryReq.Department_Code = User.Identity.Name; //requestView.Department_Code, // Get from logged in user
+				//Part_Code = requestView.Part_Code.ToString(), // Dropdown
+				queryReq.Module_Code = requestView.Module_Code;
+				queryReq.Day_ID = (byte)requestView.Day_ID;
+				queryReq.Park_ID = requestView.Park_ID;
+				queryReq.Start_Time = (byte)requestView.Start_Time;
+				queryReq.Duration = (byte)requestView.Duration;
+				queryReq.Number_Students = requestView.Number_Students;
+				queryReq.Number_Rooms = (byte)requestView.Number_Rooms;
+				queryReq.Priority = requestView.Priority;
+				queryReq.Custom_Comments = requestView.Custom_Comments;
+				queryReq.Current_Round = db.timetable_round.Where(r => r.Round_Status == "Current").First().Round_Code;
+				queryReq.Request_Status = 1;
+
+			db.SaveChanges();
+
+			//timetable_request timetable_request = new timetable_request()
+			//{
+			//	Request_ID = requID,
+			//	Department_Code = User.Identity.Name, //requestView.Department_Code, // Get from logged in user
+			//	//Part_Code = requestView.Part_Code.ToString(), // Dropdown
+			//	Module_Code = requestView.Module_Code,
+			//	Day_ID = (byte)requestView.Day_ID,
+			//	Park_ID = requestView.Park_ID,
+			//	Start_Time = (byte)requestView.Start_Time,
+			//	Duration = (byte)requestView.Duration,
+			//	Number_Students = requestView.Number_Students,
+			//	Number_Rooms = (byte)requestView.Number_Rooms,
+			//	Priority = requestView.Priority,
+			//	Custom_Comments = requestView.Custom_Comments,
+			//	Current_Round = db.timetable_round.Where(r => r.Round_Status == "Current").First().Round_Code,
+			//	Request_Status = 1
+			//};
+
+			IQueryable<timetable_request_facility> facilities = db.timetable_request_facility.Where(rf => rf.Request_ID == requID);
+			IQueryable<timetable_request_room_allocation> allocations = db.timetable_request_room_allocation.Where(ra => ra.Request_ID == requID);
+			IQueryable<timetable_request_week> weeks = db.timetable_request_week.Where(rw => rw.Request_ID == requID);
+			//Remove rows from tables
+			foreach (timetable_request_facility facility in facilities)
+			{
+				db.timetable_request_facility.Remove(facility);
+			}
+			foreach (timetable_request_room_allocation allocation in allocations)
+			{
+				db.timetable_request_room_allocation.Remove(allocation);
+			}
+			foreach (timetable_request_week week in weeks)
+			{
+				db.timetable_request_week.Remove(week);
+			}
+			//Save db with rows removed
+			db.SaveChanges();
+
+
+			JavaScriptSerializer serializer = new JavaScriptSerializer();
+
+			// [Redundancy...
+			if (requestView.Fac_JSON != null && requestView.Fac_JSON != "[\"\"]")
+			{
+
+				var facs = serializer.Deserialize<byte[]>(requestView.Fac_JSON);
+
+				foreach (var item in facs)
+				{
+					timetable_request_facility timetable_request_facility = new timetable_request_facility()
+					{
+						Request_ID = requID,
+						Facility_ID = item,
+						Quantity = 1,
+					};
+
+					db.timetable_request_facility.Add(timetable_request_facility);
+					db.SaveChanges();
+				}
+			}
+			// ...]
+			if (requestView.Room_Pref_JSON != null)
+			{
+				var roomPrefsArray = (requestView.Room_Pref_JSON).Split(',');
+
+				for (var i = 1; i < roomPrefsArray.Length - 1; i += 2)
+				{
+					timetable_request_room_allocation timetable_request_room_allocation = new timetable_request_room_allocation()
+					{
+						Request_ID = requID,
+						Building_ID = roomPrefsArray[i],
+						Room_ID = roomPrefsArray[i + 1],
+					};
+
+					db.timetable_request_room_allocation.Add(timetable_request_room_allocation);
+					db.SaveChanges();
+				}
+
+			}
+
+			byte weekCount = 1;
+
+			timetable_request_week timetable_request_week;
+
+			// TO DO TODO: From here....
+			bool[] weekList = new bool[] { requestView.WeekOne, requestView.WeekTwo, requestView.WeekThree, requestView.WeekFour, requestView.WeekFive, requestView.WeekSix, requestView.WeekSeven, requestView.WeekEight, requestView.WeekNine, requestView.WeekTen, requestView.WeekEleven, requestView.WeekTwelve, requestView.WeekThirteen, requestView.WeekFourteen, requestView.WeekFifteen };
+
+			for (int i = 0; i < weekList.Length; i++)
+			{
+				if (weekList[i] == true)
+				{
+					timetable_request_week = new timetable_request_week()
+					{
+						Request_ID = requID,
+						Week = Convert.ToByte(i + 1),
+						//WeekReqID = (Int16)((db.timetable_request_week.ToList().Last().WeekReqID) + 1),
+					};
+
+					db.timetable_request_week.Add(timetable_request_week);
+					db.SaveChanges();
+				}
+				weekCount++;
+			}
+
+			// TO DO TODO: ...To here.
+
+			return RedirectToAction("List", "Requests");
         }
 
         //

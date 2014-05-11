@@ -64,22 +64,11 @@ namespace TeamProjects.Controllers.manage
             return View();
         }
 
-		//public bool GetRoomPrefCollection(string[][] roomPrefColl)
 		public ActionResult GetRoomPrefCollection(string[][] roomPrefColl)
 		{
 			var cr = new JsonResult();
 			cr.Data = roomPrefColl;
-			return cr;
-
-			//if (roomPrefColl != null)
-			//{
-			//	return true;
-			//}
-
-			//else {
-			//	return false;
-			//}
-			
+			return cr;			
 		}
 
         // POST: /Request/Create
@@ -88,17 +77,7 @@ namespace TeamProjects.Controllers.manage
         [HttpPost]
         //[ValidateAntiForgeryToken]
         public ActionResult Create(RequestViewModel requestView)
-		//public ActionResult Create([Bind(Include="Request_ID,Department_Code,Part_Code,Module_Code,Day_ID,Start_Time,Duration,Number_Students,Number_Rooms,Priority,Room_Type,Park_ID,Custom_Comments,Current_Year,Current_Semester,Current_Round,Request_Status")] RequestViewModel requestView)
         {
-            // Make new timetable_request object, add requestView ("master data") Current_Round value.
-            // Do this for all tables which need subsets of data from requestView.
-
-			//string query = "SELECT dept.Department_Code as Department_Code, mod.Part_Code as Part_Code, mod.Module_Code as Module_Code, roomt.Type_Name as Room_Type, park.Park_ID as Park_ID from timetable_department dept, timetable_request mod, timetable_room_type roomt, timetable_park park";
-			//var viewModel = db.Database.SqlQuery<TeamProjects.Models.RequestViewModel>(query);
-			//return View(viewModel.ToList());
-
-			
-
 			timetable_request timetable_request = new timetable_request()
 			{
 				//Request_ID = newReqID,
@@ -113,7 +92,6 @@ namespace TeamProjects.Controllers.manage
 				Number_Rooms = (byte) requestView.Number_Rooms,
 				Priority = requestView.Priority,
 				Custom_Comments = requestView.Custom_Comments,
-                //TODO change so that it uses the departments selected active round
 				Current_Round = db.timetable_round.Where(r => r.Round_Status == "Current").First().Round_Code,
 				Request_Status = 1
 			};
@@ -122,8 +100,6 @@ namespace TeamProjects.Controllers.manage
 			db.SaveChanges();
 
 			JavaScriptSerializer serializer = new JavaScriptSerializer();
-
-			//var newReqID = ((Int16)((from s in db.timetable_request select s.Request_ID).Max()));
 
 			// [Redundancy...
 			if (requestView.Fac_JSON != null && requestView.Fac_JSON != "[\"\"]")
@@ -145,48 +121,24 @@ namespace TeamProjects.Controllers.manage
                 }
             }
 			// ...]
-            if (requestView.Room_Pref_JSON != null)
-            {
+			if (requestView.Room_Pref_JSON != null)
+			{
 				var roomPrefsArray = (requestView.Room_Pref_JSON).Split(',');
 
-				for (var i = 1; i < roomPrefsArray.Length-1; i += 2)
+				for (var i = 1; i < roomPrefsArray.Length - 1; i += 2)
 				{
 					timetable_request_room_allocation timetable_request_room_allocation = new timetable_request_room_allocation()
 					{
 						Request_ID = ((Int16)((from s in db.timetable_request select s.Request_ID).Max())),
 						Building_ID = roomPrefsArray[i],
-						Room_ID = roomPrefsArray[i+1],
+						Room_ID = roomPrefsArray[i + 1],
 					};
 
 					db.timetable_request_room_allocation.Add(timetable_request_room_allocation);
 					db.SaveChanges();
 				}
 
-
-
-				//var roomPrefs = serializer.Deserialize<Array[]>(roomPrefsString);
-
-                //foreach (var item in roomPrefs)
-                //{
-						//timetable_request_room_allocation timetable_request_room_allocation = new timetable_request_room_allocation()
-						//{
-						//	Request_ID = newReqID,
-						//	Building_ID = item[2].ToString(),
-						//	Room_ID = item[3].ToString(),
-						//};
-
-						//db.timetable_request_room_allocation.Add(timetable_request_room_allocation);
-						//db.SaveChanges();
-                //}
-            }
-
-			//timetable_request_week timetable_request_week = new timetable_request_week()
-			//{
-			//	Request_ID = newReqID,
-				//Week = Convert.ToByte(requestView.WeekOne),
-			//};
-
-           // timetable_request_week timetable_request_week = new timetable_request_week();
+			}
 
             byte weekCount = 1;
 
@@ -214,68 +166,7 @@ namespace TeamProjects.Controllers.manage
 
 			// TO DO TODO: ...To here.
 
-			//return RedirectToAction("List");
 			return RedirectToAction("List", "Requests");
-        }
-
-
-        //
-        // GET: /Request/Edit/5
-        [Authorize]
-        public ActionResult Edit(short id = 0)
-        {
-            timetable_request timetable_request = db.timetable_request.Find(id);
-            if (timetable_request == null)
-            {
-                return HttpNotFound();
-            }
-            return View(timetable_request);
-        }
-
-        //
-        // POST: /Request/Edit/5
-
-        [HttpPost]
-        public ActionResult Edit(timetable_request timetable_request)
-        {
-            if (ModelState.IsValid)
-            {
-                db.Entry(timetable_request).State = EntityState.Modified;
-                db.SaveChanges();
-                return RedirectToAction("Index");
-            }
-            return View(timetable_request);
-        }
-
-        //
-        // GET: /Request/Delete/5
-        [Authorize]
-        public ActionResult Delete(short id = 0)
-        {
-            timetable_request timetable_request = db.timetable_request.Find(id);
-            if (timetable_request == null)
-            {
-                return HttpNotFound();
-            }
-            return View(timetable_request);
-        }
-
-        //
-        // POST: /Request/Delete/5
-
-        [HttpPost, ActionName("Delete")]
-        public ActionResult DeleteConfirmed(short id)
-        {
-            timetable_request timetable_request = db.timetable_request.Find(id);
-            db.timetable_request.Remove(timetable_request);
-            db.SaveChanges();
-            return RedirectToAction("Index");
-        }
-
-        protected override void Dispose(bool disposing)
-        {
-            db.Dispose();
-            base.Dispose(disposing);
         }
     }
 }
