@@ -16,23 +16,29 @@
         <input id="Department_Code" name="Department_Code" type="hidden" value="CO" />
 
         <div class="editor-label">
-            @Html.LabelFor(model => model.Part_Code)
+            <label for="Part_Code">Part Code</label>
         </div>
         <div class="editor-field">
-            @Html.EditorFor(model => model.Part_Code)
+            <select id="Part_Code" name="Part_Code">
+                <option value="A">A</option>
+                <option value="B">B</option>
+                <option value="C">C</option>
+                <option value="D">D</option>
+            </select>
             @Html.ValidationMessageFor(model => model.Part_Code)
         </div>
 
         <div class="editor-label">
-            @Html.LabelFor(model => model.Module_Code)
+            <label for="Module_Code">Module Code</label>
         </div>
         <div class="editor-field">
-            @Html.EditorFor(model => model.Module_Code)
+            @Html.TextBoxFor(model => model.Module_Code, new { onkeypress="return isNumber(event)" })
             @Html.ValidationMessageFor(model => model.Module_Code)
+            <span class="modCodeVal hide"><i class="fa fa-exclamation-triangle"></i> Should be a number.</span>
         </div>
 
         <div class="editor-label">
-            @Html.LabelFor(model => model.Module_Title)
+            <label for="Module_Title">Module Title</label>
         </div>
         <div class="editor-field">
             @Html.EditorFor(model => model.Module_Title)
@@ -56,7 +62,18 @@
 <div>
     @Html.ActionLink("Back to List", "Index")
 </div>
-
+<script>
+    function isNumber(evt) {
+        evt = (evt) ? evt : window.event;
+        var charCode = (evt.which) ? evt.which : evt.keyCode;
+        if (charCode > 31 && (charCode < 48 || charCode > 57)) {
+            $('.modCodeVal').removeClass('hide').addClass('show');
+            return false;
+        }
+        $('.modCodeVal').removeClass('show').addClass('hide');
+        return true;
+    }
+</script>
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
 }

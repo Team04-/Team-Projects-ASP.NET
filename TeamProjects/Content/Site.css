@@ -903,3 +903,13 @@ tr.pager td {
     -ms-transform:  rotate(360deg) scaleX(1) scaleY(1) ;
   }
 }
+/*Hide misc*/
+.hide
+{
+    display:none;
+}
+/*Show misc*/
+.show
+{
+    display:inline-block;
+}
