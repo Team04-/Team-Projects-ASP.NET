@@ -4,8 +4,7 @@ http://co-web.lboro.ac.uk/team04web
 ##General Todo
 - Finish Shepherd tour pages
 - Finish Styling
-- Finish Add Request page
-- Finish Requests timetable view
+- Change Room Edit type id to be an auto selected chosen dropdown
 - Final Check
 - Bug Check
 - Bug Fixing
