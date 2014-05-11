@@ -9,7 +9,8 @@
 }
 <h2>Create</h2>
 
-@using (Html.BeginForm()) {
+@using (Html.BeginForm())
+{
     @Html.ValidationSummary(true)
 
     <fieldset>
@@ -22,7 +23,7 @@
             <select id="Building_ID" class="Building_ID" name="Building_ID" data-placeholder="Select the building...">
                 <option disabled selected>Select the building...</option>
                 @{
-                    for (int i = 0; i < ViewBag.buildingCodes.Count;i++)
+                    for (int i = 0; i < ViewBag.buildingCodes.Count; i++)
                     {
                         <option value="@ViewBag.buildingCodes[i]">@ViewBag.buildingCodes[i] - @ViewBag.buildingNames[i]</option>
                     }
@@ -39,19 +40,24 @@
         </div>
 
         <div class="editor-label">
-            <label for="Capacity">Capacity ID</label>
+            <label for="Capacity">Capacity</label>
         </div>
         <div class="editor-field">
-            @Html.EditorFor(model => model.Capacity)
+            @Html.TextBoxFor(model => model.Capacity, new { onkeypress = "return isNumber(event)" })
             @Html.ValidationMessageFor(model => model.Capacity)
+            <span class="capCodeVal hide"><i class="fa fa-exclamation-triangle"></i> Must be a number.</span>
         </div>
 
         <div class="editor-label">
             <label for="Type_ID">Room Type</label>
         </div>
         <div class="editor-field">
-            @Html.EditorFor(model => model.Type_ID)
-            @Html.ValidationMessageFor(model => model.Type_ID)
+            <select id="Type_ID" class="Type_ID" name="Type_ID" data-placeholder="Select the room type...">
+                <option disabled selected>Select the room type...</option>
+                <option value="1">Lecture</option>
+                <option value="2">Seminar</option>
+                <option value="3">Lab</option>
+            </select>
         </div>
 
         <p>
@@ -65,6 +71,17 @@
 </div>
 <script>
     $("#Building_ID").chosen({ width: "315px" });
+    $("#Type_ID").chosen({ width: "315px" });
+    function isNumber(evt) {
+        evt = (evt) ? evt : window.event;
+        var charCode = (evt.which) ? evt.which : evt.keyCode;
+        if (charCode > 31 && (charCode < 48 || charCode > 57)) {
+            $('.capCodeVal').removeClass('hide').addClass('show');
+            return false;
+        }
+        $('.capCodeVal').removeClass('show').addClass('hide');
+        return true;
+    }
 </script>
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
