@@ -106,6 +106,10 @@
                 </td>
             </tr>  
         }
+    }
+    @if (ViewBag.Attention.Count == 0)
+    {
+        <tr class="noresults"><td colspan=11>No requests currently need attention.</td></tr>
     } 
     </tbody>
 </table>
@@ -190,7 +194,11 @@
                 </td>
             </tr>  
         }
-    }    
+    }
+    @if (ViewBag.RecentlyAdded.Count == 0)
+    {
+        <tr class="noresults"><td colspan=11>No requests have been recently added.</td></tr>
+    }     
     </tbody>
 </table>
 <script type="text/javascript">
