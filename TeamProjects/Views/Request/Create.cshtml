@@ -392,35 +392,35 @@
 
         <div class="form-group">
             @Html.LabelFor(model => model.Module_Code, "Module Code", new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
+            <div class="col-md-10b">
 				@Html.DropDownListFor(model => model.Module_Code, (SelectList)ViewBag.Module_Code, "-Select Module Code-")
             </div>
         </div>
 
         <div class="form-group">
             @Html.LabelFor(model => model.Day_ID, "Day", new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
+            <div class="col-md-10c">
                 @Html.DropDownListFor(model => model.Day_ID, (SelectList) ViewBag.Day_ID)
             </div>
         </div>
 
         <div class="form-group">
             @Html.LabelFor(model => model.Start_Time, "Start Time", new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
+            <div class="col-md-10d">
                 @Html.DropDownListFor(model => model.Start_Time, (SelectList) ViewBag.Start_Time)
             </div>
         </div>
 
         <div class="form-group">
             @Html.LabelFor(model => model.Duration, "Duration", new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
+            <div class="col-md-10e">
                 @Html.DropDownListFor(model => model.Duration, (SelectList) ViewBag.Duration)
             </div>
         </div>
 
         <div class="form-group">
             @Html.LabelFor(model => model.Week, "Weeks", new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
+            <div class="col-md-10f">
                 <table>
                     <tr>
                         <th>1</th>
@@ -460,7 +460,7 @@
 
         <div class="form-group">
             @Html.LabelFor(model => model.Number_Students, "Number Of Students", new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
+            <div class="col-md-10g">
                 @Html.EditorFor(model => model.Number_Students)
                 @Html.ValidationMessageFor(model => model.Number_Students)
             </div>
@@ -468,14 +468,14 @@
 
 		<div class="form-group">
 			@Html.LabelFor(model => model.Park_ID, "Park Preference", new { @class = "control-label col-md-2" })
-			<div class="col-md-10">
+			<div class="col-md-10h">
 				@Html.DropDownListFor(model => model.Park_ID, (SelectList) ViewBag.Park_ID)
 			</div>
 		</div>
 
         <div class="form-group">
             @Html.LabelFor(model => model.Number_Rooms, "# Of Rooms", new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
+            <div class="col-md-10i">
                 @Html.DropDownListFor(model => model.Number_Rooms, (SelectList)ViewBag.Number_Rooms)
             </div>
         </div>
@@ -485,21 +485,21 @@
 
 			<div class="form-group">
 				@Html.LabelFor(model => model.Park_ID, "Filter by Park", new { @class = "control-label col-md-2" })
-				<div class="col-md-10">
+				<div class="col-md-10j">
 					@Html.DropDownListFor(model => model.Park_ID2, (SelectList)ViewBag.Park_ID, new { @id = "Park_ID2" })
 				</div>
 			</div>
 
 			<div class="form-group">
 				@Html.LabelFor(model => model.Building_ID, "Building", new { @class = "control-label col-md-2" })
-				<div class="col-md-10">
+				<div class="col-md-10k">
 					@Html.DropDownListFor(model => model.Building_ID, (SelectList)ViewBag.Building_ID)
 				</div>
 			</div>
 
 			<div class="form-group">
 				@Html.LabelFor(model => model.Room_Type, "Filter by Room Type", new { @class = "control-label col-md-2" })
-				<div class="col-md-10">
+				<div class="col-md-10l">
 					@Html.DropDownListFor(model => model.Room_Type, (SelectList)ViewBag.Room_Type)
 				</div>
 			</div>
@@ -508,7 +508,7 @@
 
 			<div class="form-group">
 				@Html.LabelFor(model => model.Room_ID, "Room", new { @class = "control-label col-md-2" })
-				<div class="col-md-10">
+				<div class="col-md-10m">
 					@Html.DropDownListFor(model => model.Room_ID, (SelectList)ViewBag.Room_ID)
 				</div>
 			</div>
@@ -529,14 +529,14 @@
 
             <div class="form-group">
                 @Html.LabelFor(model => model.Priority, "Priority", new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
+                <div class="col-md-10n">
                     @Html.CheckBoxFor(model => model.Priority)
                 </div>
             </div>
 
             <div class="form-group">
                 @Html.LabelFor(model => model.Custom_Comments, "Additional Information", new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
+                <div class="col-md-10o">
                     @Html.EditorFor(model => model.Custom_Comments)
                 </div>
             </div>
