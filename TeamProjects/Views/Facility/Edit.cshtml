@@ -1,7 +1,7 @@
 ﻿@model TeamProjects.Models.timetable_facility
 
 @{
-    ViewBag.Title = "Edit @Model.Facility_Name";
+    ViewBag.Title = "Edit "+Model.Facility_Name;
 }
 
 <h2>Edit @Model.Facility_Name</h2>
@@ -12,16 +12,10 @@
     <fieldset>
         <legend>timetable_facility</legend>
 
-        <div class="editor-label">
-            @Html.LabelFor(model => model.Facility_ID)
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.Facility_ID)
-            @Html.ValidationMessageFor(model => model.Facility_ID)
-        </div>
+        <input id="Facility_ID" name="Facility_ID" type="hidden" value="@Model.Facility_ID">
 
         <div class="editor-label">
-            @Html.LabelFor(model => model.Facility_Name)
+            <label for="Facility_Name">Facility Name</label>
         </div>
         <div class="editor-field">
             @Html.EditorFor(model => model.Facility_Name)

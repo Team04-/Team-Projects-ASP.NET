@@ -1,10 +1,10 @@
 ﻿@model TeamProjects.Models.timetable_room
 
 @{
-    ViewBag.Title = "Edit @Model.Building_ID @Model.Room_ID";
+    ViewBag.Title = "Edit "+Model.Building_ID+Model.Room_ID;
 }
 
-<h2>Edit @Model.Building_ID @Model.Room_ID</h2>
+<h2>Edit @Model.Building_ID@Model.Room_ID</h2>
 
 @using (Html.BeginForm())
 {
@@ -13,21 +13,8 @@
     <fieldset>
         <legend>timetable_room</legend>
 
-        <div class="editor-label">
-            @Html.LabelFor(model => model.Building_ID)
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.Building_ID)
-            @Html.ValidationMessageFor(model => model.Building_ID)
-        </div>
-
-        <div class="editor-label">
-            @Html.LabelFor(model => model.Room_ID)
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.Room_ID)
-            @Html.ValidationMessageFor(model => model.Room_ID)
-        </div>
+        <input id="Building_ID" name="Building_ID" type="hidden" value="@Model.Building_ID" />
+        <input id="Room_ID" name="Room_ID" type="hidden" value="@Model.Room_ID" />
 
         <div class="editor-label">
             @Html.LabelFor(model => model.Capacity)
