@@ -34,7 +34,7 @@
         <div class="editor-field">
             @Html.TextBoxFor(model => model.Module_Code, new { onkeypress="return isNumber(event)" })
             @Html.ValidationMessageFor(model => model.Module_Code)
-            <span class="modCodeVal hide"><i class="fa fa-exclamation-triangle"></i> Should be a number.</span>
+            <span class="modCodeVal hide"><i class="fa fa-exclamation-triangle"></i> Must be a number.</span>
         </div>
 
         <div class="editor-label">
