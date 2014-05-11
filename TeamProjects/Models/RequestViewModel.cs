@@ -13,7 +13,7 @@ namespace TeamProjects.Models
     public class RequestViewModel
     {
         // Tinyint in DB --> byte in ASP.NET
-        public int Request_ID { get; set; }
+        public string Request_ID { get; set; }
         public string Department_Code { get; set; }
         //public char Part_Code { get; set; }
         public string Module_Code { get; set; }

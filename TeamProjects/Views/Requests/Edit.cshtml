@@ -102,6 +102,8 @@
 	function getReqInfo() {
 		// TASK: populate table with all requests for selected round and week
 		var reqID = @ViewBag.id
+		$("#Request_ID").val(reqID);
+
 		// Get all request data via getJSON() from RequestAPIController (make it from Matt's list code)
 		$('#timetableDiv td').each(function(){$(this).empty();});
 		$.getJSON("@Url.Action("RequestAPI", "api", null, Request.Url.Scheme)" + "?Round=0" + "&Week=0")
@@ -147,7 +149,7 @@
 					//Building - don't need
 					//Room Type - don't need
 
-					//TODO: FACILITIES - see Edit Page Plan on Git - FACILITIES IN MODEL
+					//Facilities - don't need
 
 					//TODO: ROOM PREFERENCES  - see Edit Page Plan on Git
 
@@ -611,8 +613,9 @@
             </div>
             <div class="form-group">
                 <input type="hidden" id="Department_Code" name="Department_Code" value="@User.Identity.Name"/>
-                @Html.HiddenFor(model => model.Room_Pref_JSON, new { @ID = "hdnRoomPrefJSON" })
-		        @Html.HiddenFor(model => model.Fac_JSON, new { @ID = "hdnfacJSON" })
+				<input type="hidden" id="hdnRoomPrefJSON" name="Room_Pref_JSON" value="" />
+				<input type="hidden" id="hdnfacJSON" name="Fac_JSON" value="" />
+				<input type="text" id="Request_ID" name="Request_ID" value="@ViewBag.id" />
             </div>
 		<!-- TODO: Change button to delete existing records with RequestID then do normal submit to Add Request -->
 		    <input type="submit" value="Save" class="btn btn-default"/>
