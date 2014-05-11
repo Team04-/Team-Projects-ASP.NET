@@ -225,7 +225,18 @@
 	}
 
 	function updateRoomPrefJSON() {
-	    $("#hdnRoomPrefJSON").val(JSON.stringify(roomPrefCollection));
+		var roomPrefString;
+		var check = 0;
+		roomPrefCollection.forEach(function (entry) {
+			if (check = 1) {
+				roomPrefString = roomPrefString + "," + entry[2] + "," + entry[3];
+			}
+			else {
+				roomPrefString = roomPrefString + entry[2] + "," + entry[3];
+				check = 1;
+			}
+		});
+		$("#hdnRoomPrefJSON").val(roomPrefString);
 	}
 
 	function updateFacJSON() {
@@ -336,13 +347,18 @@
 
 			roomPrefCollection.push(roomPref);
 
+			addRow('dataTable');
+
+			roomPref[2] = document.getElementById('Building_ID').options[document.getElementById('Building_ID').selectedIndex].value;
+
+			updateRoomPrefJSON();
+
 			document.getElementById('Room_Type').value = "";
 			document.getElementById('Park_ID2').value = "";
 			document.getElementById('Building_ID').value = "";
 			document.getElementById('Room_ID').value = "";
 
-			addRow('dataTable');
-			updateRoomPrefJSON();
+
 
 			alert("Room preference successfully added!");
 		}
@@ -432,23 +448,23 @@
 });
     }
 
-    function selWeeks() {
-        $(".weekBox").each(function () { $(this).prop("checked", true); });
-        //$("weekBox12").value(false);
-        //$("weekBox13").prop("value", false);
-        //$("weekBox14").prop("value", false);
-    }
+	function selWeeks() {
+		$(".weekBox").each(function () { $(this).prop("checked", true); });
+		//$("weekBox12").value(false);
+		//$("weekBox13").prop("value", false);
+		//$("weekBox14").prop("value", false);
+	}
 
-    function selWeeksTwelve() {
-        $(".weekBox").each(function () { $(this).prop("checked", true); });
-        $("#weekBox12").prop("checked", false);
-        $("#weekBox13").prop("checked", false);
-        $("#weekBox14").prop("checked", false);
-    }
+	function selWeeksTwelve() {
+		$(".weekBox").each(function () { $(this).prop("checked", true); });
+		$("#weekBox-12").prop("checked", false);
+		$("#weekBox-13").prop("checked", false);
+		$("#weekBox-14").prop("checked", false);
+	}
 
-    function unselAll() {
-        $(".weekBox").each(function () { $(this).prop("checked", false); });
-    }
+	function unselAll() {
+		$(".weekBox").each(function () { $(this).prop("checked", false); });
+	}
 
 </script>
 
@@ -497,31 +513,36 @@
             @Html.LabelFor(model => model.Week, "Weeks", new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 <table>
-                    <tr>
-                        <th>1</th>
-                        <th>2</th>
-                        <th>3</th>
-                        <th>4</th>
-                        <th>5</th>
-                        <th>6</th>
-                        <th>7</th>
-                        <th>8</th>
-                        <th>9</th>
-                        <th>10</th>
-                        <th>11</th>
-                        <th>12</th>
-                        <th>13</th>
-                        <th>14</th>
-                        <th>15</th>
-                    </tr>
-                    <tr>
-                        @for (int i = 0; i < 15; i++)
-                        {
-                            <td>
-                            @Html.CheckBoxFor(m => m.Week[i], new { @class = "weekBox", id = "weekBox"+i })
-                            </td>
-                        }
-                    </tr>
+					<tr>
+						<th>1</th>
+						<th>2</th>
+						<th>3</th>
+						<th>4</th>
+						<th>5</th>
+						<th>6</th>
+						<th>7</th>
+						<th>8</th>
+						<th>9</th>
+						<th>10</th>
+						<th>11</th>
+						<th>12</th>
+						<th>13</th>
+						<th>14</th>
+						<th>15</th>
+					</tr>
+					<tr>
+						@for (int i = 0; i < 15; i++)
+						{
+							<td>
+								@{
+							string[] numberList = { "One", "Two", "Three", "Four", "Five", "Six", "Seven", "Eight", "Nine", "Ten", "Eleven", "Twelve", "Thirteen", "Fourteen", "Fifteen" };
+							string week = "Week" + numberList[i];
+							<input type="checkbox" name="@week" value="true" id="weekBox-@i" class="weekBox" />
+								}
+							</td>
+						}
+					</tr>
+
                 </table>
                 <input type="button" value="Select Weeks 1-12" onclick="selWeeksTwelve()" />
                 <input type="button" value="Select All" onclick="selWeeks()" />
