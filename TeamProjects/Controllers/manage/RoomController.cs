@@ -46,6 +46,16 @@ namespace TeamProjects.Controllers.manage
         [Authorize]
         public ActionResult Create()
         {
+            List<timetable_building> buildingList = db.timetable_building.ToList();
+            List<string> buildingCodes = new List<string>();
+            List<string> buildingNames = new List<string>();
+            foreach (timetable_building building in buildingList)
+            {
+                buildingCodes.Add(building.Building_ID);
+                buildingNames.Add(building.Building_Name);
+            }
+            ViewBag.buildingCodes = buildingCodes;
+            ViewBag.buildingNames = buildingNames;
             return View();
         }
 

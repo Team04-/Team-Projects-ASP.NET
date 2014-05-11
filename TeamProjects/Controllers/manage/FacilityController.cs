@@ -50,6 +50,7 @@ namespace TeamProjects.Controllers.manage
         {
             if (ModelState.IsValid)
             {
+                timetable_facility.Facility_ID = Convert.ToByte(db.timetable_facility.Count() + 1);
                 db.timetable_facility.Add(timetable_facility);
                 db.SaveChanges();
                 return RedirectToAction("Index");
