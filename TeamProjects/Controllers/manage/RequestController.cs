@@ -123,7 +123,7 @@ namespace TeamProjects.Controllers.manage
 
 			JavaScriptSerializer serializer = new JavaScriptSerializer();
 
-			var newReqID = (Int16)((db.timetable_request.ToList().Last().Request_ID));
+			//var newReqID = ((Int16)((from s in db.timetable_request select s.Request_ID).Max()));
 
 			// [Redundancy...
 			if (requestView.Fac_JSON != null && requestView.Fac_JSON != "[\"\"]")
@@ -135,7 +135,7 @@ namespace TeamProjects.Controllers.manage
                 {
                     timetable_request_facility timetable_request_facility = new timetable_request_facility()
                     {
-                        Request_ID = newReqID,
+                        Request_ID = ((Int16)((from s in db.timetable_request select s.Request_ID).Max())),
                         Facility_ID = item,
                         Quantity = 1,
                     };
@@ -153,7 +153,7 @@ namespace TeamProjects.Controllers.manage
 				{
 					timetable_request_room_allocation timetable_request_room_allocation = new timetable_request_room_allocation()
 					{
-						Request_ID = newReqID,
+						Request_ID = ((Int16)((from s in db.timetable_request select s.Request_ID).Max())),
 						Building_ID = roomPrefsArray[i],
 						Room_ID = roomPrefsArray[i+1],
 					};
@@ -201,7 +201,7 @@ namespace TeamProjects.Controllers.manage
                 {
                     timetable_request_week = new timetable_request_week()
                     {
-                        Request_ID = newReqID,
+						Request_ID = ((Int16)((from s in db.timetable_request select s.Request_ID).Max())),
                         Week = Convert.ToByte(i+1),
                         //WeekReqID = (Int16)((db.timetable_request_week.ToList().Last().WeekReqID) + 1),
                     };
