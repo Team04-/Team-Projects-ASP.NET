@@ -98,6 +98,11 @@
                         tour.start();
                     }
                 }
+                $('.main-content').on('DOMNodeInserted', function(e) {
+                    if (e.relatedNode.className == 'field-validation-error') {
+                        $('.field-validation-error span').html($('.field-validation-error span').text().replace(/_/g, ' '));
+                    }
+                });
             </script>
     </body>
 </html>

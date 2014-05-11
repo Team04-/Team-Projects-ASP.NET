@@ -11,6 +11,7 @@ namespace TeamProjects.Models
 {
     using System;
     using System.Collections.Generic;
+    using System.ComponentModel.DataAnnotations;
     
     public partial class timetable_facility
     {
@@ -18,8 +19,9 @@ namespace TeamProjects.Models
         {
             this.timetable_request_facility = new HashSet<timetable_request_facility>();
         }
-    
+        [Required]
         public byte Facility_ID { get; set; }
+        [Required]
         public string Facility_Name { get; set; }
     
         public virtual ICollection<timetable_request_facility> timetable_request_facility { get; internal set; }

@@ -11,13 +11,19 @@ namespace TeamProjects.Models
 {
     using System;
     using System.Collections.Generic;
+    using System.ComponentModel.DataAnnotations;
     
     public partial class timetable_module
     {
+        [Required]
         public string Department_Code { get; set; }
+        [Required]
         public string Part_Code { get; set; }
+        [Required]
         public string Module_Code { get; set; }
+        [Required]
         public string Module_Title { get; set; }
+        [Required]
         public bool Active { get; set; }
     }
 }

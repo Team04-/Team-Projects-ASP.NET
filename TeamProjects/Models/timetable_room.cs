@@ -11,6 +11,7 @@ namespace TeamProjects.Models
 {
     using System;
     using System.Collections.Generic;
+    using System.ComponentModel.DataAnnotations;
     
     public partial class timetable_room
     {
@@ -18,10 +19,13 @@ namespace TeamProjects.Models
         {
             this.timetable_request_room_allocation = new HashSet<timetable_request_room_allocation>();
         }
-    
+        [Required]
         public string Building_ID { get; set; }
+        [Required]
         public string Room_ID { get; set; }
+        [Required]
         public Nullable<int> Capacity { get; set; }
+        [Required]
         public byte Type_ID { get; set; }
     
         public virtual ICollection<timetable_request_room_allocation> timetable_request_room_allocation { get; internal set; }
