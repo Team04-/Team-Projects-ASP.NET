@@ -10,13 +10,11 @@
     @Html.ValidationSummary(true)
 
     <fieldset>
-        <legend>timetable_round</legend>
-
         <div class="editor-label">
             @Html.LabelFor(model => model.Round_Code)
         </div>
         <div class="editor-field">
-            @Html.EditorFor(model => model.Round_Code)
+            @Html.TextBoxFor(model => model.Round_Code, new { disabled = "disabled" })
             @Html.ValidationMessageFor(model => model.Round_Code)
         </div>
 

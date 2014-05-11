@@ -4,9 +4,9 @@
 .form-horizontal {
     text-align: center;
 }
-
-.col-md-10e {
-    margin-left: 200px;
+.form-group>div
+{
+    padding:10px;
 }
 
 .control-label col-md-2 {

@@ -1,10 +1,10 @@
 ﻿@model TeamProjects.Models.timetable_module
 
 @{
-    ViewBag.Title = "Edit";
+    ViewBag.Title = "Edit Part "+Model.Part_Code+" Module "+Model.Department_Code+Model.Module_Code;
 }
 
-<h2>Edit</h2>
+<h2>Edit Part @Model.Part_Code Module @Model.Department_Code@Model.Module_Code</h2>
 
 @using (Html.BeginForm()) {
     @Html.ValidationSummary(true)
@@ -12,27 +12,12 @@
     <fieldset>
         <legend>timetable_module</legend>
 
-        <!--TODO Change CO to user code-->
-        <input id="Department_Code" name="Department_Code" type="hidden" value="CO" />
+        <input id="Department_Code" name="Department_Code" type="hidden" value="@Model.Department_Code" />
+        <input id="Module_Code" name="Module_Code" type="hidden" value="@Model.Module_Code" />
+        <input id="Part_Code" name="Part_Code" type="hidden" value="@Model.Part_Code" />
 
         <div class="editor-label">
-            @Html.LabelFor(model => model.Part_Code)
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.Part_Code)
-            @Html.ValidationMessageFor(model => model.Part_Code)
-        </div>
-
-        <div class="editor-label">
-            @Html.LabelFor(model => model.Module_Code)
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.Module_Code)
-            @Html.ValidationMessageFor(model => model.Module_Code)
-        </div>
-
-        <div class="editor-label">
-            @Html.LabelFor(model => model.Module_Title)
+            <label for="Module_Title">Module Title</label>
         </div>
         <div class="editor-field">
             @Html.EditorFor(model => model.Module_Title)
@@ -56,7 +41,6 @@
 <div>
     @Html.ActionLink("Back to List", "Index")
 </div>
-
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
 }

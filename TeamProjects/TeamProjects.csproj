@@ -343,7 +343,6 @@
     <Content Include="Scripts\knockout-2.1.0.js" />
     <Content Include="Scripts\modernizr-2.5.3.js" />
     <Content Include="Scripts\shepherd.js" />
-    <Content Include="Scripts\tools\calendar.js" />
     <Content Include="Scripts\tools\jquery.freezeheader.js" />
     <Content Include="Scripts\tools\jquery.tablesorter.js" />
     <Content Include="Scripts\tools\jquery.tablesorter.min.js" />
@@ -351,6 +350,7 @@
     <Content Include="Scripts\tours\Facility-1.js" />
     <Content Include="Scripts\tours\Module-1.js" />
     <Content Include="Scripts\tours\Request-1.js" />
+    <Content Include="Scripts\tours\Requests-1.js" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>

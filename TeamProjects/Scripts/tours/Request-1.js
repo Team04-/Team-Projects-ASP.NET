@@ -7,19 +7,7 @@ tour = new Shepherd.Tour({
     }
 });
 
-tour.addStep('Step1', {
-    title: 'Select Department',
-    text: 'To begin, Choose your department.',
-    attachTo: '.col-md-10a',
-    classes: 'shepherd shepherd-open shepherd-theme-arrows shepherd-transparent-text',
-    buttons: [
-      {
-          text: 'Next',
-          action: tour.next,
-          classes: 'shepherd-button-example-primary'
-      }
-    ]
-});
+
 
 tour.addStep('Step2', {
     title: 'Select Module',
@@ -80,7 +68,7 @@ tour.addStep('Step5', {
 tour.addStep('Step6', {
     title: 'Weeks',
     text: 'Select the weeks you would like the rooms for. If you would like them for all 15 weeks please click on the "Select All" button.',
-    attachTo: '.col-md-10e',
+    attachTo: '.col-md-10f',
     classes: 'shepherd shepherd-open shepherd-theme-arrows shepherd-transparent-text',
     buttons: [
       {
@@ -94,7 +82,7 @@ tour.addStep('Step6', {
 tour.addStep('Step6', {
     title: 'Number of students',
     text: 'Now enter the number of students.',
-    attachTo: '.col-md-10f',
+    attachTo: '.col-md-10g',
     classes: 'shepherd shepherd-open shepherd-theme-arrows shepherd-transparent-text',
     buttons: [
       {
@@ -108,7 +96,7 @@ tour.addStep('Step6', {
 tour.addStep('Step7', {
     title: 'Park preference',
     text: 'Now select your park preference.',
-    attachTo: '.col-md-10g',
+    attachTo: '.col-md-10h',
     classes: 'shepherd shepherd-open shepherd-theme-arrows shepherd-transparent-text',
     buttons: [
       {
@@ -122,7 +110,7 @@ tour.addStep('Step7', {
 tour.addStep('Step8', {
     title: 'Number of rooms',
     text: 'Select the number of rooms you wish to book.',
-    attachTo: '.col-md-10h',
+    attachTo: '.col-md-10i',
     classes: 'shepherd shepherd-open shepherd-theme-arrows shepherd-transparent-text',
     buttons: [
       {
@@ -136,7 +124,7 @@ tour.addStep('Step8', {
 tour.addStep('Step9', {
     title: 'Preferred Park',
     text: 'For your individual room preference, please select a park.',
-    attachTo: '.col-md-10i',
+    attachTo: '.col-md-10j',
     classes: 'shepherd shepherd-open shepherd-theme-arrows shepherd-transparent-text',
     buttons: [
       {
@@ -150,7 +138,7 @@ tour.addStep('Step9', {
 tour.addStep('Step10', {
     title: 'Preferred Building',
     text: 'For your individual room preference, please select a building.',
-    attachTo: '.col-md-10j',
+    attachTo: '.col-md-10k',
     classes: 'shepherd shepherd-open shepherd-theme-arrows shepherd-transparent-text',
     buttons: [
       {
@@ -164,7 +152,7 @@ tour.addStep('Step10', {
 tour.addStep('Step11', {
     title: 'Room type',
     text: 'Now select the type of room you would like to book.',
-    attachTo: '.col-md-10k',
+    attachTo: '.col-md-10l',
     classes: 'shepherd shepherd-open shepherd-theme-arrows shepherd-transparent-text',
     buttons: [
       {
@@ -192,7 +180,7 @@ tour.addStep('Step12', {
 tour.addStep('Step13', {
     title: 'Room',
     text: 'Select your preferred room.',
-    attachTo: '.col-md-10l',
+    attachTo: '.col-md-10m',
     classes: 'shepherd shepherd-open shepherd-theme-arrows shepherd-transparent-text',
     buttons: [
       {
@@ -220,7 +208,7 @@ tour.addStep('Step14', {
 tour.addStep('Step15', {
     title: 'Priority',
     text: 'Tick the box if your room is a priority booking.',
-    attachTo: '.col-md-10m',
+    attachTo: '.col-md-10n',
     classes: 'shepherd shepherd-open shepherd-theme-arrows shepherd-transparent-text',
     buttons: [
       {
@@ -245,16 +233,3 @@ tour.addStep('Step15', {
     ]
 });
 
-tour.addStep('Step16', {
-    title: 'Submit',
-    text: 'Click to submit request',
-    attachTo: '.col-md-10o',
-    classes: 'shepherd shepherd-open shepherd-theme-arrows shepherd-transparent-text',
-    buttons: [
-      {
-          text: 'Next',
-          action: tour.next,
-          classes: 'shepherd-button-example-primary'
-      }
-    ]
-});
