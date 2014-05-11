@@ -57,13 +57,13 @@ namespace TeamProjects.Controllers
         }
 
         [HttpGet]
-        public ActionResult Register()
+        public ActionResult New()
         {
             return View();
         }
 
         [HttpPost]
-        public ActionResult Register(Models.DepartmentModel department)
+        public ActionResult New(Models.DepartmentModel department)
         {
             if (ModelState.IsValid)
             {
