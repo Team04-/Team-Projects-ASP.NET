@@ -106,6 +106,8 @@ foreach (var item in Model.OrderBy(r => r.Module_Code))
                 {
                                 <a href="~/Requests/Edit/@item.Request_ID">Edit</a>
                                 <span>|</span>
+                                <a href="~/Requests/Duplicate/@item.Request_ID">Duplicate</a>
+                                <span>|</span>
                                 <a href="~/Requests/Delete/@item.Request_ID">Delete</a>
                 }
             }
@@ -116,13 +118,15 @@ foreach (var item in Model.OrderBy(r => r.Module_Code))
             <div class='detail detail__title'><div class='detailsheader'>Title</div><div class='detailscontent'>@item.Module_Title</div></div>
             <div class='detail detail__rooms'><div class='detailsheader'>@((ViewBag.CurrentRoundCode == item.Round) ? "Room Preferences" : "Allocated Rooms")</div><div class='detailscontent'>
             @{
-                if(item.Rooms.Length > 0) {
+                if (item.Rooms.Length > 0)
+                {
                     foreach (string room in item.Rooms)
                     {
                         <span class="room">@room</span>
                     }
                 }
-                else {
+                else
+                {
                     <span>No rooms allocated.</span>
                 } 
             }
@@ -135,7 +139,7 @@ foreach (var item in Model.OrderBy(r => r.Module_Code))
                 {
                     if (item.Weeks[i])
                     {
-                        <span class="week">@(i+1)</span>
+                        <span class="week">@(i + 1)</span>
                         hasAWeek = true;
                     }
                 }
@@ -146,7 +150,8 @@ foreach (var item in Model.OrderBy(r => r.Module_Code))
             }
             </div></div>
             @{
-                if(item.Has_Comments){
+                if (item.Has_Comments)
+                {
                     <div class='detail detail__comment'><div class='detailsheader'>Comments</div><div class='detailscontent'>@item.Custom_Comments</div></div>
                 }
             }
