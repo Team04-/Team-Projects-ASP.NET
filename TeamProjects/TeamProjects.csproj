@@ -434,7 +434,7 @@
     <Content Include="Views\Round\Delete.cshtml" />
     <Content Include="Views\User\Index.cshtml" />
     <Content Include="Views\User\LogIn.cshtml" />
-    <Content Include="Views\User\Register.cshtml" />
+    <Content Include="Views\User\New.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Views\Requests\Timetable.cshtml" />
     <Content Include="Views\Requests\List.cshtml" />
