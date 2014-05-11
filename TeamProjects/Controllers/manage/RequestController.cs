@@ -123,10 +123,10 @@ namespace TeamProjects.Controllers.manage
 
 			JavaScriptSerializer serializer = new JavaScriptSerializer();
 
-			var newReqID = (Int16)((db.timetable_request.ToList().Last().Request_ID) + 1);
+			var newReqID = (Int16)((db.timetable_request.ToList().Last().Request_ID));
 
 			// [Redundancy...
-            if (requestView.Fac_JSON != null)
+			if (requestView.Fac_JSON != null && requestView.Fac_JSON != "[\"\"]")
             {
 
                 var facs = serializer.Deserialize<byte[]>(requestView.Fac_JSON);
@@ -202,7 +202,7 @@ namespace TeamProjects.Controllers.manage
                     timetable_request_week = new timetable_request_week()
                     {
                         Request_ID = newReqID,
-                        Week = Convert.ToByte(i),
+                        Week = Convert.ToByte(i+1),
                         //WeekReqID = (Int16)((db.timetable_request_week.ToList().Last().WeekReqID) + 1),
                     };
 
