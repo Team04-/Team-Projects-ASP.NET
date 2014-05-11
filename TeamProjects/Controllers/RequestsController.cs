@@ -352,6 +352,126 @@ namespace TeamProjects.Controllers
 			return RedirectToAction("List", "Requests");
         }
 
+		//
+		// GET: /Requests/Duplicate/5
+		[Authorize]
+		public ActionResult Duplicate(short id)
+		{
+			ViewBag.Number_Rooms = new SelectList(new[] { "1", "2", "3" });
+			ViewBag.Start_Time = new SelectList(new[] { "1", "2", "3", "4", "5", "6", "7", "8", "9" });
+			ViewBag.Duration = new SelectList(new[] { "1", "2", "3", "4", "5", "6", "7", "8", "9" });
+			ViewBag.Department_Code = new SelectList(db.timetable_department, "Department_Code", "Department_Name");
+			//ViewBag.Part_Code = new SelectList(db.timetable_request, "Part_Code", "Part_Code");
+			ViewBag.Module_Code = new SelectList(db.timetable_module, "Module_Code", "Module_Title");
+			ViewBag.Day_ID = new SelectList(db.timetable_day, "Day_ID", "Day_Name");
+			ViewBag.Park_ID = new SelectList(db.timetable_park, "Park_ID", "Park_Name");
+			ViewBag.Building_ID = new SelectList(db.timetable_building, "Building_ID", "Building_Name");
+			ViewBag.Room_ID = new SelectList(db.timetable_room, "Room_ID", "Room_ID");
+			ViewBag.Facility_ID = new SelectList(db.timetable_facility, "Facility_ID", "Facility_Name");
+			ViewBag.Room_Type = new SelectList(db.timetable_room_type, "Type_ID", "Type_Name");
+
+			ViewBag.id = id;
+
+			return View();
+		}
+
+
+		//
+		// POST: /Requests/Duplicate/5
+		[HttpPost]
+		public ActionResult Duplicate(RequestViewModel requestView)
+		{
+						timetable_request timetable_request = new timetable_request()
+			{
+				//Request_ID = newReqID,
+				Department_Code = User.Identity.Name, //requestView.Department_Code, // Get from logged in user
+				//Part_Code = requestView.Part_Code.ToString(), // Dropdown
+				Module_Code = requestView.Module_Code,
+				Day_ID = (byte) requestView.Day_ID,
+				Park_ID = requestView.Park_ID,
+				Start_Time = (byte) requestView.Start_Time,
+				Duration = (byte) requestView.Duration,
+				Number_Students = requestView.Number_Students,
+				Number_Rooms = (byte) requestView.Number_Rooms,
+				Priority = requestView.Priority,
+				Custom_Comments = requestView.Custom_Comments,
+				Current_Round = db.timetable_round.Where(r => r.Round_Status == "Current").First().Round_Code,
+				Request_Status = 1
+			};
+
+			db.timetable_request.Add(timetable_request);
+			db.SaveChanges();
+
+			JavaScriptSerializer serializer = new JavaScriptSerializer();
+
+			// [Redundancy...
+			if (requestView.Fac_JSON != null && requestView.Fac_JSON != "[\"\"]")
+            {
+
+                var facs = serializer.Deserialize<byte[]>(requestView.Fac_JSON);
+
+                foreach (var item in facs)
+                {
+                    timetable_request_facility timetable_request_facility = new timetable_request_facility()
+                    {
+                        Request_ID = ((Int16)((from s in db.timetable_request select s.Request_ID).Max())),
+                        Facility_ID = item,
+                        Quantity = 1,
+                    };
+
+                    db.timetable_request_facility.Add(timetable_request_facility);
+                    db.SaveChanges();
+                }
+            }
+			// ...]
+			if (requestView.Room_Pref_JSON != null)
+			{
+				var roomPrefsArray = (requestView.Room_Pref_JSON).Split(',');
+
+				for (var i = 1; i < roomPrefsArray.Length - 1; i += 2)
+				{
+					timetable_request_room_allocation timetable_request_room_allocation = new timetable_request_room_allocation()
+					{
+						Request_ID = ((Int16)((from s in db.timetable_request select s.Request_ID).Max())),
+						Building_ID = roomPrefsArray[i],
+						Room_ID = roomPrefsArray[i + 1],
+					};
+
+					db.timetable_request_room_allocation.Add(timetable_request_room_allocation);
+					db.SaveChanges();
+				}
+
+			}
+
+            byte weekCount = 1;
+
+            timetable_request_week timetable_request_week;
+
+			// TO DO TODO: From here....
+            bool[] weekList = new bool[] {requestView.WeekOne, requestView.WeekTwo, requestView.WeekThree, requestView.WeekFour, requestView.WeekFive, requestView.WeekSix, requestView.WeekSeven, requestView.WeekEight, requestView.WeekNine, requestView.WeekTen, requestView.WeekEleven, requestView.WeekTwelve, requestView.WeekThirteen, requestView.WeekFourteen, requestView.WeekFifteen};
+
+            for (int i = 0; i < weekList.Length;i++)
+            {
+                if (weekList[i] == true)
+                {
+                    timetable_request_week = new timetable_request_week()
+                    {
+						Request_ID = ((Int16)((from s in db.timetable_request select s.Request_ID).Max())),
+                        Week = Convert.ToByte(i+1),
+                        //WeekReqID = (Int16)((db.timetable_request_week.ToList().Last().WeekReqID) + 1),
+                    };
+
+                    db.timetable_request_week.Add(timetable_request_week);
+                    db.SaveChanges();
+                }
+                weekCount++;
+            }
+
+			// TO DO TODO: ...To here.
+
+			return RedirectToAction("List", "Requests");
+        }
+
         //
         // GET: /Requests/Delete/5
         [Authorize]
