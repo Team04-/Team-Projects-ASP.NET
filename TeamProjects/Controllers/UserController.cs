@@ -40,8 +40,7 @@ namespace TeamProjects.Controllers
         [HttpPost]
         public ActionResult LogIn(Models.DepartmentModel department) 
         {
-            if (ModelState.IsValid)
-            {
+            ViewBag.DepartmentsInfo = getDepartmentsInfo();
                 if (isValid(department.Code, department.Password))
                 {
                     FormsAuthentication.SetAuthCookie(department.Code, false);
@@ -52,7 +51,6 @@ namespace TeamProjects.Controllers
                     ViewBag.DepartmentsInfo = getDepartmentsInfo();
                     ModelState.AddModelError("","Login data is incorrect.");
                 }
-            }
             return View(department);
         }
 
