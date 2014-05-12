@@ -20,6 +20,8 @@ namespace TeamProjects.Models
         [Required]
         public string Part_Code { get; set; }
         [Required]
+        [MinLength(3, ErrorMessage="The {0} must be at least {2} characters long.")]
+        [MaxLength(3, ErrorMessage="The {0} must no more than {2} characters long.")]
         public string Module_Code { get; set; }
         [Required]
         public string Module_Title { get; set; }

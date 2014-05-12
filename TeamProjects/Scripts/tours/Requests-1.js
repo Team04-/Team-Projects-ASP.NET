@@ -9,7 +9,7 @@ tour = new Shepherd.Tour({
 
 
 tour.addStep('Step1', {
-    title: 'Create a new request,
+    title: 'Create a new request',
     text: 'Click here to create a new request.',
     attachTo: '.tour1',
     classes: 'shepherd shepherd-open shepherd-theme-arrows shepherd-transparent-text',

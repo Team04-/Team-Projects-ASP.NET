@@ -127,6 +127,7 @@ namespace TeamProjects.Controllers
                 db.timetable_department.Where(d => d.Department_Code == User.Identity.Name).First().Password_Salt = crypto.Salt;
                 db.SaveChanges();
             }
+            TempData["changed"] = true;
             return RedirectToAction("Account", "User");
         }
     }

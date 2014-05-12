@@ -204,6 +204,16 @@ namespace TeamProjects.Controllers
 			ViewBag.Department_Code = new SelectList(db.timetable_department, "Department_Code", "Department_Name");
 			//ViewBag.Part_Code = new SelectList(db.timetable_request, "Part_Code", "Part_Code");
 			ViewBag.Module_Code = new SelectList(db.timetable_module, "Module_Code", "Module_Title");
+            List<timetable_module> modules = db.timetable_module.Where(m => m.Department_Code == User.Identity.Name).OrderBy(m => m.Module_Code).ToList();
+            List<string> codes = new List<string>();
+            List<string> titles = new List<string>();
+            for (int i = 0; i < modules.Count; i++)
+            {
+                codes.Add(modules[i].Module_Code);
+                titles.Add(modules[i].Module_Title);
+            }
+            ViewBag.codes = codes;
+            ViewBag.titles = titles;
 			ViewBag.Day_ID = new SelectList(db.timetable_day, "Day_ID", "Day_Name");
 			ViewBag.Park_ID = new SelectList(db.timetable_park, "Park_ID", "Park_Name");
 			ViewBag.Building_ID = new SelectList(db.timetable_building, "Building_ID", "Building_Name");
@@ -363,6 +373,16 @@ namespace TeamProjects.Controllers
 			ViewBag.Department_Code = new SelectList(db.timetable_department, "Department_Code", "Department_Name");
 			//ViewBag.Part_Code = new SelectList(db.timetable_request, "Part_Code", "Part_Code");
 			ViewBag.Module_Code = new SelectList(db.timetable_module, "Module_Code", "Module_Title");
+            List<timetable_module> modules = db.timetable_module.Where(m => m.Department_Code == User.Identity.Name).OrderBy(m => m.Module_Code).ToList();
+            List<string> codes = new List<string>();
+            List<string> titles = new List<string>();
+            for (int i = 0; i < modules.Count; i++)
+            {
+                codes.Add(modules[i].Module_Code);
+                titles.Add(modules[i].Module_Title);
+            }
+            ViewBag.codes = codes;
+            ViewBag.titles = titles;
 			ViewBag.Day_ID = new SelectList(db.timetable_day, "Day_ID", "Day_Name");
 			ViewBag.Park_ID = new SelectList(db.timetable_park, "Park_ID", "Park_Name");
 			ViewBag.Building_ID = new SelectList(db.timetable_building, "Building_ID", "Building_Name");

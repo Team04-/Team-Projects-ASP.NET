@@ -4,6 +4,8 @@
 }
 @section Includes{
     <link href="@Url.Content("~/Content/AddRequest.css")" rel="stylesheet" />
+    <link href="@Url.Content("~/Content/chosen/chosen.min.css")" rel="stylesheet" />
+    <script src="@Url.Content("~/Scripts/chosen.jquery.min.js")" type="text/javascript"></script>
 }
 <h2>Edit</h2>
 
@@ -90,8 +92,8 @@
 
 		$("#Building_ID").empty();
 		$("#Room_ID").empty();
-		$("#Module_Code").empty();
-		findModules("@User.Identity.Name");
+		//$("#Module_Code").empty();
+		//findModules("@User.Identity.Name");
 		findBuildings(document.getElementById('Park_ID2').options[document.getElementById('Park_ID2').selectedIndex].value);
 		findRooms(document.getElementById('Building_ID').options[document.getElementById('Building_ID').selectedIndex].value, document.getElementById('Room_Type').options[document.getElementById('Room_Type').selectedIndex].text, facIdString);
 		getReqInfo();
@@ -116,7 +118,9 @@
 					var Start_Time = entry.Start_Period;
 					var Duration = (entry.End_Period) - (entry.Start_Period) + 1;
 
-					$("#Module_Code option:contains(" + entry.Module_Title + ")").attr('selected', 'selected');
+					//$("#Module_Code option:contains(" + entry.Module_Title + ")").attr('selected', 'selected');
+                    $('#Module_Code ').val(entry.Module_Code);
+                    $('#Module_Code ').trigger("chosen:updated");
 					$("#Day_ID option:contains(" + entry.Day + ")").attr('selected', 'selected');
 
 					$("#Start_Time option").each(function () {
@@ -484,7 +488,13 @@
         <div class="form-group">
             @Html.LabelFor(model => model.Module_Code, "Module Code", new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-				@Html.DropDownListFor(model => model.Module_Code, (SelectList)ViewBag.Module_Code, "-Select Module Code-")
+                <select id="Module_Code" name="Module_Code" class="valid" data-placeholder="Select the module...">
+                    <option disabled selected>Choose the module...</option>
+                    @for (int i=0;i<ViewBag.codes.Count;i++)
+                    {
+                        <option value="@ViewBag.codes[i]">@ViewBag.codes[i] - @ViewBag.titles[i]</option>
+                    }
+                </select>
             </div>
         </div>
 
@@ -646,7 +656,9 @@
 <div>
     @Html.ActionLink("Back to List", "List")
 </div>
-
+<script>
+    $("#Module_Code").chosen({ width: "315px" });
+</script>
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
 }

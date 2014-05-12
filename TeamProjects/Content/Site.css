@@ -917,3 +917,11 @@ tr.pager td {
 .validation-summary-errors ul {
 	list-style-type:none;
 }
+/*Dialogs*/
+.successdialog
+{
+    width: 100%;
+    padding: 10px;
+    margin: 20px;
+    background-color: #69da69;
+}
