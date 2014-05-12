@@ -90,6 +90,29 @@
 			}
 		});
 
+		$("#submitButton").click(function(event){
+			var error_free = false;
+
+			$(".weekBox").each(function () {
+				if($(this).prop("checked")){
+					checkboxCount++;
+				}
+			});
+			if (!error_free) {
+				event.preventDefault();
+				window.scrollTo(0, $("#weeksDiv").offset().top);
+				$('.errorWeeks').removeClass('hide').addClass('show');
+				// no checkboxes checked
+			}
+			else {
+				$('.errorWeeks').removeClass('show').addClass('hide');
+			// Form submits
+			//alert('No errors: Form will be submitted');
+			}
+		});
+
+
+
 		$("#Building_ID").empty();
 		$("#Room_ID").empty();
 		//$("#Module_Code").empty();
@@ -100,6 +123,8 @@
 	});
 
 	//FUNCTIONS//
+
+
 
 	function getReqInfo() {
 		// TASK: populate table with all requests for selected round and week
@@ -518,8 +543,9 @@
             </div>
         </div>
 
-        <div class="form-group">
+        <div class="form-group" id="weeksDiv">
             @Html.LabelFor(model => model.Week, "Weeks", new { @class = "control-label col-md-2" })
+			<span class="errorWeeks hide"><i class="fa fa-exclamation-triangle"></i> Must be at least one week selected.</span>
             <div class="col-md-10">
                 <table>
 					<tr>
@@ -648,7 +674,7 @@
 				<input type="text" id="Request_ID" name="Request_ID" value="@ViewBag.id" />
             </div>
 		<!-- TODO: Change button to delete existing records with RequestID then do normal submit to Add Request -->
-		    <input type="submit" value="Save" class="btn btn-default"/>
+		    <input type="submit" id="submitButton" value="Save" class="btn btn-default"/>
         </div>
 }
 
