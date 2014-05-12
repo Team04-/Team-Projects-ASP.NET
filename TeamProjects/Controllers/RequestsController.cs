@@ -155,7 +155,7 @@ namespace TeamProjects.Controllers
         public ActionResult List()
         {
             List<Models.RequestListModel> RequestList = new List<Models.RequestListModel>();
-            List<timetable_request> Requests = db.timetable_request.OrderBy(r => r.Current_Round).ToList();
+            List<timetable_request> Requests = db.timetable_request.Where(r => r.Department_Code == User.Identity.Name).OrderBy(r => r.Current_Round).ToList();
             foreach(timetable_request request in Requests)
             {
                 RequestList.Add(getFullRequest(request));

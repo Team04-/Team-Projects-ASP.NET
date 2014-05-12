@@ -18,8 +18,8 @@ namespace TeamProjects.Controllers.api
             List<Models.RequestListModel> RequestList = new List<Models.RequestListModel>();
 			List<timetable_request> Requests;
 
-			if (Round == 0) { Requests = db.timetable_request.ToList(); }
-			else { Requests = db.timetable_request.Where(m => m.Current_Round == Round).ToList(); }
+			if (Round == 0) { Requests = db.timetable_request.Where(r => r.Department_Code == User.Identity.Name).ToList(); }
+            else { Requests = db.timetable_request.Where(r => r.Department_Code == User.Identity.Name).Where(m => m.Current_Round == Round).ToList(); }
             //Requests = from m in db.timetable_room join Requests where m.Type_ID == selID select m;
             foreach (timetable_request request in Requests)
             {

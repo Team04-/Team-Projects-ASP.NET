@@ -146,11 +146,11 @@ namespace TeamProjects.Controllers
             int toSkip = (requestCount > 5) ? requestCount - 5 : 0;
             List<RequestListModel> RecentlyAdded = new List<RequestListModel>();
             List<RequestListModel> Attention = new List<RequestListModel>();
-            foreach (timetable_request request in db.timetable_request.OrderBy(r => r.Request_ID).Skip(toSkip).OrderByDescending(r => r.Request_ID))
+            foreach (timetable_request request in db.timetable_request.Where(r => r.Department_Code == User.Identity.Name).OrderBy(r => r.Request_ID).Skip(toSkip).OrderByDescending(r => r.Request_ID))
             {
                 RecentlyAdded.Add(getFullRequest(request));
             }
-            foreach (timetable_request request in db.timetable_request.Where(r => r.Request_Status == 3 || r.Request_Status == 4).OrderByDescending(r => r.Request_ID))
+            foreach (timetable_request request in db.timetable_request.Where(r =>r.Department_Code == User.Identity.Name).Where(r => r.Request_Status == 3 || r.Request_Status == 4).OrderByDescending(r => r.Request_ID))
             {
                 Attention.Add(getFullRequest(request));
             }
