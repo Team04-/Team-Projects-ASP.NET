@@ -913,3 +913,7 @@ tr.pager td {
 {
     display:inline-block;
 }
+/*Remove user validation list dot*/
+.validation-summary-errors ul {
+	list-style-type:none;
+}
