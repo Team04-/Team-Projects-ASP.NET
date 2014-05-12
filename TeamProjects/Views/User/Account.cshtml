@@ -15,10 +15,10 @@
     <div>
         @Html.PasswordFor(u => u.Password)
         @Html.ValidationMessageFor(u => u.Password) 
-        <span class="passVal hide"><i class="fa fa-exclamation-triangle"></i> You must enter a password.</span>
+        <span class="passVal show"><i class="fa fa-exclamation-triangle"></i> You must enter a password.</span>
     </div>
     
-    <input class="submitPass" type="submit" value="Save Changes"/>
+    <input class="submitPass" type="submit" value="Save Changes" disabled="disabled"/>
 }
 <script>
     $('#Password').keyup(function () {
