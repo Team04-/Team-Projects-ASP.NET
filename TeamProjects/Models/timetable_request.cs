@@ -22,7 +22,7 @@ namespace TeamProjects.Models
         public int Park_ID { get; set; }
         public byte Start_Time { get; set; }
         public byte Duration { get; set; }
-        [Range(9,700, ErrorMessage= "{0} can only be between {1} and {2}")])]
+        [Range(9,700, ErrorMessage= "{0} can only be between {1} and {2}")]
         public int Number_Students { get; set; }
         public byte Number_Rooms { get; set; }
         public bool Priority { get; set; }
