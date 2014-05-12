@@ -50,7 +50,22 @@
             @Html.DisplayFor(modelItem => item.Capacity)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.Type_ID)
+            @if (item.Type_ID == 1)
+            {
+                <span>Lecture</span>
+            }
+            else if (item.Type_ID == 2)
+            {
+                <span>Seminar</span>
+            }
+            else if (item.Type_ID == 3)
+            {
+                <span>Lab</span>
+            }
+            else
+            {
+                <span>Unknown</span>
+            }
         </td>
         <td>
             @Html.ActionLink("Edit", "Edit", new { buildingID = item.Building_ID, roomID = item.Room_ID }) |
