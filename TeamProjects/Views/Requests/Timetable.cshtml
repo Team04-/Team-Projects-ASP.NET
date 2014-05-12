@@ -14,29 +14,16 @@
 
     $(document).ready(function () {
     	//populateTableData(4,1);
-        $('#requestTable td').click(function(){
-            if($(this).text()!=""){
-                var is_selected = $(this).hasClass('selected');
-                $('#requestTable .selected').removeClass('selected');
-                if(!is_selected){
-                    $(this).addClass('selected');
-                    $('#infoTable').removeClass('hidetable').addClass('showtable');
-                } else {
-                    $('#infoTable').removeClass('showtable').addClass('hidetable');
-                }
-            }
-        });
     });
 
     function populateTableData(round, week) {
-        $('.tableloading').addClass('loading').append('<i class="fa fa-spinner"></i>');
+        $('.tableloading').addClass('loading').html('<i class="fa fa-spinner"></i>');
         // TASK: populate table with all requests for selected round and week
 
         // Get all request data via getJSON() from RequestAPIController (make it from Matt's list code)
     	$('#timetableDiv td').each(function(){$(this).empty();});
         $.getJSON("@Url.Action("RequestAPI", "api", null, Request.Url.Scheme)" + "?Round=" + round + "&Week=" + week)
             .done(function (data) {
-            	console.log(data);
             	timetableData = data;
             	data.forEach(function (entry) {
             		var Start_Time = entry.Start_Period;
@@ -48,7 +35,7 @@
             				if ($(this).find('td:nth-of-type(' + col + ')').text() == "") {
             					//if (col < ((Start_Time + Duration))) {
             					//IT'S A FREE PERIOD
-            					$(this).find('td:nth-of-type(' + col + ')').append("<div onclick='updateRequestInfoPanel(\"" + entry.Request_ID + "\");'>"+entry.Module_Code+"</div>");
+            					$(this).find('td:nth-of-type(' + col + ')').append("<div onclick='updateRequestInfoPanel(\"" + entry.Request_ID + "\",this);'>"+entry.Module_Code+"</div>");
                                     //console.log(entry.Module_Code + " added to " + entry.Day + " row in column " + col);
             						added = true;
             					//}
@@ -65,7 +52,7 @@
 
             			for (var col = Start_Time; col < (Start_Time + Duration) ; col++) {
             				//alert("inside not added for: "+col);
-            				$("." + entry.Day).last().find('td:nth-of-type(' + col + ')').append("<div onclick='updateRequestInfoPanel(\"" + entry.Request_ID + "\");'>" + entry.Module_Code + "</div>");
+            				$("." + entry.Day).last().find('td:nth-of-type(' + col + ')').append("<div onclick='updateRequestInfoPanel(\"" + entry.Request_ID + "\",this);'>" + entry.Module_Code + "</div>");
             			}
             			//ADD NEW ROW HERE, THEN ADD THE REQUEST
             		}
@@ -79,8 +66,7 @@
         });
     }
 
-	function updateRequestInfoPanel(RequestID) {
-
+	function updateRequestInfoPanel(RequestID, cell) {
 		timetableData.forEach(function (entry) {
 			if (entry.Request_ID == RequestID) {
                 console.log(entry);
@@ -106,6 +92,14 @@
                 $('.Module_Title').html(entry.Module_Title);
 			}
 		});
+        var is_selected = $(cell).hasClass('selected');
+        $('#requestTable .selected').removeClass('selected');
+        if(!is_selected){
+            $(cell).addClass('selected');
+            $('#infoTable').removeClass('hidetable').addClass('showtable');
+        } else {
+            $('#infoTable').removeClass('showtable').addClass('hidetable');
+        }
 	}
 
         // for each request:
