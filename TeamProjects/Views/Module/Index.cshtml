@@ -10,7 +10,7 @@
 </script>
 <h2>Modules</h2>
 
-<p>
+<p class="tour1">
     @Html.ActionLink("Create New", "Create")
 </p>
 <table class="moduleTable toolslast">
@@ -47,7 +47,7 @@
         <td>
             @Html.DisplayFor(modelItem => item.Active)
         </td>
-        <td>
+        <td class="tour2">
             @Html.ActionLink("Edit", "Edit", new { moduleCode = item.Module_Code }) |
             @Html.ActionLink("Details", "Details", new { moduleCode = item.Module_Code }) |
             @Html.ActionLink("Delete", "Delete", new { moduleCode = item.Module_Code })
