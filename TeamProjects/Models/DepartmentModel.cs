@@ -22,7 +22,7 @@ namespace TeamProjects.Models
 
         [Required]
         [DataType(DataType.Password)]
-        [StringLength(200, MinimumLength = 8)]
+        [StringLength(200, MinimumLength = 6)]
         [Display(Name = "Password: ")]
         public string Password { get; set; }
     }
