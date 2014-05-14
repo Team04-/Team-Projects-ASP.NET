@@ -214,6 +214,8 @@ namespace TeamProjects.Controllers
             }
             ViewBag.codes = codes;
             ViewBag.titles = titles;
+
+			//ViewBag.Current_Round = new SelectList(db.timetable_round.Where(r => r.Round_Status == "Current" || r.Round_Status == "Active"), "Round_Code", "Round_Code");
 			ViewBag.Day_ID = new SelectList(db.timetable_day, "Day_ID", "Day_Name");
 			ViewBag.Park_ID = new SelectList(db.timetable_park, "Park_ID", "Park_Name");
 			ViewBag.Building_ID = new SelectList(db.timetable_building, "Building_ID", "Building_Name");
@@ -383,6 +385,8 @@ namespace TeamProjects.Controllers
             }
             ViewBag.codes = codes;
             ViewBag.titles = titles;
+
+			ViewBag.Current_Round = new SelectList(db.timetable_round.Where(r => r.Round_Status == "Current" || r.Round_Status == "Active"), "Round_Code", "Round_Code");
 			ViewBag.Day_ID = new SelectList(db.timetable_day, "Day_ID", "Day_Name");
 			ViewBag.Park_ID = new SelectList(db.timetable_park, "Park_ID", "Park_Name");
 			ViewBag.Building_ID = new SelectList(db.timetable_building, "Building_ID", "Building_Name");
@@ -415,7 +419,7 @@ namespace TeamProjects.Controllers
 				Number_Rooms = (byte) requestView.Number_Rooms,
 				Priority = requestView.Priority,
 				Custom_Comments = requestView.Custom_Comments,
-				Current_Round = db.timetable_round.Where(r => r.Round_Status == "Current").First().Round_Code,
+				Current_Round = requestView.Current_Round,
 				Request_Status = 1
 			};
 
