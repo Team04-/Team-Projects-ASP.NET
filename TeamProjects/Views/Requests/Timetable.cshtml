@@ -13,8 +13,14 @@
 	var timetableData;
 
     $(document).ready(function () {
-    	//populateTableData(4,1);
+        //populateTableData(4,1);
+        appendRoundTag();
     });
+
+    function appendRoundTag() {
+        document.getElementById("RoundSemester").options[document.getElementById("RoundSemester").length - 2].text = document.getElementById("RoundSemester").options[document.getElementById("RoundSemester").length - 2].text + " | Current";
+        document.getElementById("RoundSemester").options[document.getElementById("RoundSemester").length - 1].text = document.getElementById("RoundSemester").options[document.getElementById("RoundSemester").length - 1].text + " | Adhoc";
+    }
 
     function populateTableData(round, week) {
         $('.tableloading').addClass('loading').html('<i class="fa fa-spinner"></i>');

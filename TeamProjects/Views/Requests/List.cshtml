@@ -31,45 +31,6 @@
 <p>
     <i class="fa fa-info-circle"></i> Click on a request to view it in detail. Click on headings to sort the table.
 </p>
-<div class="roundsOptions change-search">
-@{
-    //Display checkboxes for each round that is it possible for a request to have been made for
-    for (var i = 1; i <= ViewBag.currentRoundCode; i++)
-    {
-        <label style="display:inline-block;margin-bottom:10px;margin-right:10px;">
-            <input class="round-@i" checked type="checkbox" />Round @i
-            @{
-                //Check if the round the checkbox is being shown for is the current round
-                //Add an indicator if it is
-                if(i==ViewBag.currentRoundCode){
-                    <span>(Current)</span>
-                }
-            }
-        </label>
-    }
-}
-</div>
-<div>
-Module
-<select class="moduleSelect change-search">
-    <option value="">Choose a module</option>
-@{
-List<string> moduleList = new List<string>();
-foreach (var item in Model.OrderBy(r => r.Module_Code))
-{
-    string moduleCode = String.Concat(User.Identity.Name,item.Module_Code);
-    if(!(moduleList.Contains(moduleCode))){
-        moduleList.Add(moduleCode);
-        <option value="@Html.Raw(moduleCode)">@Html.Raw(User.Identity.Name)@Html.DisplayFor(modelItem => item.Module_Code)</option>  
-    }
-    
-}
-}
-</select>
-</div>
-<div class="commentSearch">
-    Search comments: <input class="commentSearchInput" type="text" />
-</div>
 <table id="RequestTable" class="toolslast">
 <thead>
     <tr>
