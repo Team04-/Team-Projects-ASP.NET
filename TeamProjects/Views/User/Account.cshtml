@@ -22,14 +22,12 @@
 }
 <script>
     $('#Password').keyup(function () {
-        console.log($.trim($(this).val()));
-        console.log($.trim($(this).val()) == '');
         if ($.trim($(this).val()) == '') {
             $('.passVal').removeClass('hide').addClass('show');
-            $('.submitPass').attr('disabled', 'disabled');
+            $('.submitPass').prop("disabled", true);
         } else {
             $('.passVal').removeClass('show').addClass('hide');
-            $('.sumbitPass').removeAttr('disabled');
+            $('.submitPass').prop("disabled", false);
         }
     });
 </script>
