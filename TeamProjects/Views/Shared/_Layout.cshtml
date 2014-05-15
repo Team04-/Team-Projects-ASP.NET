@@ -26,6 +26,7 @@
     </head>
     <body>
         <header>
+            <div class="topbar" style="height:25px;width:0%;background-color:#330066;"></div>
             <div class="content-wrapper">
                 <div class="content-wrapper">
                     <p class="site-title"><img src="~/images/LU-mark-rgb.png" /></p>
@@ -94,6 +95,41 @@
                             /*failed*/
 			            });
                     }
+                    $.ajax({
+                            type: "GET",
+                            url: "@Url.Action("RoundDatesAPI", "api", null, Request.Url.Scheme)",
+                            dataType: "json"
+                        })
+			            .done(function (data) {
+                            function parseDate (str) {
+                                var date = (str.indexOf("T")>-1) ? str.split("T")[0] : str,
+                                    mdy = date.split('/');
+                                if(mdy.length==1){
+                                    mdy = mdy[0].split('-');
+                                }
+                                return new Date(mdy[0], mdy[1]-1, mdy[2]);
+                            }
+
+                            daydiff = function (first, second) {
+                                return (second-first)/(1000*60*60*24)
+                            }
+                            pad = function (s) { return (s < 10) ? '0' + s : s; }
+                            var difference_between = daydiff(parseDate(data.Start_Date.toString()),parseDate(data.End_Date.toString()));
+                            var today = new Date(),
+                                start_date = parseDate(data.Start_Date),
+                                todays_year = today.getFullYear(),
+                                todays_month = pad(today.getMonth()+1),
+                                todays_day = pad(today.getDate());
+                                console.log(todays_year+"-"+todays_month+"-"+todays_day);
+                                var todays_date = parseDate(todays_year + "-" + todays_month + "-" + todays_day),
+                                difference_from_today = daydiff(start_date,todays_date);
+                            var percentage_base = ((difference_from_today/difference_between)*100);
+                            percentage_base = (percentage_base>100)?100:((percentage_base<0)?0:percentage_base);
+                            $('.topbar').css('width',percentage_base+"%");
+			            })
+			            .fail(function (jqXHR, textStatus, err) {
+                            /*failed*/
+			            });
                     if (!(tour === undefined)) {
                         tour.start();
                     }
