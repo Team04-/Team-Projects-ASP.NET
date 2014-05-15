@@ -90,6 +90,7 @@
                 }
                 $('.Status').html(entry.Status);
                 $('.Module_Title').html(entry.Module_Title);
+                $('.Tools').html('<a href="./Edit/'+entry.Request_ID+'">Edit</a><span>|</span><a href="./Duplicate/'+entry.Request_ID+'">Duplicate</a><span>|</span><a href="./Delete/'+entry.Request_ID+'">Delete</a>');
 			}
 		});
         var is_selected = $(cell).hasClass('selected');
@@ -112,7 +113,6 @@
         // make request cells clickable, which then shows all the requests data
 
 </script>
-
 <body>
     @Html.DropDownList("RoundSemester")
 
@@ -138,6 +138,18 @@
     <br /><br />
     <div id="timetableDiv">
     <table id="requestTable">
+        <tr>
+            <th style="width:182px;"></th>
+            <th>1</th>
+            <th>2</th>
+            <th>3</th>
+            <th>4</th>
+            <th>5</th>
+            <th>6</th>
+            <th>7</th>
+            <th>8</th>
+            <th>9</th>
+        </tr>
         <tr class="Mon">
             <th>Mon</th>
             <td></td>
